@@ -1,0 +1,49 @@
+syntax = "proto3";
+package proxy;
+option go_package = "./protobuf;protobuf";
+import "protobuf/model_dictionary.proto";
+
+message Ebook {
+  int64 id = 1;
+  BibliographicLevel bibliographic_level = 2;
+  TypeDescription type_description = 3;
+  Catalog catalog = 4;
+  string author = 5;
+  string title = 6;
+  EbookPlacement placement = 7;
+  EbookFormat format = 8;
+}
+
+message EbookInv {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string inv_number = 3;
+  string barcode = 4;
+  Department Department = 5;
+  State State = 6;
+}
+
+message EbookPlacement {
+  int64 placement = 1;
+}
+
+message EbookFormat {
+  string format = 1;
+}
+
+message BibliographicLevel {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type_ebooks = 4;
+}
+message TypeDescription {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message Catalog {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}

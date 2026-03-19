@@ -1,0 +1,13 @@
+syntax = "proto3";
+package proxy;
+option go_package = "./protobuf;protobuf";
+
+message Reader {
+  int64 ticket_number = 1;
+  string barcode = 2;
+  string firstname = 3;
+  string middlename = 4;
+  string lastname = 5;
+  string department = 6;
+  bool is_employee = 7;
+}

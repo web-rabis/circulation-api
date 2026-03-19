@@ -4,7 +4,13 @@ import (
 	"context"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/web-rabis/circulation-service/internal/config"
+	"github.com/web-rabis/circulation-api/internal/config"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/user"
+	"github.com/web-rabis/circulation-api/internal/resource/http"
+	v1 "github.com/web-rabis/circulation-api/internal/resource/http/auth/v1"
+	v2 "github.com/web-rabis/circulation-api/internal/resource/http/order/v1"
 
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
@@ -17,12 +23,18 @@ const (
 	compressLevel = 5
 )
 
-func Run(serversCtx context.Context, opts *config.APIServer,
+func Run(serversCtx context.Context,
+	opts *config.APIServer,
+	authMan *auth.Manager,
+	userMan *user.Manager,
+	orderMan *order.Manager,
 	version string) error {
 	resources := []cherver.Resource{
 		http.NewVersionResource("/version", version),
 		http.NewFilesResource("/files", opts.ServerConfig.FilesDir),
 		//swaggerV1.NewSwaggerResource("/swagger", opts.ServerConfig.BasePath, "/files"),
+		v1.NewAuthResource("/api/v1/auth", authMan, userMan),
+		v2.NewOrderResource("/api/v1/orders", authMan, orderMan),
 	}
 	httpSrv := cherver.New(
 		cherver.WithListenAddress(opts.ServerConfig.ListenAddr),

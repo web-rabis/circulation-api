@@ -4,4 +4,5 @@ type APIServer struct {
 	DatabaseConfig
 	ServerConfig
 	GeneralConfig
+	AuthConfig
 }

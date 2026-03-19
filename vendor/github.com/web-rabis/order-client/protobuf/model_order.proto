@@ -1,0 +1,32 @@
+syntax = "proto3";
+package proxy;
+option go_package = "./protobuf;protobuf";
+import "google/protobuf/timestamp.proto";
+import "protobuf/model_ebook.proto";
+import "protobuf/model_reader.proto";
+import "protobuf/model_periodical.proto";
+import "protobuf/model_dictionary.proto";
+message Order {
+  int64 Id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string type = 4;
+  Reader reader = 5;
+  Ebook ebook = 6;
+  EbookInv inv_number = 7;
+  Periodical periodical = 8;
+  State state = 9;
+  Department department = 10;
+}
+message Paging {
+  int64   skip = 1;
+  int64   limit = 2;
+  string  sortKey = 3;
+  int32   sortVal = 4;
+}
+message OrderFilters {
+  int64 ebook_id = 1;
+  int64 periodical_id = 2;
+  int64 ticket_number = 3;
+  repeated string states = 4;
+}
