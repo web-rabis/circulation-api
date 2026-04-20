@@ -23,19 +23,20 @@ const (
 )
 
 type Order struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Reader        *Reader                `protobuf:"bytes,5,opt,name=reader,proto3" json:"reader,omitempty"`
-	Ebook         *Ebook                 `protobuf:"bytes,6,opt,name=ebook,proto3" json:"ebook,omitempty"`
-	InvNumber     *EbookInv              `protobuf:"bytes,7,opt,name=inv_number,json=invNumber,proto3" json:"inv_number,omitempty"`
-	Periodical    *Periodical            `protobuf:"bytes,8,opt,name=periodical,proto3" json:"periodical,omitempty"`
-	State         *State                 `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`
-	Department    *Department            `protobuf:"bytes,10,opt,name=department,proto3" json:"department,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              int64                  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Type            string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Reader          *Reader                `protobuf:"bytes,5,opt,name=reader,proto3" json:"reader,omitempty"`
+	Ebook           *Ebook                 `protobuf:"bytes,6,opt,name=ebook,proto3" json:"ebook,omitempty"`
+	InvNumber       *EbookInv              `protobuf:"bytes,7,opt,name=inv_number,json=invNumber,proto3" json:"inv_number,omitempty"`
+	Periodical      *Periodical            `protobuf:"bytes,8,opt,name=periodical,proto3" json:"periodical,omitempty"`
+	State           *State                 `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`
+	Department      *Department            `protobuf:"bytes,10,opt,name=department,proto3" json:"department,omitempty"`
+	IsAuxiliaryFund bool                   `protobuf:"varint,11,opt,name=is_auxiliary_fund,json=isAuxiliaryFund,proto3" json:"is_auxiliary_fund,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Order) Reset() {
@@ -138,9 +139,68 @@ func (x *Order) GetDepartment() *Department {
 	return nil
 }
 
+func (x *Order) GetIsAuxiliaryFund() bool {
+	if x != nil {
+		return x.IsAuxiliaryFund
+	}
+	return false
+}
+
+type StateCount struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	State         *State                 `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StateCount) Reset() {
+	*x = StateCount{}
+	mi := &file_protobuf_model_order_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StateCount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StateCount) ProtoMessage() {}
+
+func (x *StateCount) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_order_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StateCount.ProtoReflect.Descriptor instead.
+func (*StateCount) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_order_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StateCount) GetState() *State {
+	if x != nil {
+		return x.State
+	}
+	return nil
+}
+
+func (x *StateCount) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 type Paging struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Skip          int64                  `protobuf:"varint,1,opt,name=skip,proto3" json:"skip,omitempty"`
+	Offset        int64                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit         int64                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 	SortKey       string                 `protobuf:"bytes,3,opt,name=sortKey,proto3" json:"sortKey,omitempty"`
 	SortVal       int32                  `protobuf:"varint,4,opt,name=sortVal,proto3" json:"sortVal,omitempty"`
@@ -150,7 +210,7 @@ type Paging struct {
 
 func (x *Paging) Reset() {
 	*x = Paging{}
-	mi := &file_protobuf_model_order_proto_msgTypes[1]
+	mi := &file_protobuf_model_order_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -162,7 +222,7 @@ func (x *Paging) String() string {
 func (*Paging) ProtoMessage() {}
 
 func (x *Paging) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_model_order_proto_msgTypes[1]
+	mi := &file_protobuf_model_order_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -175,12 +235,12 @@ func (x *Paging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Paging.ProtoReflect.Descriptor instead.
 func (*Paging) Descriptor() ([]byte, []int) {
-	return file_protobuf_model_order_proto_rawDescGZIP(), []int{1}
+	return file_protobuf_model_order_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Paging) GetSkip() int64 {
+func (x *Paging) GetOffset() int64 {
 	if x != nil {
-		return x.Skip
+		return x.Offset
 	}
 	return 0
 }
@@ -207,18 +267,21 @@ func (x *Paging) GetSortVal() int32 {
 }
 
 type OrderFilters struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	EbookId       int64                  `protobuf:"varint,1,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	PeriodicalId  int64                  `protobuf:"varint,2,opt,name=periodical_id,json=periodicalId,proto3" json:"periodical_id,omitempty"`
-	TicketNumber  int64                  `protobuf:"varint,3,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
-	States        []string               `protobuf:"bytes,4,rep,name=states,proto3" json:"states,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	EbookId         int64                  `protobuf:"varint,1,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
+	PeriodicalId    int64                  `protobuf:"varint,2,opt,name=periodical_id,json=periodicalId,proto3" json:"periodical_id,omitempty"`
+	TicketNumber    int64                  `protobuf:"varint,3,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	States          []string               `protobuf:"bytes,4,rep,name=states,proto3" json:"states,omitempty"`
+	DepartmentId    int64                  `protobuf:"varint,5,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
+	Period          string                 `protobuf:"bytes,6,opt,name=period,proto3" json:"period,omitempty"`
+	IsAuxiliaryFund int64                  `protobuf:"varint,7,opt,name=is_auxiliary_fund,json=isAuxiliaryFund,proto3" json:"is_auxiliary_fund,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OrderFilters) Reset() {
 	*x = OrderFilters{}
-	mi := &file_protobuf_model_order_proto_msgTypes[2]
+	mi := &file_protobuf_model_order_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -230,7 +293,7 @@ func (x *OrderFilters) String() string {
 func (*OrderFilters) ProtoMessage() {}
 
 func (x *OrderFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_model_order_proto_msgTypes[2]
+	mi := &file_protobuf_model_order_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -243,7 +306,7 @@ func (x *OrderFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFilters.ProtoReflect.Descriptor instead.
 func (*OrderFilters) Descriptor() ([]byte, []int) {
-	return file_protobuf_model_order_proto_rawDescGZIP(), []int{2}
+	return file_protobuf_model_order_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OrderFilters) GetEbookId() int64 {
@@ -274,11 +337,92 @@ func (x *OrderFilters) GetStates() []string {
 	return nil
 }
 
+func (x *OrderFilters) GetDepartmentId() int64 {
+	if x != nil {
+		return x.DepartmentId
+	}
+	return 0
+}
+
+func (x *OrderFilters) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *OrderFilters) GetIsAuxiliaryFund() int64 {
+	if x != nil {
+		return x.IsAuxiliaryFund
+	}
+	return 0
+}
+
+type StateCountFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	States        []string               `protobuf:"bytes,1,rep,name=states,proto3" json:"states,omitempty"`
+	DepartmentId  int64                  `protobuf:"varint,2,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
+	Period        string                 `protobuf:"bytes,3,opt,name=period,proto3" json:"period,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StateCountFilters) Reset() {
+	*x = StateCountFilters{}
+	mi := &file_protobuf_model_order_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StateCountFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StateCountFilters) ProtoMessage() {}
+
+func (x *StateCountFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_order_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StateCountFilters.ProtoReflect.Descriptor instead.
+func (*StateCountFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_order_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *StateCountFilters) GetStates() []string {
+	if x != nil {
+		return x.States
+	}
+	return nil
+}
+
+func (x *StateCountFilters) GetDepartmentId() int64 {
+	if x != nil {
+		return x.DepartmentId
+	}
+	return 0
+}
+
+func (x *StateCountFilters) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
 var File_protobuf_model_order_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_order_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotobuf/model_order.proto\x12\x05proxy\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1aprotobuf/model_ebook.proto\x1a\x1bprotobuf/model_reader.proto\x1a\x1fprotobuf/model_periodical.proto\x1a\x1fprotobuf/model_dictionary.proto\"\xa6\x03\n" +
+	"\x1aprotobuf/model_order.proto\x12\x05order\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1aprotobuf/model_ebook.proto\x1a\x1bprotobuf/model_reader.proto\x1a\x1fprotobuf/model_periodical.proto\x1a\x1fprotobuf/model_dictionary.proto\"\xd2\x03\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\x03R\x02Id\x129\n" +
 	"\n" +
@@ -286,28 +430,40 @@ const file_protobuf_model_order_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12%\n" +
-	"\x06reader\x18\x05 \x01(\v2\r.proxy.ReaderR\x06reader\x12\"\n" +
-	"\x05ebook\x18\x06 \x01(\v2\f.proxy.EbookR\x05ebook\x12.\n" +
+	"\x06reader\x18\x05 \x01(\v2\r.order.ReaderR\x06reader\x12\"\n" +
+	"\x05ebook\x18\x06 \x01(\v2\f.order.EbookR\x05ebook\x12.\n" +
 	"\n" +
-	"inv_number\x18\a \x01(\v2\x0f.proxy.EbookInvR\tinvNumber\x121\n" +
+	"inv_number\x18\a \x01(\v2\x0f.order.EbookInvR\tinvNumber\x121\n" +
 	"\n" +
-	"periodical\x18\b \x01(\v2\x11.proxy.PeriodicalR\n" +
+	"periodical\x18\b \x01(\v2\x11.order.PeriodicalR\n" +
 	"periodical\x12\"\n" +
-	"\x05state\x18\t \x01(\v2\f.proxy.StateR\x05state\x121\n" +
+	"\x05state\x18\t \x01(\v2\f.order.StateR\x05state\x121\n" +
 	"\n" +
 	"department\x18\n" +
-	" \x01(\v2\x11.proxy.DepartmentR\n" +
-	"department\"f\n" +
-	"\x06Paging\x12\x12\n" +
-	"\x04skip\x18\x01 \x01(\x03R\x04skip\x12\x14\n" +
+	" \x01(\v2\x11.order.DepartmentR\n" +
+	"department\x12*\n" +
+	"\x11is_auxiliary_fund\x18\v \x01(\bR\x0fisAuxiliaryFund\"F\n" +
+	"\n" +
+	"StateCount\x12\"\n" +
+	"\x05state\x18\x01 \x01(\v2\f.order.StateR\x05state\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"j\n" +
+	"\x06Paging\x12\x16\n" +
+	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x18\n" +
 	"\asortKey\x18\x03 \x01(\tR\asortKey\x12\x18\n" +
-	"\asortVal\x18\x04 \x01(\x05R\asortVal\"\x8b\x01\n" +
+	"\asortVal\x18\x04 \x01(\x05R\asortVal\"\xf4\x01\n" +
 	"\fOrderFilters\x12\x19\n" +
 	"\bebook_id\x18\x01 \x01(\x03R\aebookId\x12#\n" +
 	"\rperiodical_id\x18\x02 \x01(\x03R\fperiodicalId\x12#\n" +
 	"\rticket_number\x18\x03 \x01(\x03R\fticketNumber\x12\x16\n" +
-	"\x06states\x18\x04 \x03(\tR\x06statesB\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\x06states\x18\x04 \x03(\tR\x06states\x12#\n" +
+	"\rdepartment_id\x18\x05 \x01(\x03R\fdepartmentId\x12\x16\n" +
+	"\x06period\x18\x06 \x01(\tR\x06period\x12*\n" +
+	"\x11is_auxiliary_fund\x18\a \x01(\x03R\x0fisAuxiliaryFund\"h\n" +
+	"\x11StateCountFilters\x12\x16\n" +
+	"\x06states\x18\x01 \x03(\tR\x06states\x12#\n" +
+	"\rdepartment_id\x18\x02 \x01(\x03R\fdepartmentId\x12\x16\n" +
+	"\x06period\x18\x03 \x01(\tR\x06periodB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_model_order_proto_rawDescOnce sync.Once
@@ -321,33 +477,36 @@ func file_protobuf_model_order_proto_rawDescGZIP() []byte {
 	return file_protobuf_model_order_proto_rawDescData
 }
 
-var file_protobuf_model_order_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protobuf_model_order_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_protobuf_model_order_proto_goTypes = []any{
-	(*Order)(nil),                 // 0: proxy.Order
-	(*Paging)(nil),                // 1: proxy.Paging
-	(*OrderFilters)(nil),          // 2: proxy.OrderFilters
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
-	(*Reader)(nil),                // 4: proxy.Reader
-	(*Ebook)(nil),                 // 5: proxy.Ebook
-	(*EbookInv)(nil),              // 6: proxy.EbookInv
-	(*Periodical)(nil),            // 7: proxy.Periodical
-	(*State)(nil),                 // 8: proxy.State
-	(*Department)(nil),            // 9: proxy.Department
+	(*Order)(nil),                 // 0: order.Order
+	(*StateCount)(nil),            // 1: order.StateCount
+	(*Paging)(nil),                // 2: order.Paging
+	(*OrderFilters)(nil),          // 3: order.OrderFilters
+	(*StateCountFilters)(nil),     // 4: order.StateCountFilters
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*Reader)(nil),                // 6: order.Reader
+	(*Ebook)(nil),                 // 7: order.Ebook
+	(*EbookInv)(nil),              // 8: order.EbookInv
+	(*Periodical)(nil),            // 9: order.Periodical
+	(*State)(nil),                 // 10: order.State
+	(*Department)(nil),            // 11: order.Department
 }
 var file_protobuf_model_order_proto_depIdxs = []int32{
-	3, // 0: proxy.Order.created_at:type_name -> google.protobuf.Timestamp
-	3, // 1: proxy.Order.updated_at:type_name -> google.protobuf.Timestamp
-	4, // 2: proxy.Order.reader:type_name -> proxy.Reader
-	5, // 3: proxy.Order.ebook:type_name -> proxy.Ebook
-	6, // 4: proxy.Order.inv_number:type_name -> proxy.EbookInv
-	7, // 5: proxy.Order.periodical:type_name -> proxy.Periodical
-	8, // 6: proxy.Order.state:type_name -> proxy.State
-	9, // 7: proxy.Order.department:type_name -> proxy.Department
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	5,  // 0: order.Order.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 1: order.Order.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 2: order.Order.reader:type_name -> order.Reader
+	7,  // 3: order.Order.ebook:type_name -> order.Ebook
+	8,  // 4: order.Order.inv_number:type_name -> order.EbookInv
+	9,  // 5: order.Order.periodical:type_name -> order.Periodical
+	10, // 6: order.Order.state:type_name -> order.State
+	11, // 7: order.Order.department:type_name -> order.Department
+	10, // 8: order.StateCount.state:type_name -> order.State
+	9,  // [9:9] is the sub-list for method output_type
+	9,  // [9:9] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_model_order_proto_init() }
@@ -365,7 +524,7 @@ func file_protobuf_model_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_model_order_proto_rawDesc), len(file_protobuf_model_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

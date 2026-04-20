@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proxy;
+package order;
 option go_package = "./protobuf;protobuf";
 import "google/protobuf/timestamp.proto";
 import "protobuf/model_ebook.proto";
@@ -17,9 +17,14 @@ message Order {
   Periodical periodical = 8;
   State state = 9;
   Department department = 10;
+  bool is_auxiliary_fund = 11;
+}
+message StateCount {
+  State state = 1;
+  int64 total = 2;
 }
 message Paging {
-  int64   skip = 1;
+  int64   offset = 1;
   int64   limit = 2;
   string  sortKey = 3;
   int32   sortVal = 4;
@@ -29,4 +34,12 @@ message OrderFilters {
   int64 periodical_id = 2;
   int64 ticket_number = 3;
   repeated string states = 4;
+  int64 department_id = 5;
+  string period = 6;
+  int64 is_auxiliary_fund = 7;
+}
+message StateCountFilters {
+  repeated string states = 1;
+  int64 department_id = 2;
+  string period = 3;
 }

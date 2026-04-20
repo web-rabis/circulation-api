@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proxy;
+package order;
 option go_package = "./protobuf;protobuf";
 
 message Periodical {

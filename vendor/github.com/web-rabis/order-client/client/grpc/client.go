@@ -14,7 +14,8 @@ type BaseClient struct {
 	conn     *grpc.ClientConn
 	dialOpts []grpc.DialOption
 
-	order client.OrderService
+	order      client.OrderService
+	dictionary client.DictionaryService
 }
 
 var _ client.Base = &BaseClient{}
@@ -50,4 +51,12 @@ func (c *BaseClient) Order() client.OrderService {
 	}
 
 	return c.order
+}
+
+func (c *BaseClient) Dictionary() client.DictionaryService {
+	if c.dictionary == nil {
+		c.dictionary = NewDictionaryServiceClient(protobuf.NewDictionaryServiceClient(c.conn))
+	}
+
+	return c.dictionary
 }

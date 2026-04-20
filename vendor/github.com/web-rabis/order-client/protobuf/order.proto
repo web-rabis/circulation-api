@@ -1,13 +1,26 @@
 syntax = "proto3";
-package proxy;
+package order;
 option go_package = "./protobuf;protobuf";
 import "protobuf/model_order.proto";
+import "protobuf/model_dictionary.proto";
+import "google/protobuf/empty.proto";
 
 
 service OrderService {
   rpc List(OrderListRequest) returns (OrderListResponse) {}
   rpc ById(ByIdRequest) returns (Order) {}
+  rpc Reject(RejectRequest) returns (google.protobuf.Empty) {}
+  rpc Redirect(RedirectRequest) returns (google.protobuf.Empty) {}
+  rpc StateCounts(StateCountsRequest) returns (StateCountsResponse) {}
 }
+
+service DictionaryService {
+  rpc ReasonRejectionList(ReasonRejectionListRequest) returns (ReasonRejectionListResponse) {}
+  rpc ReasonRejectionById(ByIdRequest) returns (ReasonRejection) {}
+  rpc DepartmentList(DepartmentListRequest) returns (DepartmentListResponse) {}
+  rpc DepartmentById(ByIdRequest) returns (Department) {}
+}
+
 
 message OrderListRequest {
   OrderFilters filters = 1;
@@ -19,4 +32,36 @@ message OrderListResponse {
 }
 message ByIdRequest {
   int64 id = 1;
+}
+message RejectRequest {
+  repeated int64 ids = 1;
+  int64 reason_rejection_id = 2;
+  int64 user_id = 3;
+}
+message RedirectRequest{
+  repeated int64 ids = 1;
+  int64 department_id = 2;
+  int64 user_id = 3;
+}
+message StateCountsRequest{
+  StateCountFilters filters = 1;
+}
+message StateCountsResponse{
+  repeated StateCount state_counts = 1;
+}
+message ReasonRejectionListRequest {
+  ReasonRejectionFilters filters = 1;
+  Paging paging = 2;
+}
+message ReasonRejectionListResponse {
+  int64 count = 1;
+  repeated ReasonRejection reason_rejections = 2;
+}
+message DepartmentListRequest {
+  DepartmentFilters filters = 1;
+  Paging paging = 2;
+}
+message DepartmentListResponse {
+  int64 count = 1;
+  repeated Department departments = 2;
 }

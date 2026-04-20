@@ -5,4 +5,6 @@ type APIServer struct {
 	ServerConfig
 	GeneralConfig
 	AuthConfig
+	OrderConfig
+	ReaderConfig
 }

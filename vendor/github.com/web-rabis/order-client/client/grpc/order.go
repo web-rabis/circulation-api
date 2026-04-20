@@ -52,3 +52,45 @@ func (c *OrderService) ById(ctx context.Context, id int64) (*model.Order, error)
 		return nil, err
 	}
 }
+
+func (c *OrderService) Reject(ctx context.Context, ids []int64, reasonRejectId int64, userId int64) error {
+	request := &protobuf.RejectRequest{
+		Ids:               ids,
+		ReasonRejectionId: reasonRejectId,
+		UserId:            userId,
+	}
+	_, err := c.client.Reject(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) Redirect(ctx context.Context, ids []int64, departmentId int64, userId int64) error {
+	request := &protobuf.RedirectRequest{
+		Ids:          ids,
+		DepartmentId: departmentId,
+		UserId:       userId,
+	}
+	_, err := c.client.Redirect(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *OrderService) StateCounts(ctx context.Context, filters *model.StateCountFilters) ([]*model.StateCount, error) {
+	request := &protobuf.StateCountsRequest{
+		Filters: filters.ToProto(),
+	}
+	response, err := c.client.StateCounts(ctx, request)
+	switch status.Code(err) {
+	case codes.OK:
+		stateCounts := make([]*model.StateCount, len(response.GetStateCounts()))
+		for i, s := range response.GetStateCounts() {
+			stateCounts[i] = model.NewStateCountProto(s)
+		}
+		return stateCounts, nil
+	default:
+		return nil, err
+	}
+}

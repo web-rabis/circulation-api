@@ -50,3 +50,10 @@ func (ua UserAccessCtx) ChiMiddleware(next http.Handler) http.Handler {
 	})
 
 }
+func UserIdFromContext(ctx context.Context) (int64, error) {
+	id := ctx.Value(UserIDKey)
+	if id == nil {
+		return 0, errors.New("user id not found")
+	}
+	return int64(id.(float64)), nil
+}

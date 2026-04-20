@@ -165,7 +165,7 @@ var File_protobuf_model_periodical_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_periodical_proto_rawDesc = "" +
 	"\n" +
-	"\x1fprotobuf/model_periodical.proto\x12\x05proxy\"\xf6\x02\n" +
+	"\x1fprotobuf/model_periodical.proto\x12\x05order\"\xf6\x02\n" +
 	"\n" +
 	"Periodical\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x10\n" +
@@ -200,7 +200,7 @@ func file_protobuf_model_periodical_proto_rawDescGZIP() []byte {
 
 var file_protobuf_model_periodical_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_protobuf_model_periodical_proto_goTypes = []any{
-	(*Periodical)(nil), // 0: proxy.Periodical
+	(*Periodical)(nil), // 0: order.Periodical
 }
 var file_protobuf_model_periodical_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

@@ -8,7 +8,7 @@ import (
 )
 
 type Paging struct {
-	Skip    int64  `json:"skip"`
+	Offset  int64  `json:"offset"`
 	Limit   int64  `json:"limit"`
 	SortKey string `json:"sort_key"`
 	SortVal int32  `json:"sort_val"`
@@ -25,18 +25,18 @@ func PagingParseFromHttp(r *http.Request) (*Paging, error) {
 		paging.Limit = limit
 	}
 
-	if pageParam := r.URL.Query().Get("skip"); pageParam != "" {
+	if pageParam := r.URL.Query().Get("offset"); pageParam != "" {
 		page, err := strconv.ParseInt(pageParam, 10, 64)
 		if err != nil {
 			return nil, err
 		}
-		skip := page - 1
+		offset := page - 1
 		if paging.Limit != 0 {
-			skip = paging.Limit * skip
+			offset = paging.Limit * offset
 		} else {
-			skip = skip * 10
+			offset = offset * 10
 		}
-		paging.Skip = skip
+		paging.Offset = offset
 	}
 
 	if orderParam := r.URL.Query().Get("order"); orderParam != "" {
@@ -59,7 +59,7 @@ func (p *Paging) ToProto() *protobuf.Paging {
 		return nil
 	}
 	return &protobuf.Paging{
-		Skip:    p.Skip,
+		Offset:  p.Offset,
 		Limit:   p.Limit,
 		SortKey: p.SortKey,
 		SortVal: p.SortVal,

@@ -117,7 +117,7 @@ var File_protobuf_model_reader_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_reader_proto_rawDesc = "" +
 	"\n" +
-	"\x1bprotobuf/model_reader.proto\x12\x05proxy\"\xe2\x01\n" +
+	"\x1bprotobuf/model_reader.proto\x12\x05order\"\xe2\x01\n" +
 	"\x06Reader\x12#\n" +
 	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12\x18\n" +
 	"\abarcode\x18\x02 \x01(\tR\abarcode\x12\x1c\n" +
@@ -146,7 +146,7 @@ func file_protobuf_model_reader_proto_rawDescGZIP() []byte {
 
 var file_protobuf_model_reader_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_protobuf_model_reader_proto_goTypes = []any{
-	(*Reader)(nil), // 0: proxy.Reader
+	(*Reader)(nil), // 0: order.Reader
 }
 var file_protobuf_model_reader_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

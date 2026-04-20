@@ -23,13 +23,19 @@ type ServerConfig struct {
 	MetricsListenAddr string `long:"metrics-listen" env:"METRICS_LISTEN" description:"Metrics Listen Address (format: :5000|127.0.0.1:5000)" required:"false" default:":4040"`
 }
 type AuthConfig struct {
-	JWTKey          string `long:"jwt-key" env:"JWT_KEY" description:"JWT secret key" required:"false" default:"airbapay-secret"`
+	JWTKey          string `long:"jwt-key" env:"JWT_KEY" description:"JWT secret key" required:"false" default:"nlrk-secret"`
 	AccessTokenTTL  int    `long:"access-token-ttl" env:"ACCESS_TOKEN_TTL" required:"false" default:"60"`   // Access token expiration in minutes
 	RefreshTokenTTL int    `long:"refresh-token-ttl" env:"REFRESH_TOKEN_TTL" required:"false" default:"24"` // Refresh token expiration in hours
 }
 type GeneralConfig struct {
 	Dbg       bool `long:"dbg" env:"DEBUG" description:"debug mode"`
 	IsTesting bool `long:"testing" env:"APP_TESTING" description:"testing mode"`
+}
+type OrderConfig struct {
+	GrpcAddress string `long:"order-grpc-address" env:"ORDER_GRPC_ADDRESS" description:"Order Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
+}
+type ReaderConfig struct {
+	GrpcAddress string `long:"reader-grpc-address" env:"READER_GRPC_ADDRESS" description:"Reader Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
 }
 
 func Parse(c interface{}) interface{} {

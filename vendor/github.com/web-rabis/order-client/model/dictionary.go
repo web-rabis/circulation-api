@@ -15,6 +15,12 @@ type State struct {
 	Name string `json:"name"`
 }
 
+type ReasonRejection struct {
+	Id   int64  `json:"id"`
+	Code string `json:"code"`
+	Name string `json:"name"`
+}
+
 func NewDepartmentFromProto(d *protobuf.Department) *Department {
 	if d == nil {
 		return nil
@@ -31,6 +37,16 @@ func NewStateFromProto(s *protobuf.State) *State {
 		return nil
 	}
 	return &State{
+		Id:   s.Id,
+		Code: s.Code,
+		Name: s.Name,
+	}
+}
+func NewReasonRejectionProto(s *protobuf.ReasonRejection) *ReasonRejection {
+	if s == nil {
+		return nil
+	}
+	return &ReasonRejection{
 		Id:   s.Id,
 		Code: s.Code,
 		Name: s.Name,

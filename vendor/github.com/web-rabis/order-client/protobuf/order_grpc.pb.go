@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,8 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrderService_List_FullMethodName = "/proxy.OrderService/List"
-	OrderService_ById_FullMethodName = "/proxy.OrderService/ById"
+	OrderService_List_FullMethodName        = "/order.OrderService/List"
+	OrderService_ById_FullMethodName        = "/order.OrderService/ById"
+	OrderService_Reject_FullMethodName      = "/order.OrderService/Reject"
+	OrderService_Redirect_FullMethodName    = "/order.OrderService/Redirect"
+	OrderService_StateCounts_FullMethodName = "/order.OrderService/StateCounts"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -29,6 +33,9 @@ const (
 type OrderServiceClient interface {
 	List(ctx context.Context, in *OrderListRequest, opts ...grpc.CallOption) (*OrderListResponse, error)
 	ById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*Order, error)
+	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Redirect(ctx context.Context, in *RedirectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StateCounts(ctx context.Context, in *StateCountsRequest, opts ...grpc.CallOption) (*StateCountsResponse, error)
 }
 
 type orderServiceClient struct {
@@ -59,12 +66,45 @@ func (c *orderServiceClient) ById(ctx context.Context, in *ByIdRequest, opts ...
 	return out, nil
 }
 
+func (c *orderServiceClient) Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Reject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Redirect(ctx context.Context, in *RedirectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Redirect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) StateCounts(ctx context.Context, in *StateCountsRequest, opts ...grpc.CallOption) (*StateCountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StateCountsResponse)
+	err := c.cc.Invoke(ctx, OrderService_StateCounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility.
 type OrderServiceServer interface {
 	List(context.Context, *OrderListRequest) (*OrderListResponse, error)
 	ById(context.Context, *ByIdRequest) (*Order, error)
+	Reject(context.Context, *RejectRequest) (*emptypb.Empty, error)
+	Redirect(context.Context, *RedirectRequest) (*emptypb.Empty, error)
+	StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -80,6 +120,15 @@ func (UnimplementedOrderServiceServer) List(context.Context, *OrderListRequest) 
 }
 func (UnimplementedOrderServiceServer) ById(context.Context, *ByIdRequest) (*Order, error) {
 	return nil, status.Error(codes.Unimplemented, "method ById not implemented")
+}
+func (UnimplementedOrderServiceServer) Reject(context.Context, *RejectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Reject not implemented")
+}
+func (UnimplementedOrderServiceServer) Redirect(context.Context, *RedirectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Redirect not implemented")
+}
+func (UnimplementedOrderServiceServer) StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StateCounts not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 func (UnimplementedOrderServiceServer) testEmbeddedByValue()                      {}
@@ -138,11 +187,65 @@ func _OrderService_ById_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_Reject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Reject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Reject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Reject(ctx, req.(*RejectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Redirect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RedirectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Redirect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Redirect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Redirect(ctx, req.(*RedirectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_StateCounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StateCountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).StateCounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_StateCounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).StateCounts(ctx, req.(*StateCountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proxy.OrderService",
+	ServiceName: "order.OrderService",
 	HandlerType: (*OrderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -152,6 +255,234 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ById",
 			Handler:    _OrderService_ById_Handler,
+		},
+		{
+			MethodName: "Reject",
+			Handler:    _OrderService_Reject_Handler,
+		},
+		{
+			MethodName: "Redirect",
+			Handler:    _OrderService_Redirect_Handler,
+		},
+		{
+			MethodName: "StateCounts",
+			Handler:    _OrderService_StateCounts_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/order.proto",
+}
+
+const (
+	DictionaryService_ReasonRejectionList_FullMethodName = "/order.DictionaryService/ReasonRejectionList"
+	DictionaryService_ReasonRejectionById_FullMethodName = "/order.DictionaryService/ReasonRejectionById"
+	DictionaryService_DepartmentList_FullMethodName      = "/order.DictionaryService/DepartmentList"
+	DictionaryService_DepartmentById_FullMethodName      = "/order.DictionaryService/DepartmentById"
+)
+
+// DictionaryServiceClient is the client API for DictionaryService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictionaryServiceClient interface {
+	ReasonRejectionList(ctx context.Context, in *ReasonRejectionListRequest, opts ...grpc.CallOption) (*ReasonRejectionListResponse, error)
+	ReasonRejectionById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*ReasonRejection, error)
+	DepartmentList(ctx context.Context, in *DepartmentListRequest, opts ...grpc.CallOption) (*DepartmentListResponse, error)
+	DepartmentById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*Department, error)
+}
+
+type dictionaryServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictionaryServiceClient(cc grpc.ClientConnInterface) DictionaryServiceClient {
+	return &dictionaryServiceClient{cc}
+}
+
+func (c *dictionaryServiceClient) ReasonRejectionList(ctx context.Context, in *ReasonRejectionListRequest, opts ...grpc.CallOption) (*ReasonRejectionListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReasonRejectionListResponse)
+	err := c.cc.Invoke(ctx, DictionaryService_ReasonRejectionList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryServiceClient) ReasonRejectionById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*ReasonRejection, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReasonRejection)
+	err := c.cc.Invoke(ctx, DictionaryService_ReasonRejectionById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryServiceClient) DepartmentList(ctx context.Context, in *DepartmentListRequest, opts ...grpc.CallOption) (*DepartmentListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DepartmentListResponse)
+	err := c.cc.Invoke(ctx, DictionaryService_DepartmentList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionaryServiceClient) DepartmentById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*Department, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Department)
+	err := c.cc.Invoke(ctx, DictionaryService_DepartmentById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictionaryServiceServer is the server API for DictionaryService service.
+// All implementations must embed UnimplementedDictionaryServiceServer
+// for forward compatibility.
+type DictionaryServiceServer interface {
+	ReasonRejectionList(context.Context, *ReasonRejectionListRequest) (*ReasonRejectionListResponse, error)
+	ReasonRejectionById(context.Context, *ByIdRequest) (*ReasonRejection, error)
+	DepartmentList(context.Context, *DepartmentListRequest) (*DepartmentListResponse, error)
+	DepartmentById(context.Context, *ByIdRequest) (*Department, error)
+	mustEmbedUnimplementedDictionaryServiceServer()
+}
+
+// UnimplementedDictionaryServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDictionaryServiceServer struct{}
+
+func (UnimplementedDictionaryServiceServer) ReasonRejectionList(context.Context, *ReasonRejectionListRequest) (*ReasonRejectionListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReasonRejectionList not implemented")
+}
+func (UnimplementedDictionaryServiceServer) ReasonRejectionById(context.Context, *ByIdRequest) (*ReasonRejection, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReasonRejectionById not implemented")
+}
+func (UnimplementedDictionaryServiceServer) DepartmentList(context.Context, *DepartmentListRequest) (*DepartmentListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DepartmentList not implemented")
+}
+func (UnimplementedDictionaryServiceServer) DepartmentById(context.Context, *ByIdRequest) (*Department, error) {
+	return nil, status.Error(codes.Unimplemented, "method DepartmentById not implemented")
+}
+func (UnimplementedDictionaryServiceServer) mustEmbedUnimplementedDictionaryServiceServer() {}
+func (UnimplementedDictionaryServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeDictionaryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictionaryServiceServer will
+// result in compilation errors.
+type UnsafeDictionaryServiceServer interface {
+	mustEmbedUnimplementedDictionaryServiceServer()
+}
+
+func RegisterDictionaryServiceServer(s grpc.ServiceRegistrar, srv DictionaryServiceServer) {
+	// If the following call panics, it indicates UnimplementedDictionaryServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DictionaryService_ServiceDesc, srv)
+}
+
+func _DictionaryService_ReasonRejectionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReasonRejectionListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionaryServiceServer).ReasonRejectionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionaryService_ReasonRejectionList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionaryServiceServer).ReasonRejectionList(ctx, req.(*ReasonRejectionListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionaryService_ReasonRejectionById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionaryServiceServer).ReasonRejectionById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionaryService_ReasonRejectionById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionaryServiceServer).ReasonRejectionById(ctx, req.(*ByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionaryService_DepartmentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DepartmentListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionaryServiceServer).DepartmentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionaryService_DepartmentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionaryServiceServer).DepartmentList(ctx, req.(*DepartmentListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionaryService_DepartmentById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionaryServiceServer).DepartmentById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionaryService_DepartmentById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionaryServiceServer).DepartmentById(ctx, req.(*ByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DictionaryService_ServiceDesc is the grpc.ServiceDesc for DictionaryService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictionaryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "order.DictionaryService",
+	HandlerType: (*DictionaryServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReasonRejectionList",
+			Handler:    _DictionaryService_ReasonRejectionList_Handler,
+		},
+		{
+			MethodName: "ReasonRejectionById",
+			Handler:    _DictionaryService_ReasonRejectionById_Handler,
+		},
+		{
+			MethodName: "DepartmentList",
+			Handler:    _DictionaryService_DepartmentList_Handler,
+		},
+		{
+			MethodName: "DepartmentById",
+			Handler:    _DictionaryService_DepartmentById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

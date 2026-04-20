@@ -3,6 +3,7 @@ package v1
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth"
+
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
 )
@@ -32,6 +33,9 @@ func (res *OrderResource) Routes() chi.Router {
 		r.Use(jwtauth.Verifier(res.authMan.JWTAuth()))
 		r.Use(auth.NewUserAccessCtx(res.authMan.JWTKey()).ChiMiddleware)
 		r.Get("/", res.orders)
+		r.Post("/reject", res.rejectOrder)
+		r.Post("/redirect", res.redirectOrder)
+		r.Get("/state-counts", res.stateCounts)
 	})
 
 	return r

@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/render"
-	"github.com/web-rabis/circulation-api/internal/domain/model/order"
+
 	"github.com/web-rabis/circulation-api/internal/resource/http/order/v1/dto"
 	"github.com/web-rabis/httperrors"
 	orderModel "github.com/web-rabis/order-client/model"
@@ -37,20 +37,51 @@ func (res *OrderResource) orders(w http.ResponseWriter, r *http.Request) {
 }
 func parseFilters(r *http.Request) (*orderModel.OrderFilters, error) {
 	var ticketNumber_ int64
+	var states []string
 	ticketNumber := r.URL.Query().Get("ticketNumber")
 	if ticketNumber != "" {
 		ticketNumber_, _ = strconv.ParseInt(ticketNumber, 10, 64)
 	}
-
+	status := r.URL.Query().Get("status")
+	switch status {
+	case orderModel.OrderStateInHands, orderModel.OrderStateOrdered, orderModel.OrderStateInStorage, orderModel.OrderStateInReadingHall, orderModel.OrderStatePostponed, orderModel.OrderStateRejected, orderModel.OrderStateInAuxiliaryFund, orderModel.OrderStateReaderReturned, orderModel.OrderStateReturnToStorage:
+		states = append(states, status)
+	default:
+		states = []string{
+			orderModel.OrderStateInHands,
+			orderModel.OrderStateOrdered,
+			orderModel.OrderStateInStorage,
+			orderModel.OrderStateInReadingHall,
+			orderModel.OrderStatePostponed,
+			orderModel.OrderStateRejected,
+			orderModel.OrderStateInAuxiliaryFund,
+			orderModel.OrderStateReaderReturned,
+			orderModel.OrderStateReturnToStorage,
+		}
+	}
+	departmentId, _ := strconv.ParseInt(r.URL.Query().Get("departmentId"), 10, 64)
+	period := r.URL.Query().Get("period")
+	switch period {
+	case orderModel.OrderPeriodToday:
+	case orderModel.OrderPeriodWeek:
+	case orderModel.OrderPeriodMonth:
+	case orderModel.OrderPeriodQuarter:
+	case orderModel.OrderPeriodYear:
+	default:
+		period = ""
+	}
+	var isAuxiliaryFund *bool
+	if r.URL.Query().Get("isAuxiliaryFund") != "" {
+		af, err := strconv.ParseBool(r.URL.Query().Get("isAuxiliaryFund"))
+		if err == nil {
+			isAuxiliaryFund = &af
+		}
+	}
 	return &orderModel.OrderFilters{
-		TicketNumber: ticketNumber_,
-		States: []string{
-			order.OrderStateInHands,
-			order.OrderStateOrdered,
-			order.OrderStateInStorage,
-			order.OrderStateInReadingHall,
-			order.OrderStatePostponed,
-			order.OrderStateRejected,
-		},
+		TicketNumber:    ticketNumber_,
+		States:          states,
+		DepartmentId:    departmentId,
+		Period:          period,
+		IsAuxiliaryFund: isAuxiliaryFund,
 	}, nil
 }

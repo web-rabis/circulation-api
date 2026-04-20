@@ -485,16 +485,16 @@ var File_protobuf_model_ebook_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_ebook_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotobuf/model_ebook.proto\x12\x05proxy\x1a\x1fprotobuf/model_dictionary.proto\"\xdf\x02\n" +
+	"\x1aprotobuf/model_ebook.proto\x12\x05order\x1a\x1fprotobuf/model_dictionary.proto\"\xdf\x02\n" +
 	"\x05Ebook\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12J\n" +
-	"\x13bibliographic_level\x18\x02 \x01(\v2\x19.proxy.BibliographicLevelR\x12bibliographicLevel\x12A\n" +
-	"\x10type_description\x18\x03 \x01(\v2\x16.proxy.TypeDescriptionR\x0ftypeDescription\x12(\n" +
-	"\acatalog\x18\x04 \x01(\v2\x0e.proxy.CatalogR\acatalog\x12\x16\n" +
+	"\x13bibliographic_level\x18\x02 \x01(\v2\x19.order.BibliographicLevelR\x12bibliographicLevel\x12A\n" +
+	"\x10type_description\x18\x03 \x01(\v2\x16.order.TypeDescriptionR\x0ftypeDescription\x12(\n" +
+	"\acatalog\x18\x04 \x01(\v2\x0e.order.CatalogR\acatalog\x12\x16\n" +
 	"\x06author\x18\x05 \x01(\tR\x06author\x12\x14\n" +
 	"\x05title\x18\x06 \x01(\tR\x05title\x123\n" +
-	"\tplacement\x18\a \x01(\v2\x15.proxy.EbookPlacementR\tplacement\x12*\n" +
-	"\x06format\x18\b \x01(\v2\x12.proxy.EbookFormatR\x06format\"\xc5\x01\n" +
+	"\tplacement\x18\a \x01(\v2\x15.order.EbookPlacementR\tplacement\x12*\n" +
+	"\x06format\x18\b \x01(\v2\x12.order.EbookFormatR\x06format\"\xc5\x01\n" +
 	"\bEbookInv\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x1d\n" +
@@ -502,9 +502,9 @@ const file_protobuf_model_ebook_proto_rawDesc = "" +
 	"inv_number\x18\x03 \x01(\tR\tinvNumber\x12\x18\n" +
 	"\abarcode\x18\x04 \x01(\tR\abarcode\x121\n" +
 	"\n" +
-	"Department\x18\x05 \x01(\v2\x11.proxy.DepartmentR\n" +
+	"Department\x18\x05 \x01(\v2\x11.order.DepartmentR\n" +
 	"Department\x12\"\n" +
-	"\x05State\x18\x06 \x01(\v2\f.proxy.StateR\x05State\".\n" +
+	"\x05State\x18\x06 \x01(\v2\f.order.StateR\x05State\".\n" +
 	"\x0eEbookPlacement\x12\x1c\n" +
 	"\tplacement\x18\x01 \x01(\x03R\tplacement\"%\n" +
 	"\vEbookFormat\x12\x16\n" +
@@ -538,24 +538,24 @@ func file_protobuf_model_ebook_proto_rawDescGZIP() []byte {
 
 var file_protobuf_model_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_protobuf_model_ebook_proto_goTypes = []any{
-	(*Ebook)(nil),              // 0: proxy.Ebook
-	(*EbookInv)(nil),           // 1: proxy.EbookInv
-	(*EbookPlacement)(nil),     // 2: proxy.EbookPlacement
-	(*EbookFormat)(nil),        // 3: proxy.EbookFormat
-	(*BibliographicLevel)(nil), // 4: proxy.BibliographicLevel
-	(*TypeDescription)(nil),    // 5: proxy.TypeDescription
-	(*Catalog)(nil),            // 6: proxy.Catalog
-	(*Department)(nil),         // 7: proxy.Department
-	(*State)(nil),              // 8: proxy.State
+	(*Ebook)(nil),              // 0: order.Ebook
+	(*EbookInv)(nil),           // 1: order.EbookInv
+	(*EbookPlacement)(nil),     // 2: order.EbookPlacement
+	(*EbookFormat)(nil),        // 3: order.EbookFormat
+	(*BibliographicLevel)(nil), // 4: order.BibliographicLevel
+	(*TypeDescription)(nil),    // 5: order.TypeDescription
+	(*Catalog)(nil),            // 6: order.Catalog
+	(*Department)(nil),         // 7: order.Department
+	(*State)(nil),              // 8: order.State
 }
 var file_protobuf_model_ebook_proto_depIdxs = []int32{
-	4, // 0: proxy.Ebook.bibliographic_level:type_name -> proxy.BibliographicLevel
-	5, // 1: proxy.Ebook.type_description:type_name -> proxy.TypeDescription
-	6, // 2: proxy.Ebook.catalog:type_name -> proxy.Catalog
-	2, // 3: proxy.Ebook.placement:type_name -> proxy.EbookPlacement
-	3, // 4: proxy.Ebook.format:type_name -> proxy.EbookFormat
-	7, // 5: proxy.EbookInv.Department:type_name -> proxy.Department
-	8, // 6: proxy.EbookInv.State:type_name -> proxy.State
+	4, // 0: order.Ebook.bibliographic_level:type_name -> order.BibliographicLevel
+	5, // 1: order.Ebook.type_description:type_name -> order.TypeDescription
+	6, // 2: order.Ebook.catalog:type_name -> order.Catalog
+	2, // 3: order.Ebook.placement:type_name -> order.EbookPlacement
+	3, // 4: order.Ebook.format:type_name -> order.EbookFormat
+	7, // 5: order.EbookInv.Department:type_name -> order.Department
+	8, // 6: order.EbookInv.State:type_name -> order.State
 	7, // [7:7] is the sub-list for method output_type
 	7, // [7:7] is the sub-list for method input_type
 	7, // [7:7] is the sub-list for extension type_name

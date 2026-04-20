@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  nlrk-circulation-service:
-    container_name: nlrk-circulation-service
-    image: shaisarov/nlrk-circulation-service
+  nlrk-circulation-api:
+    container_name: nlrk-circulation-api
+    image: shaisarov/nlrk-circulation-api
     restart: unless-stopped
     build:
       context: .
@@ -12,13 +12,15 @@ services:
         - https_proxy
         - no_proxy
     ports:
-      - "8588:8588"
+      - "8590:8590"
     environment:
-      - LISTEN=:8585
+      - LISTEN=:8590
       - DEBUG=1
       - DATASTORE=postgres
       - DATASTORE_URL=postgres://postgres:postgres@192.168.7.241:5432/nlrk
       - DATASTORE_DB=nlrk
+      - ORDER_GRPC_ADDRESS=nlrk-order:8909
+      - READER_GRPC_ADDRESS=nlrk-reader:8906
     networks:
       - web_rabis_network
 networks:

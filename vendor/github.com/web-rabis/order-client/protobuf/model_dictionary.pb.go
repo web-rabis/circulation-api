@@ -149,11 +149,143 @@ func (x *State) GetName() string {
 	return ""
 }
 
+type ReasonRejection struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReasonRejection) Reset() {
+	*x = ReasonRejection{}
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReasonRejection) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReasonRejection) ProtoMessage() {}
+
+func (x *ReasonRejection) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReasonRejection.ProtoReflect.Descriptor instead.
+func (*ReasonRejection) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_dictionary_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ReasonRejection) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ReasonRejection) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ReasonRejection) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ReasonRejectionFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReasonRejectionFilters) Reset() {
+	*x = ReasonRejectionFilters{}
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReasonRejectionFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReasonRejectionFilters) ProtoMessage() {}
+
+func (x *ReasonRejectionFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReasonRejectionFilters.ProtoReflect.Descriptor instead.
+func (*ReasonRejectionFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_dictionary_proto_rawDescGZIP(), []int{3}
+}
+
+type DepartmentFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DepartmentFilters) Reset() {
+	*x = DepartmentFilters{}
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DepartmentFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DepartmentFilters) ProtoMessage() {}
+
+func (x *DepartmentFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_dictionary_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DepartmentFilters.ProtoReflect.Descriptor instead.
+func (*DepartmentFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_dictionary_proto_rawDescGZIP(), []int{4}
+}
+
 var File_protobuf_model_dictionary_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_dictionary_proto_rawDesc = "" +
 	"\n" +
-	"\x1fprotobuf/model_dictionary.proto\x12\x05proxy\"X\n" +
+	"\x1fprotobuf/model_dictionary.proto\x12\x05order\"X\n" +
 	"\n" +
 	"Department\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
@@ -163,7 +295,13 @@ const file_protobuf_model_dictionary_proto_rawDesc = "" +
 	"\x05State\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04nameB\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\x04name\x18\x03 \x01(\tR\x04name\"I\n" +
+	"\x0fReasonRejection\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"\x18\n" +
+	"\x16ReasonRejectionFilters\"\x13\n" +
+	"\x11DepartmentFiltersB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_model_dictionary_proto_rawDescOnce sync.Once
@@ -177,10 +315,13 @@ func file_protobuf_model_dictionary_proto_rawDescGZIP() []byte {
 	return file_protobuf_model_dictionary_proto_rawDescData
 }
 
-var file_protobuf_model_dictionary_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_protobuf_model_dictionary_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_protobuf_model_dictionary_proto_goTypes = []any{
-	(*Department)(nil), // 0: proxy.Department
-	(*State)(nil),      // 1: proxy.State
+	(*Department)(nil),             // 0: order.Department
+	(*State)(nil),                  // 1: order.State
+	(*ReasonRejection)(nil),        // 2: order.ReasonRejection
+	(*ReasonRejectionFilters)(nil), // 3: order.ReasonRejectionFilters
+	(*DepartmentFilters)(nil),      // 4: order.DepartmentFilters
 }
 var file_protobuf_model_dictionary_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -201,7 +342,7 @@ func file_protobuf_model_dictionary_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_model_dictionary_proto_rawDesc), len(file_protobuf_model_dictionary_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

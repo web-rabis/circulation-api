@@ -1,0 +1,12 @@
+syntax = "proto3";
+package reader;
+option go_package = "./protobuf;protobuf";
+import "protobuf/reader_model.proto";
+
+service ReaderSvc {
+  rpc ReaderById(EntityByIdRequest) returns (Reader) {}
+}
+
+message EntityByIdRequest {
+  int64 id = 1;
+}

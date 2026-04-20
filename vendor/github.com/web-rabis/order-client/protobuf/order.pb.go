@@ -9,6 +9,7 @@ package protobuf
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -169,22 +170,470 @@ func (x *ByIdRequest) GetId() int64 {
 	return 0
 }
 
+type RejectRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Ids               []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	ReasonRejectionId int64                  `protobuf:"varint,2,opt,name=reason_rejection_id,json=reasonRejectionId,proto3" json:"reason_rejection_id,omitempty"`
+	UserId            int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *RejectRequest) Reset() {
+	*x = RejectRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RejectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RejectRequest) ProtoMessage() {}
+
+func (x *RejectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RejectRequest.ProtoReflect.Descriptor instead.
+func (*RejectRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RejectRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *RejectRequest) GetReasonRejectionId() int64 {
+	if x != nil {
+		return x.ReasonRejectionId
+	}
+	return 0
+}
+
+func (x *RejectRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type RedirectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	DepartmentId  int64                  `protobuf:"varint,2,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RedirectRequest) Reset() {
+	*x = RedirectRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RedirectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RedirectRequest) ProtoMessage() {}
+
+func (x *RedirectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RedirectRequest.ProtoReflect.Descriptor instead.
+func (*RedirectRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RedirectRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *RedirectRequest) GetDepartmentId() int64 {
+	if x != nil {
+		return x.DepartmentId
+	}
+	return 0
+}
+
+func (x *RedirectRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type StateCountsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *StateCountFilters     `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StateCountsRequest) Reset() {
+	*x = StateCountsRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StateCountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StateCountsRequest) ProtoMessage() {}
+
+func (x *StateCountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StateCountsRequest.ProtoReflect.Descriptor instead.
+func (*StateCountsRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StateCountsRequest) GetFilters() *StateCountFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+type StateCountsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StateCounts   []*StateCount          `protobuf:"bytes,1,rep,name=state_counts,json=stateCounts,proto3" json:"state_counts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StateCountsResponse) Reset() {
+	*x = StateCountsResponse{}
+	mi := &file_protobuf_order_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StateCountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StateCountsResponse) ProtoMessage() {}
+
+func (x *StateCountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StateCountsResponse.ProtoReflect.Descriptor instead.
+func (*StateCountsResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *StateCountsResponse) GetStateCounts() []*StateCount {
+	if x != nil {
+		return x.StateCounts
+	}
+	return nil
+}
+
+type ReasonRejectionListRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Filters       *ReasonRejectionFilters `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                 `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReasonRejectionListRequest) Reset() {
+	*x = ReasonRejectionListRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReasonRejectionListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReasonRejectionListRequest) ProtoMessage() {}
+
+func (x *ReasonRejectionListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReasonRejectionListRequest.ProtoReflect.Descriptor instead.
+func (*ReasonRejectionListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ReasonRejectionListRequest) GetFilters() *ReasonRejectionFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *ReasonRejectionListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type ReasonRejectionListResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Count            int64                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	ReasonRejections []*ReasonRejection     `protobuf:"bytes,2,rep,name=reason_rejections,json=reasonRejections,proto3" json:"reason_rejections,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ReasonRejectionListResponse) Reset() {
+	*x = ReasonRejectionListResponse{}
+	mi := &file_protobuf_order_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReasonRejectionListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReasonRejectionListResponse) ProtoMessage() {}
+
+func (x *ReasonRejectionListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReasonRejectionListResponse.ProtoReflect.Descriptor instead.
+func (*ReasonRejectionListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ReasonRejectionListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ReasonRejectionListResponse) GetReasonRejections() []*ReasonRejection {
+	if x != nil {
+		return x.ReasonRejections
+	}
+	return nil
+}
+
+type DepartmentListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *DepartmentFilters     `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DepartmentListRequest) Reset() {
+	*x = DepartmentListRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DepartmentListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DepartmentListRequest) ProtoMessage() {}
+
+func (x *DepartmentListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DepartmentListRequest.ProtoReflect.Descriptor instead.
+func (*DepartmentListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DepartmentListRequest) GetFilters() *DepartmentFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *DepartmentListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type DepartmentListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Count         int64                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Departments   []*Department          `protobuf:"bytes,2,rep,name=departments,proto3" json:"departments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DepartmentListResponse) Reset() {
+	*x = DepartmentListResponse{}
+	mi := &file_protobuf_order_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DepartmentListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DepartmentListResponse) ProtoMessage() {}
+
+func (x *DepartmentListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DepartmentListResponse.ProtoReflect.Descriptor instead.
+func (*DepartmentListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DepartmentListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *DepartmentListResponse) GetDepartments() []*Department {
+	if x != nil {
+		return x.Departments
+	}
+	return nil
+}
+
 var File_protobuf_order_proto protoreflect.FileDescriptor
 
 const file_protobuf_order_proto_rawDesc = "" +
 	"\n" +
-	"\x14protobuf/order.proto\x12\x05proxy\x1a\x1aprotobuf/model_order.proto\"h\n" +
+	"\x14protobuf/order.proto\x12\x05order\x1a\x1aprotobuf/model_order.proto\x1a\x1fprotobuf/model_dictionary.proto\x1a\x1bgoogle/protobuf/empty.proto\"h\n" +
 	"\x10OrderListRequest\x12-\n" +
-	"\afilters\x18\x01 \x01(\v2\x13.proxy.OrderFiltersR\afilters\x12%\n" +
-	"\x06paging\x18\x02 \x01(\v2\r.proxy.PagingR\x06paging\"O\n" +
+	"\afilters\x18\x01 \x01(\v2\x13.order.OrderFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.order.PagingR\x06paging\"O\n" +
 	"\x11OrderListResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x03R\x05count\x12$\n" +
-	"\x06orders\x18\x02 \x03(\v2\f.proxy.OrderR\x06orders\"\x1d\n" +
+	"\x06orders\x18\x02 \x03(\v2\f.order.OrderR\x06orders\"\x1d\n" +
 	"\vByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id2w\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"j\n" +
+	"\rRejectRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12.\n" +
+	"\x13reason_rejection_id\x18\x02 \x01(\x03R\x11reasonRejectionId\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"a\n" +
+	"\x0fRedirectRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12#\n" +
+	"\rdepartment_id\x18\x02 \x01(\x03R\fdepartmentId\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"H\n" +
+	"\x12StateCountsRequest\x122\n" +
+	"\afilters\x18\x01 \x01(\v2\x18.order.StateCountFiltersR\afilters\"K\n" +
+	"\x13StateCountsResponse\x124\n" +
+	"\fstate_counts\x18\x01 \x03(\v2\x11.order.StateCountR\vstateCounts\"|\n" +
+	"\x1aReasonRejectionListRequest\x127\n" +
+	"\afilters\x18\x01 \x01(\v2\x1d.order.ReasonRejectionFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.order.PagingR\x06paging\"x\n" +
+	"\x1bReasonRejectionListResponse\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x03R\x05count\x12C\n" +
+	"\x11reason_rejections\x18\x02 \x03(\v2\x16.order.ReasonRejectionR\x10reasonRejections\"r\n" +
+	"\x15DepartmentListRequest\x122\n" +
+	"\afilters\x18\x01 \x01(\v2\x18.order.DepartmentFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.order.PagingR\x06paging\"c\n" +
+	"\x16DepartmentListResponse\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x03R\x05count\x123\n" +
+	"\vdepartments\x18\x02 \x03(\v2\x11.order.DepartmentR\vdepartments2\xb7\x02\n" +
 	"\fOrderService\x12;\n" +
-	"\x04List\x12\x17.proxy.OrderListRequest\x1a\x18.proxy.OrderListResponse\"\x00\x12*\n" +
-	"\x04ById\x12\x12.proxy.ByIdRequest\x1a\f.proxy.Order\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\x04List\x12\x17.order.OrderListRequest\x1a\x18.order.OrderListResponse\"\x00\x12*\n" +
+	"\x04ById\x12\x12.order.ByIdRequest\x1a\f.order.Order\"\x00\x128\n" +
+	"\x06Reject\x12\x14.order.RejectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12<\n" +
+	"\bRedirect\x12\x16.order.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
+	"\vStateCounts\x12\x19.order.StateCountsRequest\x1a\x1a.order.StateCountsResponse\"\x002\xc4\x02\n" +
+	"\x11DictionaryService\x12^\n" +
+	"\x13ReasonRejectionList\x12!.order.ReasonRejectionListRequest\x1a\".order.ReasonRejectionListResponse\"\x00\x12C\n" +
+	"\x13ReasonRejectionById\x12\x12.order.ByIdRequest\x1a\x16.order.ReasonRejection\"\x00\x12O\n" +
+	"\x0eDepartmentList\x12\x1c.order.DepartmentListRequest\x1a\x1d.order.DepartmentListResponse\"\x00\x129\n" +
+	"\x0eDepartmentById\x12\x12.order.ByIdRequest\x1a\x11.order.Department\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_order_proto_rawDescOnce sync.Once
@@ -198,28 +647,65 @@ func file_protobuf_order_proto_rawDescGZIP() []byte {
 	return file_protobuf_order_proto_rawDescData
 }
 
-var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_protobuf_order_proto_goTypes = []any{
-	(*OrderListRequest)(nil),  // 0: proxy.OrderListRequest
-	(*OrderListResponse)(nil), // 1: proxy.OrderListResponse
-	(*ByIdRequest)(nil),       // 2: proxy.ByIdRequest
-	(*OrderFilters)(nil),      // 3: proxy.OrderFilters
-	(*Paging)(nil),            // 4: proxy.Paging
-	(*Order)(nil),             // 5: proxy.Order
+	(*OrderListRequest)(nil),            // 0: order.OrderListRequest
+	(*OrderListResponse)(nil),           // 1: order.OrderListResponse
+	(*ByIdRequest)(nil),                 // 2: order.ByIdRequest
+	(*RejectRequest)(nil),               // 3: order.RejectRequest
+	(*RedirectRequest)(nil),             // 4: order.RedirectRequest
+	(*StateCountsRequest)(nil),          // 5: order.StateCountsRequest
+	(*StateCountsResponse)(nil),         // 6: order.StateCountsResponse
+	(*ReasonRejectionListRequest)(nil),  // 7: order.ReasonRejectionListRequest
+	(*ReasonRejectionListResponse)(nil), // 8: order.ReasonRejectionListResponse
+	(*DepartmentListRequest)(nil),       // 9: order.DepartmentListRequest
+	(*DepartmentListResponse)(nil),      // 10: order.DepartmentListResponse
+	(*OrderFilters)(nil),                // 11: order.OrderFilters
+	(*Paging)(nil),                      // 12: order.Paging
+	(*Order)(nil),                       // 13: order.Order
+	(*StateCountFilters)(nil),           // 14: order.StateCountFilters
+	(*StateCount)(nil),                  // 15: order.StateCount
+	(*ReasonRejectionFilters)(nil),      // 16: order.ReasonRejectionFilters
+	(*ReasonRejection)(nil),             // 17: order.ReasonRejection
+	(*DepartmentFilters)(nil),           // 18: order.DepartmentFilters
+	(*Department)(nil),                  // 19: order.Department
+	(*emptypb.Empty)(nil),               // 20: google.protobuf.Empty
 }
 var file_protobuf_order_proto_depIdxs = []int32{
-	3, // 0: proxy.OrderListRequest.filters:type_name -> proxy.OrderFilters
-	4, // 1: proxy.OrderListRequest.paging:type_name -> proxy.Paging
-	5, // 2: proxy.OrderListResponse.orders:type_name -> proxy.Order
-	0, // 3: proxy.OrderService.List:input_type -> proxy.OrderListRequest
-	2, // 4: proxy.OrderService.ById:input_type -> proxy.ByIdRequest
-	1, // 5: proxy.OrderService.List:output_type -> proxy.OrderListResponse
-	5, // 6: proxy.OrderService.ById:output_type -> proxy.Order
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	11, // 0: order.OrderListRequest.filters:type_name -> order.OrderFilters
+	12, // 1: order.OrderListRequest.paging:type_name -> order.Paging
+	13, // 2: order.OrderListResponse.orders:type_name -> order.Order
+	14, // 3: order.StateCountsRequest.filters:type_name -> order.StateCountFilters
+	15, // 4: order.StateCountsResponse.state_counts:type_name -> order.StateCount
+	16, // 5: order.ReasonRejectionListRequest.filters:type_name -> order.ReasonRejectionFilters
+	12, // 6: order.ReasonRejectionListRequest.paging:type_name -> order.Paging
+	17, // 7: order.ReasonRejectionListResponse.reason_rejections:type_name -> order.ReasonRejection
+	18, // 8: order.DepartmentListRequest.filters:type_name -> order.DepartmentFilters
+	12, // 9: order.DepartmentListRequest.paging:type_name -> order.Paging
+	19, // 10: order.DepartmentListResponse.departments:type_name -> order.Department
+	0,  // 11: order.OrderService.List:input_type -> order.OrderListRequest
+	2,  // 12: order.OrderService.ById:input_type -> order.ByIdRequest
+	3,  // 13: order.OrderService.Reject:input_type -> order.RejectRequest
+	4,  // 14: order.OrderService.Redirect:input_type -> order.RedirectRequest
+	5,  // 15: order.OrderService.StateCounts:input_type -> order.StateCountsRequest
+	7,  // 16: order.DictionaryService.ReasonRejectionList:input_type -> order.ReasonRejectionListRequest
+	2,  // 17: order.DictionaryService.ReasonRejectionById:input_type -> order.ByIdRequest
+	9,  // 18: order.DictionaryService.DepartmentList:input_type -> order.DepartmentListRequest
+	2,  // 19: order.DictionaryService.DepartmentById:input_type -> order.ByIdRequest
+	1,  // 20: order.OrderService.List:output_type -> order.OrderListResponse
+	13, // 21: order.OrderService.ById:output_type -> order.Order
+	20, // 22: order.OrderService.Reject:output_type -> google.protobuf.Empty
+	20, // 23: order.OrderService.Redirect:output_type -> google.protobuf.Empty
+	6,  // 24: order.OrderService.StateCounts:output_type -> order.StateCountsResponse
+	8,  // 25: order.DictionaryService.ReasonRejectionList:output_type -> order.ReasonRejectionListResponse
+	17, // 26: order.DictionaryService.ReasonRejectionById:output_type -> order.ReasonRejection
+	10, // 27: order.DictionaryService.DepartmentList:output_type -> order.DepartmentListResponse
+	19, // 28: order.DictionaryService.DepartmentById:output_type -> order.Department
+	20, // [20:29] is the sub-list for method output_type
+	11, // [11:20] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_order_proto_init() }
@@ -228,15 +714,16 @@ func file_protobuf_order_proto_init() {
 		return
 	}
 	file_protobuf_model_order_proto_init()
+	file_protobuf_model_dictionary_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_order_proto_rawDesc), len(file_protobuf_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   11,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_protobuf_order_proto_goTypes,
 		DependencyIndexes: file_protobuf_order_proto_depIdxs,
