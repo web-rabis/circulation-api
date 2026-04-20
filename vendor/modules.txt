@@ -179,7 +179,6 @@ github.com/web-rabis/db/internal/adapter/database/user/drivers/pgsql/user
 github.com/web-rabis/db/model
 github.com/web-rabis/db/reader
 github.com/web-rabis/db/user
-github.com/web-rabis/db/user/manager/user
 # github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
 ## explicit; go 1.18
 github.com/web-rabis/httperrors
