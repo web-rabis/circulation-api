@@ -21,6 +21,7 @@ services:
       - DATASTORE_DB=nlrk
       - ORDER_GRPC_ADDRESS=nlrk-order:8909
       - READER_GRPC_ADDRESS=nlrk-reader:8906
+      - SSO_GRPC_ADDRESS=nlrk-sso:8908
       - JWT_KEY=QowdicuD2K6h7oVpI4z7GjeX5COGRY52
     networks:
       - web_rabis_network
