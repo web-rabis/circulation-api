@@ -3,6 +3,9 @@ package order
 import (
 	"context"
 
+	"github.com/web-rabis/circulation-api/internal/domain/model"
+	ebookClient "github.com/web-rabis/ebook-client/client"
+	model2 "github.com/web-rabis/ebook-client/model"
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerClient "github.com/web-rabis/reader-client/client"
@@ -10,7 +13,7 @@ import (
 )
 
 type IManager interface {
-	List(ctx context.Context, filters *orderModel.OrderFilters, paging *orderModel.Paging) (int64, []*orderModel.Order, error)
+	List(ctx context.Context, filters *orderModel.OrderFilters, paging *orderModel.Paging) (int64, []*model.Order, error)
 	ById(ctx context.Context, id int64) (*orderModel.Order, error)
 	StateCounts(ctx context.Context, filters *orderModel.StateCountFilters) ([]*orderModel.StateCount, error)
 	Reject(ctx context.Context, ids []int64, rejectId, userId int64) error
@@ -28,33 +31,42 @@ type Manager struct {
 	orderCl  orderClient.OrderService
 	readerCl readerClient.ReaderService
 	userCl   ssoClient.UserService
+	ebookCl  ebookClient.EbookService
 }
 
-func NewOrderManager(orderCl orderClient.OrderService, readerCl readerClient.ReaderService, userCl ssoClient.UserService) *Manager {
+func NewOrderManager(orderCl orderClient.OrderService, readerCl readerClient.ReaderService, userCl ssoClient.UserService, ebookCl ebookClient.EbookService) *Manager {
 	return &Manager{
 		orderCl:  orderCl,
 		readerCl: readerCl,
 		userCl:   userCl,
+		ebookCl:  ebookCl,
 	}
 }
-func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, paging *orderModel.Paging) (int64, []*orderModel.Order, error) {
+func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, paging *orderModel.Paging) (int64, []*model.Order, error) {
 	count, orders, err := m.orderCl.List(ctx, paging, filters)
 	if err != nil {
 		return 0, nil, err
 	}
-	for _, order := range orders {
+	var orders_ = make([]*model.Order, len(orders))
+	for i, order := range orders {
 		reader, err := m.readerCl.ReaderById(ctx, order.Reader.TicketNumber)
-		if err != nil {
-			continue
+		if err == nil {
+			order.Reader.Firstname = reader.Firstname
+			order.Reader.Lastname = reader.Lastname
+			order.Reader.Middlename = reader.Middlename
+			order.Reader.Barcode = reader.Barcode
+			order.Reader.IsEmployee = reader.IsEmployee
+			order.Reader.Department = reader.Department
+
 		}
-		order.Reader.Firstname = reader.Firstname
-		order.Reader.Lastname = reader.Lastname
-		order.Reader.Middlename = reader.Middlename
-		order.Reader.Barcode = reader.Barcode
-		order.Reader.IsEmployee = reader.IsEmployee
-		order.Reader.Department = reader.Department
+		var e *model2.Ebook
+		if order.Ebook != nil {
+			e, _ = m.ebookCl.EbookById(ctx, order.Ebook.Id)
+		}
+		order_ := model.NewOrder(order, e)
+		orders_[i] = order_
 	}
-	return count, orders, nil
+	return count, orders_, nil
 }
 func (m *Manager) ById(ctx context.Context, id int64) (*orderModel.Order, error) {
 	return m.ById(ctx, id)

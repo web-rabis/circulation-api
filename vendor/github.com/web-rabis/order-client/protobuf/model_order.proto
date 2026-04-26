@@ -17,7 +17,9 @@ message Order {
   Periodical periodical = 8;
   State state = 9;
   Department department = 10;
-  bool is_auxiliary_fund = 11;
+  Department storage_department = 11;
+  bool is_auxiliary_fund = 12;
+  ReasonRejection reason_rejection = 13;
 }
 message StateCount {
   State state = 1;

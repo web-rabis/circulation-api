@@ -36,6 +36,7 @@ type Periodical struct {
 	PlaceEdition       string                 `protobuf:"bytes,11,opt,name=place_edition,json=placeEdition,proto3" json:"place_edition,omitempty"`
 	Publishing         string                 `protobuf:"bytes,12,opt,name=publishing,proto3" json:"publishing,omitempty"`
 	YearEdition        string                 `protobuf:"bytes,13,opt,name=year_edition,json=yearEdition,proto3" json:"year_edition,omitempty"`
+	TitleInformation   string                 `protobuf:"bytes,14,opt,name=title_information,json=titleInformation,proto3" json:"title_information,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -161,11 +162,18 @@ func (x *Periodical) GetYearEdition() string {
 	return ""
 }
 
+func (x *Periodical) GetTitleInformation() string {
+	if x != nil {
+		return x.TitleInformation
+	}
+	return ""
+}
+
 var File_protobuf_model_periodical_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_periodical_proto_rawDesc = "" +
 	"\n" +
-	"\x1fprotobuf/model_periodical.proto\x12\x05order\"\xf6\x02\n" +
+	"\x1fprotobuf/model_periodical.proto\x12\x05order\"\xa3\x03\n" +
 	"\n" +
 	"Periodical\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x10\n" +
@@ -184,7 +192,8 @@ const file_protobuf_model_periodical_proto_rawDesc = "" +
 	"\n" +
 	"publishing\x18\f \x01(\tR\n" +
 	"publishing\x12!\n" +
-	"\fyear_edition\x18\r \x01(\tR\vyearEditionB\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\fyear_edition\x18\r \x01(\tR\vyearEdition\x12+\n" +
+	"\x11title_information\x18\x0e \x01(\tR\x10titleInformationB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_model_periodical_proto_rawDescOnce sync.Once

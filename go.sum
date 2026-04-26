@@ -121,6 +121,12 @@ github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067 h1:vffMRzCJAwHZ7JgAgR
 github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067/go.mod h1:Xe80ERLsrFd98y5Do9FIwtyok5uJpabjEpBghHpH7Qg=
 github.com/web-rabis/ebook-client v0.0.0-20260420184157-67d29932005a h1:cQHBKQyfMZmCNQT0fNNrkJA/7cq74vzIbXhIk6Xa2ho=
 github.com/web-rabis/ebook-client v0.0.0-20260420184157-67d29932005a/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260426202328-294fbd17eba8 h1:0O0j/UleOh+7aU9bGI8aCH4vwrD6Hq6c1Qq1nJxAEi4=
+github.com/web-rabis/ebook-client v0.0.0-20260426202328-294fbd17eba8/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260426210837-d1565fc2e162 h1:BshpL9zKToUjlmXb+xEeS2Y97Xd5ARTosKNrsTgbRpI=
+github.com/web-rabis/ebook-client v0.0.0-20260426210837-d1565fc2e162/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260426211847-888ff19bfd51 h1:O2fnEHsD5yPMl3QXrmuQIMFi8R4hamEc+/XaMOxNhVg=
+github.com/web-rabis/ebook-client v0.0.0-20260426211847-888ff19bfd51/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738 h1:bjsfGcPZpuLiQuU+CKZOc43G6odhS6Bo85QczEXKsPM=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738/go.mod h1:LRBhzsu6qMyoBjaWBzyN2uaVKHHEQ4zKCAtnoRQZ9LM=
 github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6 h1:EQgAdvr7pO2TZ0eYfScvKvH/Kr+lfLiGofACXAxm3LA=
@@ -129,6 +135,14 @@ github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9 h1:MvCJ7ci0
 github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
 github.com/web-rabis/order-client v0.0.0-20260426172206-b7504d4b9d82 h1:hVO8mRK12g/IlfSoyXgFyk838gGHPdUOpQ1XGSteGrA=
 github.com/web-rabis/order-client v0.0.0-20260426172206-b7504d4b9d82/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
+github.com/web-rabis/order-client v0.0.0-20260426183414-18b57dab9625 h1:4GltCUAYfpyeBIFnwhM8ui6SYZyhdv5S//Bmkao1V2Q=
+github.com/web-rabis/order-client v0.0.0-20260426183414-18b57dab9625/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
+github.com/web-rabis/order-client v0.0.0-20260426190621-52974a468897 h1:4MplKptLAVgFIroSvIzX085NueJjjPsWJ32WUhGVAyk=
+github.com/web-rabis/order-client v0.0.0-20260426190621-52974a468897/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
+github.com/web-rabis/order-client v0.0.0-20260426193545-b44ad641f7c7 h1:hn92HoeYRCvhhRXp4hA2zWjUUXj/h/kAxW14zQkhBf4=
+github.com/web-rabis/order-client v0.0.0-20260426193545-b44ad641f7c7/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
+github.com/web-rabis/order-client v0.0.0-20260426214151-6598944bcb3e h1:5GczN0T9GkemOJ6iEzW/6yqDs/Ly4m0p6bWyDunpscI=
+github.com/web-rabis/order-client v0.0.0-20260426214151-6598944bcb3e/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
 github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454 h1:gfmRxynDMmFi6RbF86F3xglZDWT/y1jm8r4T+CGMezk=
 github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454/go.mod h1:hu5iy4M5LuqhLmVeYPfnyWXYhLXOSzC+QkjwAz7Q6Do=
 github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7 h1:SITv0D//l05ybopn+4aNcx9b+oWzF7oVLGZsSXgyaPA=

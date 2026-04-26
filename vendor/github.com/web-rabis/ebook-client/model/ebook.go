@@ -11,85 +11,28 @@ type Ebook struct {
 	Title              string              `json:"title"`
 	Placement          *EbookPlacement     `json:"placement"`
 	Format             *EbookFormat        `json:"format"`
-}
-type EbookInv struct {
-	Id         int64       `json:"id"`
-	EbookId    int64       `json:"ebookId"`
-	InvNumber  string      `json:"invNumber"`
-	Barcode    string      `json:"barcode"`
-	Department *Department `json:"department"`
-	State      *State      `json:"state"`
-}
-type EbookPlacement struct {
-	Placement int64 `json:"placement"`
+	Sources            []*EbookSource      `json:"sources"`
+	ServiceNotes       []*EbookServiceNote `json:"serviceNotes"`
+	AuthorMark         *EbookAuthorMark    `json:"authorMark"`
+	Krv                bool                `json:"krv"`
 }
 
-type EbookFormat struct {
-	Format string `json:"format"`
-}
-
-type BibliographicLevel struct {
-	Id         int64  `json:"id"`
-	Code       string `json:"code"`
-	Name       string `json:"name"`
-	TypeEbooks string `json:"typeEbooks"`
-}
-
-type TypeDescription struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-type Catalog struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-type Department struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-	Type string
-}
-type State struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-func NewEbookFromProto(i *protobuf.EbookInv) *EbookInv {
-	if i == nil {
+func NewEbookFromProto(e *protobuf.Ebook) *Ebook {
+	if e == nil {
 		return nil
 	}
-	return &EbookInv{
-		Id:         i.Id,
-		EbookId:    i.EbookId,
-		InvNumber:  i.InvNumber,
-		Barcode:    i.Barcode,
-		Department: NewDepartmentFromProto(i.Department),
-		State:      NewStateFromProto(i.State),
-	}
-}
-func NewDepartmentFromProto(d *protobuf.Department) *Department {
-	if d == nil {
-		return nil
-	}
-	return &Department{
-		Id:   d.Id,
-		Code: d.Code,
-		Name: d.Name,
-		Type: d.Type,
-	}
-}
-func NewStateFromProto(s *protobuf.State) *State {
-	if s == nil {
-		return nil
-	}
-	return &State{
-		Id:   s.Id,
-		Code: s.Code,
-		Name: s.Name,
+	return &Ebook{
+		Id:                 e.Id,
+		Author:             e.Author,
+		Title:              e.Title,
+		BibliographicLevel: NewBibliographicLevelFromProto(e.BibliographicLevel),
+		TypeDescription:    NewTypeDescriptionFromProto(e.TypeDescription),
+		Catalog:            NewCatalogFromProto(e.Catalog),
+		Placement:          NewEbookPlacementFromProto(e.Placement),
+		Format:             NewEbookFormatFromProto(e.Format),
+		Sources:            NewEbookSourcesFromProto(e.Sources),
+		ServiceNotes:       NewEbookServiceNotesFromProto(e.ServiceNotes),
+		AuthorMark:         NewEbookAuthorMarkFromProto(e.AuthorMark),
+		Krv:                e.Krv,
 	}
 }

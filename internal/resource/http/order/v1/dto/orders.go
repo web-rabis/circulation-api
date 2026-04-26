@@ -1,10 +1,10 @@
 package dto
 
 import (
-	orderModel "github.com/web-rabis/order-client/model"
+	"github.com/web-rabis/circulation-api/internal/domain/model"
 )
 
 type OrdersResponse struct {
-	Result []*orderModel.Order `json:"result"`
-	Count  int64               `json:"count"`
+	Result []*model.Order `json:"result"`
+	Count  int64          `json:"count"`
 }

@@ -16,4 +16,5 @@ message Periodical {
   string place_edition = 11;
   string publishing = 12;
   string year_edition = 13;
+  string title_information = 14;
 }

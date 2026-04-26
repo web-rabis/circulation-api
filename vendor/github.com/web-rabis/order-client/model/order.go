@@ -28,17 +28,19 @@ const (
 )
 
 type Order struct {
-	Id              int64       `json:"id"`
-	CreatedAt       time.Time   `json:"createdAt"`
-	UpdatedAt       time.Time   `json:"updatedAt"`
-	Type            string      `json:"type"`
-	Reader          *Reader     `json:"reader"`
-	Ebook           *Ebook      `json:"ebook"`
-	InvNumber       *EbookInv   `json:"invNumber"`
-	Periodical      *Periodical `json:"periodical"`
-	State           *State      `json:"state"`
-	Department      *Department `json:"department"`
-	IsAuxiliaryFund bool        `json:"isAuxiliaryFund"`
+	Id                int64            `json:"id"`
+	CreatedAt         time.Time        `json:"createdAt"`
+	UpdatedAt         time.Time        `json:"updatedAt"`
+	Type              string           `json:"type"`
+	Reader            *Reader          `json:"reader"`
+	Ebook             *Ebook           `json:"ebook"`
+	InvNumber         *EbookInv        `json:"invNumber"`
+	Periodical        *Periodical      `json:"periodical"`
+	State             *State           `json:"state"`
+	Department        *Department      `json:"department"`
+	StorageDepartment *Department      `json:"storageDepartment"`
+	IsAuxiliaryFund   bool             `json:"isAuxiliaryFund"`
+	ReasonRejection   *ReasonRejection `json:"reasonRejection"`
 }
 type StateCount struct {
 	State *State `json:"state"`
@@ -54,17 +56,19 @@ func NewOrderFormProto(o *protobuf.Order) *Order {
 		return nil
 	}
 	return &Order{
-		Id:              o.Id,
-		CreatedAt:       o.CreatedAt.AsTime(),
-		UpdatedAt:       o.UpdatedAt.AsTime(),
-		Type:            o.Type,
-		Reader:          NewReaderFromProto(o.Reader),
-		Ebook:           NewEbookFromProto(o.Ebook),
-		InvNumber:       NewEbookInvFromProto(o.InvNumber),
-		Periodical:      NewPeriodicalFromProto(o.Periodical),
-		State:           NewStateFromProto(o.State),
-		Department:      NewDepartmentFromProto(o.Department),
-		IsAuxiliaryFund: o.IsAuxiliaryFund,
+		Id:                o.Id,
+		CreatedAt:         o.CreatedAt.AsTime(),
+		UpdatedAt:         o.UpdatedAt.AsTime(),
+		Type:              o.Type,
+		Reader:            NewReaderFromProto(o.Reader),
+		Ebook:             NewEbookFromProto(o.Ebook),
+		InvNumber:         NewEbookInvFromProto(o.InvNumber),
+		Periodical:        NewPeriodicalFromProto(o.Periodical),
+		State:             NewStateFromProto(o.State),
+		Department:        NewDepartmentFromProto(o.Department),
+		StorageDepartment: NewDepartmentFromProto(o.StorageDepartment),
+		IsAuxiliaryFund:   o.IsAuxiliaryFund,
+		ReasonRejection:   NewReasonRejectionProto(o.ReasonRejection),
 	}
 }
 func NewStateCountProto(o *protobuf.StateCount) *StateCount {

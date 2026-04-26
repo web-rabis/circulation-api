@@ -12,6 +12,10 @@ message Ebook {
   Catalog catalog = 6;
   EbookPlacement placement = 7;
   EbookFormat format = 8;
+  repeated EbookSource sources = 9;
+  repeated EbookServiceNote service_notes = 10;
+  EbookAuthorMark author_mark = 11;
+  bool krv = 12;
 }
 message BibliographicLevel {
   int64 id = 1;
@@ -35,6 +39,14 @@ message EbookPlacement {
 message EbookFormat {
    string format = 1;
 }
+message EbookAuthorMark {
+  string author_mark = 1;
+}
+message EbookServiceNote {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  DictionaryServiceData service_data = 3;
+}
 message EbookInv {
   int64 id = 1;
   int64 ebook_id = 2;
@@ -42,6 +54,11 @@ message EbookInv {
   string barcode = 4;
   Department department = 5;
   State state = 6;
+}
+message EbookSource {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string title = 3;
 }
 message Department {
   int64 id = 1;
@@ -51,6 +68,11 @@ message Department {
 }
 
 message State {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message DictionaryServiceData {
   int64 id = 1;
   string code = 2;
   string name = 3;

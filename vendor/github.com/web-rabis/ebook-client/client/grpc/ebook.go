@@ -26,16 +26,7 @@ func (s *EbookService) EbookById(ctx context.Context, id int64) (*model.Ebook, e
 	e, err := s.client.EbookById(ctx, &protobuf.EntityByIdRequest{Id: id})
 	switch status.Code(err) {
 	case codes.OK:
-		return &model.Ebook{
-			Id:                 id,
-			BibliographicLevel: nil,
-			TypeDescription:    nil,
-			Catalog:            nil,
-			Author:             e.Author,
-			Title:              e.Title,
-			Placement:          nil,
-			Format:             nil,
-		}, nil
+		return model.NewEbookFromProto(e), nil
 	default:
 		return nil, err
 	}
@@ -46,7 +37,7 @@ func (s *EbookService) EbookInventory(ctx context.Context, id int64) ([]*model.E
 	case codes.OK:
 		inventories := make([]*model.EbookInv, len(response.Inventories))
 		for i, item := range response.Inventories {
-			inventories[i] = model.NewEbookFromProto(item)
+			inventories[i] = model.NewEbookInvFromProto(item)
 		}
 		return inventories, nil
 	default:

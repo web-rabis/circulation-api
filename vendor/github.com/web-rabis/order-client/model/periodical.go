@@ -16,6 +16,7 @@ type Periodical struct {
 	PlaceEdition       string `json:"placeEdition"`
 	Publishing         string `json:"publishing"`
 	YearEdition        string `json:"yearEdition"`
+	TitleInformation   string `json:"titleInformation"`
 }
 
 func NewPeriodicalFromProto(p *protobuf.Periodical) *Periodical {
@@ -36,5 +37,6 @@ func NewPeriodicalFromProto(p *protobuf.Periodical) *Periodical {
 		PlaceEdition:       p.PlaceEdition,
 		Publishing:         p.Publishing,
 		YearEdition:        p.YearEdition,
+		TitleInformation:   p.TitleInformation,
 	}
 }
