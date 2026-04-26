@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
 	v1 "github.com/web-rabis/circulation-api/internal/resource/http/ebook/v1"
+	ssoClient "github.com/web-rabis/sso-client/client"
 
 	"github.com/web-rabis/circulation-api/internal/config"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
@@ -30,12 +31,13 @@ func Run(serversCtx context.Context,
 	orderMan order.IManager,
 	dictMan dictionary.IManager,
 	ebookMan ebook.IManager,
+	userSvc ssoClient.UserService,
 	version string) error {
 	resources := []cherver.Resource{
 		http.NewVersionResource("/version", version),
 		http.NewFilesResource("/files", opts.ServerConfig.FilesDir),
 		//swaggerV1.NewSwaggerResource("/swagger", opts.ServerConfig.BasePath, "/files"),
-		v2.NewOrderResource("/api/v1/orders", authMan, orderMan),
+		v2.NewOrderResource("/api/v1/orders", authMan, orderMan, userSvc),
 		v3.NewDictionaryResource("/api/v1/dictionary", authMan, dictMan),
 		v1.NewEbookResource("/api/v1/ebook", authMan, ebookMan),
 	}

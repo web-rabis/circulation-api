@@ -275,6 +275,7 @@ type OrderFilters struct {
 	DepartmentId    int64                  `protobuf:"varint,5,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
 	Period          string                 `protobuf:"bytes,6,opt,name=period,proto3" json:"period,omitempty"`
 	IsAuxiliaryFund int64                  `protobuf:"varint,7,opt,name=is_auxiliary_fund,json=isAuxiliaryFund,proto3" json:"is_auxiliary_fund,omitempty"`
+	Query           string                 `protobuf:"bytes,8,opt,name=query,proto3" json:"query,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -356,6 +357,13 @@ func (x *OrderFilters) GetIsAuxiliaryFund() int64 {
 		return x.IsAuxiliaryFund
 	}
 	return 0
+}
+
+func (x *OrderFilters) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
 }
 
 type StateCountFilters struct {
@@ -587,7 +595,7 @@ const file_protobuf_model_order_proto_rawDesc = "" +
 	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x18\n" +
 	"\asortKey\x18\x03 \x01(\tR\asortKey\x12\x18\n" +
-	"\asortVal\x18\x04 \x01(\x05R\asortVal\"\xf4\x01\n" +
+	"\asortVal\x18\x04 \x01(\x05R\asortVal\"\x8a\x02\n" +
 	"\fOrderFilters\x12\x19\n" +
 	"\bebook_id\x18\x01 \x01(\x03R\aebookId\x12#\n" +
 	"\rperiodical_id\x18\x02 \x01(\x03R\fperiodicalId\x12#\n" +
@@ -595,7 +603,8 @@ const file_protobuf_model_order_proto_rawDesc = "" +
 	"\x06states\x18\x04 \x03(\tR\x06states\x12#\n" +
 	"\rdepartment_id\x18\x05 \x01(\x03R\fdepartmentId\x12\x16\n" +
 	"\x06period\x18\x06 \x01(\tR\x06period\x12*\n" +
-	"\x11is_auxiliary_fund\x18\a \x01(\x03R\x0fisAuxiliaryFund\"h\n" +
+	"\x11is_auxiliary_fund\x18\a \x01(\x03R\x0fisAuxiliaryFund\x12\x14\n" +
+	"\x05query\x18\b \x01(\tR\x05query\"h\n" +
 	"\x11StateCountFilters\x12\x16\n" +
 	"\x06states\x18\x01 \x03(\tR\x06states\x12#\n" +
 	"\rdepartment_id\x18\x02 \x01(\x03R\fdepartmentId\x12\x16\n" +

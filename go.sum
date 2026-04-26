@@ -127,6 +127,8 @@ github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6 h1:EQgAdvr7
 github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
 github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9 h1:MvCJ7ci0r9eDNNfFpxG4jOZ078WebzQQbWa9gCNLb9g=
 github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
+github.com/web-rabis/order-client v0.0.0-20260426172206-b7504d4b9d82 h1:hVO8mRK12g/IlfSoyXgFyk838gGHPdUOpQ1XGSteGrA=
+github.com/web-rabis/order-client v0.0.0-20260426172206-b7504d4b9d82/go.mod h1:u7fNXbD1rm5u3jfBT/RwaI5dFGHPdWzuXjRiqfsSwLo=
 github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454 h1:gfmRxynDMmFi6RbF86F3xglZDWT/y1jm8r4T+CGMezk=
 github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454/go.mod h1:hu5iy4M5LuqhLmVeYPfnyWXYhLXOSzC+QkjwAz7Q6Do=
 github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7 h1:SITv0D//l05ybopn+4aNcx9b+oWzF7oVLGZsSXgyaPA=

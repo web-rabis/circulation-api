@@ -26,15 +26,9 @@ func PagingParseFromHttp(r *http.Request) (*Paging, error) {
 	}
 
 	if pageParam := r.URL.Query().Get("offset"); pageParam != "" {
-		page, err := strconv.ParseInt(pageParam, 10, 64)
+		offset, err := strconv.ParseInt(pageParam, 10, 64)
 		if err != nil {
 			return nil, err
-		}
-		offset := page - 1
-		if paging.Limit != 0 {
-			offset = paging.Limit * offset
-		} else {
-			offset = offset * 10
 		}
 		paging.Offset = offset
 	}

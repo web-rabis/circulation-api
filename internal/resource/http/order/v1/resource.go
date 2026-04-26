@@ -3,6 +3,7 @@ package v1
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth"
+	ssoClient "github.com/web-rabis/sso-client/client"
 
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
@@ -12,13 +13,15 @@ type OrderResource struct {
 	path     string
 	authMan  *auth.Manager
 	orderMan order.IManager
+	userSvc  ssoClient.UserService
 }
 
-func NewOrderResource(path string, authMan *auth.Manager, orderMan order.IManager) *OrderResource {
+func NewOrderResource(path string, authMan *auth.Manager, orderMan order.IManager, userSvc ssoClient.UserService) *OrderResource {
 	return &OrderResource{
 		path:     path,
 		authMan:  authMan,
 		orderMan: orderMan,
+		userSvc:  userSvc,
 	}
 }
 

@@ -37,6 +37,7 @@ message OrderFilters {
   int64 department_id = 5;
   string period = 6;
   int64 is_auxiliary_fund = 7;
+  string query = 8;
 }
 message StateCountFilters {
   repeated string states = 1;

@@ -13,7 +13,7 @@ require (
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
-	github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9
+	github.com/web-rabis/order-client v0.0.0-20260426172206-b7504d4b9d82
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
 	golang.org/x/sync v0.19.0

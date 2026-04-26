@@ -12,6 +12,7 @@ type OrderFilters struct {
 	DepartmentId    int64    `json:"departmentId"`
 	Period          string   `json:"period"`
 	IsAuxiliaryFund *bool    `json:"isAuxiliaryFund"`
+	Query           string   `json:"query"`
 }
 type StateCountFilters struct {
 	States       []string `json:"states"`
@@ -33,6 +34,7 @@ func (f *OrderFilters) ToProto() *protobuf.OrderFilters {
 		DepartmentId:    f.DepartmentId,
 		Period:          f.Period,
 		IsAuxiliaryFund: -1,
+		Query:           f.Query,
 	}
 	if f.IsAuxiliaryFund != nil {
 		if *f.IsAuxiliaryFund {

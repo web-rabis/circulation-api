@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/render"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 
 	"github.com/web-rabis/circulation-api/internal/resource/http/order/v1/dto"
 	"github.com/web-rabis/httperrors"
@@ -23,6 +24,16 @@ func (res *OrderResource) orders(w http.ResponseWriter, r *http.Request) {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return
 	}
+	userId, err := auth.UserIdFromContext(r.Context())
+	if err != nil {
+		_ = render.Render(w, r, httperrors.BadRequest(err))
+		return
+	}
+	user, err := res.userSvc.UserById(r.Context(), userId)
+	if err != nil {
+		_ = render.Render(w, r, httperrors.BadRequest(err))
+	}
+	filters.DepartmentId = user.Department.Id
 	count, orders, err := res.orderMan.List(r.Context(), filters, paging)
 	if err != nil {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
@@ -36,12 +47,21 @@ func (res *OrderResource) orders(w http.ResponseWriter, r *http.Request) {
 	render.JSON(w, r, response)
 }
 func parseFilters(r *http.Request) (*orderModel.OrderFilters, error) {
-	var ticketNumber_ int64
-	var states []string
-	ticketNumber := r.URL.Query().Get("ticketNumber")
-	if ticketNumber != "" {
-		ticketNumber_, _ = strconv.ParseInt(ticketNumber, 10, 64)
+	query := r.URL.Query().Get("query")
+	ticketNumber, err := strconv.ParseInt(query, 10, 64)
+	if err == nil {
+		query = ""
 	}
+	return &orderModel.OrderFilters{
+		TicketNumber:    ticketNumber,
+		States:          getStatuses(r),
+		Period:          getPeriod(r),
+		IsAuxiliaryFund: getIsAuxiliaryFund(r),
+		Query:           query,
+	}, nil
+}
+func getStatuses(r *http.Request) []string {
+	var states []string
 	status := r.URL.Query().Get("status")
 	switch status {
 	case orderModel.OrderStateInHands, orderModel.OrderStateOrdered, orderModel.OrderStateInStorage, orderModel.OrderStateInReadingHall, orderModel.OrderStatePostponed, orderModel.OrderStateRejected, orderModel.OrderStateInAuxiliaryFund, orderModel.OrderStateReaderReturned, orderModel.OrderStateReturnToStorage:
@@ -59,7 +79,9 @@ func parseFilters(r *http.Request) (*orderModel.OrderFilters, error) {
 			orderModel.OrderStateReturnToStorage,
 		}
 	}
-	departmentId, _ := strconv.ParseInt(r.URL.Query().Get("departmentId"), 10, 64)
+	return states
+}
+func getPeriod(r *http.Request) string {
 	period := r.URL.Query().Get("period")
 	switch period {
 	case orderModel.OrderPeriodToday:
@@ -70,6 +92,9 @@ func parseFilters(r *http.Request) (*orderModel.OrderFilters, error) {
 	default:
 		period = ""
 	}
+	return period
+}
+func getIsAuxiliaryFund(r *http.Request) *bool {
 	var isAuxiliaryFund *bool
 	if r.URL.Query().Get("isAuxiliaryFund") != "" {
 		af, err := strconv.ParseBool(r.URL.Query().Get("isAuxiliaryFund"))
@@ -77,11 +102,5 @@ func parseFilters(r *http.Request) (*orderModel.OrderFilters, error) {
 			isAuxiliaryFund = &af
 		}
 	}
-	return &orderModel.OrderFilters{
-		TicketNumber:    ticketNumber_,
-		States:          states,
-		DepartmentId:    departmentId,
-		Period:          period,
-		IsAuxiliaryFund: isAuxiliaryFund,
-	}, nil
+	return isAuxiliaryFund
 }

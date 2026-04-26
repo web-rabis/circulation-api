@@ -100,7 +100,7 @@ func main() {
 	servers, serversCtx := errgroup.WithContext(appCtx)
 
 	servers.Go(func() error {
-		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, ebookMan, version)
+		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, ebookMan, ssoGrpcClient.User(), version)
 	})
 
 	if err := servers.Wait(); err != nil {
