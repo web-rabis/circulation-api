@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
 	errors2 "github.com/pkg/errors"
 
@@ -20,7 +21,7 @@ func (res *OrderResource) issueOrder(w http.ResponseWriter, r *http.Request) {
 	var orderId int64
 	var id string
 
-	if id = r.URL.Query().Get("id"); id == "" {
+	if id = chi.URLParam(r, "id"); id == "" {
 		_ = render.Render(w, r, httperrors.BadRequest(errors2.Errorf("id is empty")))
 		return
 	}
