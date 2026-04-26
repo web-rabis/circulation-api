@@ -135,8 +135,8 @@ func (m *Manager) IssueOrders(ctx context.Context, ids []int64, userId int64) er
 		return err
 	}
 	var req = make([]orderModel.IssueOrder, len(ids))
-	for _, id := range ids {
-		req = append(req, orderModel.IssueOrder{Id: id})
+	for i, id := range ids {
+		req[i] = orderModel.IssueOrder{Id: id}
 	}
 	return m.orderCl.Issue(ctx, req, user)
 }
