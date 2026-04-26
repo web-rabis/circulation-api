@@ -1,6 +1,6 @@
 module github.com/web-rabis/circulation-api
 
-go 1.24.0
+go 1.25.9
 
 require (
 	github.com/go-chi/chi/v5 v5.0.10
@@ -13,7 +13,7 @@ require (
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
-	github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6
+	github.com/web-rabis/order-client v0.0.0-20260421192054-d7473a577cf9
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
 	golang.org/x/sync v0.19.0
@@ -45,6 +45,8 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
+	github.com/web-rabis/ebook-client v0.0.0-20260420184157-67d29932005a // indirect
+	github.com/web-rabis/sso-client v0.0.0-20260421185542-0d545480da41 // indirect
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
 	golang.org/x/sys v0.40.0 // indirect

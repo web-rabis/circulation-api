@@ -174,7 +174,7 @@ type RejectRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Ids               []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	ReasonRejectionId int64                  `protobuf:"varint,2,opt,name=reason_rejection_id,json=reasonRejectionId,proto3" json:"reason_rejection_id,omitempty"`
-	UserId            int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	User              *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -223,18 +223,18 @@ func (x *RejectRequest) GetReasonRejectionId() int64 {
 	return 0
 }
 
-func (x *RejectRequest) GetUserId() int64 {
+func (x *RejectRequest) GetUser() *User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return 0
+	return nil
 }
 
 type RedirectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	DepartmentId  int64                  `protobuf:"varint,2,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -283,11 +283,375 @@ func (x *RedirectRequest) GetDepartmentId() int64 {
 	return 0
 }
 
-func (x *RedirectRequest) GetUserId() int64 {
+func (x *RedirectRequest) GetUser() *User {
 	if x != nil {
-		return x.UserId
+		return x.User
 	}
-	return 0
+	return nil
+}
+
+type CancelRejectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelRejectRequest) Reset() {
+	*x = CancelRejectRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelRejectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelRejectRequest) ProtoMessage() {}
+
+func (x *CancelRejectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelRejectRequest.ProtoReflect.Descriptor instead.
+func (*CancelRejectRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CancelRejectRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *CancelRejectRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type PostponedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PostponedRequest) Reset() {
+	*x = PostponedRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PostponedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PostponedRequest) ProtoMessage() {}
+
+func (x *PostponedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PostponedRequest.ProtoReflect.Descriptor instead.
+func (*PostponedRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PostponedRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *PostponedRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ReturnRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReturnRequest) Reset() {
+	*x = ReturnRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReturnRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReturnRequest) ProtoMessage() {}
+
+func (x *ReturnRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReturnRequest.ProtoReflect.Descriptor instead.
+func (*ReturnRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ReturnRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *ReturnRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type IssueRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []*IssueOrder          `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IssueRequest) Reset() {
+	*x = IssueRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IssueRequest) ProtoMessage() {}
+
+func (x *IssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IssueRequest.ProtoReflect.Descriptor instead.
+func (*IssueRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *IssueRequest) GetIds() []*IssueOrder {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *IssueRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ArchiveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveRequest) Reset() {
+	*x = ArchiveRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveRequest) ProtoMessage() {}
+
+func (x *ArchiveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ArchiveRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *ArchiveRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type SendToPfRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendToPfRequest) Reset() {
+	*x = SendToPfRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendToPfRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendToPfRequest) ProtoMessage() {}
+
+func (x *SendToPfRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendToPfRequest.ProtoReflect.Descriptor instead.
+func (*SendToPfRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SendToPfRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *SendToPfRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ReturnToStorageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReturnToStorageRequest) Reset() {
+	*x = ReturnToStorageRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReturnToStorageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReturnToStorageRequest) ProtoMessage() {}
+
+func (x *ReturnToStorageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReturnToStorageRequest.ProtoReflect.Descriptor instead.
+func (*ReturnToStorageRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ReturnToStorageRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *ReturnToStorageRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
 }
 
 type StateCountsRequest struct {
@@ -299,7 +663,7 @@ type StateCountsRequest struct {
 
 func (x *StateCountsRequest) Reset() {
 	*x = StateCountsRequest{}
-	mi := &file_protobuf_order_proto_msgTypes[5]
+	mi := &file_protobuf_order_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -311,7 +675,7 @@ func (x *StateCountsRequest) String() string {
 func (*StateCountsRequest) ProtoMessage() {}
 
 func (x *StateCountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[5]
+	mi := &file_protobuf_order_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -324,7 +688,7 @@ func (x *StateCountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateCountsRequest.ProtoReflect.Descriptor instead.
 func (*StateCountsRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{5}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StateCountsRequest) GetFilters() *StateCountFilters {
@@ -343,7 +707,7 @@ type StateCountsResponse struct {
 
 func (x *StateCountsResponse) Reset() {
 	*x = StateCountsResponse{}
-	mi := &file_protobuf_order_proto_msgTypes[6]
+	mi := &file_protobuf_order_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +719,7 @@ func (x *StateCountsResponse) String() string {
 func (*StateCountsResponse) ProtoMessage() {}
 
 func (x *StateCountsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[6]
+	mi := &file_protobuf_order_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +732,7 @@ func (x *StateCountsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateCountsResponse.ProtoReflect.Descriptor instead.
 func (*StateCountsResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{6}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StateCountsResponse) GetStateCounts() []*StateCount {
@@ -388,7 +752,7 @@ type ReasonRejectionListRequest struct {
 
 func (x *ReasonRejectionListRequest) Reset() {
 	*x = ReasonRejectionListRequest{}
-	mi := &file_protobuf_order_proto_msgTypes[7]
+	mi := &file_protobuf_order_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -400,7 +764,7 @@ func (x *ReasonRejectionListRequest) String() string {
 func (*ReasonRejectionListRequest) ProtoMessage() {}
 
 func (x *ReasonRejectionListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[7]
+	mi := &file_protobuf_order_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +777,7 @@ func (x *ReasonRejectionListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReasonRejectionListRequest.ProtoReflect.Descriptor instead.
 func (*ReasonRejectionListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{7}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ReasonRejectionListRequest) GetFilters() *ReasonRejectionFilters {
@@ -440,7 +804,7 @@ type ReasonRejectionListResponse struct {
 
 func (x *ReasonRejectionListResponse) Reset() {
 	*x = ReasonRejectionListResponse{}
-	mi := &file_protobuf_order_proto_msgTypes[8]
+	mi := &file_protobuf_order_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -452,7 +816,7 @@ func (x *ReasonRejectionListResponse) String() string {
 func (*ReasonRejectionListResponse) ProtoMessage() {}
 
 func (x *ReasonRejectionListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[8]
+	mi := &file_protobuf_order_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -465,7 +829,7 @@ func (x *ReasonRejectionListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReasonRejectionListResponse.ProtoReflect.Descriptor instead.
 func (*ReasonRejectionListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{8}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ReasonRejectionListResponse) GetCount() int64 {
@@ -492,7 +856,7 @@ type DepartmentListRequest struct {
 
 func (x *DepartmentListRequest) Reset() {
 	*x = DepartmentListRequest{}
-	mi := &file_protobuf_order_proto_msgTypes[9]
+	mi := &file_protobuf_order_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -504,7 +868,7 @@ func (x *DepartmentListRequest) String() string {
 func (*DepartmentListRequest) ProtoMessage() {}
 
 func (x *DepartmentListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[9]
+	mi := &file_protobuf_order_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -517,7 +881,7 @@ func (x *DepartmentListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepartmentListRequest.ProtoReflect.Descriptor instead.
 func (*DepartmentListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{9}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DepartmentListRequest) GetFilters() *DepartmentFilters {
@@ -544,7 +908,7 @@ type DepartmentListResponse struct {
 
 func (x *DepartmentListResponse) Reset() {
 	*x = DepartmentListResponse{}
-	mi := &file_protobuf_order_proto_msgTypes[10]
+	mi := &file_protobuf_order_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -556,7 +920,7 @@ func (x *DepartmentListResponse) String() string {
 func (*DepartmentListResponse) ProtoMessage() {}
 
 func (x *DepartmentListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_order_proto_msgTypes[10]
+	mi := &file_protobuf_order_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,7 +933,7 @@ func (x *DepartmentListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepartmentListResponse.ProtoReflect.Descriptor instead.
 func (*DepartmentListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_order_proto_rawDescGZIP(), []int{10}
+	return file_protobuf_order_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DepartmentListResponse) GetCount() int64 {
@@ -598,15 +962,36 @@ const file_protobuf_order_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\x03R\x05count\x12$\n" +
 	"\x06orders\x18\x02 \x03(\v2\f.order.OrderR\x06orders\"\x1d\n" +
 	"\vByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"j\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"r\n" +
 	"\rRejectRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12.\n" +
-	"\x13reason_rejection_id\x18\x02 \x01(\x03R\x11reasonRejectionId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\"a\n" +
+	"\x13reason_rejection_id\x18\x02 \x01(\x03R\x11reasonRejectionId\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"i\n" +
 	"\x0fRedirectRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12#\n" +
-	"\rdepartment_id\x18\x02 \x01(\x03R\fdepartmentId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\"H\n" +
+	"\rdepartment_id\x18\x02 \x01(\x03R\fdepartmentId\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"H\n" +
+	"\x13CancelRejectRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"E\n" +
+	"\x10PostponedRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"B\n" +
+	"\rReturnRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"T\n" +
+	"\fIssueRequest\x12#\n" +
+	"\x03ids\x18\x01 \x03(\v2\x11.order.IssueOrderR\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"C\n" +
+	"\x0eArchiveRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"D\n" +
+	"\x0fSendToPfRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"K\n" +
+	"\x16ReturnToStorageRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x03R\x03ids\x12\x1f\n" +
+	"\x04user\x18\x03 \x01(\v2\v.order.UserR\x04user\"H\n" +
 	"\x12StateCountsRequest\x122\n" +
 	"\afilters\x18\x01 \x01(\v2\x18.order.StateCountFiltersR\afilters\"K\n" +
 	"\x13StateCountsResponse\x124\n" +
@@ -622,12 +1007,19 @@ const file_protobuf_order_proto_rawDesc = "" +
 	"\x06paging\x18\x02 \x01(\v2\r.order.PagingR\x06paging\"c\n" +
 	"\x16DepartmentListResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x03R\x05count\x123\n" +
-	"\vdepartments\x18\x02 \x03(\v2\x11.order.DepartmentR\vdepartments2\xb7\x02\n" +
+	"\vdepartments\x18\x02 \x03(\v2\x11.order.DepartmentR\vdepartments2\xf5\x05\n" +
 	"\fOrderService\x12;\n" +
 	"\x04List\x12\x17.order.OrderListRequest\x1a\x18.order.OrderListResponse\"\x00\x12*\n" +
 	"\x04ById\x12\x12.order.ByIdRequest\x1a\f.order.Order\"\x00\x128\n" +
-	"\x06Reject\x12\x14.order.RejectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12<\n" +
-	"\bRedirect\x12\x16.order.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
+	"\x06Reject\x12\x14.order.RejectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12D\n" +
+	"\fCancelReject\x12\x1a.order.CancelRejectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12<\n" +
+	"\bRedirect\x12\x16.order.RedirectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12>\n" +
+	"\tPostponed\x12\x17.order.PostponedRequest\x1a\x16.google.protobuf.Empty\"\x00\x128\n" +
+	"\x06Return\x12\x14.order.ReturnRequest\x1a\x16.google.protobuf.Empty\"\x00\x126\n" +
+	"\x05Issue\x12\x13.order.IssueRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
+	"\aArchive\x12\x15.order.ArchiveRequest\x1a\x16.google.protobuf.Empty\"\x00\x12<\n" +
+	"\bSendToPf\x12\x16.order.SendToPfRequest\x1a\x16.google.protobuf.Empty\"\x00\x12J\n" +
+	"\x0fReturnToStorage\x12\x1d.order.ReturnToStorageRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
 	"\vStateCounts\x12\x19.order.StateCountsRequest\x1a\x1a.order.StateCountsResponse\"\x002\xc4\x02\n" +
 	"\x11DictionaryService\x12^\n" +
 	"\x13ReasonRejectionList\x12!.order.ReasonRejectionListRequest\x1a\".order.ReasonRejectionListResponse\"\x00\x12C\n" +
@@ -647,65 +1039,98 @@ func file_protobuf_order_proto_rawDescGZIP() []byte {
 	return file_protobuf_order_proto_rawDescData
 }
 
-var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_protobuf_order_proto_goTypes = []any{
 	(*OrderListRequest)(nil),            // 0: order.OrderListRequest
 	(*OrderListResponse)(nil),           // 1: order.OrderListResponse
 	(*ByIdRequest)(nil),                 // 2: order.ByIdRequest
 	(*RejectRequest)(nil),               // 3: order.RejectRequest
 	(*RedirectRequest)(nil),             // 4: order.RedirectRequest
-	(*StateCountsRequest)(nil),          // 5: order.StateCountsRequest
-	(*StateCountsResponse)(nil),         // 6: order.StateCountsResponse
-	(*ReasonRejectionListRequest)(nil),  // 7: order.ReasonRejectionListRequest
-	(*ReasonRejectionListResponse)(nil), // 8: order.ReasonRejectionListResponse
-	(*DepartmentListRequest)(nil),       // 9: order.DepartmentListRequest
-	(*DepartmentListResponse)(nil),      // 10: order.DepartmentListResponse
-	(*OrderFilters)(nil),                // 11: order.OrderFilters
-	(*Paging)(nil),                      // 12: order.Paging
-	(*Order)(nil),                       // 13: order.Order
-	(*StateCountFilters)(nil),           // 14: order.StateCountFilters
-	(*StateCount)(nil),                  // 15: order.StateCount
-	(*ReasonRejectionFilters)(nil),      // 16: order.ReasonRejectionFilters
-	(*ReasonRejection)(nil),             // 17: order.ReasonRejection
-	(*DepartmentFilters)(nil),           // 18: order.DepartmentFilters
-	(*Department)(nil),                  // 19: order.Department
-	(*emptypb.Empty)(nil),               // 20: google.protobuf.Empty
+	(*CancelRejectRequest)(nil),         // 5: order.CancelRejectRequest
+	(*PostponedRequest)(nil),            // 6: order.PostponedRequest
+	(*ReturnRequest)(nil),               // 7: order.ReturnRequest
+	(*IssueRequest)(nil),                // 8: order.IssueRequest
+	(*ArchiveRequest)(nil),              // 9: order.ArchiveRequest
+	(*SendToPfRequest)(nil),             // 10: order.SendToPfRequest
+	(*ReturnToStorageRequest)(nil),      // 11: order.ReturnToStorageRequest
+	(*StateCountsRequest)(nil),          // 12: order.StateCountsRequest
+	(*StateCountsResponse)(nil),         // 13: order.StateCountsResponse
+	(*ReasonRejectionListRequest)(nil),  // 14: order.ReasonRejectionListRequest
+	(*ReasonRejectionListResponse)(nil), // 15: order.ReasonRejectionListResponse
+	(*DepartmentListRequest)(nil),       // 16: order.DepartmentListRequest
+	(*DepartmentListResponse)(nil),      // 17: order.DepartmentListResponse
+	(*OrderFilters)(nil),                // 18: order.OrderFilters
+	(*Paging)(nil),                      // 19: order.Paging
+	(*Order)(nil),                       // 20: order.Order
+	(*User)(nil),                        // 21: order.User
+	(*IssueOrder)(nil),                  // 22: order.IssueOrder
+	(*StateCountFilters)(nil),           // 23: order.StateCountFilters
+	(*StateCount)(nil),                  // 24: order.StateCount
+	(*ReasonRejectionFilters)(nil),      // 25: order.ReasonRejectionFilters
+	(*ReasonRejection)(nil),             // 26: order.ReasonRejection
+	(*DepartmentFilters)(nil),           // 27: order.DepartmentFilters
+	(*Department)(nil),                  // 28: order.Department
+	(*emptypb.Empty)(nil),               // 29: google.protobuf.Empty
 }
 var file_protobuf_order_proto_depIdxs = []int32{
-	11, // 0: order.OrderListRequest.filters:type_name -> order.OrderFilters
-	12, // 1: order.OrderListRequest.paging:type_name -> order.Paging
-	13, // 2: order.OrderListResponse.orders:type_name -> order.Order
-	14, // 3: order.StateCountsRequest.filters:type_name -> order.StateCountFilters
-	15, // 4: order.StateCountsResponse.state_counts:type_name -> order.StateCount
-	16, // 5: order.ReasonRejectionListRequest.filters:type_name -> order.ReasonRejectionFilters
-	12, // 6: order.ReasonRejectionListRequest.paging:type_name -> order.Paging
-	17, // 7: order.ReasonRejectionListResponse.reason_rejections:type_name -> order.ReasonRejection
-	18, // 8: order.DepartmentListRequest.filters:type_name -> order.DepartmentFilters
-	12, // 9: order.DepartmentListRequest.paging:type_name -> order.Paging
-	19, // 10: order.DepartmentListResponse.departments:type_name -> order.Department
-	0,  // 11: order.OrderService.List:input_type -> order.OrderListRequest
-	2,  // 12: order.OrderService.ById:input_type -> order.ByIdRequest
-	3,  // 13: order.OrderService.Reject:input_type -> order.RejectRequest
-	4,  // 14: order.OrderService.Redirect:input_type -> order.RedirectRequest
-	5,  // 15: order.OrderService.StateCounts:input_type -> order.StateCountsRequest
-	7,  // 16: order.DictionaryService.ReasonRejectionList:input_type -> order.ReasonRejectionListRequest
-	2,  // 17: order.DictionaryService.ReasonRejectionById:input_type -> order.ByIdRequest
-	9,  // 18: order.DictionaryService.DepartmentList:input_type -> order.DepartmentListRequest
-	2,  // 19: order.DictionaryService.DepartmentById:input_type -> order.ByIdRequest
-	1,  // 20: order.OrderService.List:output_type -> order.OrderListResponse
-	13, // 21: order.OrderService.ById:output_type -> order.Order
-	20, // 22: order.OrderService.Reject:output_type -> google.protobuf.Empty
-	20, // 23: order.OrderService.Redirect:output_type -> google.protobuf.Empty
-	6,  // 24: order.OrderService.StateCounts:output_type -> order.StateCountsResponse
-	8,  // 25: order.DictionaryService.ReasonRejectionList:output_type -> order.ReasonRejectionListResponse
-	17, // 26: order.DictionaryService.ReasonRejectionById:output_type -> order.ReasonRejection
-	10, // 27: order.DictionaryService.DepartmentList:output_type -> order.DepartmentListResponse
-	19, // 28: order.DictionaryService.DepartmentById:output_type -> order.Department
-	20, // [20:29] is the sub-list for method output_type
-	11, // [11:20] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	18, // 0: order.OrderListRequest.filters:type_name -> order.OrderFilters
+	19, // 1: order.OrderListRequest.paging:type_name -> order.Paging
+	20, // 2: order.OrderListResponse.orders:type_name -> order.Order
+	21, // 3: order.RejectRequest.user:type_name -> order.User
+	21, // 4: order.RedirectRequest.user:type_name -> order.User
+	21, // 5: order.CancelRejectRequest.user:type_name -> order.User
+	21, // 6: order.PostponedRequest.user:type_name -> order.User
+	21, // 7: order.ReturnRequest.user:type_name -> order.User
+	22, // 8: order.IssueRequest.ids:type_name -> order.IssueOrder
+	21, // 9: order.IssueRequest.user:type_name -> order.User
+	21, // 10: order.ArchiveRequest.user:type_name -> order.User
+	21, // 11: order.SendToPfRequest.user:type_name -> order.User
+	21, // 12: order.ReturnToStorageRequest.user:type_name -> order.User
+	23, // 13: order.StateCountsRequest.filters:type_name -> order.StateCountFilters
+	24, // 14: order.StateCountsResponse.state_counts:type_name -> order.StateCount
+	25, // 15: order.ReasonRejectionListRequest.filters:type_name -> order.ReasonRejectionFilters
+	19, // 16: order.ReasonRejectionListRequest.paging:type_name -> order.Paging
+	26, // 17: order.ReasonRejectionListResponse.reason_rejections:type_name -> order.ReasonRejection
+	27, // 18: order.DepartmentListRequest.filters:type_name -> order.DepartmentFilters
+	19, // 19: order.DepartmentListRequest.paging:type_name -> order.Paging
+	28, // 20: order.DepartmentListResponse.departments:type_name -> order.Department
+	0,  // 21: order.OrderService.List:input_type -> order.OrderListRequest
+	2,  // 22: order.OrderService.ById:input_type -> order.ByIdRequest
+	3,  // 23: order.OrderService.Reject:input_type -> order.RejectRequest
+	5,  // 24: order.OrderService.CancelReject:input_type -> order.CancelRejectRequest
+	4,  // 25: order.OrderService.Redirect:input_type -> order.RedirectRequest
+	6,  // 26: order.OrderService.Postponed:input_type -> order.PostponedRequest
+	7,  // 27: order.OrderService.Return:input_type -> order.ReturnRequest
+	8,  // 28: order.OrderService.Issue:input_type -> order.IssueRequest
+	9,  // 29: order.OrderService.Archive:input_type -> order.ArchiveRequest
+	10, // 30: order.OrderService.SendToPf:input_type -> order.SendToPfRequest
+	11, // 31: order.OrderService.ReturnToStorage:input_type -> order.ReturnToStorageRequest
+	12, // 32: order.OrderService.StateCounts:input_type -> order.StateCountsRequest
+	14, // 33: order.DictionaryService.ReasonRejectionList:input_type -> order.ReasonRejectionListRequest
+	2,  // 34: order.DictionaryService.ReasonRejectionById:input_type -> order.ByIdRequest
+	16, // 35: order.DictionaryService.DepartmentList:input_type -> order.DepartmentListRequest
+	2,  // 36: order.DictionaryService.DepartmentById:input_type -> order.ByIdRequest
+	1,  // 37: order.OrderService.List:output_type -> order.OrderListResponse
+	20, // 38: order.OrderService.ById:output_type -> order.Order
+	29, // 39: order.OrderService.Reject:output_type -> google.protobuf.Empty
+	29, // 40: order.OrderService.CancelReject:output_type -> google.protobuf.Empty
+	29, // 41: order.OrderService.Redirect:output_type -> google.protobuf.Empty
+	29, // 42: order.OrderService.Postponed:output_type -> google.protobuf.Empty
+	29, // 43: order.OrderService.Return:output_type -> google.protobuf.Empty
+	29, // 44: order.OrderService.Issue:output_type -> google.protobuf.Empty
+	29, // 45: order.OrderService.Archive:output_type -> google.protobuf.Empty
+	29, // 46: order.OrderService.SendToPf:output_type -> google.protobuf.Empty
+	29, // 47: order.OrderService.ReturnToStorage:output_type -> google.protobuf.Empty
+	13, // 48: order.OrderService.StateCounts:output_type -> order.StateCountsResponse
+	15, // 49: order.DictionaryService.ReasonRejectionList:output_type -> order.ReasonRejectionListResponse
+	26, // 50: order.DictionaryService.ReasonRejectionById:output_type -> order.ReasonRejection
+	17, // 51: order.DictionaryService.DepartmentList:output_type -> order.DepartmentListResponse
+	28, // 52: order.DictionaryService.DepartmentById:output_type -> order.Department
+	37, // [37:53] is the sub-list for method output_type
+	21, // [21:37] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_order_proto_init() }
@@ -721,7 +1146,7 @@ func file_protobuf_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_order_proto_rawDesc), len(file_protobuf_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

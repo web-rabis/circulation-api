@@ -7,4 +7,6 @@ type APIServer struct {
 	AuthConfig
 	OrderConfig
 	ReaderConfig
+	EbookConfig
+	SsoConfig
 }

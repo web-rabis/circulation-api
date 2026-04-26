@@ -52,3 +52,15 @@ func NewReasonRejectionProto(s *protobuf.ReasonRejection) *ReasonRejection {
 		Name: s.Name,
 	}
 }
+func (d *Department) ToProto() *protobuf.Department {
+	if d == nil {
+		return nil
+
+	}
+	return &protobuf.Department{
+		Id:   d.Id,
+		Code: d.Code,
+		Name: d.Name,
+		Type: d.Type,
+	}
+}

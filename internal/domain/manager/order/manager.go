@@ -6,6 +6,7 @@ import (
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerClient "github.com/web-rabis/reader-client/client"
+	ssoClient "github.com/web-rabis/sso-client/client"
 )
 
 type IManager interface {
@@ -13,17 +14,27 @@ type IManager interface {
 	ById(ctx context.Context, id int64) (*orderModel.Order, error)
 	StateCounts(ctx context.Context, filters *orderModel.StateCountFilters) ([]*orderModel.StateCount, error)
 	Reject(ctx context.Context, ids []int64, rejectId, userId int64) error
+	CancelReject(ctx context.Context, ids []int64, userId int64) error
+	SendToPf(ctx context.Context, ids []int64, userId int64) error
+	Archive(ctx context.Context, ids []int64, userId int64) error
+	Postponed(ctx context.Context, ids []int64, userId int64) error
+	ReturnToStorage(ctx context.Context, ids []int64, userId int64) error
+	Return(ctx context.Context, ids []int64, userId int64) error
+	Issue(ctx context.Context, id int64, userId, invId int64) error
+	IssueOrders(ctx context.Context, id []int64, userId int64) error
 	Redirect(ctx context.Context, ids []int64, departmentId, userId int64) error
 }
 type Manager struct {
 	orderCl  orderClient.OrderService
 	readerCl readerClient.ReaderService
+	userCl   ssoClient.UserService
 }
 
-func NewOrderManager(orderCl orderClient.OrderService, readerCl readerClient.ReaderService) *Manager {
+func NewOrderManager(orderCl orderClient.OrderService, readerCl readerClient.ReaderService, userCl ssoClient.UserService) *Manager {
 	return &Manager{
 		orderCl:  orderCl,
 		readerCl: readerCl,
+		userCl:   userCl,
 	}
 }
 func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, paging *orderModel.Paging) (int64, []*orderModel.Order, error) {
@@ -52,8 +63,103 @@ func (m *Manager) StateCounts(ctx context.Context, filters *orderModel.StateCoun
 	return m.orderCl.StateCounts(ctx, filters)
 }
 func (m *Manager) Reject(ctx context.Context, ids []int64, rejectId, userId int64) error {
-	return m.orderCl.Reject(ctx, ids, rejectId, userId)
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.Reject(ctx, ids, rejectId, user)
+}
+func (m *Manager) CancelReject(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.CancelReject(ctx, ids, user)
 }
 func (m *Manager) Redirect(ctx context.Context, ids []int64, departmentId, userId int64) error {
-	return m.orderCl.Redirect(ctx, ids, departmentId, userId)
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.Redirect(ctx, ids, departmentId, user)
+}
+func (m *Manager) SendToPf(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.SendToPf(ctx, ids, user)
+}
+func (m *Manager) Archive(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.Archive(ctx, ids, user)
+}
+func (m *Manager) Postponed(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.Postponed(ctx, ids, user)
+}
+func (m *Manager) ReturnToStorage(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.ReturnToStorage(ctx, ids, user)
+}
+func (m *Manager) Return(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	return m.orderCl.Return(ctx, ids, user)
+}
+func (m *Manager) Issue(ctx context.Context, id int64, userId, invId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	req := []orderModel.IssueOrder{{
+		Id:         id,
+		EbookInvId: invId,
+	}}
+	return m.orderCl.Issue(ctx, req, user)
+}
+func (m *Manager) IssueOrders(ctx context.Context, ids []int64, userId int64) error {
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	var req = make([]orderModel.IssueOrder, len(ids))
+	for _, id := range ids {
+		req = append(req, orderModel.IssueOrder{Id: id})
+	}
+	return m.orderCl.Issue(ctx, req, user)
+}
+func (m *Manager) getUserById(ctx context.Context, id int64) (*orderModel.User, error) {
+	user, err := m.userCl.UserById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	u := &orderModel.User{
+		Id:       user.Id,
+		Name:     user.Name,
+		Username: user.Username,
+		Password: user.Password,
+		Email:    user.Email,
+		State:    user.State,
+	}
+	if user.Department != nil {
+		u.Department = &orderModel.Department{
+			Id:   user.Department.Id,
+			Code: user.Department.Code,
+			Name: user.Department.Name,
+			Type: user.Department.Type,
+		}
+	}
+	return u, nil
 }

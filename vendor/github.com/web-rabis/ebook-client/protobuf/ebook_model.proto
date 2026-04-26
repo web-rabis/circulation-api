@@ -1,0 +1,57 @@
+syntax = "proto3";
+package ebook;
+option go_package = "./protobuf;protobuf";
+
+
+message Ebook {
+  int64 id = 1;
+  string author = 2;
+  string title = 3;
+  BibliographicLevel bibliographic_level = 4;
+  TypeDescription type_description = 5;
+  Catalog catalog = 6;
+  EbookPlacement placement = 7;
+  EbookFormat format = 8;
+}
+message BibliographicLevel {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type_ebooks = 4;
+}
+message TypeDescription {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message Catalog {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message EbookPlacement {
+  string placement = 1;
+}
+message EbookFormat {
+   string format = 1;
+}
+message EbookInv {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string inv_number = 3;
+  string barcode = 4;
+  Department department = 5;
+  State state = 6;
+}
+message Department {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type = 4;
+}
+
+message State {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}

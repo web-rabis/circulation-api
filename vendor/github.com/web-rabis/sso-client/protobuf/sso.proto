@@ -1,0 +1,13 @@
+syntax = "proto3";
+package sso;
+option go_package = "./protobuf;protobuf";
+import "protobuf/model_sso.proto";
+
+
+service UserService {
+  rpc UserById(ByIdRequest) returns (User) {}
+}
+
+message ByIdRequest {
+  int64 id = 1;
+}

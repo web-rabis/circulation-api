@@ -1,0 +1,19 @@
+syntax = "proto3";
+package ebook;
+option go_package = "./protobuf;protobuf";
+import "protobuf/ebook_model.proto";
+
+service EbookSvc {
+  rpc EbookById(EntityByIdRequest) returns (Ebook) {}
+  rpc EbookInventory(EbookInventoryRequest) returns (EbookInventoryResponse) {}
+}
+
+message EntityByIdRequest {
+  int64 id = 1;
+}
+message EbookInventoryRequest {
+  int64 id = 1;
+}
+message EbookInventoryResponse {
+  repeated EbookInv inventories = 1;
+}

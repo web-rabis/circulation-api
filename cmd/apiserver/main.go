@@ -10,6 +10,8 @@ import (
 	"time"
 
 	"github.com/hashicorp/logutils"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
+
 	"golang.org/x/sync/errgroup"
 
 	"github.com/web-rabis/circulation-api/internal/config"
@@ -18,10 +20,14 @@ import (
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
 	"github.com/web-rabis/circulation-api/internal/server/http"
 	"github.com/web-rabis/db"
+	ebookCli "github.com/web-rabis/ebook-client"
+	ebookModel "github.com/web-rabis/ebook-client/model"
 	orderCli "github.com/web-rabis/order-client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerCli "github.com/web-rabis/reader-client"
 	readerModel "github.com/web-rabis/reader-client/model"
+	ssoCli "github.com/web-rabis/sso-client"
+	ssoModel "github.com/web-rabis/sso-client/model"
 )
 
 var (
@@ -69,13 +75,32 @@ func main() {
 		panic(err)
 	}
 	log.Printf("[INFO] starting reader grpc listener")
-	orderMan := order.NewOrderManager(orderGrpcLient.Order(), readerGrpcLient.ReaderSvc())
+	ebookGrpcLient, err := ebookCli.NewEbookClient(&ebookModel.ConnectionConfig{
+		Address:  opts.EbookConfig.GrpcAddress,
+		Protocol: "grpc",
+		Insecure: true,
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("[INFO] starting ebook grpc listener")
+	ssoGrpcClient, err := ssoCli.NewSsoClient(&ssoModel.ConnectionConfig{
+		Address:  opts.SsoConfig.GrpcAddress,
+		Protocol: "grpc",
+		Insecure: true,
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("[INFO] starting sso grpc listener")
+	orderMan := order.NewOrderManager(orderGrpcLient.Order(), readerGrpcLient.ReaderSvc(), ssoGrpcClient.User())
 	dictMan := dictionary.NewManager(orderGrpcLient.Dictionary())
+	ebookMan := ebook.NewManager(ebookGrpcLient.EbookSvc())
 
 	servers, serversCtx := errgroup.WithContext(appCtx)
 
 	servers.Go(func() error {
-		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, version)
+		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, ebookMan, version)
 	})
 
 	if err := servers.Wait(); err != nil {

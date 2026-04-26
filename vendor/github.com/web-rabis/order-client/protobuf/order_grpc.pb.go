@@ -20,11 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrderService_List_FullMethodName        = "/order.OrderService/List"
-	OrderService_ById_FullMethodName        = "/order.OrderService/ById"
-	OrderService_Reject_FullMethodName      = "/order.OrderService/Reject"
-	OrderService_Redirect_FullMethodName    = "/order.OrderService/Redirect"
-	OrderService_StateCounts_FullMethodName = "/order.OrderService/StateCounts"
+	OrderService_List_FullMethodName            = "/order.OrderService/List"
+	OrderService_ById_FullMethodName            = "/order.OrderService/ById"
+	OrderService_Reject_FullMethodName          = "/order.OrderService/Reject"
+	OrderService_CancelReject_FullMethodName    = "/order.OrderService/CancelReject"
+	OrderService_Redirect_FullMethodName        = "/order.OrderService/Redirect"
+	OrderService_Postponed_FullMethodName       = "/order.OrderService/Postponed"
+	OrderService_Return_FullMethodName          = "/order.OrderService/Return"
+	OrderService_Issue_FullMethodName           = "/order.OrderService/Issue"
+	OrderService_Archive_FullMethodName         = "/order.OrderService/Archive"
+	OrderService_SendToPf_FullMethodName        = "/order.OrderService/SendToPf"
+	OrderService_ReturnToStorage_FullMethodName = "/order.OrderService/ReturnToStorage"
+	OrderService_StateCounts_FullMethodName     = "/order.OrderService/StateCounts"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -34,7 +41,14 @@ type OrderServiceClient interface {
 	List(ctx context.Context, in *OrderListRequest, opts ...grpc.CallOption) (*OrderListResponse, error)
 	ById(ctx context.Context, in *ByIdRequest, opts ...grpc.CallOption) (*Order, error)
 	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CancelReject(ctx context.Context, in *CancelRejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Redirect(ctx context.Context, in *RedirectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Postponed(ctx context.Context, in *PostponedRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Return(ctx context.Context, in *ReturnRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Issue(ctx context.Context, in *IssueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Archive(ctx context.Context, in *ArchiveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SendToPf(ctx context.Context, in *SendToPfRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ReturnToStorage(ctx context.Context, in *ReturnToStorageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	StateCounts(ctx context.Context, in *StateCountsRequest, opts ...grpc.CallOption) (*StateCountsResponse, error)
 }
 
@@ -76,10 +90,80 @@ func (c *orderServiceClient) Reject(ctx context.Context, in *RejectRequest, opts
 	return out, nil
 }
 
+func (c *orderServiceClient) CancelReject(ctx context.Context, in *CancelRejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_CancelReject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderServiceClient) Redirect(ctx context.Context, in *RedirectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, OrderService_Redirect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Postponed(ctx context.Context, in *PostponedRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Postponed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Return(ctx context.Context, in *ReturnRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Return_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Issue(ctx context.Context, in *IssueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Issue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Archive(ctx context.Context, in *ArchiveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_Archive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) SendToPf(ctx context.Context, in *SendToPfRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_SendToPf_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) ReturnToStorage(ctx context.Context, in *ReturnToStorageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OrderService_ReturnToStorage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +187,14 @@ type OrderServiceServer interface {
 	List(context.Context, *OrderListRequest) (*OrderListResponse, error)
 	ById(context.Context, *ByIdRequest) (*Order, error)
 	Reject(context.Context, *RejectRequest) (*emptypb.Empty, error)
+	CancelReject(context.Context, *CancelRejectRequest) (*emptypb.Empty, error)
 	Redirect(context.Context, *RedirectRequest) (*emptypb.Empty, error)
+	Postponed(context.Context, *PostponedRequest) (*emptypb.Empty, error)
+	Return(context.Context, *ReturnRequest) (*emptypb.Empty, error)
+	Issue(context.Context, *IssueRequest) (*emptypb.Empty, error)
+	Archive(context.Context, *ArchiveRequest) (*emptypb.Empty, error)
+	SendToPf(context.Context, *SendToPfRequest) (*emptypb.Empty, error)
+	ReturnToStorage(context.Context, *ReturnToStorageRequest) (*emptypb.Empty, error)
 	StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
@@ -124,8 +215,29 @@ func (UnimplementedOrderServiceServer) ById(context.Context, *ByIdRequest) (*Ord
 func (UnimplementedOrderServiceServer) Reject(context.Context, *RejectRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method Reject not implemented")
 }
+func (UnimplementedOrderServiceServer) CancelReject(context.Context, *CancelRejectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelReject not implemented")
+}
 func (UnimplementedOrderServiceServer) Redirect(context.Context, *RedirectRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method Redirect not implemented")
+}
+func (UnimplementedOrderServiceServer) Postponed(context.Context, *PostponedRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Postponed not implemented")
+}
+func (UnimplementedOrderServiceServer) Return(context.Context, *ReturnRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Return not implemented")
+}
+func (UnimplementedOrderServiceServer) Issue(context.Context, *IssueRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Issue not implemented")
+}
+func (UnimplementedOrderServiceServer) Archive(context.Context, *ArchiveRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Archive not implemented")
+}
+func (UnimplementedOrderServiceServer) SendToPf(context.Context, *SendToPfRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendToPf not implemented")
+}
+func (UnimplementedOrderServiceServer) ReturnToStorage(context.Context, *ReturnToStorageRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReturnToStorage not implemented")
 }
 func (UnimplementedOrderServiceServer) StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method StateCounts not implemented")
@@ -205,6 +317,24 @@ func _OrderService_Reject_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_CancelReject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelRejectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).CancelReject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_CancelReject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).CancelReject(ctx, req.(*CancelRejectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrderService_Redirect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RedirectRequest)
 	if err := dec(in); err != nil {
@@ -219,6 +349,114 @@ func _OrderService_Redirect_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OrderServiceServer).Redirect(ctx, req.(*RedirectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Postponed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostponedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Postponed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Postponed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Postponed(ctx, req.(*PostponedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Return_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReturnRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Return(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Return_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Return(ctx, req.(*ReturnRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Issue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IssueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Issue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Issue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Issue(ctx, req.(*IssueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Archive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Archive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Archive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Archive(ctx, req.(*ArchiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_SendToPf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendToPfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).SendToPf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_SendToPf_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).SendToPf(ctx, req.(*SendToPfRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_ReturnToStorage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReturnToStorageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).ReturnToStorage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_ReturnToStorage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).ReturnToStorage(ctx, req.(*ReturnToStorageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -261,8 +499,36 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OrderService_Reject_Handler,
 		},
 		{
+			MethodName: "CancelReject",
+			Handler:    _OrderService_CancelReject_Handler,
+		},
+		{
 			MethodName: "Redirect",
 			Handler:    _OrderService_Redirect_Handler,
+		},
+		{
+			MethodName: "Postponed",
+			Handler:    _OrderService_Postponed_Handler,
+		},
+		{
+			MethodName: "Return",
+			Handler:    _OrderService_Return_Handler,
+		},
+		{
+			MethodName: "Issue",
+			Handler:    _OrderService_Issue_Handler,
+		},
+		{
+			MethodName: "Archive",
+			Handler:    _OrderService_Archive_Handler,
+		},
+		{
+			MethodName: "SendToPf",
+			Handler:    _OrderService_SendToPf_Handler,
+		},
+		{
+			MethodName: "ReturnToStorage",
+			Handler:    _OrderService_ReturnToStorage_Handler,
 		},
 		{
 			MethodName: "StateCounts",

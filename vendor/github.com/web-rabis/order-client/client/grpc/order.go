@@ -53,11 +53,34 @@ func (c *OrderService) ById(ctx context.Context, id int64) (*model.Order, error)
 	}
 }
 
-func (c *OrderService) Reject(ctx context.Context, ids []int64, reasonRejectId int64, userId int64) error {
+func (c *OrderService) Redirect(ctx context.Context, ids []int64, departmentId int64, user *model.User) error {
+	request := &protobuf.RedirectRequest{
+		Ids:          ids,
+		DepartmentId: departmentId,
+		User:         user.ToProto(),
+	}
+	_, err := c.client.Redirect(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) CancelReject(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.CancelRejectRequest{
+		Ids:  ids,
+		User: user.ToProto(),
+	}
+	_, err := c.client.CancelReject(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) Reject(ctx context.Context, ids []int64, reasonRejectId int64, user *model.User) error {
 	request := &protobuf.RejectRequest{
 		Ids:               ids,
 		ReasonRejectionId: reasonRejectId,
-		UserId:            userId,
+		User:              user.ToProto(),
 	}
 	_, err := c.client.Reject(ctx, request)
 	if err != nil {
@@ -65,13 +88,73 @@ func (c *OrderService) Reject(ctx context.Context, ids []int64, reasonRejectId i
 	}
 	return nil
 }
-func (c *OrderService) Redirect(ctx context.Context, ids []int64, departmentId int64, userId int64) error {
-	request := &protobuf.RedirectRequest{
-		Ids:          ids,
-		DepartmentId: departmentId,
-		UserId:       userId,
+func (c *OrderService) Postponed(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.PostponedRequest{
+		Ids:  ids,
+		User: user.ToProto(),
 	}
-	_, err := c.client.Redirect(ctx, request)
+	_, err := c.client.Postponed(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) Return(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.ReturnRequest{
+		Ids:  ids,
+		User: user.ToProto(),
+	}
+	_, err := c.client.Return(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) Issue(ctx context.Context, ids []model.IssueOrder, user *model.User) error {
+	request := &protobuf.IssueRequest{
+		Ids:  make([]*protobuf.IssueOrder, len(ids)),
+		User: user.ToProto(),
+	}
+	for i, id := range ids {
+		request.Ids[i] = &protobuf.IssueOrder{
+			Id:         id.Id,
+			EbookInvId: id.EbookInvId,
+		}
+	}
+	_, err := c.client.Issue(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) Archive(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.ArchiveRequest{
+		Ids:  ids,
+		User: user.ToProto(),
+	}
+	_, err := c.client.Archive(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) SendToPf(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.SendToPfRequest{
+		Ids:  ids,
+		User: user.ToProto(),
+	}
+	_, err := c.client.SendToPf(ctx, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c *OrderService) ReturnToStorage(ctx context.Context, ids []int64, user *model.User) error {
+	request := &protobuf.ReturnToStorageRequest{
+		Ids:  ids,
+		User: user.ToProto(),
+	}
+	_, err := c.client.ReturnToStorage(ctx, request)
 	if err != nil {
 		return err
 	}

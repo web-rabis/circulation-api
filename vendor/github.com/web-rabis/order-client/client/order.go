@@ -17,8 +17,15 @@ type Base interface {
 type OrderService interface {
 	List(ctx context.Context, paging *model.Paging, filter *model.OrderFilters) (int64, []*model.Order, error)
 	ById(ctx context.Context, id int64) (*model.Order, error)
-	Reject(ctx context.Context, ids []int64, reasonRejectId int64, userId int64) error
-	Redirect(ctx context.Context, ids []int64, departmentId int64, userId int64) error
+	Reject(ctx context.Context, ids []int64, reasonRejectId int64, user *model.User) error
+	CancelReject(ctx context.Context, ids []int64, user *model.User) error
+	Redirect(ctx context.Context, ids []int64, departmentId int64, user *model.User) error
+	Postponed(ctx context.Context, ids []int64, user *model.User) error
+	Return(ctx context.Context, ids []int64, user *model.User) error
+	Issue(ctx context.Context, ids []model.IssueOrder, user *model.User) error
+	Archive(ctx context.Context, ids []int64, user *model.User) error
+	SendToPf(ctx context.Context, ids []int64, user *model.User) error
+	ReturnToStorage(ctx context.Context, ids []int64, user *model.User) error
 	StateCounts(ctx context.Context, filters *model.StateCountFilters) ([]*model.StateCount, error)
 }
 

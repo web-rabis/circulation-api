@@ -44,6 +44,10 @@ type StateCount struct {
 	State *State `json:"state"`
 	Total int64  `json:"total"`
 }
+type IssueOrder struct {
+	Id         int64 `json:"ids"`
+	EbookInvId int64 `json:"ebookInvId"`
+}
 
 func NewOrderFormProto(o *protobuf.Order) *Order {
 	if o == nil {

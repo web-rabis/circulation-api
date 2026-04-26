@@ -6,6 +6,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
+	v1 "github.com/web-rabis/circulation-api/internal/resource/http/ebook/v1"
 
 	"github.com/web-rabis/circulation-api/internal/config"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
@@ -27,6 +29,7 @@ func Run(serversCtx context.Context,
 	authMan *auth.Manager,
 	orderMan order.IManager,
 	dictMan dictionary.IManager,
+	ebookMan ebook.IManager,
 	version string) error {
 	resources := []cherver.Resource{
 		http.NewVersionResource("/version", version),
@@ -34,6 +37,7 @@ func Run(serversCtx context.Context,
 		//swaggerV1.NewSwaggerResource("/swagger", opts.ServerConfig.BasePath, "/files"),
 		v2.NewOrderResource("/api/v1/orders", authMan, orderMan),
 		v3.NewDictionaryResource("/api/v1/dictionary", authMan, dictMan),
+		v1.NewEbookResource("/api/v1/ebook", authMan, ebookMan),
 	}
 	httpSrv := cherver.New(
 		cherver.WithListenAddress(opts.ServerConfig.ListenAddr),

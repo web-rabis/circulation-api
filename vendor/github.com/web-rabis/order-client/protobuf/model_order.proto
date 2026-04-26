@@ -43,3 +43,15 @@ message StateCountFilters {
   int64 department_id = 2;
   string period = 3;
 }
+message IssueOrder {
+  int64 id = 1;
+  int64 ebook_inv_id = 2;
+}
+message User {
+  int64 id = 1;
+  string name = 2;
+  string username = 3;
+  string email = 4;
+  string state  = 5;
+  Department department = 6;
+}

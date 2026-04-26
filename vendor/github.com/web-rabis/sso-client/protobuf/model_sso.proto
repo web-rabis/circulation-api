@@ -1,0 +1,26 @@
+syntax = "proto3";
+package sso;
+option go_package = "./protobuf;protobuf";
+message User {
+  int64 id = 1;
+  string name = 2;
+  string username = 3;
+  string email = 4;
+  string state  = 5;
+  Department department = 6;
+}
+message Department {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type = 4;
+}
+
+
+
+message Paging {
+  int64   offset = 1;
+  int64   limit = 2;
+  string  sortKey = 3;
+  int32   sortVal = 4;
+}

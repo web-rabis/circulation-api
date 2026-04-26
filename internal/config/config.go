@@ -37,6 +37,12 @@ type OrderConfig struct {
 type ReaderConfig struct {
 	GrpcAddress string `long:"reader-grpc-address" env:"READER_GRPC_ADDRESS" description:"Reader Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
 }
+type EbookConfig struct {
+	GrpcAddress string `long:"ebook-grpc-address" env:"EBOOK_GRPC_ADDRESS" description:"Ebook Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
+}
+type SsoConfig struct {
+	GrpcAddress string `long:"sso-grpc-address" env:"SSO_GRPC_ADDRESS" description:"Sso Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
+}
 
 func Parse(c interface{}) interface{} {
 	p := flags.NewParser(c, flags.Default)

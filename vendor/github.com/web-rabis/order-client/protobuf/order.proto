@@ -10,7 +10,14 @@ service OrderService {
   rpc List(OrderListRequest) returns (OrderListResponse) {}
   rpc ById(ByIdRequest) returns (Order) {}
   rpc Reject(RejectRequest) returns (google.protobuf.Empty) {}
+  rpc CancelReject(CancelRejectRequest) returns (google.protobuf.Empty) {}
   rpc Redirect(RedirectRequest) returns (google.protobuf.Empty) {}
+  rpc Postponed(PostponedRequest) returns (google.protobuf.Empty) {}
+  rpc Return(ReturnRequest) returns (google.protobuf.Empty) {}
+  rpc Issue(IssueRequest) returns (google.protobuf.Empty) {}
+  rpc Archive(ArchiveRequest) returns (google.protobuf.Empty) {}
+  rpc SendToPf(SendToPfRequest) returns (google.protobuf.Empty) {}
+  rpc ReturnToStorage(ReturnToStorageRequest) returns (google.protobuf.Empty) {}
   rpc StateCounts(StateCountsRequest) returns (StateCountsResponse) {}
 }
 
@@ -36,12 +43,40 @@ message ByIdRequest {
 message RejectRequest {
   repeated int64 ids = 1;
   int64 reason_rejection_id = 2;
-  int64 user_id = 3;
+  User user = 3;
 }
 message RedirectRequest{
   repeated int64 ids = 1;
   int64 department_id = 2;
-  int64 user_id = 3;
+  User user = 3;
+}
+message CancelRejectRequest {
+  repeated int64 ids = 1;
+  User user = 3;
+}
+message PostponedRequest {
+  repeated int64 ids = 1;
+  User user = 3;
+}
+message ReturnRequest {
+  repeated int64 ids = 1;
+  User user = 3;
+}
+message IssueRequest {
+  repeated IssueOrder ids = 1;
+  User user = 3;
+}
+message ArchiveRequest {
+  repeated int64 ids = 1;
+  User user = 3;
+}
+message SendToPfRequest {
+  repeated int64 ids = 1;
+  User user = 3;
+}
+message ReturnToStorageRequest {
+  repeated int64 ids = 1;
+  User user = 3;
 }
 message StateCountsRequest{
   StateCountFilters filters = 1;
