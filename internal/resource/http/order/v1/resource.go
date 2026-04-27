@@ -49,5 +49,12 @@ func (res *OrderResource) Routes() chi.Router {
 		r.Get("/state-counts", res.stateCounts)
 	})
 
+	// SSE — токен передаётся через ?token=..., отдельная группа с собственным verifier
+	r.Group(func(r chi.Router) {
+		r.Use(sseVerifier(res.authMan.JWTAuth()))
+		r.Use(auth.NewUserAccessCtx(res.authMan.JWTKey()).ChiMiddleware)
+		r.Get("/sse-state-counts", res.sseStateCounts)
+	})
+
 	return r
 }

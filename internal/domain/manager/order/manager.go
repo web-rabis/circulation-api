@@ -69,7 +69,7 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 	return count, orders_, nil
 }
 func (m *Manager) ById(ctx context.Context, id int64) (*orderModel.Order, error) {
-	return m.ById(ctx, id)
+	return m.orderCl.ById(ctx, id)
 }
 func (m *Manager) StateCounts(ctx context.Context, filters *orderModel.StateCountFilters) ([]*orderModel.StateCount, error) {
 	return m.orderCl.StateCounts(ctx, filters)
