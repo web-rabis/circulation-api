@@ -56,5 +56,8 @@ func (res *OrderResource) Routes() chi.Router {
 		r.Get("/sse-state-counts", res.sseStateCounts)
 	})
 
+	// Публичный SSE — без аутентификации
+	r.Get("/sse-reader-monitor", res.sseReaderMonitor)
+
 	return r
 }

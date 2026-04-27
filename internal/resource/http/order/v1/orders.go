@@ -94,6 +94,13 @@ func getPeriod(r *http.Request) string {
 	}
 	return period
 }
+func getDepartmentId(r *http.Request) int64 {
+	id, err := strconv.ParseInt(r.URL.Query().Get("departmentId"), 10, 64)
+	if err != nil {
+		return 0
+	}
+	return id
+}
 func getIsAuxiliaryFund(r *http.Request) *bool {
 	var isAuxiliaryFund *bool
 	if r.URL.Query().Get("isAuxiliaryFund") != "" {
