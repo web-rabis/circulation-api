@@ -24,3 +24,13 @@ func NewEbookInvFromProto(i *protobuf.EbookInv) *EbookInv {
 		State:      NewStateFromProto(i.State),
 	}
 }
+func NewEbookInvsFromProto(s []*protobuf.EbookInv) []*EbookInv {
+	if s == nil {
+		return nil
+	}
+	var result []*EbookInv
+	for _, v := range s {
+		result = append(result, NewEbookInvFromProto(v))
+	}
+	return result
+}

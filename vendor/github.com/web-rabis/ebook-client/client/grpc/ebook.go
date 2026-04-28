@@ -35,11 +35,7 @@ func (s *EbookService) EbookInventory(ctx context.Context, id int64) ([]*model.E
 	response, err := s.client.EbookInventory(ctx, &protobuf.EbookInventoryRequest{Id: id})
 	switch status.Code(err) {
 	case codes.OK:
-		inventories := make([]*model.EbookInv, len(response.Inventories))
-		for i, item := range response.Inventories {
-			inventories[i] = model.NewEbookInvFromProto(item)
-		}
-		return inventories, nil
+		return model.NewEbookInvsFromProto(response.Inventories), nil
 	default:
 		return nil, err
 	}

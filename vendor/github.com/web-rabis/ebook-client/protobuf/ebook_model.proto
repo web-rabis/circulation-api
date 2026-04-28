@@ -16,6 +16,10 @@ message Ebook {
   repeated EbookServiceNote service_notes = 10;
   EbookAuthorMark author_mark = 11;
   bool krv = 12;
+  repeated EbookUdk udk = 13;
+  repeated EbookBbkM bbk_m = 14;
+  repeated EbookBbkN bbk_n = 15;
+  repeated EbookInv inv = 16;
 }
 message BibliographicLevel {
   int64 id = 1;
@@ -60,6 +64,23 @@ message EbookSource {
   int64 ebook_id = 2;
   string title = 3;
 }
+message EbookUdk {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string index = 3;
+}
+message EbookBbkM {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string index = 3;
+}
+message EbookBbkN {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string index = 3;
+  string source = 4;
+}
+
 message Department {
   int64 id = 1;
   string code = 2;

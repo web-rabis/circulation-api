@@ -127,6 +127,8 @@ github.com/web-rabis/ebook-client v0.0.0-20260426210837-d1565fc2e162 h1:BshpL9zK
 github.com/web-rabis/ebook-client v0.0.0-20260426210837-d1565fc2e162/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/ebook-client v0.0.0-20260426211847-888ff19bfd51 h1:O2fnEHsD5yPMl3QXrmuQIMFi8R4hamEc+/XaMOxNhVg=
 github.com/web-rabis/ebook-client v0.0.0-20260426211847-888ff19bfd51/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260428043944-c7ac0eacaeed h1:ESaokOfhOB4y4FEHRjc1yScTufnPa2kfMlVUm/4GEy0=
+github.com/web-rabis/ebook-client v0.0.0-20260428043944-c7ac0eacaeed/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738 h1:bjsfGcPZpuLiQuU+CKZOc43G6odhS6Bo85QczEXKsPM=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738/go.mod h1:LRBhzsu6qMyoBjaWBzyN2uaVKHHEQ4zKCAtnoRQZ9LM=
 github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6 h1:EQgAdvr7pO2TZ0eYfScvKvH/Kr+lfLiGofACXAxm3LA=

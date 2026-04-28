@@ -15,6 +15,10 @@ type Ebook struct {
 	ServiceNotes       []*EbookServiceNote `json:"serviceNotes"`
 	AuthorMark         *EbookAuthorMark    `json:"authorMark"`
 	Krv                bool                `json:"krv"`
+	Udk                []*EbookUdk         `json:"udk"`
+	BbkM               []*EbookBbkM        `json:"bbkM"`
+	BbkN               []*EbookBbkN        `json:"bbkN"`
+	Inv                []*EbookInv         `json:"inv"`
 }
 
 func NewEbookFromProto(e *protobuf.Ebook) *Ebook {
@@ -34,5 +38,9 @@ func NewEbookFromProto(e *protobuf.Ebook) *Ebook {
 		ServiceNotes:       NewEbookServiceNotesFromProto(e.ServiceNotes),
 		AuthorMark:         NewEbookAuthorMarkFromProto(e.AuthorMark),
 		Krv:                e.Krv,
+		Udk:                NewEbookUdksFromProto(e.Udk),
+		BbkM:               NewEbookBbkMsFromProto(e.BbkM),
+		BbkN:               NewEbookBbkNsFromProto(e.BbkN),
+		Inv:                NewEbookInvsFromProto(e.Inv),
 	}
 }
