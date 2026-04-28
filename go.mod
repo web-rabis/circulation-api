@@ -45,7 +45,7 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
-	github.com/web-rabis/ebook-client v0.0.0-20260428043944-c7ac0eacaeed // indirect
+	github.com/web-rabis/ebook-client v0.0.0-20260428051154-950335883f80 // indirect
 	github.com/web-rabis/sso-client v0.0.0-20260421185542-0d545480da41 // indirect
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect

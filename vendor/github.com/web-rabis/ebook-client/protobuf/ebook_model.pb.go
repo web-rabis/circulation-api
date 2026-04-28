@@ -375,7 +375,7 @@ func (x *Catalog) GetName() string {
 
 type EbookPlacement struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Placement     string                 `protobuf:"bytes,1,opt,name=placement,proto3" json:"placement,omitempty"`
+	Placement     int64                  `protobuf:"varint,1,opt,name=placement,proto3" json:"placement,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -410,11 +410,11 @@ func (*EbookPlacement) Descriptor() ([]byte, []int) {
 	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *EbookPlacement) GetPlacement() string {
+func (x *EbookPlacement) GetPlacement() int64 {
 	if x != nil {
 		return x.Placement
 	}
-	return ""
+	return 0
 }
 
 type EbookFormat struct {
@@ -1124,7 +1124,7 @@ const file_protobuf_ebook_model_proto_rawDesc = "" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\".\n" +
 	"\x0eEbookPlacement\x12\x1c\n" +
-	"\tplacement\x18\x01 \x01(\tR\tplacement\"%\n" +
+	"\tplacement\x18\x01 \x01(\x03R\tplacement\"%\n" +
 	"\vEbookFormat\x12\x16\n" +
 	"\x06format\x18\x01 \x01(\tR\x06format\"2\n" +
 	"\x0fEbookAuthorMark\x12\x1f\n" +

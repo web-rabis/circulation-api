@@ -3,7 +3,7 @@ package model
 import "github.com/web-rabis/ebook-client/protobuf"
 
 type EbookAuthorMark struct {
-	AuthorMark string `json:"format"`
+	AuthorMark string `json:"authorMark"`
 }
 
 func NewEbookAuthorMarkFromProto(a *protobuf.EbookAuthorMark) *EbookAuthorMark {

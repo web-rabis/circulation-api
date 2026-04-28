@@ -38,7 +38,7 @@ message Catalog {
   string name = 3;
 }
 message EbookPlacement {
-  string placement = 1;
+  int64 placement = 1;
 }
 message EbookFormat {
    string format = 1;
