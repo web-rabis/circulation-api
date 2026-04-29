@@ -1,0 +1,42 @@
+syntax = "proto3";
+package ebook;
+option go_package = "./protobuf;protobuf";
+
+message BibliographicLevel {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type_ebooks = 4;
+}
+message TypeDescription {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string name_kz = 4;
+}
+message Catalog {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message Department {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string type = 4;
+}
+message State {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message DictionaryServiceData {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message DictionaryLanguage {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}

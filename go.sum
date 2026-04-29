@@ -133,6 +133,14 @@ github.com/web-rabis/ebook-client v0.0.0-20260428045337-09548fa54a12 h1:lgk1BNF3
 github.com/web-rabis/ebook-client v0.0.0-20260428045337-09548fa54a12/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/ebook-client v0.0.0-20260428051154-950335883f80 h1:KypDs7Wd8K3jhsOdBq4FrFDe2JTRd6IuerXFFQuPMTU=
 github.com/web-rabis/ebook-client v0.0.0-20260428051154-950335883f80/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260429093020-54963203e302 h1:hm3vjqgmLdRd3s3sBdM8nWGcX5cLGWx9Rolv8rzEzvk=
+github.com/web-rabis/ebook-client v0.0.0-20260429093020-54963203e302/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260429134713-e606ed766b94 h1:wBvJnpMu3IuiArlOKjcDVGLMj6pTZfvg1+Qj3JopjyM=
+github.com/web-rabis/ebook-client v0.0.0-20260429134713-e606ed766b94/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260429143047-a60c714c7162 h1:+TBzTs5ALeTamTlgTEkCiDnczojbFfn1ueQOd8oJWDg=
+github.com/web-rabis/ebook-client v0.0.0-20260429143047-a60c714c7162/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20260429144220-7e7ab193b721 h1:oJqTGOQNmW5+dDNiGPpaoi7d8092QOCWmAtrhZqXYeI=
+github.com/web-rabis/ebook-client v0.0.0-20260429144220-7e7ab193b721/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738 h1:bjsfGcPZpuLiQuU+CKZOc43G6odhS6Bo85QczEXKsPM=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738/go.mod h1:LRBhzsu6qMyoBjaWBzyN2uaVKHHEQ4zKCAtnoRQZ9LM=
 github.com/web-rabis/order-client v0.0.0-20260419183417-dd00af91abd6 h1:EQgAdvr7pO2TZ0eYfScvKvH/Kr+lfLiGofACXAxm3LA=

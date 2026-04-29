@@ -1,57 +1,44 @@
 syntax = "proto3";
 package ebook;
 option go_package = "./protobuf;protobuf";
+import "protobuf/dictionary_model.proto";
 
+message EbookBrief {
+    int64 id = 1;
+    int64 parent_id = 2;
+    BibliographicLevel bibliographic_level = 3;
+    TypeDescription type_description = 4;
+    bool krv = 5;
+    Catalog catalog = 6;
+    string author = 7;
+    string title = 8;
+    repeated Source sources = 9;
+    repeated ServiceNote service_notes = 10;
+    AuthorMark author_mark = 11;
+    string r_cipher = 12;
 
-message Ebook {
-  int64 id = 1;
-  string author = 2;
-  string title = 3;
-  BibliographicLevel bibliographic_level = 4;
-  TypeDescription type_description = 5;
-  Catalog catalog = 6;
-  EbookPlacement placement = 7;
-  EbookFormat format = 8;
-  repeated EbookSource sources = 9;
-  repeated EbookServiceNote service_notes = 10;
-  EbookAuthorMark author_mark = 11;
-  bool krv = 12;
-  repeated EbookUdk udk = 13;
-  repeated EbookBbkM bbk_m = 14;
-  repeated EbookBbkN bbk_n = 15;
-  repeated EbookInv inv = 16;
 }
-message BibliographicLevel {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
-  string type_ebooks = 4;
+message EbookCard{
+    int64 volume_number = 1;
+    string author = 2;
+    string title = 3;
+    string r_avt = 4;
+    string main = 5;
+    string r_cipher = 6;
+    AuthorMark author_mark = 7;
+    Language language = 8;
+    repeated string indexes = 9;
+    repeated Inv inv = 10;
 }
-message TypeDescription {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
-}
-message Catalog {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
-}
-message EbookPlacement {
-  int64 placement = 1;
-}
-message EbookFormat {
-   string format = 1;
-}
-message EbookAuthorMark {
+message AuthorMark {
   string author_mark = 1;
 }
-message EbookServiceNote {
+message ServiceNote {
   int64 id = 1;
   int64 ebook_id = 2;
   DictionaryServiceData service_data = 3;
 }
-message EbookInv {
+message Inv {
   int64 id = 1;
   int64 ebook_id = 2;
   string inv_number = 3;
@@ -59,42 +46,36 @@ message EbookInv {
   Department department = 5;
   State state = 6;
 }
-message EbookSource {
+message Source {
   int64 id = 1;
   int64 ebook_id = 2;
   string title = 3;
+  string data = 4;
+  string responsibility = 5;
+  string authors = 6;
+  string data_edition = 7;
+  string data_out = 8;
+  string special_character = 9;
+  string composite_information = 10;
+  string series = 11;
+  string isbn = 12;
+  string issn = 13;
+  string parallel_name = 14;
+  string year = 15;
+  string pages = 16;
 }
-message EbookUdk {
+message Language {
   int64 id = 1;
   int64 ebook_id = 2;
-  string index = 3;
+  DictionaryLanguage language = 3;
+  string source_rewrite = 4;
 }
-message EbookBbkM {
-  int64 id = 1;
-  int64 ebook_id = 2;
-  string index = 3;
+message Paging {
+  int64   offset = 1;
+  int64   limit = 2;
+  string  sortKey = 3;
+  int32   sortVal = 4;
 }
-message EbookBbkN {
-  int64 id = 1;
-  int64 ebook_id = 2;
-  string index = 3;
-  string source = 4;
-}
-
-message Department {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
-  string type = 4;
-}
-
-message State {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
-}
-message DictionaryServiceData {
-  int64 id = 1;
-  string code = 2;
-  string name = 3;
+message InvFilters {
+  int64 ebook_id = 1;
 }

@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	"github.com/web-rabis/ebook-client/model"
+	"github.com/web-rabis/ebook-client/model/ebook"
 	orderModel "github.com/web-rabis/order-client/model"
 )
 
@@ -13,7 +13,7 @@ type Order struct {
 	UpdatedAt         time.Time                   `json:"updatedAt"`
 	Type              string                      `json:"type"`
 	Reader            *orderModel.Reader          `json:"reader"`
-	Ebook             *model.Ebook                `json:"ebook"`
+	Ebook             *ebook.EbookBrief           `json:"ebook"`
 	InvNumber         *orderModel.EbookInv        `json:"invNumber"`
 	Periodical        *orderModel.Periodical      `json:"periodical"`
 	State             *orderModel.State           `json:"state"`
@@ -23,12 +23,12 @@ type Order struct {
 	ReasonRejection   *orderModel.ReasonRejection `json:"reasonRejection"`
 }
 
-func NewOrder(o *orderModel.Order, e *model.Ebook) *Order {
+func NewOrder(o *orderModel.Order, e *ebook.EbookBrief) *Order {
 	if o == nil {
 		return nil
 	}
 	if e == nil && o.Type == "ebook" && o.Ebook != nil {
-		e = &model.Ebook{
+		e = &ebook.EbookBrief{
 			Id:     o.Ebook.Id,
 			Author: o.Ebook.Author,
 			Title:  o.Ebook.Title,

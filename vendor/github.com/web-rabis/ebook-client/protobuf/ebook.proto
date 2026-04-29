@@ -4,16 +4,18 @@ option go_package = "./protobuf;protobuf";
 import "protobuf/ebook_model.proto";
 
 service EbookSvc {
-  rpc EbookById(EntityByIdRequest) returns (Ebook) {}
-  rpc EbookInventory(EbookInventoryRequest) returns (EbookInventoryResponse) {}
+  rpc EbookBriefById(EntityByIdRequest) returns (EbookBrief) {} // краткая
+  rpc EbookCardById(EntityByIdRequest) returns (EbookCard) {}
+  rpc InvList(InvListRequest) returns (InvListResponse) {}
 }
-
 message EntityByIdRequest {
   int64 id = 1;
 }
-message EbookInventoryRequest {
-  int64 id = 1;
+message InvListRequest {
+  InvFilters filters = 1;
+  Paging paging = 2;
 }
-message EbookInventoryResponse {
-  repeated EbookInv inventories = 1;
+message InvListResponse {
+  repeated Inv result = 1;
+  int64 count = 2;
 }

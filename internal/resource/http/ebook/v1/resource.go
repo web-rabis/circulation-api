@@ -32,8 +32,7 @@ func (res *EbookResource) Routes() chi.Router {
 	r.Group(func(r chi.Router) {
 		r.Use(jwtauth.Verifier(res.authMan.JWTAuth()))
 		r.Use(auth.NewUserAccessCtx(res.authMan.JWTKey()).ChiMiddleware)
-		r.Get("/{id}", res.ebookById)
-		r.Get("/{id}/inventory", res.ebookInventory)
+		r.Get("/{id}/card", res.ebookCardById)
 	})
 
 	return r

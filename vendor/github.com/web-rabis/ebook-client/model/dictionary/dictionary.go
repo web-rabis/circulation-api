@@ -1,4 +1,4 @@
-package model
+package dictionary
 
 import "github.com/web-rabis/ebook-client/protobuf"
 
@@ -9,9 +9,10 @@ type BibliographicLevel struct {
 	TypeEbooks string `json:"typeEbooks"`
 }
 type TypeDescription struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
+	Id     int64  `json:"id"`
+	Code   string `json:"code"`
+	Name   string `json:"name"`
+	NameKz string `json:"nameKz"`
 }
 type Catalog struct {
 	Id   int64  `json:"id"`
@@ -30,7 +31,12 @@ type State struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
-type DictionaryServiceData struct {
+type ServiceData struct {
+	Id   int64  `json:"id"`
+	Code string `json:"code"`
+	Name string `json:"name"`
+}
+type Language struct {
 	Id   int64  `json:"id"`
 	Code string `json:"code"`
 	Name string `json:"name"`
@@ -52,9 +58,10 @@ func NewTypeDescriptionFromProto(t *protobuf.TypeDescription) *TypeDescription {
 		return nil
 	}
 	return &TypeDescription{
-		Id:   t.Id,
-		Code: t.Code,
-		Name: t.Name,
+		Id:     t.Id,
+		Code:   t.Code,
+		Name:   t.Name,
+		NameKz: t.NameKz,
 	}
 }
 func NewCatalogFromProto(c *protobuf.Catalog) *Catalog {
@@ -89,11 +96,21 @@ func NewStateFromProto(s *protobuf.State) *State {
 		Name: s.Name,
 	}
 }
-func NewDictionaryServiceDataFromProto(s *protobuf.DictionaryServiceData) *DictionaryServiceData {
+func NewServiceDataFromProto(s *protobuf.DictionaryServiceData) *ServiceData {
 	if s == nil {
 		return nil
 	}
-	return &DictionaryServiceData{
+	return &ServiceData{
+		Id:   s.Id,
+		Code: s.Code,
+		Name: s.Name,
+	}
+}
+func NewLanguageFromProto(s *protobuf.DictionaryLanguage) *Language {
+	if s == nil {
+		return nil
+	}
+	return &Language{
 		Id:   s.Id,
 		Code: s.Code,
 		Name: s.Name,

@@ -5,7 +5,7 @@ import (
 
 	"github.com/web-rabis/circulation-api/internal/domain/model"
 	ebookClient "github.com/web-rabis/ebook-client/client"
-	model2 "github.com/web-rabis/ebook-client/model"
+	model2 "github.com/web-rabis/ebook-client/model/ebook"
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerClient "github.com/web-rabis/reader-client/client"
@@ -59,9 +59,9 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 			order.Reader.Department = reader.Department
 
 		}
-		var e *model2.Ebook
+		var e *model2.EbookBrief
 		if order.Ebook != nil {
-			e, _ = m.ebookCl.EbookById(ctx, order.Ebook.Id)
+			e, _ = m.ebookCl.EbookBriefById(ctx, order.Ebook.Id)
 		}
 		order_ := model.NewOrder(order, e)
 		orders_[i] = order_

@@ -65,27 +65,28 @@ func (x *EntityByIdRequest) GetId() int64 {
 	return 0
 }
 
-type EbookInventoryRequest struct {
+type InvListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Filters       *InvFilters            `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookInventoryRequest) Reset() {
-	*x = EbookInventoryRequest{}
+func (x *InvListRequest) Reset() {
+	*x = InvListRequest{}
 	mi := &file_protobuf_ebook_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookInventoryRequest) String() string {
+func (x *InvListRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookInventoryRequest) ProtoMessage() {}
+func (*InvListRequest) ProtoMessage() {}
 
-func (x *EbookInventoryRequest) ProtoReflect() protoreflect.Message {
+func (x *InvListRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_protobuf_ebook_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -97,39 +98,47 @@ func (x *EbookInventoryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookInventoryRequest.ProtoReflect.Descriptor instead.
-func (*EbookInventoryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use InvListRequest.ProtoReflect.Descriptor instead.
+func (*InvListRequest) Descriptor() ([]byte, []int) {
 	return file_protobuf_ebook_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *EbookInventoryRequest) GetId() int64 {
+func (x *InvListRequest) GetFilters() *InvFilters {
 	if x != nil {
-		return x.Id
+		return x.Filters
 	}
-	return 0
+	return nil
 }
 
-type EbookInventoryResponse struct {
+func (x *InvListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type InvListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Inventories   []*EbookInv            `protobuf:"bytes,1,rep,name=inventories,proto3" json:"inventories,omitempty"`
+	Result        []*Inv                 `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookInventoryResponse) Reset() {
-	*x = EbookInventoryResponse{}
+func (x *InvListResponse) Reset() {
+	*x = InvListResponse{}
 	mi := &file_protobuf_ebook_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookInventoryResponse) String() string {
+func (x *InvListResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookInventoryResponse) ProtoMessage() {}
+func (*InvListResponse) ProtoMessage() {}
 
-func (x *EbookInventoryResponse) ProtoReflect() protoreflect.Message {
+func (x *InvListResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_protobuf_ebook_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -141,16 +150,23 @@ func (x *EbookInventoryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookInventoryResponse.ProtoReflect.Descriptor instead.
-func (*EbookInventoryResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use InvListResponse.ProtoReflect.Descriptor instead.
+func (*InvListResponse) Descriptor() ([]byte, []int) {
 	return file_protobuf_ebook_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *EbookInventoryResponse) GetInventories() []*EbookInv {
+func (x *InvListResponse) GetResult() []*Inv {
 	if x != nil {
-		return x.Inventories
+		return x.Result
 	}
 	return nil
+}
+
+func (x *InvListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
 }
 
 var File_protobuf_ebook_proto protoreflect.FileDescriptor
@@ -159,14 +175,18 @@ const file_protobuf_ebook_proto_rawDesc = "" +
 	"\n" +
 	"\x14protobuf/ebook.proto\x12\x05ebook\x1a\x1aprotobuf/ebook_model.proto\"#\n" +
 	"\x11EntityByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"'\n" +
-	"\x15EbookInventoryRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"K\n" +
-	"\x16EbookInventoryResponse\x121\n" +
-	"\vinventories\x18\x01 \x03(\v2\x0f.ebook.EbookInvR\vinventories2\x92\x01\n" +
-	"\bEbookSvc\x125\n" +
-	"\tEbookById\x12\x18.ebook.EntityByIdRequest\x1a\f.ebook.Ebook\"\x00\x12O\n" +
-	"\x0eEbookInventory\x12\x1c.ebook.EbookInventoryRequest\x1a\x1d.ebook.EbookInventoryResponse\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\x02id\x18\x01 \x01(\x03R\x02id\"d\n" +
+	"\x0eInvListRequest\x12+\n" +
+	"\afilters\x18\x01 \x01(\v2\x11.ebook.InvFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"K\n" +
+	"\x0fInvListResponse\x12\"\n" +
+	"\x06result\x18\x01 \x03(\v2\n" +
+	".ebook.InvR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count2\xc6\x01\n" +
+	"\bEbookSvc\x12?\n" +
+	"\x0eEbookBriefById\x12\x18.ebook.EntityByIdRequest\x1a\x11.ebook.EbookBrief\"\x00\x12=\n" +
+	"\rEbookCardById\x12\x18.ebook.EntityByIdRequest\x1a\x10.ebook.EbookCard\"\x00\x12:\n" +
+	"\aInvList\x12\x15.ebook.InvListRequest\x1a\x16.ebook.InvListResponse\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_ebook_proto_rawDescOnce sync.Once
@@ -182,23 +202,30 @@ func file_protobuf_ebook_proto_rawDescGZIP() []byte {
 
 var file_protobuf_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protobuf_ebook_proto_goTypes = []any{
-	(*EntityByIdRequest)(nil),      // 0: ebook.EntityByIdRequest
-	(*EbookInventoryRequest)(nil),  // 1: ebook.EbookInventoryRequest
-	(*EbookInventoryResponse)(nil), // 2: ebook.EbookInventoryResponse
-	(*EbookInv)(nil),               // 3: ebook.EbookInv
-	(*Ebook)(nil),                  // 4: ebook.Ebook
+	(*EntityByIdRequest)(nil), // 0: ebook.EntityByIdRequest
+	(*InvListRequest)(nil),    // 1: ebook.InvListRequest
+	(*InvListResponse)(nil),   // 2: ebook.InvListResponse
+	(*InvFilters)(nil),        // 3: ebook.InvFilters
+	(*Paging)(nil),            // 4: ebook.Paging
+	(*Inv)(nil),               // 5: ebook.Inv
+	(*EbookBrief)(nil),        // 6: ebook.EbookBrief
+	(*EbookCard)(nil),         // 7: ebook.EbookCard
 }
 var file_protobuf_ebook_proto_depIdxs = []int32{
-	3, // 0: ebook.EbookInventoryResponse.inventories:type_name -> ebook.EbookInv
-	0, // 1: ebook.EbookSvc.EbookById:input_type -> ebook.EntityByIdRequest
-	1, // 2: ebook.EbookSvc.EbookInventory:input_type -> ebook.EbookInventoryRequest
-	4, // 3: ebook.EbookSvc.EbookById:output_type -> ebook.Ebook
-	2, // 4: ebook.EbookSvc.EbookInventory:output_type -> ebook.EbookInventoryResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: ebook.InvListRequest.filters:type_name -> ebook.InvFilters
+	4, // 1: ebook.InvListRequest.paging:type_name -> ebook.Paging
+	5, // 2: ebook.InvListResponse.result:type_name -> ebook.Inv
+	0, // 3: ebook.EbookSvc.EbookBriefById:input_type -> ebook.EntityByIdRequest
+	0, // 4: ebook.EbookSvc.EbookCardById:input_type -> ebook.EntityByIdRequest
+	1, // 5: ebook.EbookSvc.InvList:input_type -> ebook.InvListRequest
+	6, // 6: ebook.EbookSvc.EbookBriefById:output_type -> ebook.EbookBrief
+	7, // 7: ebook.EbookSvc.EbookCardById:output_type -> ebook.EbookCard
+	2, // 8: ebook.EbookSvc.InvList:output_type -> ebook.InvListResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_ebook_proto_init() }

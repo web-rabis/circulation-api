@@ -21,42 +21,38 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Ebook struct {
+type EbookBrief struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Author             string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
-	Title              string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	BibliographicLevel *BibliographicLevel    `protobuf:"bytes,4,opt,name=bibliographic_level,json=bibliographicLevel,proto3" json:"bibliographic_level,omitempty"`
-	TypeDescription    *TypeDescription       `protobuf:"bytes,5,opt,name=type_description,json=typeDescription,proto3" json:"type_description,omitempty"`
+	ParentId           int64                  `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	BibliographicLevel *BibliographicLevel    `protobuf:"bytes,3,opt,name=bibliographic_level,json=bibliographicLevel,proto3" json:"bibliographic_level,omitempty"`
+	TypeDescription    *TypeDescription       `protobuf:"bytes,4,opt,name=type_description,json=typeDescription,proto3" json:"type_description,omitempty"`
+	Krv                bool                   `protobuf:"varint,5,opt,name=krv,proto3" json:"krv,omitempty"`
 	Catalog            *Catalog               `protobuf:"bytes,6,opt,name=catalog,proto3" json:"catalog,omitempty"`
-	Placement          *EbookPlacement        `protobuf:"bytes,7,opt,name=placement,proto3" json:"placement,omitempty"`
-	Format             *EbookFormat           `protobuf:"bytes,8,opt,name=format,proto3" json:"format,omitempty"`
-	Sources            []*EbookSource         `protobuf:"bytes,9,rep,name=sources,proto3" json:"sources,omitempty"`
-	ServiceNotes       []*EbookServiceNote    `protobuf:"bytes,10,rep,name=service_notes,json=serviceNotes,proto3" json:"service_notes,omitempty"`
-	AuthorMark         *EbookAuthorMark       `protobuf:"bytes,11,opt,name=author_mark,json=authorMark,proto3" json:"author_mark,omitempty"`
-	Krv                bool                   `protobuf:"varint,12,opt,name=krv,proto3" json:"krv,omitempty"`
-	Udk                []*EbookUdk            `protobuf:"bytes,13,rep,name=udk,proto3" json:"udk,omitempty"`
-	BbkM               []*EbookBbkM           `protobuf:"bytes,14,rep,name=bbk_m,json=bbkM,proto3" json:"bbk_m,omitempty"`
-	BbkN               []*EbookBbkN           `protobuf:"bytes,15,rep,name=bbk_n,json=bbkN,proto3" json:"bbk_n,omitempty"`
-	Inv                []*EbookInv            `protobuf:"bytes,16,rep,name=inv,proto3" json:"inv,omitempty"`
+	Author             string                 `protobuf:"bytes,7,opt,name=author,proto3" json:"author,omitempty"`
+	Title              string                 `protobuf:"bytes,8,opt,name=title,proto3" json:"title,omitempty"`
+	Sources            []*Source              `protobuf:"bytes,9,rep,name=sources,proto3" json:"sources,omitempty"`
+	ServiceNotes       []*ServiceNote         `protobuf:"bytes,10,rep,name=service_notes,json=serviceNotes,proto3" json:"service_notes,omitempty"`
+	AuthorMark         *AuthorMark            `protobuf:"bytes,11,opt,name=author_mark,json=authorMark,proto3" json:"author_mark,omitempty"`
+	RCipher            string                 `protobuf:"bytes,12,opt,name=r_cipher,json=rCipher,proto3" json:"r_cipher,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
 
-func (x *Ebook) Reset() {
-	*x = Ebook{}
+func (x *EbookBrief) Reset() {
+	*x = EbookBrief{}
 	mi := &file_protobuf_ebook_model_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Ebook) String() string {
+func (x *EbookBrief) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Ebook) ProtoMessage() {}
+func (*EbookBrief) ProtoMessage() {}
 
-func (x *Ebook) ProtoReflect() protoreflect.Message {
+func (x *EbookBrief) ProtoReflect() protoreflect.Message {
 	mi := &file_protobuf_ebook_model_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -68,421 +64,233 @@ func (x *Ebook) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Ebook.ProtoReflect.Descriptor instead.
-func (*Ebook) Descriptor() ([]byte, []int) {
+// Deprecated: Use EbookBrief.ProtoReflect.Descriptor instead.
+func (*EbookBrief) Descriptor() ([]byte, []int) {
 	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Ebook) GetId() int64 {
+func (x *EbookBrief) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *Ebook) GetAuthor() string {
+func (x *EbookBrief) GetParentId() int64 {
 	if x != nil {
-		return x.Author
+		return x.ParentId
 	}
-	return ""
+	return 0
 }
 
-func (x *Ebook) GetTitle() string {
-	if x != nil {
-		return x.Title
-	}
-	return ""
-}
-
-func (x *Ebook) GetBibliographicLevel() *BibliographicLevel {
+func (x *EbookBrief) GetBibliographicLevel() *BibliographicLevel {
 	if x != nil {
 		return x.BibliographicLevel
 	}
 	return nil
 }
 
-func (x *Ebook) GetTypeDescription() *TypeDescription {
+func (x *EbookBrief) GetTypeDescription() *TypeDescription {
 	if x != nil {
 		return x.TypeDescription
 	}
 	return nil
 }
 
-func (x *Ebook) GetCatalog() *Catalog {
-	if x != nil {
-		return x.Catalog
-	}
-	return nil
-}
-
-func (x *Ebook) GetPlacement() *EbookPlacement {
-	if x != nil {
-		return x.Placement
-	}
-	return nil
-}
-
-func (x *Ebook) GetFormat() *EbookFormat {
-	if x != nil {
-		return x.Format
-	}
-	return nil
-}
-
-func (x *Ebook) GetSources() []*EbookSource {
-	if x != nil {
-		return x.Sources
-	}
-	return nil
-}
-
-func (x *Ebook) GetServiceNotes() []*EbookServiceNote {
-	if x != nil {
-		return x.ServiceNotes
-	}
-	return nil
-}
-
-func (x *Ebook) GetAuthorMark() *EbookAuthorMark {
-	if x != nil {
-		return x.AuthorMark
-	}
-	return nil
-}
-
-func (x *Ebook) GetKrv() bool {
+func (x *EbookBrief) GetKrv() bool {
 	if x != nil {
 		return x.Krv
 	}
 	return false
 }
 
-func (x *Ebook) GetUdk() []*EbookUdk {
+func (x *EbookBrief) GetCatalog() *Catalog {
 	if x != nil {
-		return x.Udk
+		return x.Catalog
 	}
 	return nil
 }
 
-func (x *Ebook) GetBbkM() []*EbookBbkM {
+func (x *EbookBrief) GetAuthor() string {
 	if x != nil {
-		return x.BbkM
+		return x.Author
+	}
+	return ""
+}
+
+func (x *EbookBrief) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *EbookBrief) GetSources() []*Source {
+	if x != nil {
+		return x.Sources
 	}
 	return nil
 }
 
-func (x *Ebook) GetBbkN() []*EbookBbkN {
+func (x *EbookBrief) GetServiceNotes() []*ServiceNote {
 	if x != nil {
-		return x.BbkN
+		return x.ServiceNotes
 	}
 	return nil
 }
 
-func (x *Ebook) GetInv() []*EbookInv {
+func (x *EbookBrief) GetAuthorMark() *AuthorMark {
+	if x != nil {
+		return x.AuthorMark
+	}
+	return nil
+}
+
+func (x *EbookBrief) GetRCipher() string {
+	if x != nil {
+		return x.RCipher
+	}
+	return ""
+}
+
+type EbookCard struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VolumeNumber  int64                  `protobuf:"varint,1,opt,name=volume_number,json=volumeNumber,proto3" json:"volume_number,omitempty"`
+	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	RAvt          string                 `protobuf:"bytes,4,opt,name=r_avt,json=rAvt,proto3" json:"r_avt,omitempty"`
+	Main          string                 `protobuf:"bytes,5,opt,name=main,proto3" json:"main,omitempty"`
+	RCipher       string                 `protobuf:"bytes,6,opt,name=r_cipher,json=rCipher,proto3" json:"r_cipher,omitempty"`
+	AuthorMark    *AuthorMark            `protobuf:"bytes,7,opt,name=author_mark,json=authorMark,proto3" json:"author_mark,omitempty"`
+	Language      *Language              `protobuf:"bytes,8,opt,name=language,proto3" json:"language,omitempty"`
+	Indexes       []string               `protobuf:"bytes,9,rep,name=indexes,proto3" json:"indexes,omitempty"`
+	Inv           []*Inv                 `protobuf:"bytes,10,rep,name=inv,proto3" json:"inv,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EbookCard) Reset() {
+	*x = EbookCard{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EbookCard) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EbookCard) ProtoMessage() {}
+
+func (x *EbookCard) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EbookCard.ProtoReflect.Descriptor instead.
+func (*EbookCard) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *EbookCard) GetVolumeNumber() int64 {
+	if x != nil {
+		return x.VolumeNumber
+	}
+	return 0
+}
+
+func (x *EbookCard) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *EbookCard) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *EbookCard) GetRAvt() string {
+	if x != nil {
+		return x.RAvt
+	}
+	return ""
+}
+
+func (x *EbookCard) GetMain() string {
+	if x != nil {
+		return x.Main
+	}
+	return ""
+}
+
+func (x *EbookCard) GetRCipher() string {
+	if x != nil {
+		return x.RCipher
+	}
+	return ""
+}
+
+func (x *EbookCard) GetAuthorMark() *AuthorMark {
+	if x != nil {
+		return x.AuthorMark
+	}
+	return nil
+}
+
+func (x *EbookCard) GetLanguage() *Language {
+	if x != nil {
+		return x.Language
+	}
+	return nil
+}
+
+func (x *EbookCard) GetIndexes() []string {
+	if x != nil {
+		return x.Indexes
+	}
+	return nil
+}
+
+func (x *EbookCard) GetInv() []*Inv {
 	if x != nil {
 		return x.Inv
 	}
 	return nil
 }
 
-type BibliographicLevel struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	TypeEbooks    string                 `protobuf:"bytes,4,opt,name=type_ebooks,json=typeEbooks,proto3" json:"type_ebooks,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BibliographicLevel) Reset() {
-	*x = BibliographicLevel{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BibliographicLevel) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BibliographicLevel) ProtoMessage() {}
-
-func (x *BibliographicLevel) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BibliographicLevel.ProtoReflect.Descriptor instead.
-func (*BibliographicLevel) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *BibliographicLevel) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *BibliographicLevel) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *BibliographicLevel) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *BibliographicLevel) GetTypeEbooks() string {
-	if x != nil {
-		return x.TypeEbooks
-	}
-	return ""
-}
-
-type TypeDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TypeDescription) Reset() {
-	*x = TypeDescription{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TypeDescription) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TypeDescription) ProtoMessage() {}
-
-func (x *TypeDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TypeDescription.ProtoReflect.Descriptor instead.
-func (*TypeDescription) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *TypeDescription) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *TypeDescription) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *TypeDescription) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type Catalog struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Catalog) Reset() {
-	*x = Catalog{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Catalog) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Catalog) ProtoMessage() {}
-
-func (x *Catalog) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Catalog.ProtoReflect.Descriptor instead.
-func (*Catalog) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Catalog) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Catalog) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *Catalog) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type EbookPlacement struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Placement     int64                  `protobuf:"varint,1,opt,name=placement,proto3" json:"placement,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EbookPlacement) Reset() {
-	*x = EbookPlacement{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EbookPlacement) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EbookPlacement) ProtoMessage() {}
-
-func (x *EbookPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EbookPlacement.ProtoReflect.Descriptor instead.
-func (*EbookPlacement) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *EbookPlacement) GetPlacement() int64 {
-	if x != nil {
-		return x.Placement
-	}
-	return 0
-}
-
-type EbookFormat struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Format        string                 `protobuf:"bytes,1,opt,name=format,proto3" json:"format,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EbookFormat) Reset() {
-	*x = EbookFormat{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EbookFormat) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EbookFormat) ProtoMessage() {}
-
-func (x *EbookFormat) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EbookFormat.ProtoReflect.Descriptor instead.
-func (*EbookFormat) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *EbookFormat) GetFormat() string {
-	if x != nil {
-		return x.Format
-	}
-	return ""
-}
-
-type EbookAuthorMark struct {
+type AuthorMark struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AuthorMark    string                 `protobuf:"bytes,1,opt,name=author_mark,json=authorMark,proto3" json:"author_mark,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookAuthorMark) Reset() {
-	*x = EbookAuthorMark{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[6]
+func (x *AuthorMark) Reset() {
+	*x = AuthorMark{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookAuthorMark) String() string {
+func (x *AuthorMark) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookAuthorMark) ProtoMessage() {}
+func (*AuthorMark) ProtoMessage() {}
 
-func (x *EbookAuthorMark) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[6]
+func (x *AuthorMark) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -493,19 +301,19 @@ func (x *EbookAuthorMark) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookAuthorMark.ProtoReflect.Descriptor instead.
-func (*EbookAuthorMark) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{6}
+// Deprecated: Use AuthorMark.ProtoReflect.Descriptor instead.
+func (*AuthorMark) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *EbookAuthorMark) GetAuthorMark() string {
+func (x *AuthorMark) GetAuthorMark() string {
 	if x != nil {
 		return x.AuthorMark
 	}
 	return ""
 }
 
-type EbookServiceNote struct {
+type ServiceNote struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
@@ -514,21 +322,21 @@ type EbookServiceNote struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookServiceNote) Reset() {
-	*x = EbookServiceNote{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[7]
+func (x *ServiceNote) Reset() {
+	*x = ServiceNote{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookServiceNote) String() string {
+func (x *ServiceNote) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookServiceNote) ProtoMessage() {}
+func (*ServiceNote) ProtoMessage() {}
 
-func (x *EbookServiceNote) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[7]
+func (x *ServiceNote) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -539,33 +347,33 @@ func (x *EbookServiceNote) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookServiceNote.ProtoReflect.Descriptor instead.
-func (*EbookServiceNote) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use ServiceNote.ProtoReflect.Descriptor instead.
+func (*ServiceNote) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *EbookServiceNote) GetId() int64 {
+func (x *ServiceNote) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *EbookServiceNote) GetEbookId() int64 {
+func (x *ServiceNote) GetEbookId() int64 {
 	if x != nil {
 		return x.EbookId
 	}
 	return 0
 }
 
-func (x *EbookServiceNote) GetServiceData() *DictionaryServiceData {
+func (x *ServiceNote) GetServiceData() *DictionaryServiceData {
 	if x != nil {
 		return x.ServiceData
 	}
 	return nil
 }
 
-type EbookInv struct {
+type Inv struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
@@ -577,21 +385,21 @@ type EbookInv struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookInv) Reset() {
-	*x = EbookInv{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[8]
+func (x *Inv) Reset() {
+	*x = Inv{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookInv) String() string {
+func (x *Inv) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookInv) ProtoMessage() {}
+func (*Inv) ProtoMessage() {}
 
-func (x *EbookInv) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[8]
+func (x *Inv) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,77 +410,90 @@ func (x *EbookInv) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookInv.ProtoReflect.Descriptor instead.
-func (*EbookInv) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use Inv.ProtoReflect.Descriptor instead.
+func (*Inv) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *EbookInv) GetId() int64 {
+func (x *Inv) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *EbookInv) GetEbookId() int64 {
+func (x *Inv) GetEbookId() int64 {
 	if x != nil {
 		return x.EbookId
 	}
 	return 0
 }
 
-func (x *EbookInv) GetInvNumber() string {
+func (x *Inv) GetInvNumber() string {
 	if x != nil {
 		return x.InvNumber
 	}
 	return ""
 }
 
-func (x *EbookInv) GetBarcode() string {
+func (x *Inv) GetBarcode() string {
 	if x != nil {
 		return x.Barcode
 	}
 	return ""
 }
 
-func (x *EbookInv) GetDepartment() *Department {
+func (x *Inv) GetDepartment() *Department {
 	if x != nil {
 		return x.Department
 	}
 	return nil
 }
 
-func (x *EbookInv) GetState() *State {
+func (x *Inv) GetState() *State {
 	if x != nil {
 		return x.State
 	}
 	return nil
 }
 
-type EbookSource struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type Source struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	EbookId              int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
+	Title                string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Data                 string                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	Responsibility       string                 `protobuf:"bytes,5,opt,name=responsibility,proto3" json:"responsibility,omitempty"`
+	Authors              string                 `protobuf:"bytes,6,opt,name=authors,proto3" json:"authors,omitempty"`
+	DataEdition          string                 `protobuf:"bytes,7,opt,name=data_edition,json=dataEdition,proto3" json:"data_edition,omitempty"`
+	DataOut              string                 `protobuf:"bytes,8,opt,name=data_out,json=dataOut,proto3" json:"data_out,omitempty"`
+	SpecialCharacter     string                 `protobuf:"bytes,9,opt,name=special_character,json=specialCharacter,proto3" json:"special_character,omitempty"`
+	CompositeInformation string                 `protobuf:"bytes,10,opt,name=composite_information,json=compositeInformation,proto3" json:"composite_information,omitempty"`
+	Series               string                 `protobuf:"bytes,11,opt,name=series,proto3" json:"series,omitempty"`
+	Isbn                 string                 `protobuf:"bytes,12,opt,name=isbn,proto3" json:"isbn,omitempty"`
+	Issn                 string                 `protobuf:"bytes,13,opt,name=issn,proto3" json:"issn,omitempty"`
+	ParallelName         string                 `protobuf:"bytes,14,opt,name=parallel_name,json=parallelName,proto3" json:"parallel_name,omitempty"`
+	Year                 string                 `protobuf:"bytes,15,opt,name=year,proto3" json:"year,omitempty"`
+	Pages                string                 `protobuf:"bytes,16,opt,name=pages,proto3" json:"pages,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
-func (x *EbookSource) Reset() {
-	*x = EbookSource{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[9]
+func (x *Source) Reset() {
+	*x = Source{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookSource) String() string {
+func (x *Source) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookSource) ProtoMessage() {}
+func (*Source) ProtoMessage() {}
 
-func (x *EbookSource) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[9]
+func (x *Source) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,56 +504,148 @@ func (x *EbookSource) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookSource.ProtoReflect.Descriptor instead.
-func (*EbookSource) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use Source.ProtoReflect.Descriptor instead.
+func (*Source) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *EbookSource) GetId() int64 {
+func (x *Source) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *EbookSource) GetEbookId() int64 {
+func (x *Source) GetEbookId() int64 {
 	if x != nil {
 		return x.EbookId
 	}
 	return 0
 }
 
-func (x *EbookSource) GetTitle() string {
+func (x *Source) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-type EbookUdk struct {
+func (x *Source) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
+func (x *Source) GetResponsibility() string {
+	if x != nil {
+		return x.Responsibility
+	}
+	return ""
+}
+
+func (x *Source) GetAuthors() string {
+	if x != nil {
+		return x.Authors
+	}
+	return ""
+}
+
+func (x *Source) GetDataEdition() string {
+	if x != nil {
+		return x.DataEdition
+	}
+	return ""
+}
+
+func (x *Source) GetDataOut() string {
+	if x != nil {
+		return x.DataOut
+	}
+	return ""
+}
+
+func (x *Source) GetSpecialCharacter() string {
+	if x != nil {
+		return x.SpecialCharacter
+	}
+	return ""
+}
+
+func (x *Source) GetCompositeInformation() string {
+	if x != nil {
+		return x.CompositeInformation
+	}
+	return ""
+}
+
+func (x *Source) GetSeries() string {
+	if x != nil {
+		return x.Series
+	}
+	return ""
+}
+
+func (x *Source) GetIsbn() string {
+	if x != nil {
+		return x.Isbn
+	}
+	return ""
+}
+
+func (x *Source) GetIssn() string {
+	if x != nil {
+		return x.Issn
+	}
+	return ""
+}
+
+func (x *Source) GetParallelName() string {
+	if x != nil {
+		return x.ParallelName
+	}
+	return ""
+}
+
+func (x *Source) GetYear() string {
+	if x != nil {
+		return x.Year
+	}
+	return ""
+}
+
+func (x *Source) GetPages() string {
+	if x != nil {
+		return x.Pages
+	}
+	return ""
+}
+
+type Language struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	Index         string                 `protobuf:"bytes,3,opt,name=index,proto3" json:"index,omitempty"`
+	Language      *DictionaryLanguage    `protobuf:"bytes,3,opt,name=language,proto3" json:"language,omitempty"`
+	SourceRewrite string                 `protobuf:"bytes,4,opt,name=source_rewrite,json=sourceRewrite,proto3" json:"source_rewrite,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookUdk) Reset() {
-	*x = EbookUdk{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[10]
+func (x *Language) Reset() {
+	*x = Language{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookUdk) String() string {
+func (x *Language) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookUdk) ProtoMessage() {}
+func (*Language) ProtoMessage() {}
 
-func (x *EbookUdk) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[10]
+func (x *Language) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -743,56 +656,64 @@ func (x *EbookUdk) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookUdk.ProtoReflect.Descriptor instead.
-func (*EbookUdk) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use Language.ProtoReflect.Descriptor instead.
+func (*Language) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *EbookUdk) GetId() int64 {
+func (x *Language) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *EbookUdk) GetEbookId() int64 {
+func (x *Language) GetEbookId() int64 {
 	if x != nil {
 		return x.EbookId
 	}
 	return 0
 }
 
-func (x *EbookUdk) GetIndex() string {
+func (x *Language) GetLanguage() *DictionaryLanguage {
 	if x != nil {
-		return x.Index
+		return x.Language
+	}
+	return nil
+}
+
+func (x *Language) GetSourceRewrite() string {
+	if x != nil {
+		return x.SourceRewrite
 	}
 	return ""
 }
 
-type EbookBbkM struct {
+type Paging struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	Index         string                 `protobuf:"bytes,3,opt,name=index,proto3" json:"index,omitempty"`
+	Offset        int64                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         int64                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	SortKey       string                 `protobuf:"bytes,3,opt,name=sortKey,proto3" json:"sortKey,omitempty"`
+	SortVal       int32                  `protobuf:"varint,4,opt,name=sortVal,proto3" json:"sortVal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *EbookBbkM) Reset() {
-	*x = EbookBbkM{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[11]
+func (x *Paging) Reset() {
+	*x = Paging{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *EbookBbkM) String() string {
+func (x *Paging) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EbookBbkM) ProtoMessage() {}
+func (*Paging) ProtoMessage() {}
 
-func (x *EbookBbkM) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[11]
+func (x *Paging) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -803,338 +724,127 @@ func (x *EbookBbkM) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EbookBbkM.ProtoReflect.Descriptor instead.
-func (*EbookBbkM) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use Paging.ProtoReflect.Descriptor instead.
+func (*Paging) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *EbookBbkM) GetId() int64 {
+func (x *Paging) GetOffset() int64 {
 	if x != nil {
-		return x.Id
+		return x.Offset
 	}
 	return 0
 }
 
-func (x *EbookBbkM) GetEbookId() int64 {
+func (x *Paging) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *Paging) GetSortKey() string {
+	if x != nil {
+		return x.SortKey
+	}
+	return ""
+}
+
+func (x *Paging) GetSortVal() int32 {
+	if x != nil {
+		return x.SortVal
+	}
+	return 0
+}
+
+type InvFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EbookId       int64                  `protobuf:"varint,1,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InvFilters) Reset() {
+	*x = InvFilters{}
+	mi := &file_protobuf_ebook_model_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvFilters) ProtoMessage() {}
+
+func (x *InvFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_model_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvFilters.ProtoReflect.Descriptor instead.
+func (*InvFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *InvFilters) GetEbookId() int64 {
 	if x != nil {
 		return x.EbookId
 	}
 	return 0
-}
-
-func (x *EbookBbkM) GetIndex() string {
-	if x != nil {
-		return x.Index
-	}
-	return ""
-}
-
-type EbookBbkN struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	Index         string                 `protobuf:"bytes,3,opt,name=index,proto3" json:"index,omitempty"`
-	Source        string                 `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EbookBbkN) Reset() {
-	*x = EbookBbkN{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EbookBbkN) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EbookBbkN) ProtoMessage() {}
-
-func (x *EbookBbkN) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EbookBbkN.ProtoReflect.Descriptor instead.
-func (*EbookBbkN) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *EbookBbkN) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *EbookBbkN) GetEbookId() int64 {
-	if x != nil {
-		return x.EbookId
-	}
-	return 0
-}
-
-func (x *EbookBbkN) GetIndex() string {
-	if x != nil {
-		return x.Index
-	}
-	return ""
-}
-
-func (x *EbookBbkN) GetSource() string {
-	if x != nil {
-		return x.Source
-	}
-	return ""
-}
-
-type Department struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Department) Reset() {
-	*x = Department{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Department) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Department) ProtoMessage() {}
-
-func (x *Department) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Department.ProtoReflect.Descriptor instead.
-func (*Department) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *Department) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *Department) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *Department) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *Department) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-type State struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *State) Reset() {
-	*x = State{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *State) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*State) ProtoMessage() {}
-
-func (x *State) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use State.ProtoReflect.Descriptor instead.
-func (*State) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *State) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *State) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *State) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type DictionaryServiceData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DictionaryServiceData) Reset() {
-	*x = DictionaryServiceData{}
-	mi := &file_protobuf_ebook_model_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DictionaryServiceData) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DictionaryServiceData) ProtoMessage() {}
-
-func (x *DictionaryServiceData) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_model_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DictionaryServiceData.ProtoReflect.Descriptor instead.
-func (*DictionaryServiceData) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_model_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *DictionaryServiceData) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *DictionaryServiceData) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *DictionaryServiceData) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
 }
 
 var File_protobuf_ebook_model_proto protoreflect.FileDescriptor
 
 const file_protobuf_ebook_model_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotobuf/ebook_model.proto\x12\x05ebook\"\xaa\x05\n" +
-	"\x05Ebook\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
-	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12J\n" +
-	"\x13bibliographic_level\x18\x04 \x01(\v2\x19.ebook.BibliographicLevelR\x12bibliographicLevel\x12A\n" +
-	"\x10type_description\x18\x05 \x01(\v2\x16.ebook.TypeDescriptionR\x0ftypeDescription\x12(\n" +
-	"\acatalog\x18\x06 \x01(\v2\x0e.ebook.CatalogR\acatalog\x123\n" +
-	"\tplacement\x18\a \x01(\v2\x15.ebook.EbookPlacementR\tplacement\x12*\n" +
-	"\x06format\x18\b \x01(\v2\x12.ebook.EbookFormatR\x06format\x12,\n" +
-	"\asources\x18\t \x03(\v2\x12.ebook.EbookSourceR\asources\x12<\n" +
+	"\x1aprotobuf/ebook_model.proto\x12\x05ebook\x1a\x1fprotobuf/dictionary_model.proto\"\xe3\x03\n" +
+	"\n" +
+	"EbookBrief\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
+	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12J\n" +
+	"\x13bibliographic_level\x18\x03 \x01(\v2\x19.ebook.BibliographicLevelR\x12bibliographicLevel\x12A\n" +
+	"\x10type_description\x18\x04 \x01(\v2\x16.ebook.TypeDescriptionR\x0ftypeDescription\x12\x10\n" +
+	"\x03krv\x18\x05 \x01(\bR\x03krv\x12(\n" +
+	"\acatalog\x18\x06 \x01(\v2\x0e.ebook.CatalogR\acatalog\x12\x16\n" +
+	"\x06author\x18\a \x01(\tR\x06author\x12\x14\n" +
+	"\x05title\x18\b \x01(\tR\x05title\x12'\n" +
+	"\asources\x18\t \x03(\v2\r.ebook.SourceR\asources\x127\n" +
 	"\rservice_notes\x18\n" +
-	" \x03(\v2\x17.ebook.EbookServiceNoteR\fserviceNotes\x127\n" +
-	"\vauthor_mark\x18\v \x01(\v2\x16.ebook.EbookAuthorMarkR\n" +
-	"authorMark\x12\x10\n" +
-	"\x03krv\x18\f \x01(\bR\x03krv\x12!\n" +
-	"\x03udk\x18\r \x03(\v2\x0f.ebook.EbookUdkR\x03udk\x12%\n" +
-	"\x05bbk_m\x18\x0e \x03(\v2\x10.ebook.EbookBbkMR\x04bbkM\x12%\n" +
-	"\x05bbk_n\x18\x0f \x03(\v2\x10.ebook.EbookBbkNR\x04bbkN\x12!\n" +
-	"\x03inv\x18\x10 \x03(\v2\x0f.ebook.EbookInvR\x03inv\"m\n" +
-	"\x12BibliographicLevel\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1f\n" +
-	"\vtype_ebooks\x18\x04 \x01(\tR\n" +
-	"typeEbooks\"I\n" +
-	"\x0fTypeDescription\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"A\n" +
-	"\aCatalog\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\".\n" +
-	"\x0eEbookPlacement\x12\x1c\n" +
-	"\tplacement\x18\x01 \x01(\x03R\tplacement\"%\n" +
-	"\vEbookFormat\x12\x16\n" +
-	"\x06format\x18\x01 \x01(\tR\x06format\"2\n" +
-	"\x0fEbookAuthorMark\x12\x1f\n" +
+	" \x03(\v2\x12.ebook.ServiceNoteR\fserviceNotes\x122\n" +
+	"\vauthor_mark\x18\v \x01(\v2\x11.ebook.AuthorMarkR\n" +
+	"authorMark\x12\x19\n" +
+	"\br_cipher\x18\f \x01(\tR\arCipher\"\xbb\x02\n" +
+	"\tEbookCard\x12#\n" +
+	"\rvolume_number\x18\x01 \x01(\x03R\fvolumeNumber\x12\x16\n" +
+	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x13\n" +
+	"\x05r_avt\x18\x04 \x01(\tR\x04rAvt\x12\x12\n" +
+	"\x04main\x18\x05 \x01(\tR\x04main\x12\x19\n" +
+	"\br_cipher\x18\x06 \x01(\tR\arCipher\x122\n" +
+	"\vauthor_mark\x18\a \x01(\v2\x11.ebook.AuthorMarkR\n" +
+	"authorMark\x12+\n" +
+	"\blanguage\x18\b \x01(\v2\x0f.ebook.LanguageR\blanguage\x12\x18\n" +
+	"\aindexes\x18\t \x03(\tR\aindexes\x12\x1c\n" +
+	"\x03inv\x18\n" +
+	" \x03(\v2\n" +
+	".ebook.InvR\x03inv\"-\n" +
+	"\n" +
+	"AuthorMark\x12\x1f\n" +
 	"\vauthor_mark\x18\x01 \x01(\tR\n" +
-	"authorMark\"~\n" +
-	"\x10EbookServiceNote\x12\x0e\n" +
+	"authorMark\"y\n" +
+	"\vServiceNote\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12?\n" +
-	"\fservice_data\x18\x03 \x01(\v2\x1c.ebook.DictionaryServiceDataR\vserviceData\"\xc5\x01\n" +
-	"\bEbookInv\x12\x0e\n" +
+	"\fservice_data\x18\x03 \x01(\v2\x1c.ebook.DictionaryServiceDataR\vserviceData\"\xc0\x01\n" +
+	"\x03Inv\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x1d\n" +
 	"\n" +
@@ -1143,38 +853,38 @@ const file_protobuf_ebook_model_proto_rawDesc = "" +
 	"\n" +
 	"department\x18\x05 \x01(\v2\x11.ebook.DepartmentR\n" +
 	"department\x12\"\n" +
-	"\x05state\x18\x06 \x01(\v2\f.ebook.StateR\x05state\"N\n" +
-	"\vEbookSource\x12\x0e\n" +
+	"\x05state\x18\x06 \x01(\v2\f.ebook.StateR\x05state\"\xce\x03\n" +
+	"\x06Source\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\"K\n" +
-	"\bEbookUdk\x12\x0e\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
+	"\x04data\x18\x04 \x01(\tR\x04data\x12&\n" +
+	"\x0eresponsibility\x18\x05 \x01(\tR\x0eresponsibility\x12\x18\n" +
+	"\aauthors\x18\x06 \x01(\tR\aauthors\x12!\n" +
+	"\fdata_edition\x18\a \x01(\tR\vdataEdition\x12\x19\n" +
+	"\bdata_out\x18\b \x01(\tR\adataOut\x12+\n" +
+	"\x11special_character\x18\t \x01(\tR\x10specialCharacter\x123\n" +
+	"\x15composite_information\x18\n" +
+	" \x01(\tR\x14compositeInformation\x12\x16\n" +
+	"\x06series\x18\v \x01(\tR\x06series\x12\x12\n" +
+	"\x04isbn\x18\f \x01(\tR\x04isbn\x12\x12\n" +
+	"\x04issn\x18\r \x01(\tR\x04issn\x12#\n" +
+	"\rparallel_name\x18\x0e \x01(\tR\fparallelName\x12\x12\n" +
+	"\x04year\x18\x0f \x01(\tR\x04year\x12\x14\n" +
+	"\x05pages\x18\x10 \x01(\tR\x05pages\"\x93\x01\n" +
+	"\bLanguage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
-	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x14\n" +
-	"\x05index\x18\x03 \x01(\tR\x05index\"L\n" +
-	"\tEbookBbkM\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
-	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x14\n" +
-	"\x05index\x18\x03 \x01(\tR\x05index\"d\n" +
-	"\tEbookBbkN\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
-	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12\x14\n" +
-	"\x05index\x18\x03 \x01(\tR\x05index\x12\x16\n" +
-	"\x06source\x18\x04 \x01(\tR\x06source\"X\n" +
+	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x125\n" +
+	"\blanguage\x18\x03 \x01(\v2\x19.ebook.DictionaryLanguageR\blanguage\x12%\n" +
+	"\x0esource_rewrite\x18\x04 \x01(\tR\rsourceRewrite\"j\n" +
+	"\x06Paging\x12\x16\n" +
+	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x18\n" +
+	"\asortKey\x18\x03 \x01(\tR\asortKey\x12\x18\n" +
+	"\asortVal\x18\x04 \x01(\x05R\asortVal\"'\n" +
 	"\n" +
-	"Department\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\"?\n" +
-	"\x05State\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"O\n" +
-	"\x15DictionaryServiceData\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04nameB\x15Z\x13./protobuf;protobufb\x06proto3"
+	"InvFilters\x12\x19\n" +
+	"\bebook_id\x18\x01 \x01(\x03R\aebookIdB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_ebook_model_proto_rawDescOnce sync.Once
@@ -1188,46 +898,44 @@ func file_protobuf_ebook_model_proto_rawDescGZIP() []byte {
 	return file_protobuf_ebook_model_proto_rawDescData
 }
 
-var file_protobuf_ebook_model_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_protobuf_ebook_model_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_protobuf_ebook_model_proto_goTypes = []any{
-	(*Ebook)(nil),                 // 0: ebook.Ebook
-	(*BibliographicLevel)(nil),    // 1: ebook.BibliographicLevel
-	(*TypeDescription)(nil),       // 2: ebook.TypeDescription
-	(*Catalog)(nil),               // 3: ebook.Catalog
-	(*EbookPlacement)(nil),        // 4: ebook.EbookPlacement
-	(*EbookFormat)(nil),           // 5: ebook.EbookFormat
-	(*EbookAuthorMark)(nil),       // 6: ebook.EbookAuthorMark
-	(*EbookServiceNote)(nil),      // 7: ebook.EbookServiceNote
-	(*EbookInv)(nil),              // 8: ebook.EbookInv
-	(*EbookSource)(nil),           // 9: ebook.EbookSource
-	(*EbookUdk)(nil),              // 10: ebook.EbookUdk
-	(*EbookBbkM)(nil),             // 11: ebook.EbookBbkM
-	(*EbookBbkN)(nil),             // 12: ebook.EbookBbkN
+	(*EbookBrief)(nil),            // 0: ebook.EbookBrief
+	(*EbookCard)(nil),             // 1: ebook.EbookCard
+	(*AuthorMark)(nil),            // 2: ebook.AuthorMark
+	(*ServiceNote)(nil),           // 3: ebook.ServiceNote
+	(*Inv)(nil),                   // 4: ebook.Inv
+	(*Source)(nil),                // 5: ebook.Source
+	(*Language)(nil),              // 6: ebook.Language
+	(*Paging)(nil),                // 7: ebook.Paging
+	(*InvFilters)(nil),            // 8: ebook.InvFilters
+	(*BibliographicLevel)(nil),    // 9: ebook.BibliographicLevel
+	(*TypeDescription)(nil),       // 10: ebook.TypeDescription
+	(*Catalog)(nil),               // 11: ebook.Catalog
+	(*DictionaryServiceData)(nil), // 12: ebook.DictionaryServiceData
 	(*Department)(nil),            // 13: ebook.Department
 	(*State)(nil),                 // 14: ebook.State
-	(*DictionaryServiceData)(nil), // 15: ebook.DictionaryServiceData
+	(*DictionaryLanguage)(nil),    // 15: ebook.DictionaryLanguage
 }
 var file_protobuf_ebook_model_proto_depIdxs = []int32{
-	1,  // 0: ebook.Ebook.bibliographic_level:type_name -> ebook.BibliographicLevel
-	2,  // 1: ebook.Ebook.type_description:type_name -> ebook.TypeDescription
-	3,  // 2: ebook.Ebook.catalog:type_name -> ebook.Catalog
-	4,  // 3: ebook.Ebook.placement:type_name -> ebook.EbookPlacement
-	5,  // 4: ebook.Ebook.format:type_name -> ebook.EbookFormat
-	9,  // 5: ebook.Ebook.sources:type_name -> ebook.EbookSource
-	7,  // 6: ebook.Ebook.service_notes:type_name -> ebook.EbookServiceNote
-	6,  // 7: ebook.Ebook.author_mark:type_name -> ebook.EbookAuthorMark
-	10, // 8: ebook.Ebook.udk:type_name -> ebook.EbookUdk
-	11, // 9: ebook.Ebook.bbk_m:type_name -> ebook.EbookBbkM
-	12, // 10: ebook.Ebook.bbk_n:type_name -> ebook.EbookBbkN
-	8,  // 11: ebook.Ebook.inv:type_name -> ebook.EbookInv
-	15, // 12: ebook.EbookServiceNote.service_data:type_name -> ebook.DictionaryServiceData
-	13, // 13: ebook.EbookInv.department:type_name -> ebook.Department
-	14, // 14: ebook.EbookInv.state:type_name -> ebook.State
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	9,  // 0: ebook.EbookBrief.bibliographic_level:type_name -> ebook.BibliographicLevel
+	10, // 1: ebook.EbookBrief.type_description:type_name -> ebook.TypeDescription
+	11, // 2: ebook.EbookBrief.catalog:type_name -> ebook.Catalog
+	5,  // 3: ebook.EbookBrief.sources:type_name -> ebook.Source
+	3,  // 4: ebook.EbookBrief.service_notes:type_name -> ebook.ServiceNote
+	2,  // 5: ebook.EbookBrief.author_mark:type_name -> ebook.AuthorMark
+	2,  // 6: ebook.EbookCard.author_mark:type_name -> ebook.AuthorMark
+	6,  // 7: ebook.EbookCard.language:type_name -> ebook.Language
+	4,  // 8: ebook.EbookCard.inv:type_name -> ebook.Inv
+	12, // 9: ebook.ServiceNote.service_data:type_name -> ebook.DictionaryServiceData
+	13, // 10: ebook.Inv.department:type_name -> ebook.Department
+	14, // 11: ebook.Inv.state:type_name -> ebook.State
+	15, // 12: ebook.Language.language:type_name -> ebook.DictionaryLanguage
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_ebook_model_proto_init() }
@@ -1235,13 +943,14 @@ func file_protobuf_ebook_model_proto_init() {
 	if File_protobuf_ebook_model_proto != nil {
 		return
 	}
+	file_protobuf_dictionary_model_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_ebook_model_proto_rawDesc), len(file_protobuf_ebook_model_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

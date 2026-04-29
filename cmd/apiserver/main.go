@@ -65,6 +65,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer func() {
+		if err := orderGrpcLient.Close(); err != nil {
+			log.Printf("[WARN] failed to close order grpc client: %v", err)
+		}
+	}()
 	log.Printf("[INFO] starting order grpc listener")
 	readerGrpcLient, err := readerCli.NewReaderClient(&readerModel.ConnectionConfig{
 		Address:  opts.ReaderConfig.GrpcAddress,
@@ -74,6 +79,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer func() {
+		if err := readerGrpcLient.Close(); err != nil {
+			log.Printf("[WARN] failed to close reader grpc client: %v", err)
+		}
+	}()
 	log.Printf("[INFO] starting reader grpc listener")
 	ebookGrpcLient, err := ebookCli.NewEbookClient(&ebookModel.ConnectionConfig{
 		Address:  opts.EbookConfig.GrpcAddress,
@@ -83,6 +93,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer func() {
+		if err := ebookGrpcLient.Close(); err != nil {
+			log.Printf("[WARN] failed to close ebook grpc client: %v", err)
+		}
+	}()
 	log.Printf("[INFO] starting ebook grpc listener")
 	ssoGrpcClient, err := ssoCli.NewSsoClient(&ssoModel.ConnectionConfig{
 		Address:  opts.SsoConfig.GrpcAddress,
@@ -92,6 +107,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer func() {
+		if err := ssoGrpcClient.Close(); err != nil {
+			log.Printf("[WARN] failed to close sso grpc client: %v", err)
+		}
+	}()
 	log.Printf("[INFO] starting sso grpc listener")
 	orderMan := order.NewOrderManager(orderGrpcLient.Order(), readerGrpcLient.ReaderSvc(), ssoGrpcClient.User(), ebookGrpcLient.EbookSvc())
 	dictMan := dictionary.NewManager(orderGrpcLient.Dictionary())

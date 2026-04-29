@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/web-rabis/ebook-client/model"
+	"github.com/web-rabis/ebook-client/model/ebook"
 )
 
 type Base interface {
@@ -14,6 +15,7 @@ type Base interface {
 
 //go:generate go run github.com/vektra/mockery/v2@v2.53 --name EbookService
 type EbookService interface {
-	EbookById(ctx context.Context, id int64) (*model.Ebook, error)
-	EbookInventory(ctx context.Context, id int64) ([]*model.EbookInv, error)
+	EbookBriefById(ctx context.Context, id int64) (*ebook.EbookBrief, error)
+	EbookCardById(ctx context.Context, id int64) (*ebook.EbookCard, error)
+	InvList(ctx context.Context, filters *model.InvFilters, paging *model.Paging) (int64, []*ebook.Inv, error)
 }

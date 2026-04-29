@@ -19,16 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EbookSvc_EbookById_FullMethodName      = "/ebook.EbookSvc/EbookById"
-	EbookSvc_EbookInventory_FullMethodName = "/ebook.EbookSvc/EbookInventory"
+	EbookSvc_EbookBriefById_FullMethodName = "/ebook.EbookSvc/EbookBriefById"
+	EbookSvc_EbookCardById_FullMethodName  = "/ebook.EbookSvc/EbookCardById"
+	EbookSvc_InvList_FullMethodName        = "/ebook.EbookSvc/InvList"
 )
 
 // EbookSvcClient is the client API for EbookSvc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EbookSvcClient interface {
-	EbookById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*Ebook, error)
-	EbookInventory(ctx context.Context, in *EbookInventoryRequest, opts ...grpc.CallOption) (*EbookInventoryResponse, error)
+	EbookBriefById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookBrief, error)
+	EbookCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookCard, error)
+	InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error)
 }
 
 type ebookSvcClient struct {
@@ -39,20 +41,30 @@ func NewEbookSvcClient(cc grpc.ClientConnInterface) EbookSvcClient {
 	return &ebookSvcClient{cc}
 }
 
-func (c *ebookSvcClient) EbookById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*Ebook, error) {
+func (c *ebookSvcClient) EbookBriefById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookBrief, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Ebook)
-	err := c.cc.Invoke(ctx, EbookSvc_EbookById_FullMethodName, in, out, cOpts...)
+	out := new(EbookBrief)
+	err := c.cc.Invoke(ctx, EbookSvc_EbookBriefById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ebookSvcClient) EbookInventory(ctx context.Context, in *EbookInventoryRequest, opts ...grpc.CallOption) (*EbookInventoryResponse, error) {
+func (c *ebookSvcClient) EbookCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookCard, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EbookInventoryResponse)
-	err := c.cc.Invoke(ctx, EbookSvc_EbookInventory_FullMethodName, in, out, cOpts...)
+	out := new(EbookCard)
+	err := c.cc.Invoke(ctx, EbookSvc_EbookCardById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ebookSvcClient) InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InvListResponse)
+	err := c.cc.Invoke(ctx, EbookSvc_InvList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +75,9 @@ func (c *ebookSvcClient) EbookInventory(ctx context.Context, in *EbookInventoryR
 // All implementations must embed UnimplementedEbookSvcServer
 // for forward compatibility.
 type EbookSvcServer interface {
-	EbookById(context.Context, *EntityByIdRequest) (*Ebook, error)
-	EbookInventory(context.Context, *EbookInventoryRequest) (*EbookInventoryResponse, error)
+	EbookBriefById(context.Context, *EntityByIdRequest) (*EbookBrief, error)
+	EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error)
+	InvList(context.Context, *InvListRequest) (*InvListResponse, error)
 	mustEmbedUnimplementedEbookSvcServer()
 }
 
@@ -75,11 +88,14 @@ type EbookSvcServer interface {
 // pointer dereference when methods are called.
 type UnimplementedEbookSvcServer struct{}
 
-func (UnimplementedEbookSvcServer) EbookById(context.Context, *EntityByIdRequest) (*Ebook, error) {
-	return nil, status.Error(codes.Unimplemented, "method EbookById not implemented")
+func (UnimplementedEbookSvcServer) EbookBriefById(context.Context, *EntityByIdRequest) (*EbookBrief, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookBriefById not implemented")
 }
-func (UnimplementedEbookSvcServer) EbookInventory(context.Context, *EbookInventoryRequest) (*EbookInventoryResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method EbookInventory not implemented")
+func (UnimplementedEbookSvcServer) EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookCardById not implemented")
+}
+func (UnimplementedEbookSvcServer) InvList(context.Context, *InvListRequest) (*InvListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InvList not implemented")
 }
 func (UnimplementedEbookSvcServer) mustEmbedUnimplementedEbookSvcServer() {}
 func (UnimplementedEbookSvcServer) testEmbeddedByValue()                  {}
@@ -102,38 +118,56 @@ func RegisterEbookSvcServer(s grpc.ServiceRegistrar, srv EbookSvcServer) {
 	s.RegisterService(&EbookSvc_ServiceDesc, srv)
 }
 
-func _EbookSvc_EbookById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _EbookSvc_EbookBriefById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EntityByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EbookSvcServer).EbookById(ctx, in)
+		return srv.(EbookSvcServer).EbookBriefById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EbookSvc_EbookById_FullMethodName,
+		FullMethod: EbookSvc_EbookBriefById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EbookSvcServer).EbookById(ctx, req.(*EntityByIdRequest))
+		return srv.(EbookSvcServer).EbookBriefById(ctx, req.(*EntityByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EbookSvc_EbookInventory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EbookInventoryRequest)
+func _EbookSvc_EbookCardById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EbookSvcServer).EbookInventory(ctx, in)
+		return srv.(EbookSvcServer).EbookCardById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EbookSvc_EbookInventory_FullMethodName,
+		FullMethod: EbookSvc_EbookCardById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EbookSvcServer).EbookInventory(ctx, req.(*EbookInventoryRequest))
+		return srv.(EbookSvcServer).EbookCardById(ctx, req.(*EntityByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EbookSvc_InvList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InvListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookSvcServer).InvList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookSvc_InvList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookSvcServer).InvList(ctx, req.(*InvListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,12 +180,16 @@ var EbookSvc_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EbookSvcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "EbookById",
-			Handler:    _EbookSvc_EbookById_Handler,
+			MethodName: "EbookBriefById",
+			Handler:    _EbookSvc_EbookBriefById_Handler,
 		},
 		{
-			MethodName: "EbookInventory",
-			Handler:    _EbookSvc_EbookInventory_Handler,
+			MethodName: "EbookCardById",
+			Handler:    _EbookSvc_EbookCardById_Handler,
+		},
+		{
+			MethodName: "InvList",
+			Handler:    _EbookSvc_InvList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

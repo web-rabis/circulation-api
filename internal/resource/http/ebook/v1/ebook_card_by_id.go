@@ -11,7 +11,7 @@ import (
 	"github.com/web-rabis/httperrors"
 )
 
-func (res *EbookResource) ebookInventory(w http.ResponseWriter, r *http.Request) {
+func (res *EbookResource) ebookCardById(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if id == "" {
 		_ = render.Render(w, r, httperrors.BadRequest(errors.New("id must not be empty")))
@@ -22,10 +22,10 @@ func (res *EbookResource) ebookInventory(w http.ResponseWriter, r *http.Request)
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return
 	}
-	inventories, err := res.ebookMan.EbookInventory(r.Context(), idInt)
+	ebookCard, err := res.ebookMan.EbookCardById(r.Context(), idInt)
 	if err != nil {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return
 	}
-	render.JSON(w, r, inventories)
+	render.JSON(w, r, ebookCard)
 }

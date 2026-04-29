@@ -5,6 +5,7 @@ import (
 
 	"github.com/web-rabis/ebook-client/client"
 	"github.com/web-rabis/ebook-client/model"
+	"github.com/web-rabis/ebook-client/model/ebook"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
@@ -22,21 +23,32 @@ func NewEbookServiceClient(client protobuf.EbookSvcClient) client.EbookService {
 		client: client,
 	}
 }
-func (s *EbookService) EbookById(ctx context.Context, id int64) (*model.Ebook, error) {
-	e, err := s.client.EbookById(ctx, &protobuf.EntityByIdRequest{Id: id})
+func (s *EbookService) EbookBriefById(ctx context.Context, id int64) (*ebook.EbookBrief, error) {
+	e, err := s.client.EbookBriefById(ctx, &protobuf.EntityByIdRequest{Id: id})
 	switch status.Code(err) {
 	case codes.OK:
-		return model.NewEbookFromProto(e), nil
+		return ebook.NewEbookBriefProto(e), nil
 	default:
 		return nil, err
 	}
 }
-func (s *EbookService) EbookInventory(ctx context.Context, id int64) ([]*model.EbookInv, error) {
-	response, err := s.client.EbookInventory(ctx, &protobuf.EbookInventoryRequest{Id: id})
+func (s *EbookService) EbookCardById(ctx context.Context, id int64) (*ebook.EbookCard, error) {
+	response, err := s.client.EbookCardById(ctx, &protobuf.EntityByIdRequest{Id: id})
 	switch status.Code(err) {
 	case codes.OK:
-		return model.NewEbookInvsFromProto(response.Inventories), nil
-	default:
-		return nil, err
+		return ebook.NewEbookCardFromProto(response), nil
 	}
+	return nil, err
+}
+func (s *EbookService) InvList(ctx context.Context, filters *model.InvFilters, paging *model.Paging) (int64, []*ebook.Inv, error) {
+	request := &protobuf.InvListRequest{
+		Filters: filters.ToProto(),
+		Paging:  paging.ToProto(),
+	}
+	response, err := s.client.InvList(ctx, request)
+	switch status.Code(err) {
+	case codes.OK:
+		return response.Count, ebook.NewInvListFromProto(response.Result), nil
+	}
+	return 0, nil, err
 }
