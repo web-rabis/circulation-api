@@ -5,6 +5,8 @@ import (
 
 	ebookClient "github.com/web-rabis/ebook-client/client"
 	ebookModel "github.com/web-rabis/ebook-client/model/ebook"
+	orderClient "github.com/web-rabis/order-client/client"
+	orderModel "github.com/web-rabis/order-client/model"
 )
 
 type IManager interface {
@@ -13,9 +15,10 @@ type IManager interface {
 }
 type Manager struct {
 	ebookCl ebookClient.EbookService
+	orderCl orderClient.OrderService
 }
 
-func NewManager(ebookCl ebookClient.EbookService) *Manager {
+func NewManager(ebookCl ebookClient.EbookService, orderCl orderClient.OrderService) *Manager {
 	return &Manager{
 		ebookCl: ebookCl,
 	}
@@ -24,7 +27,41 @@ func (m *Manager) EbookBriefById(ctx context.Context, id int64) (*ebookModel.Ebo
 	return m.ebookCl.EbookBriefById(ctx, id)
 }
 func (m *Manager) EbookCardById(ctx context.Context, id int64) (*ebookModel.EbookCard, error) {
-	return m.ebookCl.EbookCardById(ctx, id)
+	card, err := m.ebookCl.EbookCardById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	states := []string{
+		orderModel.OrderStateInHands,
+		orderModel.OrderStateOrdered,
+		orderModel.OrderStateInStorage,
+		orderModel.OrderStateInReadingHall,
+		orderModel.OrderStatePostponed,
+		orderModel.OrderStateInAuxiliaryFund,
+	}
+	filters := &orderModel.OrderFilters{
+		EbookId: id,
+		States:  states,
+	}
+	count, orders, err := m.orderCl.List(ctx, nil, filters)
+	if err == nil && count > 0 {
+		var inv []*ebookModel.Inv
+		for _, cinv := range card.Inv {
+			var invFounded bool
+			for _, order := range orders {
+				if order.InvNumber.Id == cinv.Id {
+					invFounded = true
+					break
+				}
+			}
+			if !invFounded {
+				inv = append(inv, cinv)
+			}
+		}
+		card.Inv = inv
+	}
+
+	return card, nil
 }
 
 //func (m *Manager) getFreeCopies(ctx context.Context, e *ebook.Ebook) (int64, error) {
