@@ -21,6 +21,7 @@ type Manager struct {
 func NewManager(ebookCl ebookClient.EbookService, orderCl orderClient.OrderService) *Manager {
 	return &Manager{
 		ebookCl: ebookCl,
+		orderCl: orderCl,
 	}
 }
 func (m *Manager) EbookBriefById(ctx context.Context, id int64) (*ebookModel.EbookBrief, error) {
