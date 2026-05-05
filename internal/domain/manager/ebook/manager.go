@@ -50,7 +50,7 @@ func (m *Manager) EbookCardById(ctx context.Context, id int64) (*ebookModel.Eboo
 		for _, cinv := range card.Inv {
 			var invFounded bool
 			for _, order := range orders {
-				if order.InvNumber.Id == cinv.Id {
+				if order.InvNumber != nil && order.InvNumber.Id == cinv.Id {
 					invFounded = true
 					break
 				}
