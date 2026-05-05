@@ -115,7 +115,7 @@ func main() {
 	log.Printf("[INFO] starting sso grpc listener")
 	orderMan := order.NewOrderManager(orderGrpcLient.Order(), readerGrpcLient.ReaderSvc(), ssoGrpcClient.User(), ebookGrpcLient.EbookSvc())
 	dictMan := dictionary.NewManager(orderGrpcLient.Dictionary())
-	ebookMan := ebook.NewManager(ebookGrpcLient.EbookSvc())
+	ebookMan := ebook.NewManager(ebookGrpcLient.EbookSvc(), orderGrpcLient.Order())
 
 	servers, serversCtx := errgroup.WithContext(appCtx)
 
