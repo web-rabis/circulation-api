@@ -64,7 +64,7 @@ func getStatuses(r *http.Request) []string {
 	var states []string
 	status := r.URL.Query().Get("status")
 	switch status {
-	case orderModel.OrderStateInHands, orderModel.OrderStateOrdered, orderModel.OrderStateInStorage, orderModel.OrderStateInReadingHall, orderModel.OrderStatePostponed, orderModel.OrderStateRejected, orderModel.OrderStateInAuxiliaryFund, orderModel.OrderStateReaderReturned, orderModel.OrderStateReturnToStorage:
+	case orderModel.OrderStateInHands, orderModel.OrderStateOrdered, orderModel.OrderStateInStorage, orderModel.OrderStateInReadingHall, orderModel.OrderStatePostponed, orderModel.OrderStateRejected, orderModel.OrderStateInAuxiliaryFund, orderModel.OrderStateReaderReturned, orderModel.OrderStateReturnToStorage, orderModel.OrderStateProcessed:
 		states = append(states, status)
 	default:
 		states = []string{
@@ -77,6 +77,7 @@ func getStatuses(r *http.Request) []string {
 			orderModel.OrderStateInAuxiliaryFund,
 			orderModel.OrderStateReaderReturned,
 			orderModel.OrderStateReturnToStorage,
+			orderModel.OrderStateProcessed,
 		}
 	}
 	return states
