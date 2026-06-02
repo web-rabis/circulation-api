@@ -27,6 +27,8 @@ type OrderService interface {
 	SendToPf(ctx context.Context, ids []int64, user *model.User) error
 	ReturnToStorage(ctx context.Context, ids []int64, user *model.User) error
 	StateCounts(ctx context.Context, filters *model.StateCountFilters) ([]*model.StateCount, error)
+	CreateOnDemanIssue(ctx context.Context, ticketNumber, ebookId, departmentId, invId int64, user *model.User) (int64, error)
+	Audit(ctx context.Context, orderId int64) ([]*model.OrderAudit, error)
 }
 
 //go:generate go run github.com/vektra/mockery/v2@v2.53 --name DictionaryService

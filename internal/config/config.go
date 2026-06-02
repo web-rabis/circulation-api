@@ -43,6 +43,9 @@ type EbookConfig struct {
 type SsoConfig struct {
 	GrpcAddress string `long:"sso-grpc-address" env:"SSO_GRPC_ADDRESS" description:"Sso Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
 }
+type SearcherConfig struct {
+	GrpcAddress string `long:"searcher-grpc-address" env:"SEARCHER_GRPC_ADDRESS" description:"Searcher Grpc Address (format: :4000|127.0.0.1:4000)" required:"false" default:":4000"`
+}
 
 func Parse(c interface{}) interface{} {
 	p := flags.NewParser(c, flags.Default)

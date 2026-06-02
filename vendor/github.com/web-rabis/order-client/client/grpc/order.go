@@ -177,3 +177,33 @@ func (c *OrderService) StateCounts(ctx context.Context, filters *model.StateCoun
 		return nil, err
 	}
 }
+func (c *OrderService) CreateOnDemanIssue(ctx context.Context, ticketNumber, ebookId, departmentId, invId int64, user *model.User) (int64, error) {
+	request := &protobuf.CreateOnDemanIssueRequest{
+		TicketNumber: ticketNumber,
+		EbookId:      ebookId,
+		DepartmentId: departmentId,
+		InvId:        invId,
+		User:         user.ToProto(),
+	}
+	response, err := c.client.CreateOnDemanIssue(ctx, request)
+	switch status.Code(err) {
+	case codes.OK:
+		return response.OrderId, nil
+	default:
+		return 0, err
+	}
+}
+func (c *OrderService) Audit(ctx context.Context, orderId int64) ([]*model.OrderAudit, error) {
+	request := &protobuf.OrderAuditRequest{OrderId: orderId}
+	response, err := c.client.Audit(ctx, request)
+	switch status.Code(err) {
+	case codes.OK:
+		records := make([]*model.OrderAudit, len(response.Result))
+		for i, a := range response.Result {
+			records[i] = model.NewAuditRecordFromProto(a)
+		}
+		return records, nil
+	default:
+		return nil, err
+	}
+}

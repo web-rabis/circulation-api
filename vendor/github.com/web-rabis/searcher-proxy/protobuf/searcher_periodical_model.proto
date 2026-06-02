@@ -1,0 +1,33 @@
+syntax = "proto3";
+package searcher_proxy;
+option go_package = "./protobuf;protobuf";
+import "google/protobuf/timestamp.proto";
+import "protobuf/searcher_dictionary_model.proto";
+
+message Periodical {
+    int64 id = 1;
+    int64 nkr = 2;
+    string type = 3;
+    string title = 4;
+    string number = 5;
+    string index = 6;
+    string data_responsibility = 7;
+    string language = 8;
+    int64 year_count = 9;
+    string industry = 10;
+    string place_edition = 11;
+    string publishing = 12;
+    string year_edition = 13;
+}
+message PeriodicalNumber {
+    int64 id = 1;
+    int64 periodical_id = 2;
+    string number = 3;
+    google.protobuf.Timestamp number_date = 4;
+    google.protobuf.Timestamp receipt_date  = 5;
+    int64 count = 6;
+    double price = 7;
+    string path = 8;
+  DictionaryPeriodicalSourceType type = 9;
+    Department department = 10;
+}

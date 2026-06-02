@@ -23,11 +23,21 @@ func NewEbookServiceClient(client protobuf.EbookSvcClient) client.EbookService {
 		client: client,
 	}
 }
+func (s *EbookService) EbookById(ctx context.Context, id int64, withCard bool) (*ebook.Ebook, error) {
+	e, err := s.client.EbookById(ctx, &protobuf.EbookByIdRequest{Id: id, WithCard: withCard})
+	switch status.Code(err) {
+	case codes.OK:
+		return ebook.NewEbookFromProto(e), nil
+	default:
+		return nil, err
+	}
+}
+
 func (s *EbookService) EbookBriefById(ctx context.Context, id int64) (*ebook.EbookBrief, error) {
 	e, err := s.client.EbookBriefById(ctx, &protobuf.EntityByIdRequest{Id: id})
 	switch status.Code(err) {
 	case codes.OK:
-		return ebook.NewEbookBriefProto(e), nil
+		return ebook.NewEbookBriefFromProto(e), nil
 	default:
 		return nil, err
 	}

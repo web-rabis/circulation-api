@@ -578,6 +578,90 @@ func (x *User) GetDepartment() *Department {
 	return nil
 }
 
+type OrderAudit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderId       int64                  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	AuditDate     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=audit_date,json=auditDate,proto3" json:"audit_date,omitempty"`
+	State         *State                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
+	UserId        int64                  `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Department    *Department            `protobuf:"bytes,7,opt,name=department,proto3" json:"department,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderAudit) Reset() {
+	*x = OrderAudit{}
+	mi := &file_protobuf_model_order_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderAudit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderAudit) ProtoMessage() {}
+
+func (x *OrderAudit) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_order_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderAudit.ProtoReflect.Descriptor instead.
+func (*OrderAudit) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_order_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *OrderAudit) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *OrderAudit) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *OrderAudit) GetAuditDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AuditDate
+	}
+	return nil
+}
+
+func (x *OrderAudit) GetState() *State {
+	if x != nil {
+		return x.State
+	}
+	return nil
+}
+
+func (x *OrderAudit) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *OrderAudit) GetDepartment() *Department {
+	if x != nil {
+		return x.Department
+	}
+	return nil
+}
+
 var File_protobuf_model_order_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_order_proto_rawDesc = "" +
@@ -640,6 +724,17 @@ const file_protobuf_model_order_proto_rawDesc = "" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x121\n" +
 	"\n" +
 	"department\x18\x06 \x01(\v2\x11.order.DepartmentR\n" +
+	"department\"\xe2\x01\n" +
+	"\n" +
+	"OrderAudit\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\x03R\aorderId\x129\n" +
+	"\n" +
+	"audit_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tauditDate\x12\"\n" +
+	"\x05state\x18\x05 \x01(\v2\f.order.StateR\x05state\x12\x17\n" +
+	"\auser_id\x18\x06 \x01(\x03R\x06userId\x121\n" +
+	"\n" +
+	"department\x18\a \x01(\v2\x11.order.DepartmentR\n" +
 	"departmentB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
@@ -654,7 +749,7 @@ func file_protobuf_model_order_proto_rawDescGZIP() []byte {
 	return file_protobuf_model_order_proto_rawDescData
 }
 
-var file_protobuf_model_order_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_protobuf_model_order_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_protobuf_model_order_proto_goTypes = []any{
 	(*Order)(nil),                 // 0: order.Order
 	(*StateCount)(nil),            // 1: order.StateCount
@@ -663,33 +758,37 @@ var file_protobuf_model_order_proto_goTypes = []any{
 	(*StateCountFilters)(nil),     // 4: order.StateCountFilters
 	(*IssueOrder)(nil),            // 5: order.IssueOrder
 	(*User)(nil),                  // 6: order.User
-	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
-	(*Reader)(nil),                // 8: order.Reader
-	(*Ebook)(nil),                 // 9: order.Ebook
-	(*EbookInv)(nil),              // 10: order.EbookInv
-	(*Periodical)(nil),            // 11: order.Periodical
-	(*State)(nil),                 // 12: order.State
-	(*Department)(nil),            // 13: order.Department
-	(*ReasonRejection)(nil),       // 14: order.ReasonRejection
+	(*OrderAudit)(nil),            // 7: order.OrderAudit
+	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(*Reader)(nil),                // 9: order.Reader
+	(*Ebook)(nil),                 // 10: order.Ebook
+	(*EbookInv)(nil),              // 11: order.EbookInv
+	(*Periodical)(nil),            // 12: order.Periodical
+	(*State)(nil),                 // 13: order.State
+	(*Department)(nil),            // 14: order.Department
+	(*ReasonRejection)(nil),       // 15: order.ReasonRejection
 }
 var file_protobuf_model_order_proto_depIdxs = []int32{
-	7,  // 0: order.Order.created_at:type_name -> google.protobuf.Timestamp
-	7,  // 1: order.Order.updated_at:type_name -> google.protobuf.Timestamp
-	8,  // 2: order.Order.reader:type_name -> order.Reader
-	9,  // 3: order.Order.ebook:type_name -> order.Ebook
-	10, // 4: order.Order.inv_number:type_name -> order.EbookInv
-	11, // 5: order.Order.periodical:type_name -> order.Periodical
-	12, // 6: order.Order.state:type_name -> order.State
-	13, // 7: order.Order.department:type_name -> order.Department
-	13, // 8: order.Order.storage_department:type_name -> order.Department
-	14, // 9: order.Order.reason_rejection:type_name -> order.ReasonRejection
-	12, // 10: order.StateCount.state:type_name -> order.State
-	13, // 11: order.User.department:type_name -> order.Department
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	8,  // 0: order.Order.created_at:type_name -> google.protobuf.Timestamp
+	8,  // 1: order.Order.updated_at:type_name -> google.protobuf.Timestamp
+	9,  // 2: order.Order.reader:type_name -> order.Reader
+	10, // 3: order.Order.ebook:type_name -> order.Ebook
+	11, // 4: order.Order.inv_number:type_name -> order.EbookInv
+	12, // 5: order.Order.periodical:type_name -> order.Periodical
+	13, // 6: order.Order.state:type_name -> order.State
+	14, // 7: order.Order.department:type_name -> order.Department
+	14, // 8: order.Order.storage_department:type_name -> order.Department
+	15, // 9: order.Order.reason_rejection:type_name -> order.ReasonRejection
+	13, // 10: order.StateCount.state:type_name -> order.State
+	14, // 11: order.User.department:type_name -> order.Department
+	8,  // 12: order.OrderAudit.audit_date:type_name -> google.protobuf.Timestamp
+	13, // 13: order.OrderAudit.state:type_name -> order.State
+	14, // 14: order.OrderAudit.department:type_name -> order.Department
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_model_order_proto_init() }
@@ -707,7 +806,7 @@ func file_protobuf_model_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_model_order_proto_rawDesc), len(file_protobuf_model_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

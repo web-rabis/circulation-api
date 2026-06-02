@@ -19,7 +19,7 @@ type EbookBrief struct {
 	RCipher            string                         `json:"rCipher"`
 }
 
-func NewEbookBriefProto(e *protobuf.EbookBrief) *EbookBrief {
+func NewEbookBriefFromProto(e *protobuf.EbookBrief) *EbookBrief {
 	if e == nil {
 		return nil
 	}

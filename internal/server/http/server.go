@@ -6,18 +6,22 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
-	v1 "github.com/web-rabis/circulation-api/internal/resource/http/ebook/v1"
-	ssoClient "github.com/web-rabis/sso-client/client"
 
 	"github.com/web-rabis/circulation-api/internal/config"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/dictionary"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/reader"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/search"
 	"github.com/web-rabis/circulation-api/internal/resource/http"
-	v3 "github.com/web-rabis/circulation-api/internal/resource/http/dictionary/v1"
-	v2 "github.com/web-rabis/circulation-api/internal/resource/http/order/v1"
+	dictV1 "github.com/web-rabis/circulation-api/internal/resource/http/dictionary/v1"
+	ebookV1 "github.com/web-rabis/circulation-api/internal/resource/http/ebook/v1"
+	orderV1 "github.com/web-rabis/circulation-api/internal/resource/http/order/v1"
+	readerV1 "github.com/web-rabis/circulation-api/internal/resource/http/reader/v1"
+	searchV1 "github.com/web-rabis/circulation-api/internal/resource/http/search/v1"
 	cherver "github.com/web-rabis/servers/http"
+	ssoClient "github.com/web-rabis/sso-client/client"
 )
 
 const (
@@ -31,15 +35,19 @@ func Run(serversCtx context.Context,
 	orderMan order.IManager,
 	dictMan dictionary.IManager,
 	ebookMan ebook.IManager,
+	searchMan search.IManager,
+	readerMan reader.IManager,
 	userSvc ssoClient.UserService,
 	version string) error {
 	resources := []cherver.Resource{
 		http.NewVersionResource("/version", version),
 		http.NewFilesResource("/files", opts.ServerConfig.FilesDir),
 		//swaggerV1.NewSwaggerResource("/swagger", opts.ServerConfig.BasePath, "/files"),
-		v2.NewOrderResource("/api/v1/orders", authMan, orderMan, userSvc),
-		v3.NewDictionaryResource("/api/v1/dictionary", authMan, dictMan),
-		v1.NewEbookResource("/api/v1/ebook", authMan, ebookMan),
+		orderV1.NewOrderResource("/api/v1/orders", authMan, orderMan, userSvc),
+		dictV1.NewDictionaryResource("/api/v1/dictionary", authMan, dictMan),
+		ebookV1.NewEbookResource("/api/v1/ebook", authMan, ebookMan),
+		searchV1.NewSearchResource("/api/v1/search", authMan, searchMan),
+		readerV1.NewReaderResource("/api/v1/reader", authMan, readerMan),
 	}
 	httpSrv := cherver.New(
 		cherver.WithListenAddress(opts.ServerConfig.ListenAddr),

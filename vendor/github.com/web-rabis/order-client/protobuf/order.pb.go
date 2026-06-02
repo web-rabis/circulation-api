@@ -950,6 +950,214 @@ func (x *DepartmentListResponse) GetDepartments() []*Department {
 	return nil
 }
 
+type CreateOnDemanIssueRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	EbookId       int64                  `protobuf:"varint,2,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
+	DepartmentId  int64                  `protobuf:"varint,3,opt,name=department_id,json=departmentId,proto3" json:"department_id,omitempty"`
+	InvId         int64                  `protobuf:"varint,4,opt,name=inv_id,json=invId,proto3" json:"inv_id,omitempty"`
+	User          *User                  `protobuf:"bytes,5,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOnDemanIssueRequest) Reset() {
+	*x = CreateOnDemanIssueRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOnDemanIssueRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOnDemanIssueRequest) ProtoMessage() {}
+
+func (x *CreateOnDemanIssueRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOnDemanIssueRequest.ProtoReflect.Descriptor instead.
+func (*CreateOnDemanIssueRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *CreateOnDemanIssueRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *CreateOnDemanIssueRequest) GetEbookId() int64 {
+	if x != nil {
+		return x.EbookId
+	}
+	return 0
+}
+
+func (x *CreateOnDemanIssueRequest) GetDepartmentId() int64 {
+	if x != nil {
+		return x.DepartmentId
+	}
+	return 0
+}
+
+func (x *CreateOnDemanIssueRequest) GetInvId() int64 {
+	if x != nil {
+		return x.InvId
+	}
+	return 0
+}
+
+func (x *CreateOnDemanIssueRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type CreateOnDemanIssueResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       int64                  `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOnDemanIssueResponse) Reset() {
+	*x = CreateOnDemanIssueResponse{}
+	mi := &file_protobuf_order_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOnDemanIssueResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOnDemanIssueResponse) ProtoMessage() {}
+
+func (x *CreateOnDemanIssueResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOnDemanIssueResponse.ProtoReflect.Descriptor instead.
+func (*CreateOnDemanIssueResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *CreateOnDemanIssueResponse) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+type OrderAuditRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       int64                  `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderAuditRequest) Reset() {
+	*x = OrderAuditRequest{}
+	mi := &file_protobuf_order_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderAuditRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderAuditRequest) ProtoMessage() {}
+
+func (x *OrderAuditRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderAuditRequest.ProtoReflect.Descriptor instead.
+func (*OrderAuditRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *OrderAuditRequest) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+type OrderAuditResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*OrderAudit          `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderAuditResponse) Reset() {
+	*x = OrderAuditResponse{}
+	mi := &file_protobuf_order_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderAuditResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderAuditResponse) ProtoMessage() {}
+
+func (x *OrderAuditResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_order_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderAuditResponse.ProtoReflect.Descriptor instead.
+func (*OrderAuditResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_order_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *OrderAuditResponse) GetResult() []*OrderAudit {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
 var File_protobuf_order_proto protoreflect.FileDescriptor
 
 const file_protobuf_order_proto_rawDesc = "" +
@@ -1007,7 +1215,19 @@ const file_protobuf_order_proto_rawDesc = "" +
 	"\x06paging\x18\x02 \x01(\v2\r.order.PagingR\x06paging\"c\n" +
 	"\x16DepartmentListResponse\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x03R\x05count\x123\n" +
-	"\vdepartments\x18\x02 \x03(\v2\x11.order.DepartmentR\vdepartments2\xf5\x05\n" +
+	"\vdepartments\x18\x02 \x03(\v2\x11.order.DepartmentR\vdepartments\"\xb8\x01\n" +
+	"\x19CreateOnDemanIssueRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12\x19\n" +
+	"\bebook_id\x18\x02 \x01(\x03R\aebookId\x12#\n" +
+	"\rdepartment_id\x18\x03 \x01(\x03R\fdepartmentId\x12\x15\n" +
+	"\x06inv_id\x18\x04 \x01(\x03R\x05invId\x12\x1f\n" +
+	"\x04user\x18\x05 \x01(\v2\v.order.UserR\x04user\"7\n" +
+	"\x1aCreateOnDemanIssueResponse\x12\x19\n" +
+	"\border_id\x18\x01 \x01(\x03R\aorderId\".\n" +
+	"\x11OrderAuditRequest\x12\x19\n" +
+	"\border_id\x18\x01 \x01(\x03R\aorderId\"?\n" +
+	"\x12OrderAuditResponse\x12)\n" +
+	"\x06result\x18\x01 \x03(\v2\x11.order.OrderAuditR\x06result2\x92\a\n" +
 	"\fOrderService\x12;\n" +
 	"\x04List\x12\x17.order.OrderListRequest\x1a\x18.order.OrderListResponse\"\x00\x12*\n" +
 	"\x04ById\x12\x12.order.ByIdRequest\x1a\f.order.Order\"\x00\x128\n" +
@@ -1020,7 +1240,9 @@ const file_protobuf_order_proto_rawDesc = "" +
 	"\aArchive\x12\x15.order.ArchiveRequest\x1a\x16.google.protobuf.Empty\"\x00\x12<\n" +
 	"\bSendToPf\x12\x16.order.SendToPfRequest\x1a\x16.google.protobuf.Empty\"\x00\x12J\n" +
 	"\x0fReturnToStorage\x12\x1d.order.ReturnToStorageRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
-	"\vStateCounts\x12\x19.order.StateCountsRequest\x1a\x1a.order.StateCountsResponse\"\x002\xc4\x02\n" +
+	"\vStateCounts\x12\x19.order.StateCountsRequest\x1a\x1a.order.StateCountsResponse\"\x00\x12[\n" +
+	"\x12CreateOnDemanIssue\x12 .order.CreateOnDemanIssueRequest\x1a!.order.CreateOnDemanIssueResponse\"\x00\x12>\n" +
+	"\x05Audit\x12\x18.order.OrderAuditRequest\x1a\x19.order.OrderAuditResponse\"\x002\xc4\x02\n" +
 	"\x11DictionaryService\x12^\n" +
 	"\x13ReasonRejectionList\x12!.order.ReasonRejectionListRequest\x1a\".order.ReasonRejectionListResponse\"\x00\x12C\n" +
 	"\x13ReasonRejectionById\x12\x12.order.ByIdRequest\x1a\x16.order.ReasonRejection\"\x00\x12O\n" +
@@ -1039,7 +1261,7 @@ func file_protobuf_order_proto_rawDescGZIP() []byte {
 	return file_protobuf_order_proto_rawDescData
 }
 
-var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_protobuf_order_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_protobuf_order_proto_goTypes = []any{
 	(*OrderListRequest)(nil),            // 0: order.OrderListRequest
 	(*OrderListResponse)(nil),           // 1: order.OrderListResponse
@@ -1059,78 +1281,89 @@ var file_protobuf_order_proto_goTypes = []any{
 	(*ReasonRejectionListResponse)(nil), // 15: order.ReasonRejectionListResponse
 	(*DepartmentListRequest)(nil),       // 16: order.DepartmentListRequest
 	(*DepartmentListResponse)(nil),      // 17: order.DepartmentListResponse
-	(*OrderFilters)(nil),                // 18: order.OrderFilters
-	(*Paging)(nil),                      // 19: order.Paging
-	(*Order)(nil),                       // 20: order.Order
-	(*User)(nil),                        // 21: order.User
-	(*IssueOrder)(nil),                  // 22: order.IssueOrder
-	(*StateCountFilters)(nil),           // 23: order.StateCountFilters
-	(*StateCount)(nil),                  // 24: order.StateCount
-	(*ReasonRejectionFilters)(nil),      // 25: order.ReasonRejectionFilters
-	(*ReasonRejection)(nil),             // 26: order.ReasonRejection
-	(*DepartmentFilters)(nil),           // 27: order.DepartmentFilters
-	(*Department)(nil),                  // 28: order.Department
-	(*emptypb.Empty)(nil),               // 29: google.protobuf.Empty
+	(*CreateOnDemanIssueRequest)(nil),   // 18: order.CreateOnDemanIssueRequest
+	(*CreateOnDemanIssueResponse)(nil),  // 19: order.CreateOnDemanIssueResponse
+	(*OrderAuditRequest)(nil),           // 20: order.OrderAuditRequest
+	(*OrderAuditResponse)(nil),          // 21: order.OrderAuditResponse
+	(*OrderFilters)(nil),                // 22: order.OrderFilters
+	(*Paging)(nil),                      // 23: order.Paging
+	(*Order)(nil),                       // 24: order.Order
+	(*User)(nil),                        // 25: order.User
+	(*IssueOrder)(nil),                  // 26: order.IssueOrder
+	(*StateCountFilters)(nil),           // 27: order.StateCountFilters
+	(*StateCount)(nil),                  // 28: order.StateCount
+	(*ReasonRejectionFilters)(nil),      // 29: order.ReasonRejectionFilters
+	(*ReasonRejection)(nil),             // 30: order.ReasonRejection
+	(*DepartmentFilters)(nil),           // 31: order.DepartmentFilters
+	(*Department)(nil),                  // 32: order.Department
+	(*OrderAudit)(nil),                  // 33: order.OrderAudit
+	(*emptypb.Empty)(nil),               // 34: google.protobuf.Empty
 }
 var file_protobuf_order_proto_depIdxs = []int32{
-	18, // 0: order.OrderListRequest.filters:type_name -> order.OrderFilters
-	19, // 1: order.OrderListRequest.paging:type_name -> order.Paging
-	20, // 2: order.OrderListResponse.orders:type_name -> order.Order
-	21, // 3: order.RejectRequest.user:type_name -> order.User
-	21, // 4: order.RedirectRequest.user:type_name -> order.User
-	21, // 5: order.CancelRejectRequest.user:type_name -> order.User
-	21, // 6: order.PostponedRequest.user:type_name -> order.User
-	21, // 7: order.ReturnRequest.user:type_name -> order.User
-	22, // 8: order.IssueRequest.ids:type_name -> order.IssueOrder
-	21, // 9: order.IssueRequest.user:type_name -> order.User
-	21, // 10: order.ArchiveRequest.user:type_name -> order.User
-	21, // 11: order.SendToPfRequest.user:type_name -> order.User
-	21, // 12: order.ReturnToStorageRequest.user:type_name -> order.User
-	23, // 13: order.StateCountsRequest.filters:type_name -> order.StateCountFilters
-	24, // 14: order.StateCountsResponse.state_counts:type_name -> order.StateCount
-	25, // 15: order.ReasonRejectionListRequest.filters:type_name -> order.ReasonRejectionFilters
-	19, // 16: order.ReasonRejectionListRequest.paging:type_name -> order.Paging
-	26, // 17: order.ReasonRejectionListResponse.reason_rejections:type_name -> order.ReasonRejection
-	27, // 18: order.DepartmentListRequest.filters:type_name -> order.DepartmentFilters
-	19, // 19: order.DepartmentListRequest.paging:type_name -> order.Paging
-	28, // 20: order.DepartmentListResponse.departments:type_name -> order.Department
-	0,  // 21: order.OrderService.List:input_type -> order.OrderListRequest
-	2,  // 22: order.OrderService.ById:input_type -> order.ByIdRequest
-	3,  // 23: order.OrderService.Reject:input_type -> order.RejectRequest
-	5,  // 24: order.OrderService.CancelReject:input_type -> order.CancelRejectRequest
-	4,  // 25: order.OrderService.Redirect:input_type -> order.RedirectRequest
-	6,  // 26: order.OrderService.Postponed:input_type -> order.PostponedRequest
-	7,  // 27: order.OrderService.Return:input_type -> order.ReturnRequest
-	8,  // 28: order.OrderService.Issue:input_type -> order.IssueRequest
-	9,  // 29: order.OrderService.Archive:input_type -> order.ArchiveRequest
-	10, // 30: order.OrderService.SendToPf:input_type -> order.SendToPfRequest
-	11, // 31: order.OrderService.ReturnToStorage:input_type -> order.ReturnToStorageRequest
-	12, // 32: order.OrderService.StateCounts:input_type -> order.StateCountsRequest
-	14, // 33: order.DictionaryService.ReasonRejectionList:input_type -> order.ReasonRejectionListRequest
-	2,  // 34: order.DictionaryService.ReasonRejectionById:input_type -> order.ByIdRequest
-	16, // 35: order.DictionaryService.DepartmentList:input_type -> order.DepartmentListRequest
-	2,  // 36: order.DictionaryService.DepartmentById:input_type -> order.ByIdRequest
-	1,  // 37: order.OrderService.List:output_type -> order.OrderListResponse
-	20, // 38: order.OrderService.ById:output_type -> order.Order
-	29, // 39: order.OrderService.Reject:output_type -> google.protobuf.Empty
-	29, // 40: order.OrderService.CancelReject:output_type -> google.protobuf.Empty
-	29, // 41: order.OrderService.Redirect:output_type -> google.protobuf.Empty
-	29, // 42: order.OrderService.Postponed:output_type -> google.protobuf.Empty
-	29, // 43: order.OrderService.Return:output_type -> google.protobuf.Empty
-	29, // 44: order.OrderService.Issue:output_type -> google.protobuf.Empty
-	29, // 45: order.OrderService.Archive:output_type -> google.protobuf.Empty
-	29, // 46: order.OrderService.SendToPf:output_type -> google.protobuf.Empty
-	29, // 47: order.OrderService.ReturnToStorage:output_type -> google.protobuf.Empty
-	13, // 48: order.OrderService.StateCounts:output_type -> order.StateCountsResponse
-	15, // 49: order.DictionaryService.ReasonRejectionList:output_type -> order.ReasonRejectionListResponse
-	26, // 50: order.DictionaryService.ReasonRejectionById:output_type -> order.ReasonRejection
-	17, // 51: order.DictionaryService.DepartmentList:output_type -> order.DepartmentListResponse
-	28, // 52: order.DictionaryService.DepartmentById:output_type -> order.Department
-	37, // [37:53] is the sub-list for method output_type
-	21, // [21:37] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	22, // 0: order.OrderListRequest.filters:type_name -> order.OrderFilters
+	23, // 1: order.OrderListRequest.paging:type_name -> order.Paging
+	24, // 2: order.OrderListResponse.orders:type_name -> order.Order
+	25, // 3: order.RejectRequest.user:type_name -> order.User
+	25, // 4: order.RedirectRequest.user:type_name -> order.User
+	25, // 5: order.CancelRejectRequest.user:type_name -> order.User
+	25, // 6: order.PostponedRequest.user:type_name -> order.User
+	25, // 7: order.ReturnRequest.user:type_name -> order.User
+	26, // 8: order.IssueRequest.ids:type_name -> order.IssueOrder
+	25, // 9: order.IssueRequest.user:type_name -> order.User
+	25, // 10: order.ArchiveRequest.user:type_name -> order.User
+	25, // 11: order.SendToPfRequest.user:type_name -> order.User
+	25, // 12: order.ReturnToStorageRequest.user:type_name -> order.User
+	27, // 13: order.StateCountsRequest.filters:type_name -> order.StateCountFilters
+	28, // 14: order.StateCountsResponse.state_counts:type_name -> order.StateCount
+	29, // 15: order.ReasonRejectionListRequest.filters:type_name -> order.ReasonRejectionFilters
+	23, // 16: order.ReasonRejectionListRequest.paging:type_name -> order.Paging
+	30, // 17: order.ReasonRejectionListResponse.reason_rejections:type_name -> order.ReasonRejection
+	31, // 18: order.DepartmentListRequest.filters:type_name -> order.DepartmentFilters
+	23, // 19: order.DepartmentListRequest.paging:type_name -> order.Paging
+	32, // 20: order.DepartmentListResponse.departments:type_name -> order.Department
+	25, // 21: order.CreateOnDemanIssueRequest.user:type_name -> order.User
+	33, // 22: order.OrderAuditResponse.result:type_name -> order.OrderAudit
+	0,  // 23: order.OrderService.List:input_type -> order.OrderListRequest
+	2,  // 24: order.OrderService.ById:input_type -> order.ByIdRequest
+	3,  // 25: order.OrderService.Reject:input_type -> order.RejectRequest
+	5,  // 26: order.OrderService.CancelReject:input_type -> order.CancelRejectRequest
+	4,  // 27: order.OrderService.Redirect:input_type -> order.RedirectRequest
+	6,  // 28: order.OrderService.Postponed:input_type -> order.PostponedRequest
+	7,  // 29: order.OrderService.Return:input_type -> order.ReturnRequest
+	8,  // 30: order.OrderService.Issue:input_type -> order.IssueRequest
+	9,  // 31: order.OrderService.Archive:input_type -> order.ArchiveRequest
+	10, // 32: order.OrderService.SendToPf:input_type -> order.SendToPfRequest
+	11, // 33: order.OrderService.ReturnToStorage:input_type -> order.ReturnToStorageRequest
+	12, // 34: order.OrderService.StateCounts:input_type -> order.StateCountsRequest
+	18, // 35: order.OrderService.CreateOnDemanIssue:input_type -> order.CreateOnDemanIssueRequest
+	20, // 36: order.OrderService.Audit:input_type -> order.OrderAuditRequest
+	14, // 37: order.DictionaryService.ReasonRejectionList:input_type -> order.ReasonRejectionListRequest
+	2,  // 38: order.DictionaryService.ReasonRejectionById:input_type -> order.ByIdRequest
+	16, // 39: order.DictionaryService.DepartmentList:input_type -> order.DepartmentListRequest
+	2,  // 40: order.DictionaryService.DepartmentById:input_type -> order.ByIdRequest
+	1,  // 41: order.OrderService.List:output_type -> order.OrderListResponse
+	24, // 42: order.OrderService.ById:output_type -> order.Order
+	34, // 43: order.OrderService.Reject:output_type -> google.protobuf.Empty
+	34, // 44: order.OrderService.CancelReject:output_type -> google.protobuf.Empty
+	34, // 45: order.OrderService.Redirect:output_type -> google.protobuf.Empty
+	34, // 46: order.OrderService.Postponed:output_type -> google.protobuf.Empty
+	34, // 47: order.OrderService.Return:output_type -> google.protobuf.Empty
+	34, // 48: order.OrderService.Issue:output_type -> google.protobuf.Empty
+	34, // 49: order.OrderService.Archive:output_type -> google.protobuf.Empty
+	34, // 50: order.OrderService.SendToPf:output_type -> google.protobuf.Empty
+	34, // 51: order.OrderService.ReturnToStorage:output_type -> google.protobuf.Empty
+	13, // 52: order.OrderService.StateCounts:output_type -> order.StateCountsResponse
+	19, // 53: order.OrderService.CreateOnDemanIssue:output_type -> order.CreateOnDemanIssueResponse
+	21, // 54: order.OrderService.Audit:output_type -> order.OrderAuditResponse
+	15, // 55: order.DictionaryService.ReasonRejectionList:output_type -> order.ReasonRejectionListResponse
+	30, // 56: order.DictionaryService.ReasonRejectionById:output_type -> order.ReasonRejection
+	17, // 57: order.DictionaryService.DepartmentList:output_type -> order.DepartmentListResponse
+	32, // 58: order.DictionaryService.DepartmentById:output_type -> order.Department
+	41, // [41:59] is the sub-list for method output_type
+	23, // [23:41] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_order_proto_init() }
@@ -1146,7 +1379,7 @@ func file_protobuf_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_order_proto_rawDesc), len(file_protobuf_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

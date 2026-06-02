@@ -2,7 +2,23 @@ syntax = "proto3";
 package ebook;
 option go_package = "./protobuf;protobuf";
 import "protobuf/dictionary_model.proto";
-
+message Ebook {
+  int64 id = 1;
+  int64 parent_id = 2;
+  BibliographicLevel bibliographic_level = 3;
+  TypeDescription type_description = 4;
+  bool krv = 5;
+  Catalog catalog = 6;
+  string author = 7;
+  string title = 8;
+  repeated Source sources = 9;
+  repeated ServiceNote service_notes = 10;
+  AuthorMark author_mark = 11;
+  repeated Inv inv = 12;
+  repeated Text texts = 13;
+  repeated Sigla siglas = 14;
+  EbookCard card = 15;
+}
 message EbookBrief {
     int64 id = 1;
     int64 parent_id = 2;
@@ -16,7 +32,6 @@ message EbookBrief {
     repeated ServiceNote service_notes = 10;
     AuthorMark author_mark = 11;
     string r_cipher = 12;
-
 }
 message EbookCard{
     int64 volume_number = 1;
@@ -70,6 +85,19 @@ message Language {
   DictionaryLanguage language = 3;
   string source_rewrite = 4;
 }
+message Text  {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string text = 3;
+  string note = 4;
+  string url = 5;
+}
+message Sigla {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  DictionarySigla sigla = 3;
+}
+
 message Paging {
   int64   offset = 1;
   int64   limit = 2;

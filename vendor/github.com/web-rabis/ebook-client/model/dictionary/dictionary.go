@@ -2,117 +2,70 @@ package dictionary
 
 import "github.com/web-rabis/ebook-client/protobuf"
 
-type BibliographicLevel struct {
-	Id         int64  `json:"id"`
-	Code       string `json:"code"`
-	Name       string `json:"name"`
-	TypeEbooks string `json:"typeEbooks"`
+type Dictionary struct {
+	Id        int64  `json:"id"`
+	Code      string `json:"code"`
+	Name      string `json:"name"`
+	TableName string `json:"tableName"`
+	Base      bool   `json:"base"`
 }
-type TypeDescription struct {
-	Id     int64  `json:"id"`
-	Code   string `json:"code"`
-	Name   string `json:"name"`
-	NameKz string `json:"nameKz"`
-}
-type Catalog struct {
+type DictionaryBase struct {
 	Id   int64  `json:"id"`
 	Code string `json:"code"`
 	Name string `json:"name"`
+}
+type DictionaryFilters struct{}
+type SearchDictionaryFilters struct {
+	Dictionary *Dictionary `json:"dictionary"`
+	Query      string      `json:"query"`
 }
 
-type Department struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-	Type string
-}
-type State struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-type ServiceData struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-type Language struct {
-	Id   int64  `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-func NewBibliographicLevelFromProto(b *protobuf.BibliographicLevel) *BibliographicLevel {
-	if b == nil {
-		return nil
-	}
-	return &BibliographicLevel{
-		Id:         b.Id,
-		Code:       b.Code,
-		Name:       b.Name,
-		TypeEbooks: b.TypeEbooks,
-	}
-}
-func NewTypeDescriptionFromProto(t *protobuf.TypeDescription) *TypeDescription {
-	if t == nil {
-		return nil
-	}
-	return &TypeDescription{
-		Id:     t.Id,
-		Code:   t.Code,
-		Name:   t.Name,
-		NameKz: t.NameKz,
-	}
-}
-func NewCatalogFromProto(c *protobuf.Catalog) *Catalog {
-	if c == nil {
-		return nil
-	}
-	return &Catalog{
-		Id:   c.Id,
-		Code: c.Code,
-		Name: c.Name,
-	}
-}
-
-func NewDepartmentFromProto(d *protobuf.Department) *Department {
+func (d *Dictionary) ToProto() *protobuf.Dictionary {
 	if d == nil {
 		return nil
 	}
-	return &Department{
-		Id:   d.Id,
-		Code: d.Code,
-		Name: d.Name,
-		Type: d.Type,
+	return &protobuf.Dictionary{
+		Id:        d.Id,
+		Code:      d.Code,
+		Name:      d.Name,
+		TableName: d.TableName,
+		Base:      d.Base,
 	}
 }
-func NewStateFromProto(s *protobuf.State) *State {
-	if s == nil {
+func (f *DictionaryFilters) ToProto() *protobuf.DictionaryFilters {
+	if f == nil {
 		return nil
 	}
-	return &State{
-		Id:   s.Id,
-		Code: s.Code,
-		Name: s.Name,
+	return &protobuf.DictionaryFilters{}
+}
+func (f *SearchDictionaryFilters) ToProto() *protobuf.SearchDictionaryFilters {
+	if f == nil {
+		return nil
+	}
+	return &protobuf.SearchDictionaryFilters{
+		Dictionary: f.Dictionary.ToProto(),
+		Query:      f.Query,
 	}
 }
-func NewServiceDataFromProto(s *protobuf.DictionaryServiceData) *ServiceData {
-	if s == nil {
+func NewDictionaryFromProto(c *protobuf.Dictionary) *Dictionary {
+	if c == nil {
 		return nil
 	}
-	return &ServiceData{
-		Id:   s.Id,
-		Code: s.Code,
-		Name: s.Name,
+	return &Dictionary{
+		Id:        c.Id,
+		Code:      c.Code,
+		Name:      c.Name,
+		TableName: c.TableName,
+		Base:      c.Base,
 	}
 }
-func NewLanguageFromProto(s *protobuf.DictionaryLanguage) *Language {
-	if s == nil {
+func NewDictionaryBaseFromProto(c *protobuf.DictionaryBase) *DictionaryBase {
+	if c == nil {
 		return nil
 	}
-	return &Language{
-		Id:   s.Id,
-		Code: s.Code,
-		Name: s.Name,
+	return &DictionaryBase{
+		Id:   c.Id,
+		Code: c.Code,
+		Name: c.Name,
 	}
 }

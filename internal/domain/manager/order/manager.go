@@ -2,10 +2,12 @@ package order
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"github.com/web-rabis/circulation-api/internal/domain/model"
 	ebookClient "github.com/web-rabis/ebook-client/client"
-	model2 "github.com/web-rabis/ebook-client/model/ebook"
+	ebookModel "github.com/web-rabis/ebook-client/model/ebook"
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerClient "github.com/web-rabis/reader-client/client"
@@ -26,6 +28,9 @@ type IManager interface {
 	Issue(ctx context.Context, id int64, userId, invId int64) error
 	IssueOrders(ctx context.Context, id []int64, userId int64) error
 	Redirect(ctx context.Context, ids []int64, departmentId, userId int64) error
+	Create(ctx context.Context, ticketNumber, ebookId, departmentId, invId, userId int64) (int64, error)
+	Search(ctx context.Context, query string, paging *orderModel.Paging) (int64, []*model.Order, error)
+	Audit(ctx context.Context, orderId int64) ([]*model.OrderAudit, error)
 }
 type Manager struct {
 	orderCl  orderClient.OrderService
@@ -59,7 +64,7 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 			order.Reader.Department = reader.Department
 
 		}
-		var e *model2.EbookBrief
+		var e *ebookModel.EbookBrief
 		if order.Ebook != nil {
 			e, _ = m.ebookCl.EbookBriefById(ctx, order.Ebook.Id)
 		}
@@ -152,6 +157,64 @@ func (m *Manager) IssueOrders(ctx context.Context, ids []int64, userId int64) er
 	}
 	return m.orderCl.Issue(ctx, req, user)
 }
+func (m *Manager) Create(ctx context.Context, ticketNumber, ebookId, departmentId, invId, userId int64) (int64, error) {
+	// Проверяем, не выдана ли уже эта книга данному читателю (активный заказ)
+	activeStates := []string{
+		orderModel.OrderStateOrdered,
+		orderModel.OrderStateInStorage,
+		orderModel.OrderStateInReadingHall,
+		orderModel.OrderStateInHands,
+		orderModel.OrderStatePostponed,
+		orderModel.OrderStateInAuxiliaryFund,
+	}
+	count, _, err := m.orderCl.List(ctx, &orderModel.Paging{Limit: 1}, &orderModel.OrderFilters{
+		TicketNumber: ticketNumber,
+		EbookId:      ebookId,
+		States:       activeStates,
+	})
+	if err != nil {
+		return 0, err
+	}
+	if count > 0 {
+		return 0, errors.New("книга уже выдана данному читателю")
+	}
+
+	user, err := m.getUserById(ctx, userId)
+	if err != nil {
+		return 0, err
+	}
+	return m.orderCl.CreateOnDemanIssue(ctx, ticketNumber, ebookId, departmentId, invId, user)
+}
+
+// Search ищет заказы по строке query: если query — число, ищет по номеру читательского билета,
+// иначе ищет по номеру заказа/названию (передаётся как query в фильтр).
+func (m *Manager) Search(ctx context.Context, query string, paging *orderModel.Paging) (int64, []*model.Order, error) {
+	filters := &orderModel.OrderFilters{}
+	var ticketNumber int64
+	if _, err := fmt.Sscanf(query, "%d", &ticketNumber); err == nil {
+		filters.TicketNumber = ticketNumber
+	} else {
+		filters.Query = query
+	}
+	return m.List(ctx, filters, paging)
+}
+
+func (m *Manager) Audit(ctx context.Context, orderId int64) ([]*model.OrderAudit, error) {
+
+	list, err := m.orderCl.Audit(ctx, orderId)
+	if err != nil {
+		return nil, err
+	}
+	var audits = make([]*model.OrderAudit, len(list))
+	for i, audit := range list {
+		audits[i] = model.NewOrderAudit(audit)
+		if audit.UserId != 0 {
+			audits[i].User, _ = m.userCl.UserById(ctx, audit.UserId)
+		}
+	}
+	return audits, nil
+}
+
 func (m *Manager) getUserById(ctx context.Context, id int64) (*orderModel.User, error) {
 	user, err := m.userCl.UserById(ctx, id)
 	if err != nil {

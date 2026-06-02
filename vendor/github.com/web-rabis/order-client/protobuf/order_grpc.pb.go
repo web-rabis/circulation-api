@@ -20,18 +20,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrderService_List_FullMethodName            = "/order.OrderService/List"
-	OrderService_ById_FullMethodName            = "/order.OrderService/ById"
-	OrderService_Reject_FullMethodName          = "/order.OrderService/Reject"
-	OrderService_CancelReject_FullMethodName    = "/order.OrderService/CancelReject"
-	OrderService_Redirect_FullMethodName        = "/order.OrderService/Redirect"
-	OrderService_Postponed_FullMethodName       = "/order.OrderService/Postponed"
-	OrderService_Return_FullMethodName          = "/order.OrderService/Return"
-	OrderService_Issue_FullMethodName           = "/order.OrderService/Issue"
-	OrderService_Archive_FullMethodName         = "/order.OrderService/Archive"
-	OrderService_SendToPf_FullMethodName        = "/order.OrderService/SendToPf"
-	OrderService_ReturnToStorage_FullMethodName = "/order.OrderService/ReturnToStorage"
-	OrderService_StateCounts_FullMethodName     = "/order.OrderService/StateCounts"
+	OrderService_List_FullMethodName               = "/order.OrderService/List"
+	OrderService_ById_FullMethodName               = "/order.OrderService/ById"
+	OrderService_Reject_FullMethodName             = "/order.OrderService/Reject"
+	OrderService_CancelReject_FullMethodName       = "/order.OrderService/CancelReject"
+	OrderService_Redirect_FullMethodName           = "/order.OrderService/Redirect"
+	OrderService_Postponed_FullMethodName          = "/order.OrderService/Postponed"
+	OrderService_Return_FullMethodName             = "/order.OrderService/Return"
+	OrderService_Issue_FullMethodName              = "/order.OrderService/Issue"
+	OrderService_Archive_FullMethodName            = "/order.OrderService/Archive"
+	OrderService_SendToPf_FullMethodName           = "/order.OrderService/SendToPf"
+	OrderService_ReturnToStorage_FullMethodName    = "/order.OrderService/ReturnToStorage"
+	OrderService_StateCounts_FullMethodName        = "/order.OrderService/StateCounts"
+	OrderService_CreateOnDemanIssue_FullMethodName = "/order.OrderService/CreateOnDemanIssue"
+	OrderService_Audit_FullMethodName              = "/order.OrderService/Audit"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -50,6 +52,8 @@ type OrderServiceClient interface {
 	SendToPf(ctx context.Context, in *SendToPfRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ReturnToStorage(ctx context.Context, in *ReturnToStorageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	StateCounts(ctx context.Context, in *StateCountsRequest, opts ...grpc.CallOption) (*StateCountsResponse, error)
+	CreateOnDemanIssue(ctx context.Context, in *CreateOnDemanIssueRequest, opts ...grpc.CallOption) (*CreateOnDemanIssueResponse, error)
+	Audit(ctx context.Context, in *OrderAuditRequest, opts ...grpc.CallOption) (*OrderAuditResponse, error)
 }
 
 type orderServiceClient struct {
@@ -180,6 +184,26 @@ func (c *orderServiceClient) StateCounts(ctx context.Context, in *StateCountsReq
 	return out, nil
 }
 
+func (c *orderServiceClient) CreateOnDemanIssue(ctx context.Context, in *CreateOnDemanIssueRequest, opts ...grpc.CallOption) (*CreateOnDemanIssueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOnDemanIssueResponse)
+	err := c.cc.Invoke(ctx, OrderService_CreateOnDemanIssue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) Audit(ctx context.Context, in *OrderAuditRequest, opts ...grpc.CallOption) (*OrderAuditResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OrderAuditResponse)
+	err := c.cc.Invoke(ctx, OrderService_Audit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility.
@@ -196,6 +220,8 @@ type OrderServiceServer interface {
 	SendToPf(context.Context, *SendToPfRequest) (*emptypb.Empty, error)
 	ReturnToStorage(context.Context, *ReturnToStorageRequest) (*emptypb.Empty, error)
 	StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error)
+	CreateOnDemanIssue(context.Context, *CreateOnDemanIssueRequest) (*CreateOnDemanIssueResponse, error)
+	Audit(context.Context, *OrderAuditRequest) (*OrderAuditResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -241,6 +267,12 @@ func (UnimplementedOrderServiceServer) ReturnToStorage(context.Context, *ReturnT
 }
 func (UnimplementedOrderServiceServer) StateCounts(context.Context, *StateCountsRequest) (*StateCountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method StateCounts not implemented")
+}
+func (UnimplementedOrderServiceServer) CreateOnDemanIssue(context.Context, *CreateOnDemanIssueRequest) (*CreateOnDemanIssueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOnDemanIssue not implemented")
+}
+func (UnimplementedOrderServiceServer) Audit(context.Context, *OrderAuditRequest) (*OrderAuditResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Audit not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 func (UnimplementedOrderServiceServer) testEmbeddedByValue()                      {}
@@ -479,6 +511,42 @@ func _OrderService_StateCounts_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_CreateOnDemanIssue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOnDemanIssueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).CreateOnDemanIssue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_CreateOnDemanIssue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).CreateOnDemanIssue(ctx, req.(*CreateOnDemanIssueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_Audit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderAuditRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).Audit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_Audit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).Audit(ctx, req.(*OrderAuditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -533,6 +601,14 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StateCounts",
 			Handler:    _OrderService_StateCounts_Handler,
+		},
+		{
+			MethodName: "CreateOnDemanIssue",
+			Handler:    _OrderService_CreateOnDemanIssue_Handler,
+		},
+		{
+			MethodName: "Audit",
+			Handler:    _OrderService_Audit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

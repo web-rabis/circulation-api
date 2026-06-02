@@ -1,0 +1,67 @@
+package grpc
+
+import (
+	"github.com/web-rabis/searcher-proxy/client"
+	"github.com/web-rabis/searcher-proxy/model"
+	"github.com/web-rabis/searcher-proxy/protobuf"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+)
+
+type BaseClient struct {
+	address  string
+	conn     *grpc.ClientConn
+	dialOpts []grpc.DialOption
+
+	dictSvc       client.DictionaryService
+	ebookSvc      client.EbookSearchService
+	periodicalSvc client.PeriodicalSearchService
+}
+
+var _ client.Base = &BaseClient{}
+
+func NewClient(config *model.ConnectionConfig) (client.Base, error) {
+	var grpcOpts []grpc.DialOption
+	if config.Insecure == true {
+		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	}
+
+	return &BaseClient{
+		address:  config.Address,
+		dialOpts: grpcOpts,
+	}, nil
+}
+
+func (c *BaseClient) Connect() (err error) {
+	c.conn, err = grpc.Dial(c.address, c.dialOpts...)
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
+func (c *BaseClient) Close() error {
+	return c.conn.Close()
+}
+
+func (c *BaseClient) DictionarySvc() client.DictionaryService {
+	if c.dictSvc == nil {
+		c.dictSvc = NewDictionaryServiceClient(protobuf.NewDictionarySvcClient(c.conn))
+	}
+	return c.dictSvc
+}
+
+func (c *BaseClient) EbookSearchSvc() client.EbookSearchService {
+	if c.ebookSvc == nil {
+		c.ebookSvc = NewEbookSearchServiceClient(protobuf.NewEbookSearchSvcClient(c.conn))
+	}
+	return c.ebookSvc
+}
+
+func (c *BaseClient) PeriodicalSearchSvc() client.PeriodicalSearchService {
+	if c.periodicalSvc == nil {
+		c.periodicalSvc = NewPeriodicalSearchServiceClient(protobuf.NewPeriodicalSearchSvcClient(c.conn))
+	}
+	return c.periodicalSvc
+}

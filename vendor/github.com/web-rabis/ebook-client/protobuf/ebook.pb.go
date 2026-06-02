@@ -65,6 +65,58 @@ func (x *EntityByIdRequest) GetId() int64 {
 	return 0
 }
 
+type EbookByIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WithCard      bool                   `protobuf:"varint,2,opt,name=with_card,json=withCard,proto3" json:"with_card,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EbookByIdRequest) Reset() {
+	*x = EbookByIdRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EbookByIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EbookByIdRequest) ProtoMessage() {}
+
+func (x *EbookByIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EbookByIdRequest.ProtoReflect.Descriptor instead.
+func (*EbookByIdRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *EbookByIdRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *EbookByIdRequest) GetWithCard() bool {
+	if x != nil {
+		return x.WithCard
+	}
+	return false
+}
+
 type InvListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Filters       *InvFilters            `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
@@ -75,7 +127,7 @@ type InvListRequest struct {
 
 func (x *InvListRequest) Reset() {
 	*x = InvListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[1]
+	mi := &file_protobuf_ebook_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +139,7 @@ func (x *InvListRequest) String() string {
 func (*InvListRequest) ProtoMessage() {}
 
 func (x *InvListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[1]
+	mi := &file_protobuf_ebook_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +152,7 @@ func (x *InvListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvListRequest.ProtoReflect.Descriptor instead.
 func (*InvListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{1}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *InvListRequest) GetFilters() *InvFilters {
@@ -127,7 +179,7 @@ type InvListResponse struct {
 
 func (x *InvListResponse) Reset() {
 	*x = InvListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[2]
+	mi := &file_protobuf_ebook_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -139,7 +191,7 @@ func (x *InvListResponse) String() string {
 func (*InvListResponse) ProtoMessage() {}
 
 func (x *InvListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[2]
+	mi := &file_protobuf_ebook_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -152,7 +204,7 @@ func (x *InvListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvListResponse.ProtoReflect.Descriptor instead.
 func (*InvListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{2}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *InvListResponse) GetResult() []*Inv {
@@ -169,24 +221,917 @@ func (x *InvListResponse) GetCount() int64 {
 	return 0
 }
 
+type CatalogListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *CatalogFilters        `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CatalogListRequest) Reset() {
+	*x = CatalogListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CatalogListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CatalogListRequest) ProtoMessage() {}
+
+func (x *CatalogListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CatalogListRequest.ProtoReflect.Descriptor instead.
+func (*CatalogListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CatalogListRequest) GetFilters() *CatalogFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *CatalogListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type CatalogListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Catalog             `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CatalogListResponse) Reset() {
+	*x = CatalogListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CatalogListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CatalogListResponse) ProtoMessage() {}
+
+func (x *CatalogListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CatalogListResponse.ProtoReflect.Descriptor instead.
+func (*CatalogListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CatalogListResponse) GetResult() []*Catalog {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *CatalogListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type TypeDescriptionListRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Filters       *TypeDescriptionFilters `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                 `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeDescriptionListRequest) Reset() {
+	*x = TypeDescriptionListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeDescriptionListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeDescriptionListRequest) ProtoMessage() {}
+
+func (x *TypeDescriptionListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeDescriptionListRequest.ProtoReflect.Descriptor instead.
+func (*TypeDescriptionListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TypeDescriptionListRequest) GetFilters() *TypeDescriptionFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *TypeDescriptionListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type TypeDescriptionListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*TypeDescription     `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeDescriptionListResponse) Reset() {
+	*x = TypeDescriptionListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeDescriptionListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeDescriptionListResponse) ProtoMessage() {}
+
+func (x *TypeDescriptionListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeDescriptionListResponse.ProtoReflect.Descriptor instead.
+func (*TypeDescriptionListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *TypeDescriptionListResponse) GetResult() []*TypeDescription {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *TypeDescriptionListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type BibliographicLevelListRequest struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Filters       *BibliographicLevelFilters `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                    `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BibliographicLevelListRequest) Reset() {
+	*x = BibliographicLevelListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BibliographicLevelListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BibliographicLevelListRequest) ProtoMessage() {}
+
+func (x *BibliographicLevelListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BibliographicLevelListRequest.ProtoReflect.Descriptor instead.
+func (*BibliographicLevelListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BibliographicLevelListRequest) GetFilters() *BibliographicLevelFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *BibliographicLevelListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type BibliographicLevelListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*BibliographicLevel  `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BibliographicLevelListResponse) Reset() {
+	*x = BibliographicLevelListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BibliographicLevelListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BibliographicLevelListResponse) ProtoMessage() {}
+
+func (x *BibliographicLevelListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BibliographicLevelListResponse.ProtoReflect.Descriptor instead.
+func (*BibliographicLevelListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *BibliographicLevelListResponse) GetResult() []*BibliographicLevel {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *BibliographicLevelListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type DictionaryLanguageListRequest struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Filters       *DictionaryLanguageFilters `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                    `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryLanguageListRequest) Reset() {
+	*x = DictionaryLanguageListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryLanguageListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryLanguageListRequest) ProtoMessage() {}
+
+func (x *DictionaryLanguageListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryLanguageListRequest.ProtoReflect.Descriptor instead.
+func (*DictionaryLanguageListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DictionaryLanguageListRequest) GetFilters() *DictionaryLanguageFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *DictionaryLanguageListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type DictionaryLanguageListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*DictionaryLanguage  `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryLanguageListResponse) Reset() {
+	*x = DictionaryLanguageListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryLanguageListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryLanguageListResponse) ProtoMessage() {}
+
+func (x *DictionaryLanguageListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryLanguageListResponse.ProtoReflect.Descriptor instead.
+func (*DictionaryLanguageListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DictionaryLanguageListResponse) GetResult() []*DictionaryLanguage {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *DictionaryLanguageListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type BlockFieldListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *BlockFieldFilters     `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlockFieldListRequest) Reset() {
+	*x = BlockFieldListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlockFieldListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlockFieldListRequest) ProtoMessage() {}
+
+func (x *BlockFieldListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlockFieldListRequest.ProtoReflect.Descriptor instead.
+func (*BlockFieldListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *BlockFieldListRequest) GetFilters() *BlockFieldFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *BlockFieldListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type BlockFieldListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*BlockField          `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlockFieldListResponse) Reset() {
+	*x = BlockFieldListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlockFieldListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlockFieldListResponse) ProtoMessage() {}
+
+func (x *BlockFieldListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlockFieldListResponse.ProtoReflect.Descriptor instead.
+func (*BlockFieldListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *BlockFieldListResponse) GetResult() []*BlockField {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *BlockFieldListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type BlockListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *BlockFilters          `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlockListRequest) Reset() {
+	*x = BlockListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlockListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlockListRequest) ProtoMessage() {}
+
+func (x *BlockListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlockListRequest.ProtoReflect.Descriptor instead.
+func (*BlockListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *BlockListRequest) GetFilters() *BlockFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *BlockListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type BlockListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Block               `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlockListResponse) Reset() {
+	*x = BlockListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlockListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlockListResponse) ProtoMessage() {}
+
+func (x *BlockListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlockListResponse.ProtoReflect.Descriptor instead.
+func (*BlockListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *BlockListResponse) GetResult() []*Block {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *BlockListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type DictionaryListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *DictionaryFilters     `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryListRequest) Reset() {
+	*x = DictionaryListRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryListRequest) ProtoMessage() {}
+
+func (x *DictionaryListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryListRequest.ProtoReflect.Descriptor instead.
+func (*DictionaryListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *DictionaryListRequest) GetFilters() *DictionaryFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *DictionaryListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type DictionaryListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Dictionary          `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryListResponse) Reset() {
+	*x = DictionaryListResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryListResponse) ProtoMessage() {}
+
+func (x *DictionaryListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryListResponse.ProtoReflect.Descriptor instead.
+func (*DictionaryListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DictionaryListResponse) GetResult() []*Dictionary {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *DictionaryListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type SearchDictionaryRequest struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Filters       *SearchDictionaryFilters `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                  `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchDictionaryRequest) Reset() {
+	*x = SearchDictionaryRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchDictionaryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchDictionaryRequest) ProtoMessage() {}
+
+func (x *SearchDictionaryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchDictionaryRequest.ProtoReflect.Descriptor instead.
+func (*SearchDictionaryRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SearchDictionaryRequest) GetFilters() *SearchDictionaryFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *SearchDictionaryRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type SearchDictionaryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*DictionaryBase      `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchDictionaryResponse) Reset() {
+	*x = SearchDictionaryResponse{}
+	mi := &file_protobuf_ebook_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchDictionaryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchDictionaryResponse) ProtoMessage() {}
+
+func (x *SearchDictionaryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchDictionaryResponse.ProtoReflect.Descriptor instead.
+func (*SearchDictionaryResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *SearchDictionaryResponse) GetResult() []*DictionaryBase {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *SearchDictionaryResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_protobuf_ebook_proto protoreflect.FileDescriptor
 
 const file_protobuf_ebook_proto_rawDesc = "" +
 	"\n" +
-	"\x14protobuf/ebook.proto\x12\x05ebook\x1a\x1aprotobuf/ebook_model.proto\"#\n" +
+	"\x14protobuf/ebook.proto\x12\x05ebook\x1a\x1aprotobuf/ebook_model.proto\x1a\x1fprotobuf/dictionary_model.proto\"#\n" +
 	"\x11EntityByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"d\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"?\n" +
+	"\x10EbookByIdRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
+	"\twith_card\x18\x02 \x01(\bR\bwithCard\"d\n" +
 	"\x0eInvListRequest\x12+\n" +
 	"\afilters\x18\x01 \x01(\v2\x11.ebook.InvFiltersR\afilters\x12%\n" +
 	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"K\n" +
 	"\x0fInvListResponse\x12\"\n" +
 	"\x06result\x18\x01 \x03(\v2\n" +
 	".ebook.InvR\x06result\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count2\xc6\x01\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"l\n" +
+	"\x12CatalogListRequest\x12/\n" +
+	"\afilters\x18\x01 \x01(\v2\x15.ebook.CatalogFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"S\n" +
+	"\x13CatalogListResponse\x12&\n" +
+	"\x06result\x18\x01 \x03(\v2\x0e.ebook.CatalogR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"|\n" +
+	"\x1aTypeDescriptionListRequest\x127\n" +
+	"\afilters\x18\x01 \x01(\v2\x1d.ebook.TypeDescriptionFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"c\n" +
+	"\x1bTypeDescriptionListResponse\x12.\n" +
+	"\x06result\x18\x01 \x03(\v2\x16.ebook.TypeDescriptionR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"\x82\x01\n" +
+	"\x1dBibliographicLevelListRequest\x12:\n" +
+	"\afilters\x18\x01 \x01(\v2 .ebook.BibliographicLevelFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"i\n" +
+	"\x1eBibliographicLevelListResponse\x121\n" +
+	"\x06result\x18\x01 \x03(\v2\x19.ebook.BibliographicLevelR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"\x82\x01\n" +
+	"\x1dDictionaryLanguageListRequest\x12:\n" +
+	"\afilters\x18\x01 \x01(\v2 .ebook.DictionaryLanguageFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"i\n" +
+	"\x1eDictionaryLanguageListResponse\x121\n" +
+	"\x06result\x18\x01 \x03(\v2\x19.ebook.DictionaryLanguageR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"r\n" +
+	"\x15BlockFieldListRequest\x122\n" +
+	"\afilters\x18\x01 \x01(\v2\x18.ebook.BlockFieldFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"Y\n" +
+	"\x16BlockFieldListResponse\x12)\n" +
+	"\x06result\x18\x01 \x03(\v2\x11.ebook.BlockFieldR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"h\n" +
+	"\x10BlockListRequest\x12-\n" +
+	"\afilters\x18\x01 \x01(\v2\x13.ebook.BlockFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"O\n" +
+	"\x11BlockListResponse\x12$\n" +
+	"\x06result\x18\x01 \x03(\v2\f.ebook.BlockR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"r\n" +
+	"\x15DictionaryListRequest\x122\n" +
+	"\afilters\x18\x01 \x01(\v2\x18.ebook.DictionaryFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"Y\n" +
+	"\x16DictionaryListResponse\x12)\n" +
+	"\x06result\x18\x01 \x03(\v2\x11.ebook.DictionaryR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"z\n" +
+	"\x17SearchDictionaryRequest\x128\n" +
+	"\afilters\x18\x01 \x01(\v2\x1e.ebook.SearchDictionaryFiltersR\afilters\x12%\n" +
+	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"_\n" +
+	"\x18SearchDictionaryResponse\x12-\n" +
+	"\x06result\x18\x01 \x03(\v2\x15.ebook.DictionaryBaseR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count2\xfc\x01\n" +
 	"\bEbookSvc\x12?\n" +
 	"\x0eEbookBriefById\x12\x18.ebook.EntityByIdRequest\x1a\x11.ebook.EbookBrief\"\x00\x12=\n" +
-	"\rEbookCardById\x12\x18.ebook.EntityByIdRequest\x1a\x10.ebook.EbookCard\"\x00\x12:\n" +
-	"\aInvList\x12\x15.ebook.InvListRequest\x1a\x16.ebook.InvListResponse\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\rEbookCardById\x12\x18.ebook.EntityByIdRequest\x1a\x10.ebook.EbookCard\"\x00\x124\n" +
+	"\tEbookById\x12\x17.ebook.EbookByIdRequest\x1a\f.ebook.Ebook\"\x00\x12:\n" +
+	"\aInvList\x12\x15.ebook.InvListRequest\x1a\x16.ebook.InvListResponse\"\x002\xba\x05\n" +
+	"\rDictionarySvc\x12O\n" +
+	"\x0eDictionaryList\x12\x1c.ebook.DictionaryListRequest\x1a\x1d.ebook.DictionaryListResponse\"\x00\x12U\n" +
+	"\x10SearchDictionary\x12\x1e.ebook.SearchDictionaryRequest\x1a\x1f.ebook.SearchDictionaryResponse\"\x00\x12F\n" +
+	"\vCatalogList\x12\x19.ebook.CatalogListRequest\x1a\x1a.ebook.CatalogListResponse\"\x00\x12^\n" +
+	"\x13TypeDescriptionList\x12!.ebook.TypeDescriptionListRequest\x1a\".ebook.TypeDescriptionListResponse\"\x00\x12g\n" +
+	"\x16BibliographicLevelList\x12$.ebook.BibliographicLevelListRequest\x1a%.ebook.BibliographicLevelListResponse\"\x00\x12]\n" +
+	"\fLanguageList\x12$.ebook.DictionaryLanguageListRequest\x1a%.ebook.DictionaryLanguageListResponse\"\x00\x12@\n" +
+	"\tBlockList\x12\x17.ebook.BlockListRequest\x1a\x18.ebook.BlockListResponse\"\x00\x12O\n" +
+	"\x0eBlockFieldList\x12\x1c.ebook.BlockFieldListRequest\x1a\x1d.ebook.BlockFieldListResponse\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_ebook_proto_rawDescOnce sync.Once
@@ -200,32 +1145,108 @@ func file_protobuf_ebook_proto_rawDescGZIP() []byte {
 	return file_protobuf_ebook_proto_rawDescData
 }
 
-var file_protobuf_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protobuf_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_protobuf_ebook_proto_goTypes = []any{
-	(*EntityByIdRequest)(nil), // 0: ebook.EntityByIdRequest
-	(*InvListRequest)(nil),    // 1: ebook.InvListRequest
-	(*InvListResponse)(nil),   // 2: ebook.InvListResponse
-	(*InvFilters)(nil),        // 3: ebook.InvFilters
-	(*Paging)(nil),            // 4: ebook.Paging
-	(*Inv)(nil),               // 5: ebook.Inv
-	(*EbookBrief)(nil),        // 6: ebook.EbookBrief
-	(*EbookCard)(nil),         // 7: ebook.EbookCard
+	(*EntityByIdRequest)(nil),              // 0: ebook.EntityByIdRequest
+	(*EbookByIdRequest)(nil),               // 1: ebook.EbookByIdRequest
+	(*InvListRequest)(nil),                 // 2: ebook.InvListRequest
+	(*InvListResponse)(nil),                // 3: ebook.InvListResponse
+	(*CatalogListRequest)(nil),             // 4: ebook.CatalogListRequest
+	(*CatalogListResponse)(nil),            // 5: ebook.CatalogListResponse
+	(*TypeDescriptionListRequest)(nil),     // 6: ebook.TypeDescriptionListRequest
+	(*TypeDescriptionListResponse)(nil),    // 7: ebook.TypeDescriptionListResponse
+	(*BibliographicLevelListRequest)(nil),  // 8: ebook.BibliographicLevelListRequest
+	(*BibliographicLevelListResponse)(nil), // 9: ebook.BibliographicLevelListResponse
+	(*DictionaryLanguageListRequest)(nil),  // 10: ebook.DictionaryLanguageListRequest
+	(*DictionaryLanguageListResponse)(nil), // 11: ebook.DictionaryLanguageListResponse
+	(*BlockFieldListRequest)(nil),          // 12: ebook.BlockFieldListRequest
+	(*BlockFieldListResponse)(nil),         // 13: ebook.BlockFieldListResponse
+	(*BlockListRequest)(nil),               // 14: ebook.BlockListRequest
+	(*BlockListResponse)(nil),              // 15: ebook.BlockListResponse
+	(*DictionaryListRequest)(nil),          // 16: ebook.DictionaryListRequest
+	(*DictionaryListResponse)(nil),         // 17: ebook.DictionaryListResponse
+	(*SearchDictionaryRequest)(nil),        // 18: ebook.SearchDictionaryRequest
+	(*SearchDictionaryResponse)(nil),       // 19: ebook.SearchDictionaryResponse
+	(*InvFilters)(nil),                     // 20: ebook.InvFilters
+	(*Paging)(nil),                         // 21: ebook.Paging
+	(*Inv)(nil),                            // 22: ebook.Inv
+	(*CatalogFilters)(nil),                 // 23: ebook.CatalogFilters
+	(*Catalog)(nil),                        // 24: ebook.Catalog
+	(*TypeDescriptionFilters)(nil),         // 25: ebook.TypeDescriptionFilters
+	(*TypeDescription)(nil),                // 26: ebook.TypeDescription
+	(*BibliographicLevelFilters)(nil),      // 27: ebook.BibliographicLevelFilters
+	(*BibliographicLevel)(nil),             // 28: ebook.BibliographicLevel
+	(*DictionaryLanguageFilters)(nil),      // 29: ebook.DictionaryLanguageFilters
+	(*DictionaryLanguage)(nil),             // 30: ebook.DictionaryLanguage
+	(*BlockFieldFilters)(nil),              // 31: ebook.BlockFieldFilters
+	(*BlockField)(nil),                     // 32: ebook.BlockField
+	(*BlockFilters)(nil),                   // 33: ebook.BlockFilters
+	(*Block)(nil),                          // 34: ebook.Block
+	(*DictionaryFilters)(nil),              // 35: ebook.DictionaryFilters
+	(*Dictionary)(nil),                     // 36: ebook.Dictionary
+	(*SearchDictionaryFilters)(nil),        // 37: ebook.SearchDictionaryFilters
+	(*DictionaryBase)(nil),                 // 38: ebook.DictionaryBase
+	(*EbookBrief)(nil),                     // 39: ebook.EbookBrief
+	(*EbookCard)(nil),                      // 40: ebook.EbookCard
+	(*Ebook)(nil),                          // 41: ebook.Ebook
 }
 var file_protobuf_ebook_proto_depIdxs = []int32{
-	3, // 0: ebook.InvListRequest.filters:type_name -> ebook.InvFilters
-	4, // 1: ebook.InvListRequest.paging:type_name -> ebook.Paging
-	5, // 2: ebook.InvListResponse.result:type_name -> ebook.Inv
-	0, // 3: ebook.EbookSvc.EbookBriefById:input_type -> ebook.EntityByIdRequest
-	0, // 4: ebook.EbookSvc.EbookCardById:input_type -> ebook.EntityByIdRequest
-	1, // 5: ebook.EbookSvc.InvList:input_type -> ebook.InvListRequest
-	6, // 6: ebook.EbookSvc.EbookBriefById:output_type -> ebook.EbookBrief
-	7, // 7: ebook.EbookSvc.EbookCardById:output_type -> ebook.EbookCard
-	2, // 8: ebook.EbookSvc.InvList:output_type -> ebook.InvListResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	20, // 0: ebook.InvListRequest.filters:type_name -> ebook.InvFilters
+	21, // 1: ebook.InvListRequest.paging:type_name -> ebook.Paging
+	22, // 2: ebook.InvListResponse.result:type_name -> ebook.Inv
+	23, // 3: ebook.CatalogListRequest.filters:type_name -> ebook.CatalogFilters
+	21, // 4: ebook.CatalogListRequest.paging:type_name -> ebook.Paging
+	24, // 5: ebook.CatalogListResponse.result:type_name -> ebook.Catalog
+	25, // 6: ebook.TypeDescriptionListRequest.filters:type_name -> ebook.TypeDescriptionFilters
+	21, // 7: ebook.TypeDescriptionListRequest.paging:type_name -> ebook.Paging
+	26, // 8: ebook.TypeDescriptionListResponse.result:type_name -> ebook.TypeDescription
+	27, // 9: ebook.BibliographicLevelListRequest.filters:type_name -> ebook.BibliographicLevelFilters
+	21, // 10: ebook.BibliographicLevelListRequest.paging:type_name -> ebook.Paging
+	28, // 11: ebook.BibliographicLevelListResponse.result:type_name -> ebook.BibliographicLevel
+	29, // 12: ebook.DictionaryLanguageListRequest.filters:type_name -> ebook.DictionaryLanguageFilters
+	21, // 13: ebook.DictionaryLanguageListRequest.paging:type_name -> ebook.Paging
+	30, // 14: ebook.DictionaryLanguageListResponse.result:type_name -> ebook.DictionaryLanguage
+	31, // 15: ebook.BlockFieldListRequest.filters:type_name -> ebook.BlockFieldFilters
+	21, // 16: ebook.BlockFieldListRequest.paging:type_name -> ebook.Paging
+	32, // 17: ebook.BlockFieldListResponse.result:type_name -> ebook.BlockField
+	33, // 18: ebook.BlockListRequest.filters:type_name -> ebook.BlockFilters
+	21, // 19: ebook.BlockListRequest.paging:type_name -> ebook.Paging
+	34, // 20: ebook.BlockListResponse.result:type_name -> ebook.Block
+	35, // 21: ebook.DictionaryListRequest.filters:type_name -> ebook.DictionaryFilters
+	21, // 22: ebook.DictionaryListRequest.paging:type_name -> ebook.Paging
+	36, // 23: ebook.DictionaryListResponse.result:type_name -> ebook.Dictionary
+	37, // 24: ebook.SearchDictionaryRequest.filters:type_name -> ebook.SearchDictionaryFilters
+	21, // 25: ebook.SearchDictionaryRequest.paging:type_name -> ebook.Paging
+	38, // 26: ebook.SearchDictionaryResponse.result:type_name -> ebook.DictionaryBase
+	0,  // 27: ebook.EbookSvc.EbookBriefById:input_type -> ebook.EntityByIdRequest
+	0,  // 28: ebook.EbookSvc.EbookCardById:input_type -> ebook.EntityByIdRequest
+	1,  // 29: ebook.EbookSvc.EbookById:input_type -> ebook.EbookByIdRequest
+	2,  // 30: ebook.EbookSvc.InvList:input_type -> ebook.InvListRequest
+	16, // 31: ebook.DictionarySvc.DictionaryList:input_type -> ebook.DictionaryListRequest
+	18, // 32: ebook.DictionarySvc.SearchDictionary:input_type -> ebook.SearchDictionaryRequest
+	4,  // 33: ebook.DictionarySvc.CatalogList:input_type -> ebook.CatalogListRequest
+	6,  // 34: ebook.DictionarySvc.TypeDescriptionList:input_type -> ebook.TypeDescriptionListRequest
+	8,  // 35: ebook.DictionarySvc.BibliographicLevelList:input_type -> ebook.BibliographicLevelListRequest
+	10, // 36: ebook.DictionarySvc.LanguageList:input_type -> ebook.DictionaryLanguageListRequest
+	14, // 37: ebook.DictionarySvc.BlockList:input_type -> ebook.BlockListRequest
+	12, // 38: ebook.DictionarySvc.BlockFieldList:input_type -> ebook.BlockFieldListRequest
+	39, // 39: ebook.EbookSvc.EbookBriefById:output_type -> ebook.EbookBrief
+	40, // 40: ebook.EbookSvc.EbookCardById:output_type -> ebook.EbookCard
+	41, // 41: ebook.EbookSvc.EbookById:output_type -> ebook.Ebook
+	3,  // 42: ebook.EbookSvc.InvList:output_type -> ebook.InvListResponse
+	17, // 43: ebook.DictionarySvc.DictionaryList:output_type -> ebook.DictionaryListResponse
+	19, // 44: ebook.DictionarySvc.SearchDictionary:output_type -> ebook.SearchDictionaryResponse
+	5,  // 45: ebook.DictionarySvc.CatalogList:output_type -> ebook.CatalogListResponse
+	7,  // 46: ebook.DictionarySvc.TypeDescriptionList:output_type -> ebook.TypeDescriptionListResponse
+	9,  // 47: ebook.DictionarySvc.BibliographicLevelList:output_type -> ebook.BibliographicLevelListResponse
+	11, // 48: ebook.DictionarySvc.LanguageList:output_type -> ebook.DictionaryLanguageListResponse
+	15, // 49: ebook.DictionarySvc.BlockList:output_type -> ebook.BlockListResponse
+	13, // 50: ebook.DictionarySvc.BlockFieldList:output_type -> ebook.BlockFieldListResponse
+	39, // [39:51] is the sub-list for method output_type
+	27, // [27:39] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_ebook_proto_init() }
@@ -234,15 +1255,16 @@ func file_protobuf_ebook_proto_init() {
 		return
 	}
 	file_protobuf_ebook_model_proto_init()
+	file_protobuf_dictionary_model_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_ebook_proto_rawDesc), len(file_protobuf_ebook_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   20,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_protobuf_ebook_proto_goTypes,
 		DependencyIndexes: file_protobuf_ebook_proto_depIdxs,

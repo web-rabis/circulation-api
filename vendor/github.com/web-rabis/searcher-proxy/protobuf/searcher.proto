@@ -1,0 +1,89 @@
+syntax = "proto3";
+package searcher_proxy;
+option go_package = "./protobuf;protobuf";
+import "protobuf/searcher_dictionary_model.proto";
+import "protobuf/searcher_ebook_model.proto";
+import "protobuf/searcher_periodical_model.proto";
+import "google/protobuf/empty.proto";
+
+service DictionarySvc {
+  rpc CatalogList(google.protobuf.Empty) returns (CatalogListResponse) {}
+  rpc TypeDescriptionList(google.protobuf.Empty) returns (TypeDescriptionListResponse) {}
+  rpc BibliographicLevelList(google.protobuf.Empty) returns (BibliographicLevelListResponse) {}
+  rpc LanguageList(google.protobuf.Empty) returns (DictionaryLanguageListResponse) {}
+  rpc SearchFieldList(google.protobuf.Empty) returns (SearchFieldListResponse) {}
+}
+service EbookSearchSvc {
+  rpc Search(EbookSearchRequest) returns (EbookSearchResponse) {}
+}
+service PeriodicalSearchSvc {
+  rpc Search(PeriodicalSearchRequest) returns (PeriodicalSearchResponse) {}
+  rpc PeriodicalNumbers(PeriodicalNumbersRequest) returns (PeriodicalNumbersResponse) {}
+}
+message CatalogListResponse {
+  repeated Catalog result = 1;
+  int64 count = 2;
+}
+message TypeDescriptionListResponse {
+ repeated TypeDescription result = 1;
+  int64 count = 2;
+}
+message BibliographicLevelListResponse {
+  repeated BibliographicLevel result = 1;
+  int64 count = 2;
+}
+message DictionaryLanguageListResponse {
+  repeated DictionaryLanguage result = 1;
+  int64 count = 2;
+}
+message SearchFieldListResponse {
+  repeated SearchField result = 1;
+  int64 count = 2;
+}
+message EbookSearchFilters {
+  string query = 1;
+  string type = 2;
+  bool is_simple_search = 3;
+  repeated int64 catalogs = 4;
+  repeated int64 languages = 5;
+  repeated int64 fields = 6;
+  repeated int64 type_descriptions = 7;
+  repeated int64 bibliographic_levels = 8;
+  string fields_query = 9;
+  int64 year_edition_low = 10;
+  int64 year_edition_high = 11;
+}
+message EbookSearchRequest {
+  EbookSearchFilters filters =1;
+  Paging paging = 2;
+}
+message EbookSearchResponse {
+  repeated Ebook result = 1;
+  int64 count = 2;
+}
+message PeriodicalSearchFilters {
+  string query = 1;
+  string type = 2;
+  bool is_simple_search = 3;
+}
+message PeriodicalSearchRequest {
+  PeriodicalSearchFilters filters = 1;
+  Paging paging = 2;
+}
+message PeriodicalSearchResponse {
+  repeated Periodical result = 1;
+  int64 count = 2;
+}
+message PeriodicalNumbersRequest {
+  int64 periodical_id = 1;
+}
+message PeriodicalNumbersResponse {
+  repeated PeriodicalNumber result = 1;
+  int64 count = 2;
+}
+message Paging {
+  int64   offset = 1;
+  int64   limit = 2;
+  string  sortKey = 3;
+  int32   sortVal = 4;
+}

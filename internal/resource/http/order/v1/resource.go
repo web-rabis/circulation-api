@@ -3,10 +3,10 @@ package v1
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth"
-	ssoClient "github.com/web-rabis/sso-client/client"
 
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
+	ssoClient "github.com/web-rabis/sso-client/client"
 )
 
 type OrderResource struct {
@@ -36,6 +36,9 @@ func (res *OrderResource) Routes() chi.Router {
 		r.Use(jwtauth.Verifier(res.authMan.JWTAuth()))
 		r.Use(auth.NewUserAccessCtx(res.authMan.JWTKey()).ChiMiddleware)
 		r.Get("/", res.orders)
+		r.Post("/", res.searchOrders)
+		r.Get("/audit/{id}", res.auditOrder)
+		r.Post("/book/on-demand-issue", res.createOrder)
 		r.Post("/return", res.returnOrder)
 		r.Post("/return-to-storage", res.returnToStorageOrder)
 		r.Post("/postponed", res.postponedOrder)

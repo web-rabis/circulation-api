@@ -13,10 +13,10 @@ require (
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
-	github.com/web-rabis/order-client v0.0.0-20260426214151-6598944bcb3e
+	github.com/web-rabis/order-client v0.0.0-20260602092709-1c40db0796b5
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
-	golang.org/x/sync v0.19.0
+	golang.org/x/sync v0.20.0
 )
 
 require (
@@ -45,15 +45,16 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
-	github.com/web-rabis/ebook-client v0.0.0-20260429144220-7e7ab193b721 // indirect
+	github.com/web-rabis/ebook-client v0.0.0-20260531173742-cb890cac976e // indirect
+	github.com/web-rabis/searcher-proxy v0.0.0-20260531173822-4d20674ca383 // indirect
 	github.com/web-rabis/sso-client v0.0.0-20260421185542-0d545480da41 // indirect
-	golang.org/x/crypto v0.47.0 // indirect
-	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
-	golang.org/x/tools v0.40.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260120221211-b8f7ae30c516 // indirect
-	google.golang.org/grpc v1.80.0 // indirect
+	golang.org/x/crypto v0.48.0 // indirect
+	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/text v0.34.0 // indirect
+	golang.org/x/tools v0.41.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260226221140-a57be14db171 // indirect
+	google.golang.org/grpc v1.81.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/gorm v1.25.4 // indirect

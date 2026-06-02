@@ -2,14 +2,32 @@ syntax = "proto3";
 package ebook;
 option go_package = "./protobuf;protobuf";
 import "protobuf/ebook_model.proto";
+import "protobuf/dictionary_model.proto";
 
 service EbookSvc {
   rpc EbookBriefById(EntityByIdRequest) returns (EbookBrief) {} // краткая
   rpc EbookCardById(EntityByIdRequest) returns (EbookCard) {}
+  rpc EbookById(EbookByIdRequest) returns (Ebook) {}
   rpc InvList(InvListRequest) returns (InvListResponse) {}
 }
+
+service DictionarySvc {
+  rpc DictionaryList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc SearchDictionary(SearchDictionaryRequest) returns (SearchDictionaryResponse) {}
+  rpc CatalogList(CatalogListRequest) returns (CatalogListResponse) {}
+  rpc TypeDescriptionList(TypeDescriptionListRequest) returns (TypeDescriptionListResponse) {}
+  rpc BibliographicLevelList(BibliographicLevelListRequest) returns (BibliographicLevelListResponse) {}
+  rpc LanguageList(DictionaryLanguageListRequest) returns (DictionaryLanguageListResponse) {}
+  rpc BlockList(BlockListRequest) returns (BlockListResponse) {}
+  rpc BlockFieldList(BlockFieldListRequest) returns (BlockFieldListResponse) {}
+}
+
 message EntityByIdRequest {
   int64 id = 1;
+}
+message EbookByIdRequest {
+  int64 id = 1;
+  bool with_card = 2;
 }
 message InvListRequest {
   InvFilters filters = 1;
@@ -17,5 +35,69 @@ message InvListRequest {
 }
 message InvListResponse {
   repeated Inv result = 1;
+  int64 count = 2;
+}
+message CatalogListRequest {
+  CatalogFilters filters = 1;
+  Paging paging = 2;
+}
+message CatalogListResponse {
+  repeated Catalog result = 1;
+  int64 count = 2;
+}
+message TypeDescriptionListRequest {
+  TypeDescriptionFilters filters = 1;
+  Paging paging = 2;
+}
+message TypeDescriptionListResponse {
+  repeated TypeDescription result = 1;
+  int64 count = 2;
+}
+message BibliographicLevelListRequest {
+  BibliographicLevelFilters filters = 1;
+  Paging paging = 2;
+}
+message BibliographicLevelListResponse {
+  repeated BibliographicLevel result = 1;
+  int64 count = 2;
+}
+message DictionaryLanguageListRequest {
+  DictionaryLanguageFilters filters = 1;
+  Paging paging = 2;
+}
+message DictionaryLanguageListResponse {
+  repeated DictionaryLanguage result = 1;
+  int64 count = 2;
+}
+message BlockFieldListRequest {
+  BlockFieldFilters filters = 1;
+  Paging paging = 2;
+}
+message BlockFieldListResponse {
+  repeated BlockField result = 1;
+  int64 count = 2;
+}
+message BlockListRequest {
+  BlockFilters filters = 1;
+  Paging paging = 2;
+}
+message BlockListResponse {
+  repeated Block result = 1;
+  int64 count = 2;
+}
+message DictionaryListRequest {
+  DictionaryFilters filters = 1;
+  Paging paging = 2;
+}
+message DictionaryListResponse {
+  repeated Dictionary result = 1;
+  int64 count =2;
+}
+message SearchDictionaryRequest {
+  SearchDictionaryFilters filters = 1;
+  Paging paging = 2;
+}
+message SearchDictionaryResponse {
+  repeated DictionaryBase result = 1;
   int64 count = 2;
 }

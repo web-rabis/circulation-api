@@ -9,4 +9,5 @@ type APIServer struct {
 	ReaderConfig
 	EbookConfig
 	SsoConfig
+	SearcherConfig
 }

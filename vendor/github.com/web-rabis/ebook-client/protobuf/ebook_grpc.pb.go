@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	EbookSvc_EbookBriefById_FullMethodName = "/ebook.EbookSvc/EbookBriefById"
 	EbookSvc_EbookCardById_FullMethodName  = "/ebook.EbookSvc/EbookCardById"
+	EbookSvc_EbookById_FullMethodName      = "/ebook.EbookSvc/EbookById"
 	EbookSvc_InvList_FullMethodName        = "/ebook.EbookSvc/InvList"
 )
 
@@ -30,6 +31,7 @@ const (
 type EbookSvcClient interface {
 	EbookBriefById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookBrief, error)
 	EbookCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookCard, error)
+	EbookById(ctx context.Context, in *EbookByIdRequest, opts ...grpc.CallOption) (*Ebook, error)
 	InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error)
 }
 
@@ -61,6 +63,16 @@ func (c *ebookSvcClient) EbookCardById(ctx context.Context, in *EntityByIdReques
 	return out, nil
 }
 
+func (c *ebookSvcClient) EbookById(ctx context.Context, in *EbookByIdRequest, opts ...grpc.CallOption) (*Ebook, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ebook)
+	err := c.cc.Invoke(ctx, EbookSvc_EbookById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *ebookSvcClient) InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InvListResponse)
@@ -77,6 +89,7 @@ func (c *ebookSvcClient) InvList(ctx context.Context, in *InvListRequest, opts .
 type EbookSvcServer interface {
 	EbookBriefById(context.Context, *EntityByIdRequest) (*EbookBrief, error)
 	EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error)
+	EbookById(context.Context, *EbookByIdRequest) (*Ebook, error)
 	InvList(context.Context, *InvListRequest) (*InvListResponse, error)
 	mustEmbedUnimplementedEbookSvcServer()
 }
@@ -93,6 +106,9 @@ func (UnimplementedEbookSvcServer) EbookBriefById(context.Context, *EntityByIdRe
 }
 func (UnimplementedEbookSvcServer) EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error) {
 	return nil, status.Error(codes.Unimplemented, "method EbookCardById not implemented")
+}
+func (UnimplementedEbookSvcServer) EbookById(context.Context, *EbookByIdRequest) (*Ebook, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookById not implemented")
 }
 func (UnimplementedEbookSvcServer) InvList(context.Context, *InvListRequest) (*InvListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method InvList not implemented")
@@ -154,6 +170,24 @@ func _EbookSvc_EbookCardById_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EbookSvc_EbookById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EbookByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookSvcServer).EbookById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookSvc_EbookById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookSvcServer).EbookById(ctx, req.(*EbookByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EbookSvc_InvList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InvListRequest)
 	if err := dec(in); err != nil {
@@ -188,8 +222,380 @@ var EbookSvc_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _EbookSvc_EbookCardById_Handler,
 		},
 		{
+			MethodName: "EbookById",
+			Handler:    _EbookSvc_EbookById_Handler,
+		},
+		{
 			MethodName: "InvList",
 			Handler:    _EbookSvc_InvList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/ebook.proto",
+}
+
+const (
+	DictionarySvc_DictionaryList_FullMethodName         = "/ebook.DictionarySvc/DictionaryList"
+	DictionarySvc_SearchDictionary_FullMethodName       = "/ebook.DictionarySvc/SearchDictionary"
+	DictionarySvc_CatalogList_FullMethodName            = "/ebook.DictionarySvc/CatalogList"
+	DictionarySvc_TypeDescriptionList_FullMethodName    = "/ebook.DictionarySvc/TypeDescriptionList"
+	DictionarySvc_BibliographicLevelList_FullMethodName = "/ebook.DictionarySvc/BibliographicLevelList"
+	DictionarySvc_LanguageList_FullMethodName           = "/ebook.DictionarySvc/LanguageList"
+	DictionarySvc_BlockList_FullMethodName              = "/ebook.DictionarySvc/BlockList"
+	DictionarySvc_BlockFieldList_FullMethodName         = "/ebook.DictionarySvc/BlockFieldList"
+)
+
+// DictionarySvcClient is the client API for DictionarySvc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictionarySvcClient interface {
+	DictionaryList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	SearchDictionary(ctx context.Context, in *SearchDictionaryRequest, opts ...grpc.CallOption) (*SearchDictionaryResponse, error)
+	CatalogList(ctx context.Context, in *CatalogListRequest, opts ...grpc.CallOption) (*CatalogListResponse, error)
+	TypeDescriptionList(ctx context.Context, in *TypeDescriptionListRequest, opts ...grpc.CallOption) (*TypeDescriptionListResponse, error)
+	BibliographicLevelList(ctx context.Context, in *BibliographicLevelListRequest, opts ...grpc.CallOption) (*BibliographicLevelListResponse, error)
+	LanguageList(ctx context.Context, in *DictionaryLanguageListRequest, opts ...grpc.CallOption) (*DictionaryLanguageListResponse, error)
+	BlockList(ctx context.Context, in *BlockListRequest, opts ...grpc.CallOption) (*BlockListResponse, error)
+	BlockFieldList(ctx context.Context, in *BlockFieldListRequest, opts ...grpc.CallOption) (*BlockFieldListResponse, error)
+}
+
+type dictionarySvcClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictionarySvcClient(cc grpc.ClientConnInterface) DictionarySvcClient {
+	return &dictionarySvcClient{cc}
+}
+
+func (c *dictionarySvcClient) DictionaryList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_DictionaryList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) SearchDictionary(ctx context.Context, in *SearchDictionaryRequest, opts ...grpc.CallOption) (*SearchDictionaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SearchDictionaryResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_SearchDictionary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) CatalogList(ctx context.Context, in *CatalogListRequest, opts ...grpc.CallOption) (*CatalogListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CatalogListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_CatalogList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) TypeDescriptionList(ctx context.Context, in *TypeDescriptionListRequest, opts ...grpc.CallOption) (*TypeDescriptionListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TypeDescriptionListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_TypeDescriptionList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) BibliographicLevelList(ctx context.Context, in *BibliographicLevelListRequest, opts ...grpc.CallOption) (*BibliographicLevelListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BibliographicLevelListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_BibliographicLevelList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) LanguageList(ctx context.Context, in *DictionaryLanguageListRequest, opts ...grpc.CallOption) (*DictionaryLanguageListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryLanguageListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_LanguageList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) BlockList(ctx context.Context, in *BlockListRequest, opts ...grpc.CallOption) (*BlockListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BlockListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_BlockList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) BlockFieldList(ctx context.Context, in *BlockFieldListRequest, opts ...grpc.CallOption) (*BlockFieldListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BlockFieldListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_BlockFieldList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictionarySvcServer is the server API for DictionarySvc service.
+// All implementations must embed UnimplementedDictionarySvcServer
+// for forward compatibility.
+type DictionarySvcServer interface {
+	DictionaryList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	SearchDictionary(context.Context, *SearchDictionaryRequest) (*SearchDictionaryResponse, error)
+	CatalogList(context.Context, *CatalogListRequest) (*CatalogListResponse, error)
+	TypeDescriptionList(context.Context, *TypeDescriptionListRequest) (*TypeDescriptionListResponse, error)
+	BibliographicLevelList(context.Context, *BibliographicLevelListRequest) (*BibliographicLevelListResponse, error)
+	LanguageList(context.Context, *DictionaryLanguageListRequest) (*DictionaryLanguageListResponse, error)
+	BlockList(context.Context, *BlockListRequest) (*BlockListResponse, error)
+	BlockFieldList(context.Context, *BlockFieldListRequest) (*BlockFieldListResponse, error)
+	mustEmbedUnimplementedDictionarySvcServer()
+}
+
+// UnimplementedDictionarySvcServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDictionarySvcServer struct{}
+
+func (UnimplementedDictionarySvcServer) DictionaryList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DictionaryList not implemented")
+}
+func (UnimplementedDictionarySvcServer) SearchDictionary(context.Context, *SearchDictionaryRequest) (*SearchDictionaryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SearchDictionary not implemented")
+}
+func (UnimplementedDictionarySvcServer) CatalogList(context.Context, *CatalogListRequest) (*CatalogListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CatalogList not implemented")
+}
+func (UnimplementedDictionarySvcServer) TypeDescriptionList(context.Context, *TypeDescriptionListRequest) (*TypeDescriptionListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TypeDescriptionList not implemented")
+}
+func (UnimplementedDictionarySvcServer) BibliographicLevelList(context.Context, *BibliographicLevelListRequest) (*BibliographicLevelListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BibliographicLevelList not implemented")
+}
+func (UnimplementedDictionarySvcServer) LanguageList(context.Context, *DictionaryLanguageListRequest) (*DictionaryLanguageListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LanguageList not implemented")
+}
+func (UnimplementedDictionarySvcServer) BlockList(context.Context, *BlockListRequest) (*BlockListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BlockList not implemented")
+}
+func (UnimplementedDictionarySvcServer) BlockFieldList(context.Context, *BlockFieldListRequest) (*BlockFieldListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BlockFieldList not implemented")
+}
+func (UnimplementedDictionarySvcServer) mustEmbedUnimplementedDictionarySvcServer() {}
+func (UnimplementedDictionarySvcServer) testEmbeddedByValue()                       {}
+
+// UnsafeDictionarySvcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictionarySvcServer will
+// result in compilation errors.
+type UnsafeDictionarySvcServer interface {
+	mustEmbedUnimplementedDictionarySvcServer()
+}
+
+func RegisterDictionarySvcServer(s grpc.ServiceRegistrar, srv DictionarySvcServer) {
+	// If the following call panics, it indicates UnimplementedDictionarySvcServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DictionarySvc_ServiceDesc, srv)
+}
+
+func _DictionarySvc_DictionaryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).DictionaryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_DictionaryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).DictionaryList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_SearchDictionary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchDictionaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).SearchDictionary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_SearchDictionary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).SearchDictionary(ctx, req.(*SearchDictionaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_CatalogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CatalogListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).CatalogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_CatalogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).CatalogList(ctx, req.(*CatalogListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_TypeDescriptionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TypeDescriptionListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).TypeDescriptionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_TypeDescriptionList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).TypeDescriptionList(ctx, req.(*TypeDescriptionListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_BibliographicLevelList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BibliographicLevelListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).BibliographicLevelList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_BibliographicLevelList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).BibliographicLevelList(ctx, req.(*BibliographicLevelListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_LanguageList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryLanguageListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).LanguageList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_LanguageList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).LanguageList(ctx, req.(*DictionaryLanguageListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_BlockList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlockListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).BlockList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_BlockList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).BlockList(ctx, req.(*BlockListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_BlockFieldList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlockFieldListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).BlockFieldList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_BlockFieldList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).BlockFieldList(ctx, req.(*BlockFieldListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DictionarySvc_ServiceDesc is the grpc.ServiceDesc for DictionarySvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictionarySvc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ebook.DictionarySvc",
+	HandlerType: (*DictionarySvcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DictionaryList",
+			Handler:    _DictionarySvc_DictionaryList_Handler,
+		},
+		{
+			MethodName: "SearchDictionary",
+			Handler:    _DictionarySvc_SearchDictionary_Handler,
+		},
+		{
+			MethodName: "CatalogList",
+			Handler:    _DictionarySvc_CatalogList_Handler,
+		},
+		{
+			MethodName: "TypeDescriptionList",
+			Handler:    _DictionarySvc_TypeDescriptionList_Handler,
+		},
+		{
+			MethodName: "BibliographicLevelList",
+			Handler:    _DictionarySvc_BibliographicLevelList_Handler,
+		},
+		{
+			MethodName: "LanguageList",
+			Handler:    _DictionarySvc_LanguageList_Handler,
+		},
+		{
+			MethodName: "BlockList",
+			Handler:    _DictionarySvc_BlockList_Handler,
+		},
+		{
+			MethodName: "BlockFieldList",
+			Handler:    _DictionarySvc_BlockFieldList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

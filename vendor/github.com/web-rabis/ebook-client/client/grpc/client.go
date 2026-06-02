@@ -14,7 +14,8 @@ type BaseClient struct {
 	conn     *grpc.ClientConn
 	dialOpts []grpc.DialOption
 
-	roleSvc client.EbookService
+	ebookSvc client.EbookService
+	dictSvc  client.DictionaryService
 }
 
 var _ client.Base = &BaseClient{}
@@ -45,9 +46,14 @@ func (c *BaseClient) Close() error {
 }
 
 func (c *BaseClient) EbookSvc() client.EbookService {
-	if c.roleSvc == nil {
-		c.roleSvc = NewEbookServiceClient(protobuf.NewEbookSvcClient(c.conn))
+	if c.ebookSvc == nil {
+		c.ebookSvc = NewEbookServiceClient(protobuf.NewEbookSvcClient(c.conn))
 	}
-
-	return c.roleSvc
+	return c.ebookSvc
+}
+func (c *BaseClient) DictionarySvc() client.DictionaryService {
+	if c.dictSvc == nil {
+		c.dictSvc = NewDictionaryServiceClient(protobuf.NewDictionarySvcClient(c.conn))
+	}
+	return c.dictSvc
 }

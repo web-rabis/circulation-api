@@ -1,18 +1,44 @@
 syntax = "proto3";
 package ebook;
 option go_package = "./protobuf;protobuf";
+message DictionaryFilters {
+}
+message Dictionary  {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  string table_name = 4;
+  bool base = 5;
+}
+message SearchDictionaryFilters {
+  Dictionary dictionary = 1;
+  string query = 2;
+}
+message DictionaryBase  {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message BibliographicLevelFilters {
 
+}
 message BibliographicLevel {
   int64 id = 1;
   string code = 2;
   string name = 3;
   string type_ebooks = 4;
 }
+message TypeDescriptionFilters {
+
+}
 message TypeDescription {
   int64 id = 1;
   string code = 2;
   string name = 3;
   string name_kz = 4;
+}
+message CatalogFilters {
+  int64 is_search = 1;
 }
 message Catalog {
   int64 id = 1;
@@ -35,8 +61,37 @@ message DictionaryServiceData {
   string code = 2;
   string name = 3;
 }
+message DictionaryLanguageFilters {
+
+}
 message DictionaryLanguage {
   int64 id = 1;
   string code = 2;
   string name = 3;
+}
+message DictionarySigla {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message BlockFilters {
+}
+message Block {
+  int64 id = 1;
+  string name = 2;
+  bool is_repeat = 3;
+  int64 priority = 4;
+  string external_table = 5;
+  int64 key_value = 6;
+}
+message BlockFieldFilters {
+  int64 is_search = 1;
+}
+message BlockField {
+  int64 id = 1;
+  int64 block_id = 2;
+  string name = 3;
+  string field_name = 4;
+  string field_type = 5;
+  int64 directory_id = 6;
 }

@@ -19,6 +19,8 @@ service OrderService {
   rpc SendToPf(SendToPfRequest) returns (google.protobuf.Empty) {}
   rpc ReturnToStorage(ReturnToStorageRequest) returns (google.protobuf.Empty) {}
   rpc StateCounts(StateCountsRequest) returns (StateCountsResponse) {}
+  rpc CreateOnDemanIssue(CreateOnDemanIssueRequest) returns (CreateOnDemanIssueResponse) {}
+  rpc Audit(OrderAuditRequest) returns (OrderAuditResponse) {}
 }
 
 service DictionaryService {
@@ -99,4 +101,20 @@ message DepartmentListRequest {
 message DepartmentListResponse {
   int64 count = 1;
   repeated Department departments = 2;
+}
+message CreateOnDemanIssueRequest {
+  int64 ticket_number = 1;
+  int64 ebook_id = 2;
+  int64 department_id = 3;
+  int64 inv_id = 4;
+  User user = 5;
+}
+message CreateOnDemanIssueResponse {
+  int64 order_id = 1;
+}
+message OrderAuditRequest {
+  int64 order_id = 1;
+}
+message OrderAuditResponse {
+  repeated OrderAudit result = 1;
 }

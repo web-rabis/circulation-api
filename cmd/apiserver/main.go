@@ -10,14 +10,15 @@ import (
 	"time"
 
 	"github.com/hashicorp/logutils"
-	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
-
 	"golang.org/x/sync/errgroup"
 
 	"github.com/web-rabis/circulation-api/internal/config"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/auth"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/dictionary"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/ebook"
 	"github.com/web-rabis/circulation-api/internal/domain/manager/order"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/reader"
+	"github.com/web-rabis/circulation-api/internal/domain/manager/search"
 	"github.com/web-rabis/circulation-api/internal/server/http"
 	"github.com/web-rabis/db"
 	ebookCli "github.com/web-rabis/ebook-client"
@@ -26,6 +27,8 @@ import (
 	orderModel "github.com/web-rabis/order-client/model"
 	readerCli "github.com/web-rabis/reader-client"
 	readerModel "github.com/web-rabis/reader-client/model"
+	searcherCli "github.com/web-rabis/searcher-proxy"
+	searcherModel "github.com/web-rabis/searcher-proxy/model"
 	ssoCli "github.com/web-rabis/sso-client"
 	ssoModel "github.com/web-rabis/sso-client/model"
 )
@@ -107,6 +110,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	searcherGrpcClient, err := searcherCli.NewSearcherProxyClient(&searcherModel.ConnectionConfig{
+		Address:  opts.SearcherConfig.GrpcAddress,
+		Protocol: "grpc",
+		Insecure: true,
+	})
+	if err != nil {
+		panic(err)
+	}
 	defer func() {
 		if err := ssoGrpcClient.Close(); err != nil {
 			log.Printf("[WARN] failed to close sso grpc client: %v", err)
@@ -116,11 +127,13 @@ func main() {
 	orderMan := order.NewOrderManager(orderGrpcLient.Order(), readerGrpcLient.ReaderSvc(), ssoGrpcClient.User(), ebookGrpcLient.EbookSvc())
 	dictMan := dictionary.NewManager(orderGrpcLient.Dictionary())
 	ebookMan := ebook.NewManager(ebookGrpcLient.EbookSvc(), orderGrpcLient.Order())
+	searchMan := search.NewManager(orderGrpcLient.Order(), searcherGrpcClient)
+	readerMan := reader.NewReaderManager(readerGrpcLient.ReaderSvc())
 
 	servers, serversCtx := errgroup.WithContext(appCtx)
 
 	servers.Go(func() error {
-		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, ebookMan, ssoGrpcClient.User(), version)
+		return http.Run(serversCtx, opts, authMan, orderMan, dictMan, ebookMan, searchMan, readerMan, ssoGrpcClient.User(), version)
 	})
 
 	if err := servers.Wait(); err != nil {

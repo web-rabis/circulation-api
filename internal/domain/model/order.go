@@ -5,6 +5,7 @@ import (
 
 	"github.com/web-rabis/ebook-client/model/ebook"
 	orderModel "github.com/web-rabis/order-client/model"
+	"github.com/web-rabis/sso-client/model"
 )
 
 type Order struct {
@@ -21,6 +22,14 @@ type Order struct {
 	StorageDepartment *orderModel.Department      `json:"storageDepartment"`
 	IsAuxiliaryFund   bool                        `json:"isAuxiliaryFund"`
 	ReasonRejection   *orderModel.ReasonRejection `json:"reasonRejection"`
+}
+type OrderAudit struct {
+	Id         int64                  `json:"id"`
+	OrderId    int64                  `json:"orderId"`
+	AuditDate  time.Time              `json:"auditDate"`
+	State      *orderModel.State      `json:"state"`
+	User       *model.User            `json:"user"`
+	Department *orderModel.Department `json:"department"`
 }
 
 func NewOrder(o *orderModel.Order, e *ebook.EbookBrief) *Order {
@@ -50,4 +59,21 @@ func NewOrder(o *orderModel.Order, e *ebook.EbookBrief) *Order {
 		ReasonRejection:   o.ReasonRejection,
 	}
 
+}
+func NewOrderAudit(oa *orderModel.OrderAudit) *OrderAudit {
+	if oa == nil {
+		return nil
+	}
+	var u *model.User
+	if oa.UserId != 0 {
+		u = &model.User{Id: oa.UserId}
+	}
+	return &OrderAudit{
+		Id:         oa.Id,
+		OrderId:    oa.OrderId,
+		AuditDate:  oa.AuditDate,
+		State:      oa.State,
+		User:       u,
+		Department: oa.Department,
+	}
 }
