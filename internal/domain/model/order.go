@@ -14,8 +14,8 @@ type Order struct {
 	UpdatedAt         time.Time                   `json:"updatedAt"`
 	Type              string                      `json:"type"`
 	Reader            *orderModel.Reader          `json:"reader"`
-	Ebook             *ebook.EbookBrief           `json:"ebook"`
-	InvNumber         *orderModel.EbookInv        `json:"invNumber"`
+	Ebook             *ebook.Ebook                `json:"ebook"`
+	InvNumber         *ebook.Inv                  `json:"invNumber"`
 	Periodical        *orderModel.Periodical      `json:"periodical"`
 	State             *orderModel.State           `json:"state"`
 	Department        *orderModel.Department      `json:"department"`
@@ -32,15 +32,24 @@ type OrderAudit struct {
 	Department *orderModel.Department `json:"department"`
 }
 
-func NewOrder(o *orderModel.Order, e *ebook.EbookBrief) *Order {
+// NewOrder собирает ответ шлюза: заказ из order-client (только идентификаторы
+// EbookId/EbookInvId и денормализованные InvNumber/Barcode) обогащается
+// карточкой книги e и экземпляром inv из сервиса ebook. Если ebook недоступен,
+// в ответ уходит минимальная заглушка по данным самого заказа, чтобы список
+// заказов оставался работоспособным.
+func NewOrder(o *orderModel.Order, e *ebook.Ebook, inv *ebook.Inv) *Order {
 	if o == nil {
 		return nil
 	}
-	if e == nil && o.Type == "ebook" && o.Ebook != nil {
-		e = &ebook.EbookBrief{
-			Id:     o.Ebook.Id,
-			Author: o.Ebook.Author,
-			Title:  o.Ebook.Title,
+	if e == nil && o.EbookId != 0 {
+		e = &ebook.Ebook{Id: o.EbookId}
+	}
+	if inv == nil && (o.EbookInvId != 0 || o.InvNumber != "" || o.Barcode != "") {
+		inv = &ebook.Inv{
+			Id:        o.EbookInvId,
+			EbookId:   o.EbookId,
+			InvNumber: o.InvNumber,
+			Barcode:   o.Barcode,
 		}
 	}
 	return &Order{
@@ -50,7 +59,7 @@ func NewOrder(o *orderModel.Order, e *ebook.EbookBrief) *Order {
 		Type:              o.Type,
 		Reader:            o.Reader,
 		Ebook:             e,
-		InvNumber:         o.InvNumber,
+		InvNumber:         inv,
 		Periodical:        o.Periodical,
 		State:             o.State,
 		Department:        o.Department,

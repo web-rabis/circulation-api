@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+.next/
+.out/
+*.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+go.sum
+.git/
+.idea/
+.vscode/

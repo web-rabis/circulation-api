@@ -21,6 +21,17 @@ func NewTypeDescriptionFromProto(t *protobuf.TypeDescription) *TypeDescription {
 		NameKz: t.NameKz,
 	}
 }
+func (t *TypeDescription) ToProto() *protobuf.TypeDescription {
+	if t == nil {
+		return nil
+	}
+	return &protobuf.TypeDescription{
+		Id:     t.Id,
+		Code:   t.Code,
+		Name:   t.Name,
+		NameKz: t.NameKz,
+	}
+}
 func (f *TypeDescriptionFilters) ToProto() *protobuf.TypeDescriptionFilters {
 	if f == nil {
 		return nil

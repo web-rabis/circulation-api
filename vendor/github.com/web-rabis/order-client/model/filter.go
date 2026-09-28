@@ -5,7 +5,9 @@ import (
 )
 
 type OrderFilters struct {
-	EbookId         int64    `json:"merchantId"`
+	EbookId int64 `json:"merchantId"`
+	// EbookIds — результат поиска по автору/заглавию, выполненного в сервисе ebook.
+	EbookIds        []int64  `json:"ebookIds"`
 	PeriodicalId    int64    `json:"terminalId"`
 	TicketNumber    int64    `json:"ticketNumber"`
 	States          []string `json:"states"`
@@ -28,6 +30,7 @@ func (f *OrderFilters) ToProto() *protobuf.OrderFilters {
 	}
 	of := &protobuf.OrderFilters{
 		EbookId:         f.EbookId,
+		EbookIds:        f.EbookIds,
 		PeriodicalId:    f.PeriodicalId,
 		TicketNumber:    f.TicketNumber,
 		States:          f.States,

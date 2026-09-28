@@ -56,7 +56,7 @@ func (res *OrderResource) sseStateCounts(w http.ResponseWriter, r *http.Request)
 	}
 	userId := int64(rawID.(float64))
 
-	user, err := res.userSvc.UserById(r.Context(), userId)
+	user, err := res.userSvc.ById(r.Context(), userId)
 	if err != nil {
 		http.Error(w, "failed to get user", http.StatusInternalServerError)
 		return

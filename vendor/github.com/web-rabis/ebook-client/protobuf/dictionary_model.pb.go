@@ -625,6 +625,50 @@ func (x *Department) GetType() string {
 	return ""
 }
 
+type StateFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CodeLike      string                 `protobuf:"bytes,1,opt,name=CodeLike,proto3" json:"CodeLike,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StateFilters) Reset() {
+	*x = StateFilters{}
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StateFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StateFilters) ProtoMessage() {}
+
+func (x *StateFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StateFilters.ProtoReflect.Descriptor instead.
+func (*StateFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *StateFilters) GetCodeLike() string {
+	if x != nil {
+		return x.CodeLike
+	}
+	return ""
+}
+
 type State struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -636,7 +680,7 @@ type State struct {
 
 func (x *State) Reset() {
 	*x = State{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[11]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -648,7 +692,7 @@ func (x *State) String() string {
 func (*State) ProtoMessage() {}
 
 func (x *State) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[11]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -661,7 +705,7 @@ func (x *State) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use State.ProtoReflect.Descriptor instead.
 func (*State) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{11}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *State) GetId() int64 {
@@ -696,7 +740,7 @@ type DictionaryServiceData struct {
 
 func (x *DictionaryServiceData) Reset() {
 	*x = DictionaryServiceData{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[12]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -708,7 +752,7 @@ func (x *DictionaryServiceData) String() string {
 func (*DictionaryServiceData) ProtoMessage() {}
 
 func (x *DictionaryServiceData) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[12]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -721,7 +765,7 @@ func (x *DictionaryServiceData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryServiceData.ProtoReflect.Descriptor instead.
 func (*DictionaryServiceData) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{12}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DictionaryServiceData) GetId() int64 {
@@ -753,7 +797,7 @@ type DictionaryLanguageFilters struct {
 
 func (x *DictionaryLanguageFilters) Reset() {
 	*x = DictionaryLanguageFilters{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[13]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -765,7 +809,7 @@ func (x *DictionaryLanguageFilters) String() string {
 func (*DictionaryLanguageFilters) ProtoMessage() {}
 
 func (x *DictionaryLanguageFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[13]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -778,7 +822,7 @@ func (x *DictionaryLanguageFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryLanguageFilters.ProtoReflect.Descriptor instead.
 func (*DictionaryLanguageFilters) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{13}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{14}
 }
 
 type DictionaryLanguage struct {
@@ -792,7 +836,7 @@ type DictionaryLanguage struct {
 
 func (x *DictionaryLanguage) Reset() {
 	*x = DictionaryLanguage{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[14]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -804,7 +848,7 @@ func (x *DictionaryLanguage) String() string {
 func (*DictionaryLanguage) ProtoMessage() {}
 
 func (x *DictionaryLanguage) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[14]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -817,7 +861,7 @@ func (x *DictionaryLanguage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryLanguage.ProtoReflect.Descriptor instead.
 func (*DictionaryLanguage) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{14}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DictionaryLanguage) GetId() int64 {
@@ -852,7 +896,7 @@ type DictionarySigla struct {
 
 func (x *DictionarySigla) Reset() {
 	*x = DictionarySigla{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[15]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -864,7 +908,7 @@ func (x *DictionarySigla) String() string {
 func (*DictionarySigla) ProtoMessage() {}
 
 func (x *DictionarySigla) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[15]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,7 +921,7 @@ func (x *DictionarySigla) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionarySigla.ProtoReflect.Descriptor instead.
 func (*DictionarySigla) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{15}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DictionarySigla) GetId() int64 {
@@ -901,6 +945,126 @@ func (x *DictionarySigla) GetName() string {
 	return ""
 }
 
+type DictionaryCity struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryCity) Reset() {
+	*x = DictionaryCity{}
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryCity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryCity) ProtoMessage() {}
+
+func (x *DictionaryCity) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryCity.ProtoReflect.Descriptor instead.
+func (*DictionaryCity) Descriptor() ([]byte, []int) {
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DictionaryCity) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *DictionaryCity) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *DictionaryCity) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type DictionaryPublishing struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryPublishing) Reset() {
+	*x = DictionaryPublishing{}
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryPublishing) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryPublishing) ProtoMessage() {}
+
+func (x *DictionaryPublishing) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryPublishing.ProtoReflect.Descriptor instead.
+func (*DictionaryPublishing) Descriptor() ([]byte, []int) {
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *DictionaryPublishing) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *DictionaryPublishing) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *DictionaryPublishing) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type BlockFilters struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -909,7 +1073,7 @@ type BlockFilters struct {
 
 func (x *BlockFilters) Reset() {
 	*x = BlockFilters{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[16]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -921,7 +1085,7 @@ func (x *BlockFilters) String() string {
 func (*BlockFilters) ProtoMessage() {}
 
 func (x *BlockFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[16]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -934,7 +1098,7 @@ func (x *BlockFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockFilters.ProtoReflect.Descriptor instead.
 func (*BlockFilters) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{16}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{19}
 }
 
 type Block struct {
@@ -951,7 +1115,7 @@ type Block struct {
 
 func (x *Block) Reset() {
 	*x = Block{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[17]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -963,7 +1127,7 @@ func (x *Block) String() string {
 func (*Block) ProtoMessage() {}
 
 func (x *Block) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[17]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -976,7 +1140,7 @@ func (x *Block) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block.ProtoReflect.Descriptor instead.
 func (*Block) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{17}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Block) GetId() int64 {
@@ -1030,7 +1194,7 @@ type BlockFieldFilters struct {
 
 func (x *BlockFieldFilters) Reset() {
 	*x = BlockFieldFilters{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[18]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1042,7 +1206,7 @@ func (x *BlockFieldFilters) String() string {
 func (*BlockFieldFilters) ProtoMessage() {}
 
 func (x *BlockFieldFilters) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[18]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1055,7 +1219,7 @@ func (x *BlockFieldFilters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockFieldFilters.ProtoReflect.Descriptor instead.
 func (*BlockFieldFilters) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{18}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *BlockFieldFilters) GetIsSearch() int64 {
@@ -1072,14 +1236,16 @@ type BlockField struct {
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	FieldName     string                 `protobuf:"bytes,4,opt,name=field_name,json=fieldName,proto3" json:"field_name,omitempty"`
 	FieldType     string                 `protobuf:"bytes,5,opt,name=field_type,json=fieldType,proto3" json:"field_type,omitempty"`
-	DirectoryId   int64                  `protobuf:"varint,6,opt,name=directory_id,json=directoryId,proto3" json:"directory_id,omitempty"`
+	Priority      int64                  `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
+	DirectoryId   int64                  `protobuf:"varint,7,opt,name=directory_id,json=directoryId,proto3" json:"directory_id,omitempty"`
+	Required      bool                   `protobuf:"varint,8,opt,name=required,proto3" json:"required,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BlockField) Reset() {
 	*x = BlockField{}
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[19]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1091,7 +1257,7 @@ func (x *BlockField) String() string {
 func (*BlockField) ProtoMessage() {}
 
 func (x *BlockField) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_dictionary_model_proto_msgTypes[19]
+	mi := &file_protobuf_dictionary_model_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1104,7 +1270,7 @@ func (x *BlockField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockField.ProtoReflect.Descriptor instead.
 func (*BlockField) Descriptor() ([]byte, []int) {
-	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{19}
+	return file_protobuf_dictionary_model_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *BlockField) GetId() int64 {
@@ -1142,11 +1308,25 @@ func (x *BlockField) GetFieldType() string {
 	return ""
 }
 
+func (x *BlockField) GetPriority() int64 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
 func (x *BlockField) GetDirectoryId() int64 {
 	if x != nil {
 		return x.DirectoryId
 	}
 	return 0
+}
+
+func (x *BlockField) GetRequired() bool {
+	if x != nil {
+		return x.Required
+	}
+	return false
 }
 
 var File_protobuf_dictionary_model_proto protoreflect.FileDescriptor
@@ -1196,7 +1376,9 @@ const file_protobuf_dictionary_model_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\"?\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\"*\n" +
+	"\fStateFilters\x12\x1a\n" +
+	"\bCodeLike\x18\x01 \x01(\tR\bCodeLike\"?\n" +
 	"\x05State\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
@@ -1213,6 +1395,14 @@ const file_protobuf_dictionary_model_proto_rawDesc = "" +
 	"\x0fDictionarySigla\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"H\n" +
+	"\x0eDictionaryCity\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"N\n" +
+	"\x14DictionaryPublishing\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\"\x0e\n" +
 	"\fBlockFilters\"\xa8\x01\n" +
 	"\x05Block\x12\x0e\n" +
@@ -1223,7 +1413,7 @@ const file_protobuf_dictionary_model_proto_rawDesc = "" +
 	"\x0eexternal_table\x18\x05 \x01(\tR\rexternalTable\x12\x1b\n" +
 	"\tkey_value\x18\x06 \x01(\x03R\bkeyValue\"0\n" +
 	"\x11BlockFieldFilters\x12\x1b\n" +
-	"\tis_search\x18\x01 \x01(\x03R\bisSearch\"\xac\x01\n" +
+	"\tis_search\x18\x01 \x01(\x03R\bisSearch\"\xe4\x01\n" +
 	"\n" +
 	"BlockField\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
@@ -1232,8 +1422,10 @@ const file_protobuf_dictionary_model_proto_rawDesc = "" +
 	"\n" +
 	"field_name\x18\x04 \x01(\tR\tfieldName\x12\x1d\n" +
 	"\n" +
-	"field_type\x18\x05 \x01(\tR\tfieldType\x12!\n" +
-	"\fdirectory_id\x18\x06 \x01(\x03R\vdirectoryIdB\x15Z\x13./protobuf;protobufb\x06proto3"
+	"field_type\x18\x05 \x01(\tR\tfieldType\x12\x1a\n" +
+	"\bpriority\x18\x06 \x01(\x03R\bpriority\x12!\n" +
+	"\fdirectory_id\x18\a \x01(\x03R\vdirectoryId\x12\x1a\n" +
+	"\brequired\x18\b \x01(\bR\brequiredB\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_dictionary_model_proto_rawDescOnce sync.Once
@@ -1247,7 +1439,7 @@ func file_protobuf_dictionary_model_proto_rawDescGZIP() []byte {
 	return file_protobuf_dictionary_model_proto_rawDescData
 }
 
-var file_protobuf_dictionary_model_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_protobuf_dictionary_model_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_protobuf_dictionary_model_proto_goTypes = []any{
 	(*DictionaryFilters)(nil),         // 0: ebook.DictionaryFilters
 	(*Dictionary)(nil),                // 1: ebook.Dictionary
@@ -1260,15 +1452,18 @@ var file_protobuf_dictionary_model_proto_goTypes = []any{
 	(*CatalogFilters)(nil),            // 8: ebook.CatalogFilters
 	(*Catalog)(nil),                   // 9: ebook.Catalog
 	(*Department)(nil),                // 10: ebook.Department
-	(*State)(nil),                     // 11: ebook.State
-	(*DictionaryServiceData)(nil),     // 12: ebook.DictionaryServiceData
-	(*DictionaryLanguageFilters)(nil), // 13: ebook.DictionaryLanguageFilters
-	(*DictionaryLanguage)(nil),        // 14: ebook.DictionaryLanguage
-	(*DictionarySigla)(nil),           // 15: ebook.DictionarySigla
-	(*BlockFilters)(nil),              // 16: ebook.BlockFilters
-	(*Block)(nil),                     // 17: ebook.Block
-	(*BlockFieldFilters)(nil),         // 18: ebook.BlockFieldFilters
-	(*BlockField)(nil),                // 19: ebook.BlockField
+	(*StateFilters)(nil),              // 11: ebook.StateFilters
+	(*State)(nil),                     // 12: ebook.State
+	(*DictionaryServiceData)(nil),     // 13: ebook.DictionaryServiceData
+	(*DictionaryLanguageFilters)(nil), // 14: ebook.DictionaryLanguageFilters
+	(*DictionaryLanguage)(nil),        // 15: ebook.DictionaryLanguage
+	(*DictionarySigla)(nil),           // 16: ebook.DictionarySigla
+	(*DictionaryCity)(nil),            // 17: ebook.DictionaryCity
+	(*DictionaryPublishing)(nil),      // 18: ebook.DictionaryPublishing
+	(*BlockFilters)(nil),              // 19: ebook.BlockFilters
+	(*Block)(nil),                     // 20: ebook.Block
+	(*BlockFieldFilters)(nil),         // 21: ebook.BlockFieldFilters
+	(*BlockField)(nil),                // 22: ebook.BlockField
 }
 var file_protobuf_dictionary_model_proto_depIdxs = []int32{
 	1, // 0: ebook.SearchDictionaryFilters.dictionary:type_name -> ebook.Dictionary
@@ -1290,7 +1485,7 @@ func file_protobuf_dictionary_model_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_dictionary_model_proto_rawDesc), len(file_protobuf_dictionary_model_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

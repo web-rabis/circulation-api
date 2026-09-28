@@ -23,7 +23,7 @@ func (res *OrderResource) stateCounts(w http.ResponseWriter, r *http.Request) {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return
 	}
-	user, err := res.userSvc.UserById(r.Context(), userId)
+	user, err := res.userSvc.ById(r.Context(), userId)
 	if err != nil {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 	}

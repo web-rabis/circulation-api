@@ -3,12 +3,19 @@ package ebook;
 option go_package = "./protobuf;protobuf";
 import "protobuf/ebook_model.proto";
 import "protobuf/dictionary_model.proto";
+import "protobuf/worksheet_model.proto";
 
 service EbookSvc {
-  rpc EbookBriefById(EntityByIdRequest) returns (EbookBrief) {} // краткая
+  rpc EbookList(EbookListRequest) returns (EbookListResponse) {}
   rpc EbookCardById(EntityByIdRequest) returns (EbookCard) {}
   rpc EbookById(EbookByIdRequest) returns (Ebook) {}
   rpc InvList(InvListRequest) returns (InvListResponse) {}
+  rpc EbookDelete(EbookDeleteRequest) returns (Ebook) {} // "мягкое" удаление - перевод в статус Ebook.Deleted, физически запись не удаляется
+}
+
+service EbookFormSvc {
+  rpc EbookFormById(EntityByIdRequest) returns (EbookForm) {}
+  rpc EbookFormSave(EbookFormSaveRequest) returns (EbookForm) {}
 }
 
 service DictionarySvc {
@@ -20,10 +27,57 @@ service DictionarySvc {
   rpc LanguageList(DictionaryLanguageListRequest) returns (DictionaryLanguageListResponse) {}
   rpc BlockList(BlockListRequest) returns (BlockListResponse) {}
   rpc BlockFieldList(BlockFieldListRequest) returns (BlockFieldListResponse) {}
+  rpc StateList(StateListRequest) returns (StateListResponse) {}
+}
+
+// WorksheetSvc - рабочие листы пользователей: персональная настройка того,
+// какие поля блоков показывать при добавлении/редактировании записи для
+// конкретной пары b_level_id/type_desc_id. В отличие от DictionarySvc, здесь
+// не общий справочник, а данные, привязанные к конкретному пользователю и
+// изменяемые им самим.
+service WorksheetSvc {
+  rpc UserWorksheet(UserWorksheetRequest) returns (.ebook.UserWorksheet) {}
+  rpc UserWorksheets(UserWorksheetsRequest) returns (UserWorksheetsResponse) {}
+  // UserWorksheetSave сохраняет рабочий лист пользователя целиком - старый
+  // набор block_field_id для этой пары b_level_id/type_desc_id полностью
+  // заменяется новым (worksheet.block_field_id). Пустой block_field_id -
+  // легитимный случай ("очистить рабочий лист").
+  rpc UserWorksheetSave(UserWorksheetSaveRequest) returns (.ebook.UserWorksheet) {}
 }
 
 message EntityByIdRequest {
   int64 id = 1;
+}
+message EbookFormSaveRequest {
+  EbookForm form = 1;
+  int64 user_id = 2;  // кто сохраняет: create_user при создании, запись в ebook_audit при создании и редактировании
+}
+message EbookDeleteRequest {
+  int64 id = 1;
+  int64 user_id = 2;  // кто удалил - записывается в ebook_audit
+}
+message UserWorksheetRequest {
+  int64 user_id = 1;
+  int64 b_level_id = 2;
+  int64 type_desc_id = 3;
+}
+message UserWorksheetsRequest {
+  int64 user_id = 1;
+}
+message UserWorksheetsResponse {
+  repeated UserWorksheet result = 1;
+}
+message UserWorksheetSaveRequest {
+  int64 user_id = 1;
+  UserWorksheet worksheet = 2;
+}
+message EbookListRequest {
+  EbookFilters filters = 1;
+  Paging paging = 2;
+}
+message EbookListResponse {
+  repeated Ebook result = 1;
+  int64 count = 2;
 }
 message EbookByIdRequest {
   int64 id = 1;
@@ -99,5 +153,13 @@ message SearchDictionaryRequest {
 }
 message SearchDictionaryResponse {
   repeated DictionaryBase result = 1;
+  int64 count = 2;
+}
+message StateListRequest {
+  StateFilters filters = 1;
+  Paging paging = 2;
+}
+message StateListResponse {
+  repeated State result = 1;
   int64 count = 2;
 }

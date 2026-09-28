@@ -27,14 +27,19 @@ const (
 	OrderPeriodYear    = "year"
 )
 
+// Order несёт только данные сервиса заказов. Карточка книги и экземпляра
+// (автор, заглавие, каталог, отдел хранения) принадлежит сервису ebook
+// и подмешивается шлюзом circulation-api по EbookId/EbookInvId.
 type Order struct {
 	Id                int64            `json:"id"`
 	CreatedAt         time.Time        `json:"createdAt"`
 	UpdatedAt         time.Time        `json:"updatedAt"`
 	Type              string           `json:"type"`
 	Reader            *Reader          `json:"reader"`
-	Ebook             *Ebook           `json:"ebook"`
-	InvNumber         *EbookInv        `json:"invNumber"`
+	EbookId           int64            `json:"ebookId"`
+	EbookInvId        int64            `json:"ebookInvId"`
+	InvNumber         string           `json:"invNumber"`
+	Barcode           string           `json:"barcode"`
 	Periodical        *Periodical      `json:"periodical"`
 	State             *State           `json:"state"`
 	Department        *Department      `json:"department"`
@@ -61,8 +66,10 @@ func NewOrderFormProto(o *protobuf.Order) *Order {
 		UpdatedAt:         o.UpdatedAt.AsTime(),
 		Type:              o.Type,
 		Reader:            NewReaderFromProto(o.Reader),
-		Ebook:             NewEbookFromProto(o.Ebook),
-		InvNumber:         NewEbookInvFromProto(o.InvNumber),
+		EbookId:           o.EbookId,
+		EbookInvId:        o.EbookInvId,
+		InvNumber:         o.InvNumber,
+		Barcode:           o.Barcode,
 		Periodical:        NewPeriodicalFromProto(o.Periodical),
 		State:             NewStateFromProto(o.State),
 		Department:        NewDepartmentFromProto(o.Department),

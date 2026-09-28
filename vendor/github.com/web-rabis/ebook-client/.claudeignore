@@ -1,0 +1,10 @@
+vendor/
+bin/
+obj/
+*.exe
+*.test
+*.prof
+go.sum
+.git/
+.idea/
+.vscode/

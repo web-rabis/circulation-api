@@ -10,7 +10,7 @@ import (
 )
 
 type IManager interface {
-	EbookBriefById(ctx context.Context, id int64) (*ebookModel.EbookBrief, error)
+	EbookById(ctx context.Context, id int64) (*ebookModel.Ebook, error)
 	EbookCardById(ctx context.Context, id int64) (*ebookModel.EbookCard, error)
 }
 type Manager struct {
@@ -24,8 +24,8 @@ func NewManager(ebookCl ebookClient.EbookService, orderCl orderClient.OrderServi
 		orderCl: orderCl,
 	}
 }
-func (m *Manager) EbookBriefById(ctx context.Context, id int64) (*ebookModel.EbookBrief, error) {
-	return m.ebookCl.EbookBriefById(ctx, id)
+func (m *Manager) EbookById(ctx context.Context, id int64) (*ebookModel.Ebook, error) {
+	return m.ebookCl.EbookById(ctx, id, false)
 }
 func (m *Manager) EbookCardById(ctx context.Context, id int64) (*ebookModel.EbookCard, error) {
 	card, err := m.ebookCl.EbookCardById(ctx, id)
@@ -50,7 +50,7 @@ func (m *Manager) EbookCardById(ctx context.Context, id int64) (*ebookModel.Eboo
 		for _, cinv := range card.Inv {
 			var invFounded bool
 			for _, order := range orders {
-				if order.InvNumber != nil && order.InvNumber.Id == cinv.Id {
+				if order.EbookInvId == cinv.Id {
 					invFounded = true
 					break
 				}

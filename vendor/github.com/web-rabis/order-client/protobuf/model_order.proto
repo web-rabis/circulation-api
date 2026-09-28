@@ -2,7 +2,6 @@ syntax = "proto3";
 package order;
 option go_package = "./protobuf;protobuf";
 import "google/protobuf/timestamp.proto";
-import "protobuf/model_ebook.proto";
 import "protobuf/model_reader.proto";
 import "protobuf/model_periodical.proto";
 import "protobuf/model_dictionary.proto";
@@ -12,14 +11,19 @@ message Order {
   google.protobuf.Timestamp updated_at = 3;
   string type = 4;
   Reader reader = 5;
-  Ebook ebook = 6;
-  EbookInv inv_number = 7;
+  // Только ссылки на сервис ebook: карточку книги и экземпляра
+  // подмешивает шлюз circulation-api.
+  int64 ebook_id = 6;
+  int64 ebook_inv_id = 7;
   Periodical periodical = 8;
   State state = 9;
   Department department = 10;
   Department storage_department = 11;
   bool is_auxiliary_fund = 12;
   ReasonRejection reason_rejection = 13;
+  // Снимок, зафиксированный в самом заказе на момент выдачи.
+  string inv_number = 14;
+  string barcode = 15;
 }
 message StateCount {
   State state = 1;
@@ -40,6 +44,8 @@ message OrderFilters {
   string period = 6;
   int64 is_auxiliary_fund = 7;
   string query = 8;
+  // Результат поиска по автору/заглавию, выполненного шлюзом в сервисе ebook.
+  repeated int64 ebook_ids = 9;
 }
 message StateCountFilters {
   repeated string states = 1;

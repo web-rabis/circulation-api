@@ -21,6 +21,16 @@ func NewCatalogFromProto(c *protobuf.Catalog) *Catalog {
 		Name: c.Name,
 	}
 }
+func (c *Catalog) ToProto() *protobuf.Catalog {
+	if c == nil {
+		return nil
+	}
+	return &protobuf.Catalog{
+		Id:   c.Id,
+		Code: c.Code,
+		Name: c.Name,
+	}
+}
 func (f *CatalogFilters) ToProto() *protobuf.CatalogFilters {
 	if f == nil {
 		return nil

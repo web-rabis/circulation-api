@@ -1,37 +1,34 @@
 syntax = "proto3";
 package ebook;
 option go_package = "./protobuf;protobuf";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 import "protobuf/dictionary_model.proto";
 message Ebook {
   int64 id = 1;
   int64 parent_id = 2;
-  BibliographicLevel bibliographic_level = 3;
-  TypeDescription type_description = 4;
-  bool krv = 5;
-  Catalog catalog = 6;
-  string author = 7;
-  string title = 8;
-  repeated Source sources = 9;
-  repeated ServiceNote service_notes = 10;
-  AuthorMark author_mark = 11;
-  repeated Inv inv = 12;
-  repeated Text texts = 13;
-  repeated Sigla siglas = 14;
-  EbookCard card = 15;
-}
-message EbookBrief {
-    int64 id = 1;
-    int64 parent_id = 2;
-    BibliographicLevel bibliographic_level = 3;
-    TypeDescription type_description = 4;
-    bool krv = 5;
-    Catalog catalog = 6;
-    string author = 7;
-    string title = 8;
-    repeated Source sources = 9;
-    repeated ServiceNote service_notes = 10;
-    AuthorMark author_mark = 11;
-    string r_cipher = 12;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  State state = 5;
+  BibliographicLevel bibliographic_level = 6;
+  TypeDescription type_description = 7;
+  bool krv = 8;
+  int64 volume_number = 9;
+  Catalog catalog = 10;
+  string author = 11;
+  string title = 12;
+  repeated Source sources = 13;
+  repeated ServiceNote service_notes = 14;
+  AuthorMark author_mark = 15;
+  repeated Inv inv = 16;
+  repeated Text texts = 17;
+  repeated Sigla siglas = 18;
+  EbookCard card = 19;
+  repeated Publishing publishings = 20;
+  Language language = 21;
+  // r_cipher - полочный шифр; вычисляется на сервере
+  // (ebook.Ebook.CalcRCipher), в БД не хранится.
+  string r_cipher = 22;
 }
 message EbookCard{
     int64 volume_number = 1;
@@ -97,6 +94,36 @@ message Sigla {
   int64 ebook_id = 2;
   DictionarySigla sigla = 3;
 }
+message Author {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string author = 3;
+  int64 ne_razdel = 4;
+}
+message ParallelTitle {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  int64 title_id = 3;
+  string parallel_name = 4;
+}
+message Title {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  string title = 3;
+  repeated ParallelTitle parallel_titles = 4;
+  string data_responsibility = 5;
+  string data_title = 6;
+  string part_number = 7;
+  string part_name = 8;
+  Author author = 9;
+}
+message Publishing {
+  int64 id = 1;
+  int64 ebook_id = 2;
+  DictionaryCity place_edition = 3;
+  DictionaryPublishing publishing = 4;
+  string year_edition = 5;
+}
 
 message Paging {
   int64   offset = 1;
@@ -106,4 +133,52 @@ message Paging {
 }
 message InvFilters {
   int64 ebook_id = 1;
+}
+message EbookFilters {
+  repeated string statuses = 1;
+  repeated int64 status_ids = 2;
+  google.protobuf.Timestamp created_at_low = 3;
+  google.protobuf.Timestamp created_at_high = 4;
+  google.protobuf.Timestamp updated_at_low = 5;
+  google.protobuf.Timestamp updated_at_high = 6;
+  int64 catalog_id = 7;
+  int64 bibliographic_level_id = 8;
+  int64 type_description_id = 9;
+}
+
+message EbookForm {
+  int64 id = 1;
+  optional int64 parent_id = 2;  // нет у записи верхнего уровня (без родителя)
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  State state = 5;
+  BibliographicLevel bibliographic_level = 6;
+  TypeDescription type_description = 7;
+  bool krv = 8;
+  int64 volume_number = 9;
+  Catalog catalog = 10;
+  repeated EbookFormBlock blocks = 11;
+}
+message DictionaryRef {
+  int64 id = 1;
+  string code = 2;  // на запись игнорируется
+  string name = 3;  // на запись игнорируется
+}
+
+message EbookFormBlock {
+  optional int64 id = 1;        // нет у несохранённого повтора
+  optional int64 ebook_id = 2;  // нет при создании
+  int64 block_id = 3;
+  repeated EbookFormBlockField values = 4;
+  bool deleted = 5;  // повтор с external_table нужно удалить; для блока без external_table игнорируется
+}
+message EbookFormBlockField {
+  int64 field_id = 1;
+  oneof value {
+    google.protobuf.NullValue null_value  = 2;  // явно, см. ниже
+    string                    string_value = 3;
+    int64                     int_value    = 4;
+    bool                      bool_value   = 5;
+    DictionaryRef             dictionary_value = 6;
+  }
 }

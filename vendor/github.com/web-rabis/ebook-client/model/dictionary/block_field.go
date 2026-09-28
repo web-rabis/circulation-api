@@ -8,7 +8,9 @@ type BlockField struct {
 	Name        string `json:"name"`
 	FieldName   string `json:"fieldName"`
 	FieldType   string `json:"fieldType"`
+	Priority    int64  `json:"priority"`
 	DirectoryId *int64 `json:"directoryId"`
+	Required    bool   `json:"required"`
 }
 type BlockFieldFilters struct {
 	IsSearch *bool
@@ -28,7 +30,9 @@ func NewBlockFieldFromProto(s *protobuf.BlockField) *BlockField {
 		Name:        s.Name,
 		FieldName:   s.FieldName,
 		FieldType:   s.FieldType,
+		Priority:    s.Priority,
 		DirectoryId: directoryId,
+		Required:    s.Required,
 	}
 }
 func (f *BlockFieldFilters) ToProto() *protobuf.BlockFieldFilters {

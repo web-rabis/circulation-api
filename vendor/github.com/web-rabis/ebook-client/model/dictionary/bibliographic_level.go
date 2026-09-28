@@ -22,6 +22,17 @@ func NewBibliographicLevelFromProto(b *protobuf.BibliographicLevel) *Bibliograph
 		TypeEbooks: b.TypeEbooks,
 	}
 }
+func (b *BibliographicLevel) ToProto() *protobuf.BibliographicLevel {
+	if b == nil {
+		return nil
+	}
+	return &protobuf.BibliographicLevel{
+		Id:         b.Id,
+		Code:       b.Code,
+		Name:       b.Name,
+		TypeEbooks: b.TypeEbooks,
+	}
+}
 func (f *BibliographicLevelFilters) ToProto() *protobuf.BibliographicLevelFilters {
 	if f == nil {
 		return nil

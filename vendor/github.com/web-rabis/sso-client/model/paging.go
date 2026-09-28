@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/web-rabis/ebook-client/protobuf"
+	"github.com/web-rabis/sso-client/protobuf"
 )
 
 type Paging struct {

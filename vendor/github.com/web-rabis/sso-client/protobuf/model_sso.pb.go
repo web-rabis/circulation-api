@@ -173,6 +173,50 @@ func (x *Department) GetType() string {
 	return ""
 }
 
+type UserFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserFilters) Reset() {
+	*x = UserFilters{}
+	mi := &file_protobuf_model_sso_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserFilters) ProtoMessage() {}
+
+func (x *UserFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_model_sso_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserFilters.ProtoReflect.Descriptor instead.
+func (*UserFilters) Descriptor() ([]byte, []int) {
+	return file_protobuf_model_sso_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserFilters) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type Paging struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Offset        int64                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
@@ -185,7 +229,7 @@ type Paging struct {
 
 func (x *Paging) Reset() {
 	*x = Paging{}
-	mi := &file_protobuf_model_sso_proto_msgTypes[2]
+	mi := &file_protobuf_model_sso_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -197,7 +241,7 @@ func (x *Paging) String() string {
 func (*Paging) ProtoMessage() {}
 
 func (x *Paging) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_model_sso_proto_msgTypes[2]
+	mi := &file_protobuf_model_sso_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -210,7 +254,7 @@ func (x *Paging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Paging.ProtoReflect.Descriptor instead.
 func (*Paging) Descriptor() ([]byte, []int) {
-	return file_protobuf_model_sso_proto_rawDescGZIP(), []int{2}
+	return file_protobuf_model_sso_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Paging) GetOffset() int64 {
@@ -260,7 +304,9 @@ const file_protobuf_model_sso_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\"j\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\"!\n" +
+	"\vUserFilters\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"j\n" +
 	"\x06Paging\x12\x16\n" +
 	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x18\n" +
@@ -279,11 +325,12 @@ func file_protobuf_model_sso_proto_rawDescGZIP() []byte {
 	return file_protobuf_model_sso_proto_rawDescData
 }
 
-var file_protobuf_model_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protobuf_model_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_protobuf_model_sso_proto_goTypes = []any{
-	(*User)(nil),       // 0: sso.User
-	(*Department)(nil), // 1: sso.Department
-	(*Paging)(nil),     // 2: sso.Paging
+	(*User)(nil),        // 0: sso.User
+	(*Department)(nil),  // 1: sso.Department
+	(*UserFilters)(nil), // 2: sso.UserFilters
+	(*Paging)(nil),      // 3: sso.Paging
 }
 var file_protobuf_model_sso_proto_depIdxs = []int32{
 	1, // 0: sso.User.department:type_name -> sso.Department
@@ -305,7 +352,7 @@ func file_protobuf_model_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_model_sso_proto_rawDesc), len(file_protobuf_model_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

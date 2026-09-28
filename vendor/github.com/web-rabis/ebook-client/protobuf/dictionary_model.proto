@@ -51,6 +51,9 @@ message Department {
   string name = 3;
   string type = 4;
 }
+message StateFilters {
+  string CodeLike = 1;
+}
 message State {
   int64 id = 1;
   string code = 2;
@@ -74,6 +77,16 @@ message DictionarySigla {
   string code = 2;
   string name = 3;
 }
+message DictionaryCity {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
+message DictionaryPublishing {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}
 message BlockFilters {
 }
 message Block {
@@ -93,5 +106,7 @@ message BlockField {
   string name = 3;
   string field_name = 4;
   string field_type = 5;
-  int64 directory_id = 6;
+  int64 priority = 6;
+  int64 directory_id = 7;
+  bool required = 8;
 }

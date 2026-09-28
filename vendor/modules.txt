@@ -179,7 +179,7 @@ github.com/web-rabis/db/internal/adapter/database/user/drivers/pgsql/user
 github.com/web-rabis/db/model
 github.com/web-rabis/db/reader
 github.com/web-rabis/db/user
-# github.com/web-rabis/ebook-client v0.0.0-20260531173742-cb890cac976e
+# github.com/web-rabis/ebook-client v0.0.0-20260921191053-36cfaedaf1b1
 ## explicit; go 1.24.0
 github.com/web-rabis/ebook-client
 github.com/web-rabis/ebook-client/client
@@ -187,11 +187,13 @@ github.com/web-rabis/ebook-client/client/grpc
 github.com/web-rabis/ebook-client/model
 github.com/web-rabis/ebook-client/model/dictionary
 github.com/web-rabis/ebook-client/model/ebook
+github.com/web-rabis/ebook-client/model/ebook_form
+github.com/web-rabis/ebook-client/model/worksheet
 github.com/web-rabis/ebook-client/protobuf
 # github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
 ## explicit; go 1.18
 github.com/web-rabis/httperrors
-# github.com/web-rabis/order-client v0.0.0-20260602092709-1c40db0796b5
+# github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002
 ## explicit; go 1.24.0
 github.com/web-rabis/order-client
 github.com/web-rabis/order-client/client
@@ -218,7 +220,7 @@ github.com/web-rabis/searcher-proxy/protobuf
 # github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
 ## explicit; go 1.19
 github.com/web-rabis/servers/http
-# github.com/web-rabis/sso-client v0.0.0-20260421185542-0d545480da41
+# github.com/web-rabis/sso-client v0.0.0-20260902072025-6f0894046888
 ## explicit; go 1.25.9
 github.com/web-rabis/sso-client
 github.com/web-rabis/sso-client/client
@@ -374,6 +376,7 @@ google.golang.org/protobuf/runtime/protoimpl
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/emptypb
+google.golang.org/protobuf/types/known/structpb
 google.golang.org/protobuf/types/known/timestamppb
 # gopkg.in/yaml.v2 v2.4.0
 ## explicit; go 1.15

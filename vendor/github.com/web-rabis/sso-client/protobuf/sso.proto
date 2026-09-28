@@ -5,9 +5,18 @@ import "protobuf/model_sso.proto";
 
 
 service UserService {
-  rpc UserById(ByIdRequest) returns (User) {}
+  rpc ById(ByIdRequest) returns (User) {}
+  rpc List(UserListRequest) returns (UserListResponse) {}
 }
 
 message ByIdRequest {
   int64 id = 1;
+}
+message UserListRequest {
+  UserFilters filters = 1;
+  Paging paging = 2;
+}
+message UserListResponse {
+  repeated User result= 1;
+  int64 count = 2;
 }

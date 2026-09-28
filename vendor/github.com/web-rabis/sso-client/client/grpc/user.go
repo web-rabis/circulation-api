@@ -23,15 +23,28 @@ func NewUserServiceClient(client protobuf.UserServiceClient) client.UserService 
 	}
 }
 
-func (c *UserService) UserById(ctx context.Context, id int64) (*model.User, error) {
+func (c *UserService) ById(ctx context.Context, id int64) (*model.User, error) {
 	request := &protobuf.ByIdRequest{
 		Id: id,
 	}
-	response, err := c.client.UserById(ctx, request)
+	response, err := c.client.ById(ctx, request)
 	switch status.Code(err) {
 	case codes.OK:
 		return model.NewUserFromProto(response), nil
 	default:
 		return nil, err
+	}
+}
+func (c *UserService) List(ctx context.Context, filters *model.UserFilters, paging *model.Paging) (int64, []*model.User, error) {
+	request := &protobuf.UserListRequest{
+		Filters: filters.ToProto(),
+		Paging:  paging.ToProto(),
+	}
+	response, err := c.client.List(ctx, request)
+	switch status.Code(err) {
+	case codes.OK:
+		return response.Count, model.NewUsersFromProto(response.Result), nil
+	default:
+		return 0, nil, err
 	}
 }

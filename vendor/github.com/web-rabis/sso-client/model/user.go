@@ -18,6 +18,16 @@ type Department struct {
 	Type string `json:"type" bson:"type"`
 }
 
+func NewUsersFromProto(users []*protobuf.User) []*User {
+	if users == nil {
+		return nil
+	}
+	var result []*User
+	for _, user := range users {
+		result = append(result, NewUserFromProto(user))
+	}
+	return result
+}
 func NewUserFromProto(user *protobuf.User) *User {
 	if user == nil {
 		return nil

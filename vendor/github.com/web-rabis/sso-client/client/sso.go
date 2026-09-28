@@ -14,5 +14,6 @@ type Base interface {
 
 //go:generate go run github.com/vektra/mockery/v2@v2.53 --name UserService
 type UserService interface {
-	UserById(ctx context.Context, id int64) (*model.User, error)
+	ById(ctx context.Context, id int64) (*model.User, error)
+	List(ctx context.Context, filters *model.UserFilters, paging *model.Paging) (int64, []*model.User, error)
 }

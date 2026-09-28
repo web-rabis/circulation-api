@@ -127,3 +127,16 @@ func (s *DictionaryService) BlockFieldList(ctx context.Context, filters *diction
 		return 0, nil, err
 	}
 }
+func (s *DictionaryService) StateList(ctx context.Context, filters *dictionary.StateFilters, paging *model.Paging) (int64, []*dictionary.State, error) {
+	req := &protobuf.StateListRequest{
+		Filters: filters.ToProto(),
+		Paging:  paging.ToProto(),
+	}
+	e, err := s.client.StateList(ctx, req)
+	switch status.Code(err) {
+	case codes.OK:
+		return e.Count, model.NewListFromProto(e.Result, dictionary.NewStateFromProto), nil
+	default:
+		return 0, nil, err
+	}
+}

@@ -13,7 +13,7 @@ require (
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
-	github.com/web-rabis/order-client v0.0.0-20260602092709-1c40db0796b5
+	github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
 	golang.org/x/sync v0.20.0
@@ -45,9 +45,9 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
-	github.com/web-rabis/ebook-client v0.0.0-20260531173742-cb890cac976e // indirect
+	github.com/web-rabis/ebook-client v0.0.0-20260921191053-36cfaedaf1b1 // indirect
 	github.com/web-rabis/searcher-proxy v0.0.0-20260531173822-4d20674ca383 // indirect
-	github.com/web-rabis/sso-client v0.0.0-20260421185542-0d545480da41 // indirect
+	github.com/web-rabis/sso-client v0.0.0-20260902072025-6f0894046888 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
 	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect

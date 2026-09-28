@@ -19,20 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EbookSvc_EbookBriefById_FullMethodName = "/ebook.EbookSvc/EbookBriefById"
-	EbookSvc_EbookCardById_FullMethodName  = "/ebook.EbookSvc/EbookCardById"
-	EbookSvc_EbookById_FullMethodName      = "/ebook.EbookSvc/EbookById"
-	EbookSvc_InvList_FullMethodName        = "/ebook.EbookSvc/InvList"
+	EbookSvc_EbookList_FullMethodName     = "/ebook.EbookSvc/EbookList"
+	EbookSvc_EbookCardById_FullMethodName = "/ebook.EbookSvc/EbookCardById"
+	EbookSvc_EbookById_FullMethodName     = "/ebook.EbookSvc/EbookById"
+	EbookSvc_InvList_FullMethodName       = "/ebook.EbookSvc/InvList"
+	EbookSvc_EbookDelete_FullMethodName   = "/ebook.EbookSvc/EbookDelete"
 )
 
 // EbookSvcClient is the client API for EbookSvc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EbookSvcClient interface {
-	EbookBriefById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookBrief, error)
+	EbookList(ctx context.Context, in *EbookListRequest, opts ...grpc.CallOption) (*EbookListResponse, error)
 	EbookCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookCard, error)
 	EbookById(ctx context.Context, in *EbookByIdRequest, opts ...grpc.CallOption) (*Ebook, error)
 	InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error)
+	EbookDelete(ctx context.Context, in *EbookDeleteRequest, opts ...grpc.CallOption) (*Ebook, error)
 }
 
 type ebookSvcClient struct {
@@ -43,10 +45,10 @@ func NewEbookSvcClient(cc grpc.ClientConnInterface) EbookSvcClient {
 	return &ebookSvcClient{cc}
 }
 
-func (c *ebookSvcClient) EbookBriefById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookBrief, error) {
+func (c *ebookSvcClient) EbookList(ctx context.Context, in *EbookListRequest, opts ...grpc.CallOption) (*EbookListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EbookBrief)
-	err := c.cc.Invoke(ctx, EbookSvc_EbookBriefById_FullMethodName, in, out, cOpts...)
+	out := new(EbookListResponse)
+	err := c.cc.Invoke(ctx, EbookSvc_EbookList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,14 +85,25 @@ func (c *ebookSvcClient) InvList(ctx context.Context, in *InvListRequest, opts .
 	return out, nil
 }
 
+func (c *ebookSvcClient) EbookDelete(ctx context.Context, in *EbookDeleteRequest, opts ...grpc.CallOption) (*Ebook, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ebook)
+	err := c.cc.Invoke(ctx, EbookSvc_EbookDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EbookSvcServer is the server API for EbookSvc service.
 // All implementations must embed UnimplementedEbookSvcServer
 // for forward compatibility.
 type EbookSvcServer interface {
-	EbookBriefById(context.Context, *EntityByIdRequest) (*EbookBrief, error)
+	EbookList(context.Context, *EbookListRequest) (*EbookListResponse, error)
 	EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error)
 	EbookById(context.Context, *EbookByIdRequest) (*Ebook, error)
 	InvList(context.Context, *InvListRequest) (*InvListResponse, error)
+	EbookDelete(context.Context, *EbookDeleteRequest) (*Ebook, error)
 	mustEmbedUnimplementedEbookSvcServer()
 }
 
@@ -101,8 +114,8 @@ type EbookSvcServer interface {
 // pointer dereference when methods are called.
 type UnimplementedEbookSvcServer struct{}
 
-func (UnimplementedEbookSvcServer) EbookBriefById(context.Context, *EntityByIdRequest) (*EbookBrief, error) {
-	return nil, status.Error(codes.Unimplemented, "method EbookBriefById not implemented")
+func (UnimplementedEbookSvcServer) EbookList(context.Context, *EbookListRequest) (*EbookListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookList not implemented")
 }
 func (UnimplementedEbookSvcServer) EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error) {
 	return nil, status.Error(codes.Unimplemented, "method EbookCardById not implemented")
@@ -112,6 +125,9 @@ func (UnimplementedEbookSvcServer) EbookById(context.Context, *EbookByIdRequest)
 }
 func (UnimplementedEbookSvcServer) InvList(context.Context, *InvListRequest) (*InvListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method InvList not implemented")
+}
+func (UnimplementedEbookSvcServer) EbookDelete(context.Context, *EbookDeleteRequest) (*Ebook, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookDelete not implemented")
 }
 func (UnimplementedEbookSvcServer) mustEmbedUnimplementedEbookSvcServer() {}
 func (UnimplementedEbookSvcServer) testEmbeddedByValue()                  {}
@@ -134,20 +150,20 @@ func RegisterEbookSvcServer(s grpc.ServiceRegistrar, srv EbookSvcServer) {
 	s.RegisterService(&EbookSvc_ServiceDesc, srv)
 }
 
-func _EbookSvc_EbookBriefById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityByIdRequest)
+func _EbookSvc_EbookList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EbookListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EbookSvcServer).EbookBriefById(ctx, in)
+		return srv.(EbookSvcServer).EbookList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EbookSvc_EbookBriefById_FullMethodName,
+		FullMethod: EbookSvc_EbookList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EbookSvcServer).EbookBriefById(ctx, req.(*EntityByIdRequest))
+		return srv.(EbookSvcServer).EbookList(ctx, req.(*EbookListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -206,6 +222,24 @@ func _EbookSvc_InvList_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EbookSvc_EbookDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EbookDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookSvcServer).EbookDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookSvc_EbookDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookSvcServer).EbookDelete(ctx, req.(*EbookDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EbookSvc_ServiceDesc is the grpc.ServiceDesc for EbookSvc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -214,8 +248,8 @@ var EbookSvc_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EbookSvcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "EbookBriefById",
-			Handler:    _EbookSvc_EbookBriefById_Handler,
+			MethodName: "EbookList",
+			Handler:    _EbookSvc_EbookList_Handler,
 		},
 		{
 			MethodName: "EbookCardById",
@@ -228,6 +262,150 @@ var EbookSvc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InvList",
 			Handler:    _EbookSvc_InvList_Handler,
+		},
+		{
+			MethodName: "EbookDelete",
+			Handler:    _EbookSvc_EbookDelete_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/ebook.proto",
+}
+
+const (
+	EbookFormSvc_EbookFormById_FullMethodName = "/ebook.EbookFormSvc/EbookFormById"
+	EbookFormSvc_EbookFormSave_FullMethodName = "/ebook.EbookFormSvc/EbookFormSave"
+)
+
+// EbookFormSvcClient is the client API for EbookFormSvc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EbookFormSvcClient interface {
+	EbookFormById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookForm, error)
+	EbookFormSave(ctx context.Context, in *EbookFormSaveRequest, opts ...grpc.CallOption) (*EbookForm, error)
+}
+
+type ebookFormSvcClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEbookFormSvcClient(cc grpc.ClientConnInterface) EbookFormSvcClient {
+	return &ebookFormSvcClient{cc}
+}
+
+func (c *ebookFormSvcClient) EbookFormById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookForm, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EbookForm)
+	err := c.cc.Invoke(ctx, EbookFormSvc_EbookFormById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ebookFormSvcClient) EbookFormSave(ctx context.Context, in *EbookFormSaveRequest, opts ...grpc.CallOption) (*EbookForm, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EbookForm)
+	err := c.cc.Invoke(ctx, EbookFormSvc_EbookFormSave_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EbookFormSvcServer is the server API for EbookFormSvc service.
+// All implementations must embed UnimplementedEbookFormSvcServer
+// for forward compatibility.
+type EbookFormSvcServer interface {
+	EbookFormById(context.Context, *EntityByIdRequest) (*EbookForm, error)
+	EbookFormSave(context.Context, *EbookFormSaveRequest) (*EbookForm, error)
+	mustEmbedUnimplementedEbookFormSvcServer()
+}
+
+// UnimplementedEbookFormSvcServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedEbookFormSvcServer struct{}
+
+func (UnimplementedEbookFormSvcServer) EbookFormById(context.Context, *EntityByIdRequest) (*EbookForm, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookFormById not implemented")
+}
+func (UnimplementedEbookFormSvcServer) EbookFormSave(context.Context, *EbookFormSaveRequest) (*EbookForm, error) {
+	return nil, status.Error(codes.Unimplemented, "method EbookFormSave not implemented")
+}
+func (UnimplementedEbookFormSvcServer) mustEmbedUnimplementedEbookFormSvcServer() {}
+func (UnimplementedEbookFormSvcServer) testEmbeddedByValue()                      {}
+
+// UnsafeEbookFormSvcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EbookFormSvcServer will
+// result in compilation errors.
+type UnsafeEbookFormSvcServer interface {
+	mustEmbedUnimplementedEbookFormSvcServer()
+}
+
+func RegisterEbookFormSvcServer(s grpc.ServiceRegistrar, srv EbookFormSvcServer) {
+	// If the following call panics, it indicates UnimplementedEbookFormSvcServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&EbookFormSvc_ServiceDesc, srv)
+}
+
+func _EbookFormSvc_EbookFormById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookFormSvcServer).EbookFormById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookFormSvc_EbookFormById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookFormSvcServer).EbookFormById(ctx, req.(*EntityByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EbookFormSvc_EbookFormSave_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EbookFormSaveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookFormSvcServer).EbookFormSave(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookFormSvc_EbookFormSave_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookFormSvcServer).EbookFormSave(ctx, req.(*EbookFormSaveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// EbookFormSvc_ServiceDesc is the grpc.ServiceDesc for EbookFormSvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var EbookFormSvc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ebook.EbookFormSvc",
+	HandlerType: (*EbookFormSvcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "EbookFormById",
+			Handler:    _EbookFormSvc_EbookFormById_Handler,
+		},
+		{
+			MethodName: "EbookFormSave",
+			Handler:    _EbookFormSvc_EbookFormSave_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -243,6 +421,7 @@ const (
 	DictionarySvc_LanguageList_FullMethodName           = "/ebook.DictionarySvc/LanguageList"
 	DictionarySvc_BlockList_FullMethodName              = "/ebook.DictionarySvc/BlockList"
 	DictionarySvc_BlockFieldList_FullMethodName         = "/ebook.DictionarySvc/BlockFieldList"
+	DictionarySvc_StateList_FullMethodName              = "/ebook.DictionarySvc/StateList"
 )
 
 // DictionarySvcClient is the client API for DictionarySvc service.
@@ -257,6 +436,7 @@ type DictionarySvcClient interface {
 	LanguageList(ctx context.Context, in *DictionaryLanguageListRequest, opts ...grpc.CallOption) (*DictionaryLanguageListResponse, error)
 	BlockList(ctx context.Context, in *BlockListRequest, opts ...grpc.CallOption) (*BlockListResponse, error)
 	BlockFieldList(ctx context.Context, in *BlockFieldListRequest, opts ...grpc.CallOption) (*BlockFieldListResponse, error)
+	StateList(ctx context.Context, in *StateListRequest, opts ...grpc.CallOption) (*StateListResponse, error)
 }
 
 type dictionarySvcClient struct {
@@ -347,6 +527,16 @@ func (c *dictionarySvcClient) BlockFieldList(ctx context.Context, in *BlockField
 	return out, nil
 }
 
+func (c *dictionarySvcClient) StateList(ctx context.Context, in *StateListRequest, opts ...grpc.CallOption) (*StateListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StateListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_StateList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DictionarySvcServer is the server API for DictionarySvc service.
 // All implementations must embed UnimplementedDictionarySvcServer
 // for forward compatibility.
@@ -359,6 +549,7 @@ type DictionarySvcServer interface {
 	LanguageList(context.Context, *DictionaryLanguageListRequest) (*DictionaryLanguageListResponse, error)
 	BlockList(context.Context, *BlockListRequest) (*BlockListResponse, error)
 	BlockFieldList(context.Context, *BlockFieldListRequest) (*BlockFieldListResponse, error)
+	StateList(context.Context, *StateListRequest) (*StateListResponse, error)
 	mustEmbedUnimplementedDictionarySvcServer()
 }
 
@@ -392,6 +583,9 @@ func (UnimplementedDictionarySvcServer) BlockList(context.Context, *BlockListReq
 }
 func (UnimplementedDictionarySvcServer) BlockFieldList(context.Context, *BlockFieldListRequest) (*BlockFieldListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BlockFieldList not implemented")
+}
+func (UnimplementedDictionarySvcServer) StateList(context.Context, *StateListRequest) (*StateListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StateList not implemented")
 }
 func (UnimplementedDictionarySvcServer) mustEmbedUnimplementedDictionarySvcServer() {}
 func (UnimplementedDictionarySvcServer) testEmbeddedByValue()                       {}
@@ -558,6 +752,24 @@ func _DictionarySvc_BlockFieldList_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DictionarySvc_StateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StateListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).StateList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_StateList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).StateList(ctx, req.(*StateListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DictionarySvc_ServiceDesc is the grpc.ServiceDesc for DictionarySvc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -596,6 +808,208 @@ var DictionarySvc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BlockFieldList",
 			Handler:    _DictionarySvc_BlockFieldList_Handler,
+		},
+		{
+			MethodName: "StateList",
+			Handler:    _DictionarySvc_StateList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/ebook.proto",
+}
+
+const (
+	WorksheetSvc_UserWorksheet_FullMethodName     = "/ebook.WorksheetSvc/UserWorksheet"
+	WorksheetSvc_UserWorksheets_FullMethodName    = "/ebook.WorksheetSvc/UserWorksheets"
+	WorksheetSvc_UserWorksheetSave_FullMethodName = "/ebook.WorksheetSvc/UserWorksheetSave"
+)
+
+// WorksheetSvcClient is the client API for WorksheetSvc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// WorksheetSvc - рабочие листы пользователей: персональная настройка того,
+// какие поля блоков показывать при добавлении/редактировании записи для
+// конкретной пары b_level_id/type_desc_id. В отличие от DictionarySvc, здесь
+// не общий справочник, а данные, привязанные к конкретному пользователю и
+// изменяемые им самим.
+type WorksheetSvcClient interface {
+	UserWorksheet(ctx context.Context, in *UserWorksheetRequest, opts ...grpc.CallOption) (*UserWorksheet, error)
+	UserWorksheets(ctx context.Context, in *UserWorksheetsRequest, opts ...grpc.CallOption) (*UserWorksheetsResponse, error)
+	// UserWorksheetSave сохраняет рабочий лист пользователя целиком - старый
+	// набор block_field_id для этой пары b_level_id/type_desc_id полностью
+	// заменяется новым (worksheet.block_field_id). Пустой block_field_id -
+	// легитимный случай ("очистить рабочий лист").
+	UserWorksheetSave(ctx context.Context, in *UserWorksheetSaveRequest, opts ...grpc.CallOption) (*UserWorksheet, error)
+}
+
+type worksheetSvcClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewWorksheetSvcClient(cc grpc.ClientConnInterface) WorksheetSvcClient {
+	return &worksheetSvcClient{cc}
+}
+
+func (c *worksheetSvcClient) UserWorksheet(ctx context.Context, in *UserWorksheetRequest, opts ...grpc.CallOption) (*UserWorksheet, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserWorksheet)
+	err := c.cc.Invoke(ctx, WorksheetSvc_UserWorksheet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *worksheetSvcClient) UserWorksheets(ctx context.Context, in *UserWorksheetsRequest, opts ...grpc.CallOption) (*UserWorksheetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserWorksheetsResponse)
+	err := c.cc.Invoke(ctx, WorksheetSvc_UserWorksheets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *worksheetSvcClient) UserWorksheetSave(ctx context.Context, in *UserWorksheetSaveRequest, opts ...grpc.CallOption) (*UserWorksheet, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserWorksheet)
+	err := c.cc.Invoke(ctx, WorksheetSvc_UserWorksheetSave_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WorksheetSvcServer is the server API for WorksheetSvc service.
+// All implementations must embed UnimplementedWorksheetSvcServer
+// for forward compatibility.
+//
+// WorksheetSvc - рабочие листы пользователей: персональная настройка того,
+// какие поля блоков показывать при добавлении/редактировании записи для
+// конкретной пары b_level_id/type_desc_id. В отличие от DictionarySvc, здесь
+// не общий справочник, а данные, привязанные к конкретному пользователю и
+// изменяемые им самим.
+type WorksheetSvcServer interface {
+	UserWorksheet(context.Context, *UserWorksheetRequest) (*UserWorksheet, error)
+	UserWorksheets(context.Context, *UserWorksheetsRequest) (*UserWorksheetsResponse, error)
+	// UserWorksheetSave сохраняет рабочий лист пользователя целиком - старый
+	// набор block_field_id для этой пары b_level_id/type_desc_id полностью
+	// заменяется новым (worksheet.block_field_id). Пустой block_field_id -
+	// легитимный случай ("очистить рабочий лист").
+	UserWorksheetSave(context.Context, *UserWorksheetSaveRequest) (*UserWorksheet, error)
+	mustEmbedUnimplementedWorksheetSvcServer()
+}
+
+// UnimplementedWorksheetSvcServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedWorksheetSvcServer struct{}
+
+func (UnimplementedWorksheetSvcServer) UserWorksheet(context.Context, *UserWorksheetRequest) (*UserWorksheet, error) {
+	return nil, status.Error(codes.Unimplemented, "method UserWorksheet not implemented")
+}
+func (UnimplementedWorksheetSvcServer) UserWorksheets(context.Context, *UserWorksheetsRequest) (*UserWorksheetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UserWorksheets not implemented")
+}
+func (UnimplementedWorksheetSvcServer) UserWorksheetSave(context.Context, *UserWorksheetSaveRequest) (*UserWorksheet, error) {
+	return nil, status.Error(codes.Unimplemented, "method UserWorksheetSave not implemented")
+}
+func (UnimplementedWorksheetSvcServer) mustEmbedUnimplementedWorksheetSvcServer() {}
+func (UnimplementedWorksheetSvcServer) testEmbeddedByValue()                      {}
+
+// UnsafeWorksheetSvcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to WorksheetSvcServer will
+// result in compilation errors.
+type UnsafeWorksheetSvcServer interface {
+	mustEmbedUnimplementedWorksheetSvcServer()
+}
+
+func RegisterWorksheetSvcServer(s grpc.ServiceRegistrar, srv WorksheetSvcServer) {
+	// If the following call panics, it indicates UnimplementedWorksheetSvcServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&WorksheetSvc_ServiceDesc, srv)
+}
+
+func _WorksheetSvc_UserWorksheet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserWorksheetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorksheetSvcServer).UserWorksheet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorksheetSvc_UserWorksheet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorksheetSvcServer).UserWorksheet(ctx, req.(*UserWorksheetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorksheetSvc_UserWorksheets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserWorksheetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorksheetSvcServer).UserWorksheets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorksheetSvc_UserWorksheets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorksheetSvcServer).UserWorksheets(ctx, req.(*UserWorksheetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorksheetSvc_UserWorksheetSave_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserWorksheetSaveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorksheetSvcServer).UserWorksheetSave(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorksheetSvc_UserWorksheetSave_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorksheetSvcServer).UserWorksheetSave(ctx, req.(*UserWorksheetSaveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// WorksheetSvc_ServiceDesc is the grpc.ServiceDesc for WorksheetSvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var WorksheetSvc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ebook.WorksheetSvc",
+	HandlerType: (*WorksheetSvcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UserWorksheet",
+			Handler:    _WorksheetSvc_UserWorksheet_Handler,
+		},
+		{
+			MethodName: "UserWorksheets",
+			Handler:    _WorksheetSvc_UserWorksheets_Handler,
+		},
+		{
+			MethodName: "UserWorksheetSave",
+			Handler:    _WorksheetSvc_UserWorksheetSave_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

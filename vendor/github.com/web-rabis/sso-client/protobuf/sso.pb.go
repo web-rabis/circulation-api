@@ -65,15 +65,126 @@ func (x *ByIdRequest) GetId() int64 {
 	return 0
 }
 
+type UserListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *UserFilters           `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserListRequest) Reset() {
+	*x = UserListRequest{}
+	mi := &file_protobuf_sso_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserListRequest) ProtoMessage() {}
+
+func (x *UserListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_sso_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserListRequest.ProtoReflect.Descriptor instead.
+func (*UserListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_sso_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UserListRequest) GetFilters() *UserFilters {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *UserListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type UserListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*User                `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserListResponse) Reset() {
+	*x = UserListResponse{}
+	mi := &file_protobuf_sso_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserListResponse) ProtoMessage() {}
+
+func (x *UserListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_sso_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserListResponse.ProtoReflect.Descriptor instead.
+func (*UserListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_sso_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserListResponse) GetResult() []*User {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *UserListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_protobuf_sso_proto protoreflect.FileDescriptor
 
 const file_protobuf_sso_proto_rawDesc = "" +
 	"\n" +
 	"\x12protobuf/sso.proto\x12\x03sso\x1a\x18protobuf/model_sso.proto\"\x1d\n" +
 	"\vByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id28\n" +
-	"\vUserService\x12)\n" +
-	"\bUserById\x12\x10.sso.ByIdRequest\x1a\t.sso.User\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\x02id\x18\x01 \x01(\x03R\x02id\"b\n" +
+	"\x0fUserListRequest\x12*\n" +
+	"\afilters\x18\x01 \x01(\v2\x10.sso.UserFiltersR\afilters\x12#\n" +
+	"\x06paging\x18\x02 \x01(\v2\v.sso.PagingR\x06paging\"K\n" +
+	"\x10UserListResponse\x12!\n" +
+	"\x06result\x18\x01 \x03(\v2\t.sso.UserR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count2k\n" +
+	"\vUserService\x12%\n" +
+	"\x04ById\x12\x10.sso.ByIdRequest\x1a\t.sso.User\"\x00\x125\n" +
+	"\x04List\x12\x14.sso.UserListRequest\x1a\x15.sso.UserListResponse\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_sso_proto_rawDescOnce sync.Once
@@ -87,19 +198,28 @@ func file_protobuf_sso_proto_rawDescGZIP() []byte {
 	return file_protobuf_sso_proto_rawDescData
 }
 
-var file_protobuf_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_protobuf_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protobuf_sso_proto_goTypes = []any{
-	(*ByIdRequest)(nil), // 0: sso.ByIdRequest
-	(*User)(nil),        // 1: sso.User
+	(*ByIdRequest)(nil),      // 0: sso.ByIdRequest
+	(*UserListRequest)(nil),  // 1: sso.UserListRequest
+	(*UserListResponse)(nil), // 2: sso.UserListResponse
+	(*UserFilters)(nil),      // 3: sso.UserFilters
+	(*Paging)(nil),           // 4: sso.Paging
+	(*User)(nil),             // 5: sso.User
 }
 var file_protobuf_sso_proto_depIdxs = []int32{
-	0, // 0: sso.UserService.UserById:input_type -> sso.ByIdRequest
-	1, // 1: sso.UserService.UserById:output_type -> sso.User
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: sso.UserListRequest.filters:type_name -> sso.UserFilters
+	4, // 1: sso.UserListRequest.paging:type_name -> sso.Paging
+	5, // 2: sso.UserListResponse.result:type_name -> sso.User
+	0, // 3: sso.UserService.ById:input_type -> sso.ByIdRequest
+	1, // 4: sso.UserService.List:input_type -> sso.UserListRequest
+	5, // 5: sso.UserService.ById:output_type -> sso.User
+	2, // 6: sso.UserService.List:output_type -> sso.UserListResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_sso_proto_init() }
@@ -114,7 +234,7 @@ func file_protobuf_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_sso_proto_rawDesc), len(file_protobuf_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

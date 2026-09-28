@@ -7,6 +7,7 @@ import (
 
 	"github.com/web-rabis/circulation-api/internal/domain/model"
 	ebookClient "github.com/web-rabis/ebook-client/client"
+	ebookFilters "github.com/web-rabis/ebook-client/model"
 	ebookModel "github.com/web-rabis/ebook-client/model/ebook"
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
@@ -52,24 +53,49 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 	if err != nil {
 		return 0, nil, err
 	}
+	// order-client отдаёт только идентификаторы книги и экземпляра, карточка
+	// подтягивается здесь из сервиса ebook. Кэш на выборку, чтобы не дёргать
+	// ebook по разу на каждый заказ с одной и той же книгой.
+	var (
+		briefs = make(map[int64]*ebookModel.Ebook)
+		invs   = make(map[int64]map[int64]*ebookModel.Inv)
+	)
 	var orders_ = make([]*model.Order, len(orders))
 	for i, order := range orders {
-		reader, err := m.readerCl.ReaderById(ctx, order.Reader.TicketNumber)
-		if err == nil {
-			order.Reader.Firstname = reader.Firstname
-			order.Reader.Lastname = reader.Lastname
-			order.Reader.Middlename = reader.Middlename
-			order.Reader.Barcode = reader.Barcode
-			order.Reader.IsEmployee = reader.IsEmployee
-			order.Reader.Department = reader.Department
-
+		if order.Reader != nil {
+			reader, err := m.readerCl.ReaderById(ctx, order.Reader.TicketNumber)
+			if err == nil {
+				order.Reader.Firstname = reader.Firstname
+				order.Reader.Lastname = reader.Lastname
+				order.Reader.Middlename = reader.Middlename
+				order.Reader.Barcode = reader.Barcode
+				order.Reader.IsEmployee = reader.IsEmployee
+				order.Reader.Department = reader.Department
+			}
 		}
-		var e *ebookModel.EbookBrief
-		if order.Ebook != nil {
-			e, _ = m.ebookCl.EbookBriefById(ctx, order.Ebook.Id)
+		var e *ebookModel.Ebook
+		var inv *ebookModel.Inv
+		if order.EbookId != 0 {
+			var ok bool
+			if e, ok = briefs[order.EbookId]; !ok {
+				e, _ = m.ebookCl.EbookById(ctx, order.EbookId, false)
+				briefs[order.EbookId] = e
+			}
+			if order.EbookInvId != 0 {
+				byId, ok := invs[order.EbookId]
+				if !ok {
+					byId = make(map[int64]*ebookModel.Inv)
+					if _, list, err := m.ebookCl.InvList(ctx, &ebookFilters.InvFilters{EbookId: order.EbookId}, nil); err == nil {
+						for _, v := range list {
+							byId[v.Id] = v
+						}
+					}
+					invs[order.EbookId] = byId
+				}
+				inv = byId[order.EbookInvId]
+			}
 		}
-		order_ := model.NewOrder(order, e)
-		orders_[i] = order_
+		orders_[i] = model.NewOrder(order, e, inv)
 	}
 	return count, orders_, nil
 }
@@ -209,14 +235,14 @@ func (m *Manager) Audit(ctx context.Context, orderId int64) ([]*model.OrderAudit
 	for i, audit := range list {
 		audits[i] = model.NewOrderAudit(audit)
 		if audit.UserId != 0 {
-			audits[i].User, _ = m.userCl.UserById(ctx, audit.UserId)
+			audits[i].User, _ = m.userCl.ById(ctx, audit.UserId)
 		}
 	}
 	return audits, nil
 }
 
 func (m *Manager) getUserById(ctx context.Context, id int64) (*orderModel.User, error) {
-	user, err := m.userCl.UserById(ctx, id)
+	user, err := m.userCl.ById(ctx, id)
 	if err != nil {
 		return nil, err
 	}

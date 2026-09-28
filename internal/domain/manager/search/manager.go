@@ -68,7 +68,7 @@ func (m *Manager) filterInv(ctx context.Context, ebookId int64, inv []*ebookMode
 		for _, cinv := range inv {
 			var invFounded bool
 			for _, order := range orders {
-				if order.InvNumber != nil && order.InvNumber.Id == cinv.Id {
+				if order.EbookInvId == cinv.Id {
 					invFounded = true
 					break
 				}

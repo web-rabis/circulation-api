@@ -1,0 +1,9 @@
+syntax = "proto3";
+package ebook;
+option go_package = "./protobuf;protobuf";
+
+message UserWorksheet {
+  int64 b_level_id = 1;
+  int64 type_desc_id = 2;
+  repeated int64 block_field_id = 3;
+}
