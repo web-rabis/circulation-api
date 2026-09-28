@@ -38,6 +38,7 @@ type Ebook struct {
 	Card               *EbookCard                     `json:"card"`
 	Publishings        []*Publishing                  `json:"publishings"`
 	Language           *Language                      `json:"language"`
+	Volume             *Volume                        `json:"volume"`
 	// RCipher - полочный шифр, вычисляется на сервере, в БД не хранится.
 	RCipher string `json:"rCipher"`
 }
@@ -73,6 +74,7 @@ func NewEbookFromProto(e *protobuf.Ebook) *Ebook {
 		Card:               NewEbookCardFromProto(e.Card),
 		Publishings:        NewEbookPublishingsFromProto(e.Publishings),
 		Language:           NewLanguageFromProto(e.Language),
+		Volume:             NewVolumeFromProto(e.Volume),
 		RCipher:            e.RCipher,
 	}
 }

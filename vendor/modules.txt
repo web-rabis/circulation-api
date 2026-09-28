@@ -179,7 +179,7 @@ github.com/web-rabis/db/internal/adapter/database/user/drivers/pgsql/user
 github.com/web-rabis/db/model
 github.com/web-rabis/db/reader
 github.com/web-rabis/db/user
-# github.com/web-rabis/ebook-client v0.0.0-20260921191053-36cfaedaf1b1
+# github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015
 ## explicit; go 1.24.0
 github.com/web-rabis/ebook-client
 github.com/web-rabis/ebook-client/client
