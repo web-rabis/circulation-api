@@ -1692,8 +1692,9 @@ func (x *EbookForm) GetBlocks() []*EbookFormBlock {
 type DictionaryRef struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"` // на запись игнорируется
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"` // на запись игнорируется
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`                                            // на запись игнорируется
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                                            // на запись игнорируется
+	ClassifierId  *int64                 `protobuf:"varint,4,opt,name=classifier_id,json=classifierId,proto3,oneof" json:"classifier_id,omitempty"` // только для ссылок на classifier-справочники, на запись игнорируется
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1747,6 +1748,13 @@ func (x *DictionaryRef) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *DictionaryRef) GetClassifierId() int64 {
+	if x != nil && x.ClassifierId != nil {
+		return *x.ClassifierId
+	}
+	return 0
 }
 
 type EbookFormBlock struct {
@@ -2139,11 +2147,13 @@ const file_protobuf_ebook_model_proto_rawDesc = "" +
 	" \x01(\v2\x0e.ebook.CatalogR\acatalog\x12-\n" +
 	"\x06blocks\x18\v \x03(\v2\x15.ebook.EbookFormBlockR\x06blocksB\f\n" +
 	"\n" +
-	"_parent_id\"G\n" +
+	"_parent_id\"\x83\x01\n" +
 	"\rDictionaryRef\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"\xc2\x01\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12(\n" +
+	"\rclassifier_id\x18\x04 \x01(\x03H\x00R\fclassifierId\x88\x01\x01B\x10\n" +
+	"\x0e_classifier_id\"\xc2\x01\n" +
 	"\x0eEbookFormBlock\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\x03H\x00R\x02id\x88\x01\x01\x12\x1e\n" +
 	"\bebook_id\x18\x02 \x01(\x03H\x01R\aebookId\x88\x01\x01\x12\x19\n" +
@@ -2268,6 +2278,7 @@ func file_protobuf_ebook_model_proto_init() {
 	}
 	file_protobuf_dictionary_model_proto_init()
 	file_protobuf_ebook_model_proto_msgTypes[17].OneofWrappers = []any{}
+	file_protobuf_ebook_model_proto_msgTypes[18].OneofWrappers = []any{}
 	file_protobuf_ebook_model_proto_msgTypes[19].OneofWrappers = []any{}
 	file_protobuf_ebook_model_proto_msgTypes[20].OneofWrappers = []any{
 		(*EbookFormBlockField_NullValue)(nil),

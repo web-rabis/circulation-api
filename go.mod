@@ -13,7 +13,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
-	github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015
+	github.com/web-rabis/ebook-client v0.0.0-20261005162428-0c723e959a15
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
 	github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454

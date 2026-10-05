@@ -41,7 +41,7 @@ func (res *OrderResource) issueOrder(w http.ResponseWriter, r *http.Request) {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return
 	}
-	err = res.orderMan.Issue(r.Context(), orderId, userId, request.InventoryId)
+	err = res.orderMan.Issue(r.Context(), orderId, userId, request.InventoryId, request.Barcode)
 	if err != nil {
 		_ = render.Render(w, r, httperrors.BadRequest(err))
 		return

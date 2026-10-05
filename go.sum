@@ -121,6 +121,8 @@ github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067 h1:vffMRzCJAwHZ7JgAgR
 github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067/go.mod h1:Xe80ERLsrFd98y5Do9FIwtyok5uJpabjEpBghHpH7Qg=
 github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015 h1:3506ZvtLr8p8DRqiPL94u9Vs5X+AfgIK1VkgD/Z1YJE=
 github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
+github.com/web-rabis/ebook-client v0.0.0-20261005162428-0c723e959a15 h1:LcJwUbdRh7yAJewiYnXoTmYzpRjcZiUgN87IanUBg0U=
+github.com/web-rabis/ebook-client v0.0.0-20261005162428-0c723e959a15/go.mod h1:lOOejejpxTtZbCe6seasslNerO8YAV+skaOGYiWmwKg=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738 h1:bjsfGcPZpuLiQuU+CKZOc43G6odhS6Bo85QczEXKsPM=
 github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738/go.mod h1:LRBhzsu6qMyoBjaWBzyN2uaVKHHEQ4zKCAtnoRQZ9LM=
 github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454 h1:gfmRxynDMmFi6RbF86F3xglZDWT/y1jm8r4T+CGMezk=

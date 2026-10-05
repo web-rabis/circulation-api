@@ -69,6 +69,16 @@ func (s *EbookService) InvList(ctx context.Context, filters *model.InvFilters, p
 	return 0, nil, err
 }
 
+func (s *EbookService) InvBarcodeSave(ctx context.Context, id int64, barcode string) (*ebook.Inv, error) {
+	response, err := s.client.InvBarcodeSave(ctx, &protobuf.InvBarcodeSaveRequest{Id: id, Barcode: barcode})
+	switch status.Code(err) {
+	case codes.OK:
+		return ebook.NewInvFromProto(response), nil
+	default:
+		return nil, err
+	}
+}
+
 func (s *EbookService) EbookDelete(ctx context.Context, id, userId int64) (*ebook.Ebook, error) {
 	e, err := s.client.EbookDelete(ctx, &protobuf.EbookDeleteRequest{Id: id, UserId: userId})
 	switch status.Code(err) {

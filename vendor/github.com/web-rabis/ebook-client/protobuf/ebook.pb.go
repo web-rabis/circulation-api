@@ -169,6 +169,58 @@ func (x *EbookDeleteRequest) GetUserId() int64 {
 	return 0
 }
 
+type InvBarcodeSaveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Barcode       string                 `protobuf:"bytes,2,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InvBarcodeSaveRequest) Reset() {
+	*x = InvBarcodeSaveRequest{}
+	mi := &file_protobuf_ebook_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InvBarcodeSaveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InvBarcodeSaveRequest) ProtoMessage() {}
+
+func (x *InvBarcodeSaveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_ebook_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InvBarcodeSaveRequest.ProtoReflect.Descriptor instead.
+func (*InvBarcodeSaveRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *InvBarcodeSaveRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *InvBarcodeSaveRequest) GetBarcode() string {
+	if x != nil {
+		return x.Barcode
+	}
+	return ""
+}
+
 type UserWorksheetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -180,7 +232,7 @@ type UserWorksheetRequest struct {
 
 func (x *UserWorksheetRequest) Reset() {
 	*x = UserWorksheetRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[3]
+	mi := &file_protobuf_ebook_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -192,7 +244,7 @@ func (x *UserWorksheetRequest) String() string {
 func (*UserWorksheetRequest) ProtoMessage() {}
 
 func (x *UserWorksheetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[3]
+	mi := &file_protobuf_ebook_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -205,7 +257,7 @@ func (x *UserWorksheetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWorksheetRequest.ProtoReflect.Descriptor instead.
 func (*UserWorksheetRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{3}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UserWorksheetRequest) GetUserId() int64 {
@@ -238,7 +290,7 @@ type UserWorksheetsRequest struct {
 
 func (x *UserWorksheetsRequest) Reset() {
 	*x = UserWorksheetsRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[4]
+	mi := &file_protobuf_ebook_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -250,7 +302,7 @@ func (x *UserWorksheetsRequest) String() string {
 func (*UserWorksheetsRequest) ProtoMessage() {}
 
 func (x *UserWorksheetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[4]
+	mi := &file_protobuf_ebook_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,7 +315,7 @@ func (x *UserWorksheetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWorksheetsRequest.ProtoReflect.Descriptor instead.
 func (*UserWorksheetsRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{4}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UserWorksheetsRequest) GetUserId() int64 {
@@ -282,7 +334,7 @@ type UserWorksheetsResponse struct {
 
 func (x *UserWorksheetsResponse) Reset() {
 	*x = UserWorksheetsResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[5]
+	mi := &file_protobuf_ebook_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -294,7 +346,7 @@ func (x *UserWorksheetsResponse) String() string {
 func (*UserWorksheetsResponse) ProtoMessage() {}
 
 func (x *UserWorksheetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[5]
+	mi := &file_protobuf_ebook_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -307,7 +359,7 @@ func (x *UserWorksheetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWorksheetsResponse.ProtoReflect.Descriptor instead.
 func (*UserWorksheetsResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{5}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UserWorksheetsResponse) GetResult() []*UserWorksheet {
@@ -327,7 +379,7 @@ type UserWorksheetSaveRequest struct {
 
 func (x *UserWorksheetSaveRequest) Reset() {
 	*x = UserWorksheetSaveRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[6]
+	mi := &file_protobuf_ebook_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -339,7 +391,7 @@ func (x *UserWorksheetSaveRequest) String() string {
 func (*UserWorksheetSaveRequest) ProtoMessage() {}
 
 func (x *UserWorksheetSaveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[6]
+	mi := &file_protobuf_ebook_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -352,7 +404,7 @@ func (x *UserWorksheetSaveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWorksheetSaveRequest.ProtoReflect.Descriptor instead.
 func (*UserWorksheetSaveRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{6}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserWorksheetSaveRequest) GetUserId() int64 {
@@ -379,7 +431,7 @@ type EbookListRequest struct {
 
 func (x *EbookListRequest) Reset() {
 	*x = EbookListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[7]
+	mi := &file_protobuf_ebook_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -391,7 +443,7 @@ func (x *EbookListRequest) String() string {
 func (*EbookListRequest) ProtoMessage() {}
 
 func (x *EbookListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[7]
+	mi := &file_protobuf_ebook_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -404,7 +456,7 @@ func (x *EbookListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EbookListRequest.ProtoReflect.Descriptor instead.
 func (*EbookListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{7}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *EbookListRequest) GetFilters() *EbookFilters {
@@ -431,7 +483,7 @@ type EbookListResponse struct {
 
 func (x *EbookListResponse) Reset() {
 	*x = EbookListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[8]
+	mi := &file_protobuf_ebook_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -443,7 +495,7 @@ func (x *EbookListResponse) String() string {
 func (*EbookListResponse) ProtoMessage() {}
 
 func (x *EbookListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[8]
+	mi := &file_protobuf_ebook_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -456,7 +508,7 @@ func (x *EbookListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EbookListResponse.ProtoReflect.Descriptor instead.
 func (*EbookListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{8}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *EbookListResponse) GetResult() []*Ebook {
@@ -483,7 +535,7 @@ type EbookByIdRequest struct {
 
 func (x *EbookByIdRequest) Reset() {
 	*x = EbookByIdRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[9]
+	mi := &file_protobuf_ebook_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -495,7 +547,7 @@ func (x *EbookByIdRequest) String() string {
 func (*EbookByIdRequest) ProtoMessage() {}
 
 func (x *EbookByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[9]
+	mi := &file_protobuf_ebook_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -508,7 +560,7 @@ func (x *EbookByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EbookByIdRequest.ProtoReflect.Descriptor instead.
 func (*EbookByIdRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{9}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *EbookByIdRequest) GetId() int64 {
@@ -535,7 +587,7 @@ type InvListRequest struct {
 
 func (x *InvListRequest) Reset() {
 	*x = InvListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[10]
+	mi := &file_protobuf_ebook_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -547,7 +599,7 @@ func (x *InvListRequest) String() string {
 func (*InvListRequest) ProtoMessage() {}
 
 func (x *InvListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[10]
+	mi := &file_protobuf_ebook_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -560,7 +612,7 @@ func (x *InvListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvListRequest.ProtoReflect.Descriptor instead.
 func (*InvListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{10}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *InvListRequest) GetFilters() *InvFilters {
@@ -587,7 +639,7 @@ type InvListResponse struct {
 
 func (x *InvListResponse) Reset() {
 	*x = InvListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[11]
+	mi := &file_protobuf_ebook_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -599,7 +651,7 @@ func (x *InvListResponse) String() string {
 func (*InvListResponse) ProtoMessage() {}
 
 func (x *InvListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[11]
+	mi := &file_protobuf_ebook_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -612,7 +664,7 @@ func (x *InvListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvListResponse.ProtoReflect.Descriptor instead.
 func (*InvListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{11}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *InvListResponse) GetResult() []*Inv {
@@ -639,7 +691,7 @@ type CatalogListRequest struct {
 
 func (x *CatalogListRequest) Reset() {
 	*x = CatalogListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[12]
+	mi := &file_protobuf_ebook_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -651,7 +703,7 @@ func (x *CatalogListRequest) String() string {
 func (*CatalogListRequest) ProtoMessage() {}
 
 func (x *CatalogListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[12]
+	mi := &file_protobuf_ebook_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -664,7 +716,7 @@ func (x *CatalogListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CatalogListRequest.ProtoReflect.Descriptor instead.
 func (*CatalogListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{12}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CatalogListRequest) GetFilters() *CatalogFilters {
@@ -691,7 +743,7 @@ type CatalogListResponse struct {
 
 func (x *CatalogListResponse) Reset() {
 	*x = CatalogListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[13]
+	mi := &file_protobuf_ebook_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +755,7 @@ func (x *CatalogListResponse) String() string {
 func (*CatalogListResponse) ProtoMessage() {}
 
 func (x *CatalogListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[13]
+	mi := &file_protobuf_ebook_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,7 +768,7 @@ func (x *CatalogListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CatalogListResponse.ProtoReflect.Descriptor instead.
 func (*CatalogListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{13}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CatalogListResponse) GetResult() []*Catalog {
@@ -743,7 +795,7 @@ type TypeDescriptionListRequest struct {
 
 func (x *TypeDescriptionListRequest) Reset() {
 	*x = TypeDescriptionListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[14]
+	mi := &file_protobuf_ebook_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -755,7 +807,7 @@ func (x *TypeDescriptionListRequest) String() string {
 func (*TypeDescriptionListRequest) ProtoMessage() {}
 
 func (x *TypeDescriptionListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[14]
+	mi := &file_protobuf_ebook_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -768,7 +820,7 @@ func (x *TypeDescriptionListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TypeDescriptionListRequest.ProtoReflect.Descriptor instead.
 func (*TypeDescriptionListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{14}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *TypeDescriptionListRequest) GetFilters() *TypeDescriptionFilters {
@@ -795,7 +847,7 @@ type TypeDescriptionListResponse struct {
 
 func (x *TypeDescriptionListResponse) Reset() {
 	*x = TypeDescriptionListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[15]
+	mi := &file_protobuf_ebook_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -807,7 +859,7 @@ func (x *TypeDescriptionListResponse) String() string {
 func (*TypeDescriptionListResponse) ProtoMessage() {}
 
 func (x *TypeDescriptionListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[15]
+	mi := &file_protobuf_ebook_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -820,7 +872,7 @@ func (x *TypeDescriptionListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TypeDescriptionListResponse.ProtoReflect.Descriptor instead.
 func (*TypeDescriptionListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{15}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *TypeDescriptionListResponse) GetResult() []*TypeDescription {
@@ -847,7 +899,7 @@ type BibliographicLevelListRequest struct {
 
 func (x *BibliographicLevelListRequest) Reset() {
 	*x = BibliographicLevelListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[16]
+	mi := &file_protobuf_ebook_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -859,7 +911,7 @@ func (x *BibliographicLevelListRequest) String() string {
 func (*BibliographicLevelListRequest) ProtoMessage() {}
 
 func (x *BibliographicLevelListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[16]
+	mi := &file_protobuf_ebook_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -872,7 +924,7 @@ func (x *BibliographicLevelListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BibliographicLevelListRequest.ProtoReflect.Descriptor instead.
 func (*BibliographicLevelListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{16}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *BibliographicLevelListRequest) GetFilters() *BibliographicLevelFilters {
@@ -899,7 +951,7 @@ type BibliographicLevelListResponse struct {
 
 func (x *BibliographicLevelListResponse) Reset() {
 	*x = BibliographicLevelListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[17]
+	mi := &file_protobuf_ebook_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -911,7 +963,7 @@ func (x *BibliographicLevelListResponse) String() string {
 func (*BibliographicLevelListResponse) ProtoMessage() {}
 
 func (x *BibliographicLevelListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[17]
+	mi := &file_protobuf_ebook_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -924,7 +976,7 @@ func (x *BibliographicLevelListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BibliographicLevelListResponse.ProtoReflect.Descriptor instead.
 func (*BibliographicLevelListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{17}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *BibliographicLevelListResponse) GetResult() []*BibliographicLevel {
@@ -951,7 +1003,7 @@ type DictionaryLanguageListRequest struct {
 
 func (x *DictionaryLanguageListRequest) Reset() {
 	*x = DictionaryLanguageListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[18]
+	mi := &file_protobuf_ebook_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -963,7 +1015,7 @@ func (x *DictionaryLanguageListRequest) String() string {
 func (*DictionaryLanguageListRequest) ProtoMessage() {}
 
 func (x *DictionaryLanguageListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[18]
+	mi := &file_protobuf_ebook_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -976,7 +1028,7 @@ func (x *DictionaryLanguageListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryLanguageListRequest.ProtoReflect.Descriptor instead.
 func (*DictionaryLanguageListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{18}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DictionaryLanguageListRequest) GetFilters() *DictionaryLanguageFilters {
@@ -1003,7 +1055,7 @@ type DictionaryLanguageListResponse struct {
 
 func (x *DictionaryLanguageListResponse) Reset() {
 	*x = DictionaryLanguageListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[19]
+	mi := &file_protobuf_ebook_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1015,7 +1067,7 @@ func (x *DictionaryLanguageListResponse) String() string {
 func (*DictionaryLanguageListResponse) ProtoMessage() {}
 
 func (x *DictionaryLanguageListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[19]
+	mi := &file_protobuf_ebook_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1028,7 +1080,7 @@ func (x *DictionaryLanguageListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryLanguageListResponse.ProtoReflect.Descriptor instead.
 func (*DictionaryLanguageListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{19}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DictionaryLanguageListResponse) GetResult() []*DictionaryLanguage {
@@ -1055,7 +1107,7 @@ type BlockFieldListRequest struct {
 
 func (x *BlockFieldListRequest) Reset() {
 	*x = BlockFieldListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[20]
+	mi := &file_protobuf_ebook_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1067,7 +1119,7 @@ func (x *BlockFieldListRequest) String() string {
 func (*BlockFieldListRequest) ProtoMessage() {}
 
 func (x *BlockFieldListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[20]
+	mi := &file_protobuf_ebook_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1080,7 +1132,7 @@ func (x *BlockFieldListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockFieldListRequest.ProtoReflect.Descriptor instead.
 func (*BlockFieldListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{20}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *BlockFieldListRequest) GetFilters() *BlockFieldFilters {
@@ -1107,7 +1159,7 @@ type BlockFieldListResponse struct {
 
 func (x *BlockFieldListResponse) Reset() {
 	*x = BlockFieldListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[21]
+	mi := &file_protobuf_ebook_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1119,7 +1171,7 @@ func (x *BlockFieldListResponse) String() string {
 func (*BlockFieldListResponse) ProtoMessage() {}
 
 func (x *BlockFieldListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[21]
+	mi := &file_protobuf_ebook_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1132,7 +1184,7 @@ func (x *BlockFieldListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockFieldListResponse.ProtoReflect.Descriptor instead.
 func (*BlockFieldListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{21}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *BlockFieldListResponse) GetResult() []*BlockField {
@@ -1159,7 +1211,7 @@ type BlockListRequest struct {
 
 func (x *BlockListRequest) Reset() {
 	*x = BlockListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[22]
+	mi := &file_protobuf_ebook_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1171,7 +1223,7 @@ func (x *BlockListRequest) String() string {
 func (*BlockListRequest) ProtoMessage() {}
 
 func (x *BlockListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[22]
+	mi := &file_protobuf_ebook_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1184,7 +1236,7 @@ func (x *BlockListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockListRequest.ProtoReflect.Descriptor instead.
 func (*BlockListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{22}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *BlockListRequest) GetFilters() *BlockFilters {
@@ -1211,7 +1263,7 @@ type BlockListResponse struct {
 
 func (x *BlockListResponse) Reset() {
 	*x = BlockListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[23]
+	mi := &file_protobuf_ebook_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1223,7 +1275,7 @@ func (x *BlockListResponse) String() string {
 func (*BlockListResponse) ProtoMessage() {}
 
 func (x *BlockListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[23]
+	mi := &file_protobuf_ebook_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1236,7 +1288,7 @@ func (x *BlockListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockListResponse.ProtoReflect.Descriptor instead.
 func (*BlockListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{23}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *BlockListResponse) GetResult() []*Block {
@@ -1263,7 +1315,7 @@ type DictionaryListRequest struct {
 
 func (x *DictionaryListRequest) Reset() {
 	*x = DictionaryListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[24]
+	mi := &file_protobuf_ebook_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1327,7 @@ func (x *DictionaryListRequest) String() string {
 func (*DictionaryListRequest) ProtoMessage() {}
 
 func (x *DictionaryListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[24]
+	mi := &file_protobuf_ebook_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1340,7 @@ func (x *DictionaryListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryListRequest.ProtoReflect.Descriptor instead.
 func (*DictionaryListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{24}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *DictionaryListRequest) GetFilters() *DictionaryFilters {
@@ -1315,7 +1367,7 @@ type DictionaryListResponse struct {
 
 func (x *DictionaryListResponse) Reset() {
 	*x = DictionaryListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[25]
+	mi := &file_protobuf_ebook_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1327,7 +1379,7 @@ func (x *DictionaryListResponse) String() string {
 func (*DictionaryListResponse) ProtoMessage() {}
 
 func (x *DictionaryListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[25]
+	mi := &file_protobuf_ebook_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1340,7 +1392,7 @@ func (x *DictionaryListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictionaryListResponse.ProtoReflect.Descriptor instead.
 func (*DictionaryListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{25}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DictionaryListResponse) GetResult() []*Dictionary {
@@ -1367,7 +1419,7 @@ type SearchDictionaryRequest struct {
 
 func (x *SearchDictionaryRequest) Reset() {
 	*x = SearchDictionaryRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[26]
+	mi := &file_protobuf_ebook_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1379,7 +1431,7 @@ func (x *SearchDictionaryRequest) String() string {
 func (*SearchDictionaryRequest) ProtoMessage() {}
 
 func (x *SearchDictionaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[26]
+	mi := &file_protobuf_ebook_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1392,7 +1444,7 @@ func (x *SearchDictionaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchDictionaryRequest.ProtoReflect.Descriptor instead.
 func (*SearchDictionaryRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{26}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *SearchDictionaryRequest) GetFilters() *SearchDictionaryFilters {
@@ -1419,7 +1471,7 @@ type SearchDictionaryResponse struct {
 
 func (x *SearchDictionaryResponse) Reset() {
 	*x = SearchDictionaryResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[27]
+	mi := &file_protobuf_ebook_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1431,7 +1483,7 @@ func (x *SearchDictionaryResponse) String() string {
 func (*SearchDictionaryResponse) ProtoMessage() {}
 
 func (x *SearchDictionaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[27]
+	mi := &file_protobuf_ebook_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1444,7 +1496,7 @@ func (x *SearchDictionaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchDictionaryResponse.ProtoReflect.Descriptor instead.
 func (*SearchDictionaryResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{27}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *SearchDictionaryResponse) GetResult() []*DictionaryBase {
@@ -1471,7 +1523,7 @@ type StateListRequest struct {
 
 func (x *StateListRequest) Reset() {
 	*x = StateListRequest{}
-	mi := &file_protobuf_ebook_proto_msgTypes[28]
+	mi := &file_protobuf_ebook_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1483,7 +1535,7 @@ func (x *StateListRequest) String() string {
 func (*StateListRequest) ProtoMessage() {}
 
 func (x *StateListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[28]
+	mi := &file_protobuf_ebook_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1496,7 +1548,7 @@ func (x *StateListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateListRequest.ProtoReflect.Descriptor instead.
 func (*StateListRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{28}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *StateListRequest) GetFilters() *StateFilters {
@@ -1523,7 +1575,7 @@ type StateListResponse struct {
 
 func (x *StateListResponse) Reset() {
 	*x = StateListResponse{}
-	mi := &file_protobuf_ebook_proto_msgTypes[29]
+	mi := &file_protobuf_ebook_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1587,7 @@ func (x *StateListResponse) String() string {
 func (*StateListResponse) ProtoMessage() {}
 
 func (x *StateListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_ebook_proto_msgTypes[29]
+	mi := &file_protobuf_ebook_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1548,7 +1600,7 @@ func (x *StateListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateListResponse.ProtoReflect.Descriptor instead.
 func (*StateListResponse) Descriptor() ([]byte, []int) {
-	return file_protobuf_ebook_proto_rawDescGZIP(), []int{29}
+	return file_protobuf_ebook_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *StateListResponse) GetResult() []*State {
@@ -1577,7 +1629,10 @@ const file_protobuf_ebook_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"=\n" +
 	"\x12EbookDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\"o\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"A\n" +
+	"\x15InvBarcodeSaveRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
+	"\abarcode\x18\x02 \x01(\tR\abarcode\"o\n" +
 	"\x14UserWorksheetRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1c\n" +
 	"\n" +
@@ -1660,12 +1715,14 @@ const file_protobuf_ebook_proto_rawDesc = "" +
 	"\x06paging\x18\x02 \x01(\v2\r.ebook.PagingR\x06paging\"O\n" +
 	"\x11StateListResponse\x12$\n" +
 	"\x06result\x18\x01 \x03(\v2\f.ebook.StateR\x06result\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count2\xb7\x02\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count2\xf5\x02\n" +
 	"\bEbookSvc\x12@\n" +
 	"\tEbookList\x12\x17.ebook.EbookListRequest\x1a\x18.ebook.EbookListResponse\"\x00\x12=\n" +
 	"\rEbookCardById\x12\x18.ebook.EntityByIdRequest\x1a\x10.ebook.EbookCard\"\x00\x124\n" +
 	"\tEbookById\x12\x17.ebook.EbookByIdRequest\x1a\f.ebook.Ebook\"\x00\x12:\n" +
-	"\aInvList\x12\x15.ebook.InvListRequest\x1a\x16.ebook.InvListResponse\"\x00\x128\n" +
+	"\aInvList\x12\x15.ebook.InvListRequest\x1a\x16.ebook.InvListResponse\"\x00\x12<\n" +
+	"\x0eInvBarcodeSave\x12\x1c.ebook.InvBarcodeSaveRequest\x1a\n" +
+	".ebook.Inv\"\x00\x128\n" +
 	"\vEbookDelete\x12\x19.ebook.EbookDeleteRequest\x1a\f.ebook.Ebook\"\x002\x8f\x01\n" +
 	"\fEbookFormSvc\x12=\n" +
 	"\rEbookFormById\x12\x18.ebook.EntityByIdRequest\x1a\x10.ebook.EbookForm\"\x00\x12@\n" +
@@ -1697,142 +1754,145 @@ func file_protobuf_ebook_proto_rawDescGZIP() []byte {
 	return file_protobuf_ebook_proto_rawDescData
 }
 
-var file_protobuf_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_protobuf_ebook_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_protobuf_ebook_proto_goTypes = []any{
 	(*EntityByIdRequest)(nil),              // 0: ebook.EntityByIdRequest
 	(*EbookFormSaveRequest)(nil),           // 1: ebook.EbookFormSaveRequest
 	(*EbookDeleteRequest)(nil),             // 2: ebook.EbookDeleteRequest
-	(*UserWorksheetRequest)(nil),           // 3: ebook.UserWorksheetRequest
-	(*UserWorksheetsRequest)(nil),          // 4: ebook.UserWorksheetsRequest
-	(*UserWorksheetsResponse)(nil),         // 5: ebook.UserWorksheetsResponse
-	(*UserWorksheetSaveRequest)(nil),       // 6: ebook.UserWorksheetSaveRequest
-	(*EbookListRequest)(nil),               // 7: ebook.EbookListRequest
-	(*EbookListResponse)(nil),              // 8: ebook.EbookListResponse
-	(*EbookByIdRequest)(nil),               // 9: ebook.EbookByIdRequest
-	(*InvListRequest)(nil),                 // 10: ebook.InvListRequest
-	(*InvListResponse)(nil),                // 11: ebook.InvListResponse
-	(*CatalogListRequest)(nil),             // 12: ebook.CatalogListRequest
-	(*CatalogListResponse)(nil),            // 13: ebook.CatalogListResponse
-	(*TypeDescriptionListRequest)(nil),     // 14: ebook.TypeDescriptionListRequest
-	(*TypeDescriptionListResponse)(nil),    // 15: ebook.TypeDescriptionListResponse
-	(*BibliographicLevelListRequest)(nil),  // 16: ebook.BibliographicLevelListRequest
-	(*BibliographicLevelListResponse)(nil), // 17: ebook.BibliographicLevelListResponse
-	(*DictionaryLanguageListRequest)(nil),  // 18: ebook.DictionaryLanguageListRequest
-	(*DictionaryLanguageListResponse)(nil), // 19: ebook.DictionaryLanguageListResponse
-	(*BlockFieldListRequest)(nil),          // 20: ebook.BlockFieldListRequest
-	(*BlockFieldListResponse)(nil),         // 21: ebook.BlockFieldListResponse
-	(*BlockListRequest)(nil),               // 22: ebook.BlockListRequest
-	(*BlockListResponse)(nil),              // 23: ebook.BlockListResponse
-	(*DictionaryListRequest)(nil),          // 24: ebook.DictionaryListRequest
-	(*DictionaryListResponse)(nil),         // 25: ebook.DictionaryListResponse
-	(*SearchDictionaryRequest)(nil),        // 26: ebook.SearchDictionaryRequest
-	(*SearchDictionaryResponse)(nil),       // 27: ebook.SearchDictionaryResponse
-	(*StateListRequest)(nil),               // 28: ebook.StateListRequest
-	(*StateListResponse)(nil),              // 29: ebook.StateListResponse
-	(*EbookForm)(nil),                      // 30: ebook.EbookForm
-	(*UserWorksheet)(nil),                  // 31: ebook.UserWorksheet
-	(*EbookFilters)(nil),                   // 32: ebook.EbookFilters
-	(*Paging)(nil),                         // 33: ebook.Paging
-	(*Ebook)(nil),                          // 34: ebook.Ebook
-	(*InvFilters)(nil),                     // 35: ebook.InvFilters
-	(*Inv)(nil),                            // 36: ebook.Inv
-	(*CatalogFilters)(nil),                 // 37: ebook.CatalogFilters
-	(*Catalog)(nil),                        // 38: ebook.Catalog
-	(*TypeDescriptionFilters)(nil),         // 39: ebook.TypeDescriptionFilters
-	(*TypeDescription)(nil),                // 40: ebook.TypeDescription
-	(*BibliographicLevelFilters)(nil),      // 41: ebook.BibliographicLevelFilters
-	(*BibliographicLevel)(nil),             // 42: ebook.BibliographicLevel
-	(*DictionaryLanguageFilters)(nil),      // 43: ebook.DictionaryLanguageFilters
-	(*DictionaryLanguage)(nil),             // 44: ebook.DictionaryLanguage
-	(*BlockFieldFilters)(nil),              // 45: ebook.BlockFieldFilters
-	(*BlockField)(nil),                     // 46: ebook.BlockField
-	(*BlockFilters)(nil),                   // 47: ebook.BlockFilters
-	(*Block)(nil),                          // 48: ebook.Block
-	(*DictionaryFilters)(nil),              // 49: ebook.DictionaryFilters
-	(*Dictionary)(nil),                     // 50: ebook.Dictionary
-	(*SearchDictionaryFilters)(nil),        // 51: ebook.SearchDictionaryFilters
-	(*DictionaryBase)(nil),                 // 52: ebook.DictionaryBase
-	(*StateFilters)(nil),                   // 53: ebook.StateFilters
-	(*State)(nil),                          // 54: ebook.State
-	(*EbookCard)(nil),                      // 55: ebook.EbookCard
+	(*InvBarcodeSaveRequest)(nil),          // 3: ebook.InvBarcodeSaveRequest
+	(*UserWorksheetRequest)(nil),           // 4: ebook.UserWorksheetRequest
+	(*UserWorksheetsRequest)(nil),          // 5: ebook.UserWorksheetsRequest
+	(*UserWorksheetsResponse)(nil),         // 6: ebook.UserWorksheetsResponse
+	(*UserWorksheetSaveRequest)(nil),       // 7: ebook.UserWorksheetSaveRequest
+	(*EbookListRequest)(nil),               // 8: ebook.EbookListRequest
+	(*EbookListResponse)(nil),              // 9: ebook.EbookListResponse
+	(*EbookByIdRequest)(nil),               // 10: ebook.EbookByIdRequest
+	(*InvListRequest)(nil),                 // 11: ebook.InvListRequest
+	(*InvListResponse)(nil),                // 12: ebook.InvListResponse
+	(*CatalogListRequest)(nil),             // 13: ebook.CatalogListRequest
+	(*CatalogListResponse)(nil),            // 14: ebook.CatalogListResponse
+	(*TypeDescriptionListRequest)(nil),     // 15: ebook.TypeDescriptionListRequest
+	(*TypeDescriptionListResponse)(nil),    // 16: ebook.TypeDescriptionListResponse
+	(*BibliographicLevelListRequest)(nil),  // 17: ebook.BibliographicLevelListRequest
+	(*BibliographicLevelListResponse)(nil), // 18: ebook.BibliographicLevelListResponse
+	(*DictionaryLanguageListRequest)(nil),  // 19: ebook.DictionaryLanguageListRequest
+	(*DictionaryLanguageListResponse)(nil), // 20: ebook.DictionaryLanguageListResponse
+	(*BlockFieldListRequest)(nil),          // 21: ebook.BlockFieldListRequest
+	(*BlockFieldListResponse)(nil),         // 22: ebook.BlockFieldListResponse
+	(*BlockListRequest)(nil),               // 23: ebook.BlockListRequest
+	(*BlockListResponse)(nil),              // 24: ebook.BlockListResponse
+	(*DictionaryListRequest)(nil),          // 25: ebook.DictionaryListRequest
+	(*DictionaryListResponse)(nil),         // 26: ebook.DictionaryListResponse
+	(*SearchDictionaryRequest)(nil),        // 27: ebook.SearchDictionaryRequest
+	(*SearchDictionaryResponse)(nil),       // 28: ebook.SearchDictionaryResponse
+	(*StateListRequest)(nil),               // 29: ebook.StateListRequest
+	(*StateListResponse)(nil),              // 30: ebook.StateListResponse
+	(*EbookForm)(nil),                      // 31: ebook.EbookForm
+	(*UserWorksheet)(nil),                  // 32: ebook.UserWorksheet
+	(*EbookFilters)(nil),                   // 33: ebook.EbookFilters
+	(*Paging)(nil),                         // 34: ebook.Paging
+	(*Ebook)(nil),                          // 35: ebook.Ebook
+	(*InvFilters)(nil),                     // 36: ebook.InvFilters
+	(*Inv)(nil),                            // 37: ebook.Inv
+	(*CatalogFilters)(nil),                 // 38: ebook.CatalogFilters
+	(*Catalog)(nil),                        // 39: ebook.Catalog
+	(*TypeDescriptionFilters)(nil),         // 40: ebook.TypeDescriptionFilters
+	(*TypeDescription)(nil),                // 41: ebook.TypeDescription
+	(*BibliographicLevelFilters)(nil),      // 42: ebook.BibliographicLevelFilters
+	(*BibliographicLevel)(nil),             // 43: ebook.BibliographicLevel
+	(*DictionaryLanguageFilters)(nil),      // 44: ebook.DictionaryLanguageFilters
+	(*DictionaryLanguage)(nil),             // 45: ebook.DictionaryLanguage
+	(*BlockFieldFilters)(nil),              // 46: ebook.BlockFieldFilters
+	(*BlockField)(nil),                     // 47: ebook.BlockField
+	(*BlockFilters)(nil),                   // 48: ebook.BlockFilters
+	(*Block)(nil),                          // 49: ebook.Block
+	(*DictionaryFilters)(nil),              // 50: ebook.DictionaryFilters
+	(*Dictionary)(nil),                     // 51: ebook.Dictionary
+	(*SearchDictionaryFilters)(nil),        // 52: ebook.SearchDictionaryFilters
+	(*DictionaryBase)(nil),                 // 53: ebook.DictionaryBase
+	(*StateFilters)(nil),                   // 54: ebook.StateFilters
+	(*State)(nil),                          // 55: ebook.State
+	(*EbookCard)(nil),                      // 56: ebook.EbookCard
 }
 var file_protobuf_ebook_proto_depIdxs = []int32{
-	30, // 0: ebook.EbookFormSaveRequest.form:type_name -> ebook.EbookForm
-	31, // 1: ebook.UserWorksheetsResponse.result:type_name -> ebook.UserWorksheet
-	31, // 2: ebook.UserWorksheetSaveRequest.worksheet:type_name -> ebook.UserWorksheet
-	32, // 3: ebook.EbookListRequest.filters:type_name -> ebook.EbookFilters
-	33, // 4: ebook.EbookListRequest.paging:type_name -> ebook.Paging
-	34, // 5: ebook.EbookListResponse.result:type_name -> ebook.Ebook
-	35, // 6: ebook.InvListRequest.filters:type_name -> ebook.InvFilters
-	33, // 7: ebook.InvListRequest.paging:type_name -> ebook.Paging
-	36, // 8: ebook.InvListResponse.result:type_name -> ebook.Inv
-	37, // 9: ebook.CatalogListRequest.filters:type_name -> ebook.CatalogFilters
-	33, // 10: ebook.CatalogListRequest.paging:type_name -> ebook.Paging
-	38, // 11: ebook.CatalogListResponse.result:type_name -> ebook.Catalog
-	39, // 12: ebook.TypeDescriptionListRequest.filters:type_name -> ebook.TypeDescriptionFilters
-	33, // 13: ebook.TypeDescriptionListRequest.paging:type_name -> ebook.Paging
-	40, // 14: ebook.TypeDescriptionListResponse.result:type_name -> ebook.TypeDescription
-	41, // 15: ebook.BibliographicLevelListRequest.filters:type_name -> ebook.BibliographicLevelFilters
-	33, // 16: ebook.BibliographicLevelListRequest.paging:type_name -> ebook.Paging
-	42, // 17: ebook.BibliographicLevelListResponse.result:type_name -> ebook.BibliographicLevel
-	43, // 18: ebook.DictionaryLanguageListRequest.filters:type_name -> ebook.DictionaryLanguageFilters
-	33, // 19: ebook.DictionaryLanguageListRequest.paging:type_name -> ebook.Paging
-	44, // 20: ebook.DictionaryLanguageListResponse.result:type_name -> ebook.DictionaryLanguage
-	45, // 21: ebook.BlockFieldListRequest.filters:type_name -> ebook.BlockFieldFilters
-	33, // 22: ebook.BlockFieldListRequest.paging:type_name -> ebook.Paging
-	46, // 23: ebook.BlockFieldListResponse.result:type_name -> ebook.BlockField
-	47, // 24: ebook.BlockListRequest.filters:type_name -> ebook.BlockFilters
-	33, // 25: ebook.BlockListRequest.paging:type_name -> ebook.Paging
-	48, // 26: ebook.BlockListResponse.result:type_name -> ebook.Block
-	49, // 27: ebook.DictionaryListRequest.filters:type_name -> ebook.DictionaryFilters
-	33, // 28: ebook.DictionaryListRequest.paging:type_name -> ebook.Paging
-	50, // 29: ebook.DictionaryListResponse.result:type_name -> ebook.Dictionary
-	51, // 30: ebook.SearchDictionaryRequest.filters:type_name -> ebook.SearchDictionaryFilters
-	33, // 31: ebook.SearchDictionaryRequest.paging:type_name -> ebook.Paging
-	52, // 32: ebook.SearchDictionaryResponse.result:type_name -> ebook.DictionaryBase
-	53, // 33: ebook.StateListRequest.filters:type_name -> ebook.StateFilters
-	33, // 34: ebook.StateListRequest.paging:type_name -> ebook.Paging
-	54, // 35: ebook.StateListResponse.result:type_name -> ebook.State
-	7,  // 36: ebook.EbookSvc.EbookList:input_type -> ebook.EbookListRequest
+	31, // 0: ebook.EbookFormSaveRequest.form:type_name -> ebook.EbookForm
+	32, // 1: ebook.UserWorksheetsResponse.result:type_name -> ebook.UserWorksheet
+	32, // 2: ebook.UserWorksheetSaveRequest.worksheet:type_name -> ebook.UserWorksheet
+	33, // 3: ebook.EbookListRequest.filters:type_name -> ebook.EbookFilters
+	34, // 4: ebook.EbookListRequest.paging:type_name -> ebook.Paging
+	35, // 5: ebook.EbookListResponse.result:type_name -> ebook.Ebook
+	36, // 6: ebook.InvListRequest.filters:type_name -> ebook.InvFilters
+	34, // 7: ebook.InvListRequest.paging:type_name -> ebook.Paging
+	37, // 8: ebook.InvListResponse.result:type_name -> ebook.Inv
+	38, // 9: ebook.CatalogListRequest.filters:type_name -> ebook.CatalogFilters
+	34, // 10: ebook.CatalogListRequest.paging:type_name -> ebook.Paging
+	39, // 11: ebook.CatalogListResponse.result:type_name -> ebook.Catalog
+	40, // 12: ebook.TypeDescriptionListRequest.filters:type_name -> ebook.TypeDescriptionFilters
+	34, // 13: ebook.TypeDescriptionListRequest.paging:type_name -> ebook.Paging
+	41, // 14: ebook.TypeDescriptionListResponse.result:type_name -> ebook.TypeDescription
+	42, // 15: ebook.BibliographicLevelListRequest.filters:type_name -> ebook.BibliographicLevelFilters
+	34, // 16: ebook.BibliographicLevelListRequest.paging:type_name -> ebook.Paging
+	43, // 17: ebook.BibliographicLevelListResponse.result:type_name -> ebook.BibliographicLevel
+	44, // 18: ebook.DictionaryLanguageListRequest.filters:type_name -> ebook.DictionaryLanguageFilters
+	34, // 19: ebook.DictionaryLanguageListRequest.paging:type_name -> ebook.Paging
+	45, // 20: ebook.DictionaryLanguageListResponse.result:type_name -> ebook.DictionaryLanguage
+	46, // 21: ebook.BlockFieldListRequest.filters:type_name -> ebook.BlockFieldFilters
+	34, // 22: ebook.BlockFieldListRequest.paging:type_name -> ebook.Paging
+	47, // 23: ebook.BlockFieldListResponse.result:type_name -> ebook.BlockField
+	48, // 24: ebook.BlockListRequest.filters:type_name -> ebook.BlockFilters
+	34, // 25: ebook.BlockListRequest.paging:type_name -> ebook.Paging
+	49, // 26: ebook.BlockListResponse.result:type_name -> ebook.Block
+	50, // 27: ebook.DictionaryListRequest.filters:type_name -> ebook.DictionaryFilters
+	34, // 28: ebook.DictionaryListRequest.paging:type_name -> ebook.Paging
+	51, // 29: ebook.DictionaryListResponse.result:type_name -> ebook.Dictionary
+	52, // 30: ebook.SearchDictionaryRequest.filters:type_name -> ebook.SearchDictionaryFilters
+	34, // 31: ebook.SearchDictionaryRequest.paging:type_name -> ebook.Paging
+	53, // 32: ebook.SearchDictionaryResponse.result:type_name -> ebook.DictionaryBase
+	54, // 33: ebook.StateListRequest.filters:type_name -> ebook.StateFilters
+	34, // 34: ebook.StateListRequest.paging:type_name -> ebook.Paging
+	55, // 35: ebook.StateListResponse.result:type_name -> ebook.State
+	8,  // 36: ebook.EbookSvc.EbookList:input_type -> ebook.EbookListRequest
 	0,  // 37: ebook.EbookSvc.EbookCardById:input_type -> ebook.EntityByIdRequest
-	9,  // 38: ebook.EbookSvc.EbookById:input_type -> ebook.EbookByIdRequest
-	10, // 39: ebook.EbookSvc.InvList:input_type -> ebook.InvListRequest
-	2,  // 40: ebook.EbookSvc.EbookDelete:input_type -> ebook.EbookDeleteRequest
-	0,  // 41: ebook.EbookFormSvc.EbookFormById:input_type -> ebook.EntityByIdRequest
-	1,  // 42: ebook.EbookFormSvc.EbookFormSave:input_type -> ebook.EbookFormSaveRequest
-	24, // 43: ebook.DictionarySvc.DictionaryList:input_type -> ebook.DictionaryListRequest
-	26, // 44: ebook.DictionarySvc.SearchDictionary:input_type -> ebook.SearchDictionaryRequest
-	12, // 45: ebook.DictionarySvc.CatalogList:input_type -> ebook.CatalogListRequest
-	14, // 46: ebook.DictionarySvc.TypeDescriptionList:input_type -> ebook.TypeDescriptionListRequest
-	16, // 47: ebook.DictionarySvc.BibliographicLevelList:input_type -> ebook.BibliographicLevelListRequest
-	18, // 48: ebook.DictionarySvc.LanguageList:input_type -> ebook.DictionaryLanguageListRequest
-	22, // 49: ebook.DictionarySvc.BlockList:input_type -> ebook.BlockListRequest
-	20, // 50: ebook.DictionarySvc.BlockFieldList:input_type -> ebook.BlockFieldListRequest
-	28, // 51: ebook.DictionarySvc.StateList:input_type -> ebook.StateListRequest
-	3,  // 52: ebook.WorksheetSvc.UserWorksheet:input_type -> ebook.UserWorksheetRequest
-	4,  // 53: ebook.WorksheetSvc.UserWorksheets:input_type -> ebook.UserWorksheetsRequest
-	6,  // 54: ebook.WorksheetSvc.UserWorksheetSave:input_type -> ebook.UserWorksheetSaveRequest
-	8,  // 55: ebook.EbookSvc.EbookList:output_type -> ebook.EbookListResponse
-	55, // 56: ebook.EbookSvc.EbookCardById:output_type -> ebook.EbookCard
-	34, // 57: ebook.EbookSvc.EbookById:output_type -> ebook.Ebook
-	11, // 58: ebook.EbookSvc.InvList:output_type -> ebook.InvListResponse
-	34, // 59: ebook.EbookSvc.EbookDelete:output_type -> ebook.Ebook
-	30, // 60: ebook.EbookFormSvc.EbookFormById:output_type -> ebook.EbookForm
-	30, // 61: ebook.EbookFormSvc.EbookFormSave:output_type -> ebook.EbookForm
-	25, // 62: ebook.DictionarySvc.DictionaryList:output_type -> ebook.DictionaryListResponse
-	27, // 63: ebook.DictionarySvc.SearchDictionary:output_type -> ebook.SearchDictionaryResponse
-	13, // 64: ebook.DictionarySvc.CatalogList:output_type -> ebook.CatalogListResponse
-	15, // 65: ebook.DictionarySvc.TypeDescriptionList:output_type -> ebook.TypeDescriptionListResponse
-	17, // 66: ebook.DictionarySvc.BibliographicLevelList:output_type -> ebook.BibliographicLevelListResponse
-	19, // 67: ebook.DictionarySvc.LanguageList:output_type -> ebook.DictionaryLanguageListResponse
-	23, // 68: ebook.DictionarySvc.BlockList:output_type -> ebook.BlockListResponse
-	21, // 69: ebook.DictionarySvc.BlockFieldList:output_type -> ebook.BlockFieldListResponse
-	29, // 70: ebook.DictionarySvc.StateList:output_type -> ebook.StateListResponse
-	31, // 71: ebook.WorksheetSvc.UserWorksheet:output_type -> ebook.UserWorksheet
-	5,  // 72: ebook.WorksheetSvc.UserWorksheets:output_type -> ebook.UserWorksheetsResponse
-	31, // 73: ebook.WorksheetSvc.UserWorksheetSave:output_type -> ebook.UserWorksheet
-	55, // [55:74] is the sub-list for method output_type
-	36, // [36:55] is the sub-list for method input_type
+	10, // 38: ebook.EbookSvc.EbookById:input_type -> ebook.EbookByIdRequest
+	11, // 39: ebook.EbookSvc.InvList:input_type -> ebook.InvListRequest
+	3,  // 40: ebook.EbookSvc.InvBarcodeSave:input_type -> ebook.InvBarcodeSaveRequest
+	2,  // 41: ebook.EbookSvc.EbookDelete:input_type -> ebook.EbookDeleteRequest
+	0,  // 42: ebook.EbookFormSvc.EbookFormById:input_type -> ebook.EntityByIdRequest
+	1,  // 43: ebook.EbookFormSvc.EbookFormSave:input_type -> ebook.EbookFormSaveRequest
+	25, // 44: ebook.DictionarySvc.DictionaryList:input_type -> ebook.DictionaryListRequest
+	27, // 45: ebook.DictionarySvc.SearchDictionary:input_type -> ebook.SearchDictionaryRequest
+	13, // 46: ebook.DictionarySvc.CatalogList:input_type -> ebook.CatalogListRequest
+	15, // 47: ebook.DictionarySvc.TypeDescriptionList:input_type -> ebook.TypeDescriptionListRequest
+	17, // 48: ebook.DictionarySvc.BibliographicLevelList:input_type -> ebook.BibliographicLevelListRequest
+	19, // 49: ebook.DictionarySvc.LanguageList:input_type -> ebook.DictionaryLanguageListRequest
+	23, // 50: ebook.DictionarySvc.BlockList:input_type -> ebook.BlockListRequest
+	21, // 51: ebook.DictionarySvc.BlockFieldList:input_type -> ebook.BlockFieldListRequest
+	29, // 52: ebook.DictionarySvc.StateList:input_type -> ebook.StateListRequest
+	4,  // 53: ebook.WorksheetSvc.UserWorksheet:input_type -> ebook.UserWorksheetRequest
+	5,  // 54: ebook.WorksheetSvc.UserWorksheets:input_type -> ebook.UserWorksheetsRequest
+	7,  // 55: ebook.WorksheetSvc.UserWorksheetSave:input_type -> ebook.UserWorksheetSaveRequest
+	9,  // 56: ebook.EbookSvc.EbookList:output_type -> ebook.EbookListResponse
+	56, // 57: ebook.EbookSvc.EbookCardById:output_type -> ebook.EbookCard
+	35, // 58: ebook.EbookSvc.EbookById:output_type -> ebook.Ebook
+	12, // 59: ebook.EbookSvc.InvList:output_type -> ebook.InvListResponse
+	37, // 60: ebook.EbookSvc.InvBarcodeSave:output_type -> ebook.Inv
+	35, // 61: ebook.EbookSvc.EbookDelete:output_type -> ebook.Ebook
+	31, // 62: ebook.EbookFormSvc.EbookFormById:output_type -> ebook.EbookForm
+	31, // 63: ebook.EbookFormSvc.EbookFormSave:output_type -> ebook.EbookForm
+	26, // 64: ebook.DictionarySvc.DictionaryList:output_type -> ebook.DictionaryListResponse
+	28, // 65: ebook.DictionarySvc.SearchDictionary:output_type -> ebook.SearchDictionaryResponse
+	14, // 66: ebook.DictionarySvc.CatalogList:output_type -> ebook.CatalogListResponse
+	16, // 67: ebook.DictionarySvc.TypeDescriptionList:output_type -> ebook.TypeDescriptionListResponse
+	18, // 68: ebook.DictionarySvc.BibliographicLevelList:output_type -> ebook.BibliographicLevelListResponse
+	20, // 69: ebook.DictionarySvc.LanguageList:output_type -> ebook.DictionaryLanguageListResponse
+	24, // 70: ebook.DictionarySvc.BlockList:output_type -> ebook.BlockListResponse
+	22, // 71: ebook.DictionarySvc.BlockFieldList:output_type -> ebook.BlockFieldListResponse
+	30, // 72: ebook.DictionarySvc.StateList:output_type -> ebook.StateListResponse
+	32, // 73: ebook.WorksheetSvc.UserWorksheet:output_type -> ebook.UserWorksheet
+	6,  // 74: ebook.WorksheetSvc.UserWorksheets:output_type -> ebook.UserWorksheetsResponse
+	32, // 75: ebook.WorksheetSvc.UserWorksheetSave:output_type -> ebook.UserWorksheet
+	56, // [56:76] is the sub-list for method output_type
+	36, // [36:56] is the sub-list for method input_type
 	36, // [36:36] is the sub-list for extension type_name
 	36, // [36:36] is the sub-list for extension extendee
 	0,  // [0:36] is the sub-list for field type_name
@@ -1852,7 +1912,7 @@ func file_protobuf_ebook_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_ebook_proto_rawDesc), len(file_protobuf_ebook_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   30,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   4,
 		},

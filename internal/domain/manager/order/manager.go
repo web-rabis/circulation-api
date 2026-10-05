@@ -27,7 +27,7 @@ type IManager interface {
 	Postponed(ctx context.Context, ids []int64, userId int64) error
 	ReturnToStorage(ctx context.Context, ids []int64, userId int64) error
 	Return(ctx context.Context, ids []int64, userId int64) error
-	Issue(ctx context.Context, id int64, userId, invId int64) error
+	Issue(ctx context.Context, id int64, userId, invId int64, barcode string) error
 	IssueOrders(ctx context.Context, id []int64, userId int64) error
 	Redirect(ctx context.Context, ids []int64, departmentId, userId int64) error
 	Create(ctx context.Context, ticketNumber, ebookId, departmentId, invId, userId int64) (int64, error)
@@ -158,10 +158,15 @@ func (m *Manager) Return(ctx context.Context, ids []int64, userId int64) error {
 	}
 	return m.orderCl.Return(ctx, ids, user)
 }
-func (m *Manager) Issue(ctx context.Context, id int64, userId, invId int64) error {
+func (m *Manager) Issue(ctx context.Context, id int64, userId, invId int64, barcode string) error {
 	user, err := m.getUserById(ctx, userId)
 	if err != nil {
 		return err
+	}
+	if barcode != "" {
+		if _, err := m.ebookCl.InvBarcodeSave(ctx, invId, barcode); err != nil {
+			return err
+		}
 	}
 	req := []orderModel.IssueOrder{{
 		Id:         id,

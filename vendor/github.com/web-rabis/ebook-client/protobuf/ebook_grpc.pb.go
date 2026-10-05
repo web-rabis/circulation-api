@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EbookSvc_EbookList_FullMethodName     = "/ebook.EbookSvc/EbookList"
-	EbookSvc_EbookCardById_FullMethodName = "/ebook.EbookSvc/EbookCardById"
-	EbookSvc_EbookById_FullMethodName     = "/ebook.EbookSvc/EbookById"
-	EbookSvc_InvList_FullMethodName       = "/ebook.EbookSvc/InvList"
-	EbookSvc_EbookDelete_FullMethodName   = "/ebook.EbookSvc/EbookDelete"
+	EbookSvc_EbookList_FullMethodName      = "/ebook.EbookSvc/EbookList"
+	EbookSvc_EbookCardById_FullMethodName  = "/ebook.EbookSvc/EbookCardById"
+	EbookSvc_EbookById_FullMethodName      = "/ebook.EbookSvc/EbookById"
+	EbookSvc_InvList_FullMethodName        = "/ebook.EbookSvc/InvList"
+	EbookSvc_InvBarcodeSave_FullMethodName = "/ebook.EbookSvc/InvBarcodeSave"
+	EbookSvc_EbookDelete_FullMethodName    = "/ebook.EbookSvc/EbookDelete"
 )
 
 // EbookSvcClient is the client API for EbookSvc service.
@@ -34,6 +35,7 @@ type EbookSvcClient interface {
 	EbookCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*EbookCard, error)
 	EbookById(ctx context.Context, in *EbookByIdRequest, opts ...grpc.CallOption) (*Ebook, error)
 	InvList(ctx context.Context, in *InvListRequest, opts ...grpc.CallOption) (*InvListResponse, error)
+	InvBarcodeSave(ctx context.Context, in *InvBarcodeSaveRequest, opts ...grpc.CallOption) (*Inv, error)
 	EbookDelete(ctx context.Context, in *EbookDeleteRequest, opts ...grpc.CallOption) (*Ebook, error)
 }
 
@@ -85,6 +87,16 @@ func (c *ebookSvcClient) InvList(ctx context.Context, in *InvListRequest, opts .
 	return out, nil
 }
 
+func (c *ebookSvcClient) InvBarcodeSave(ctx context.Context, in *InvBarcodeSaveRequest, opts ...grpc.CallOption) (*Inv, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Inv)
+	err := c.cc.Invoke(ctx, EbookSvc_InvBarcodeSave_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *ebookSvcClient) EbookDelete(ctx context.Context, in *EbookDeleteRequest, opts ...grpc.CallOption) (*Ebook, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Ebook)
@@ -103,6 +115,7 @@ type EbookSvcServer interface {
 	EbookCardById(context.Context, *EntityByIdRequest) (*EbookCard, error)
 	EbookById(context.Context, *EbookByIdRequest) (*Ebook, error)
 	InvList(context.Context, *InvListRequest) (*InvListResponse, error)
+	InvBarcodeSave(context.Context, *InvBarcodeSaveRequest) (*Inv, error)
 	EbookDelete(context.Context, *EbookDeleteRequest) (*Ebook, error)
 	mustEmbedUnimplementedEbookSvcServer()
 }
@@ -125,6 +138,9 @@ func (UnimplementedEbookSvcServer) EbookById(context.Context, *EbookByIdRequest)
 }
 func (UnimplementedEbookSvcServer) InvList(context.Context, *InvListRequest) (*InvListResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method InvList not implemented")
+}
+func (UnimplementedEbookSvcServer) InvBarcodeSave(context.Context, *InvBarcodeSaveRequest) (*Inv, error) {
+	return nil, status.Error(codes.Unimplemented, "method InvBarcodeSave not implemented")
 }
 func (UnimplementedEbookSvcServer) EbookDelete(context.Context, *EbookDeleteRequest) (*Ebook, error) {
 	return nil, status.Error(codes.Unimplemented, "method EbookDelete not implemented")
@@ -222,6 +238,24 @@ func _EbookSvc_InvList_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EbookSvc_InvBarcodeSave_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InvBarcodeSaveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EbookSvcServer).InvBarcodeSave(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EbookSvc_InvBarcodeSave_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EbookSvcServer).InvBarcodeSave(ctx, req.(*InvBarcodeSaveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EbookSvc_EbookDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EbookDeleteRequest)
 	if err := dec(in); err != nil {
@@ -262,6 +296,10 @@ var EbookSvc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InvList",
 			Handler:    _EbookSvc_InvList_Handler,
+		},
+		{
+			MethodName: "InvBarcodeSave",
+			Handler:    _EbookSvc_InvBarcodeSave_Handler,
 		},
 		{
 			MethodName: "EbookDelete",

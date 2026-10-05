@@ -25,6 +25,9 @@ type EbookService interface {
 	EbookById(ctx context.Context, id int64, withCard bool) (*ebook.Ebook, error)
 	EbookCardById(ctx context.Context, id int64) (*ebook.EbookCard, error)
 	InvList(ctx context.Context, filters *model.InvFilters, paging *model.Paging) (int64, []*ebook.Inv, error)
+	// InvBarcodeSave сохраняет barcode экземпляра id, не трогая остальные
+	// поля. Возвращает экземпляр с уже применённым изменением.
+	InvBarcodeSave(ctx context.Context, id int64, barcode string) (*ebook.Inv, error)
 	// EbookDelete - "мягкое" удаление: запись не удаляется физически, а
 	// переводится в статус Ebook.Deleted; userId - кто удалил, записывается
 	// в ebook_audit. Возвращает запись уже в новом статусе.

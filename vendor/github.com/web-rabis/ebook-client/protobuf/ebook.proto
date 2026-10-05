@@ -10,6 +10,7 @@ service EbookSvc {
   rpc EbookCardById(EntityByIdRequest) returns (EbookCard) {}
   rpc EbookById(EbookByIdRequest) returns (Ebook) {}
   rpc InvList(InvListRequest) returns (InvListResponse) {}
+  rpc InvBarcodeSave(InvBarcodeSaveRequest) returns (Inv) {}
   rpc EbookDelete(EbookDeleteRequest) returns (Ebook) {} // "мягкое" удаление - перевод в статус Ebook.Deleted, физически запись не удаляется
 }
 
@@ -55,6 +56,10 @@ message EbookFormSaveRequest {
 message EbookDeleteRequest {
   int64 id = 1;
   int64 user_id = 2;  // кто удалил - записывается в ebook_audit
+}
+message InvBarcodeSaveRequest {
+  int64 id = 1;
+  string barcode = 2;
 }
 message UserWorksheetRequest {
   int64 user_id = 1;
