@@ -5,6 +5,7 @@ import (
 
 	"github.com/web-rabis/ebook-client/model/ebook"
 	orderModel "github.com/web-rabis/order-client/model"
+	readerModel "github.com/web-rabis/reader-client/model"
 	"github.com/web-rabis/sso-client/model"
 )
 
@@ -13,7 +14,7 @@ type Order struct {
 	CreatedAt         time.Time                   `json:"createdAt"`
 	UpdatedAt         time.Time                   `json:"updatedAt"`
 	Type              string                      `json:"type"`
-	Reader            *orderModel.Reader          `json:"reader"`
+	Reader            *readerModel.Reader         `json:"reader"`
 	Ebook             *ebook.Ebook                `json:"ebook"`
 	InvNumber         *ebook.Inv                  `json:"invNumber"`
 	Periodical        *orderModel.Periodical      `json:"periodical"`
@@ -33,11 +34,12 @@ type OrderAudit struct {
 }
 
 // NewOrder собирает ответ шлюза: заказ из order-client (только идентификаторы
-// EbookId/EbookInvId и денормализованные InvNumber/Barcode) обогащается
-// карточкой книги e и экземпляром inv из сервиса ebook. Если ebook недоступен,
-// в ответ уходит минимальная заглушка по данным самого заказа, чтобы список
-// заказов оставался работоспособным.
-func NewOrder(o *orderModel.Order, e *ebook.Ebook, inv *ebook.Inv) *Order {
+// EbookId/EbookInvId/ReaderTicketNumber и денормализованные InvNumber/Barcode)
+// обогащается карточкой книги e и экземпляром inv из сервиса ebook, карточкой
+// читателя reader из reader-сервиса. Если ebook недоступен, в ответ уходит
+// минимальная заглушка по данным самого заказа, чтобы список заказов
+// оставался работоспособным.
+func NewOrder(o *orderModel.Order, reader *readerModel.Reader, e *ebook.Ebook, inv *ebook.Inv) *Order {
 	if o == nil {
 		return nil
 	}
@@ -57,7 +59,7 @@ func NewOrder(o *orderModel.Order, e *ebook.Ebook, inv *ebook.Inv) *Order {
 		CreatedAt:         o.CreatedAt,
 		UpdatedAt:         o.UpdatedAt,
 		Type:              o.Type,
-		Reader:            o.Reader,
+		Reader:            reader,
 		Ebook:             e,
 		InvNumber:         inv,
 		Periodical:        o.Periodical,

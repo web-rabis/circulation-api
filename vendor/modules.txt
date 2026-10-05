@@ -193,7 +193,7 @@ github.com/web-rabis/ebook-client/protobuf
 # github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
 ## explicit; go 1.18
 github.com/web-rabis/httperrors
-# github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002
+# github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002 => ../order-client
 ## explicit; go 1.24.0
 github.com/web-rabis/order-client
 github.com/web-rabis/order-client/client
@@ -388,3 +388,4 @@ gorm.io/gorm/clause
 gorm.io/gorm/logger
 gorm.io/gorm/schema
 gorm.io/gorm/utils
+# github.com/web-rabis/order-client => ../order-client

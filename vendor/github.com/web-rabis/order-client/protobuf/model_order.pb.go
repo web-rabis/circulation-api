@@ -28,17 +28,17 @@ type Order struct {
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Type      string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Reader    *Reader                `protobuf:"bytes,5,opt,name=reader,proto3" json:"reader,omitempty"`
-	// Только ссылки на сервис ebook: карточку книги и экземпляра
-	// подмешивает шлюз circulation-api.
-	EbookId           int64            `protobuf:"varint,6,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
-	EbookInvId        int64            `protobuf:"varint,7,opt,name=ebook_inv_id,json=ebookInvId,proto3" json:"ebook_inv_id,omitempty"`
-	Periodical        *Periodical      `protobuf:"bytes,8,opt,name=periodical,proto3" json:"periodical,omitempty"`
-	State             *State           `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`
-	Department        *Department      `protobuf:"bytes,10,opt,name=department,proto3" json:"department,omitempty"`
-	StorageDepartment *Department      `protobuf:"bytes,11,opt,name=storage_department,json=storageDepartment,proto3" json:"storage_department,omitempty"`
-	IsAuxiliaryFund   bool             `protobuf:"varint,12,opt,name=is_auxiliary_fund,json=isAuxiliaryFund,proto3" json:"is_auxiliary_fund,omitempty"`
-	ReasonRejection   *ReasonRejection `protobuf:"bytes,13,opt,name=reason_rejection,json=reasonRejection,proto3" json:"reason_rejection,omitempty"`
+	// Только номер читательского билета: карточку читателя, как и карточку
+	// книги/экземпляра ниже, подмешивает шлюз circulation-api.
+	ReaderTicketNumber int64            `protobuf:"varint,5,opt,name=reader_ticket_number,json=readerTicketNumber,proto3" json:"reader_ticket_number,omitempty"`
+	EbookId            int64            `protobuf:"varint,6,opt,name=ebook_id,json=ebookId,proto3" json:"ebook_id,omitempty"`
+	EbookInvId         int64            `protobuf:"varint,7,opt,name=ebook_inv_id,json=ebookInvId,proto3" json:"ebook_inv_id,omitempty"`
+	Periodical         *Periodical      `protobuf:"bytes,8,opt,name=periodical,proto3" json:"periodical,omitempty"`
+	State              *State           `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`
+	Department         *Department      `protobuf:"bytes,10,opt,name=department,proto3" json:"department,omitempty"`
+	StorageDepartment  *Department      `protobuf:"bytes,11,opt,name=storage_department,json=storageDepartment,proto3" json:"storage_department,omitempty"`
+	IsAuxiliaryFund    bool             `protobuf:"varint,12,opt,name=is_auxiliary_fund,json=isAuxiliaryFund,proto3" json:"is_auxiliary_fund,omitempty"`
+	ReasonRejection    *ReasonRejection `protobuf:"bytes,13,opt,name=reason_rejection,json=reasonRejection,proto3" json:"reason_rejection,omitempty"`
 	// Снимок, зафиксированный в самом заказе на момент выдачи.
 	InvNumber     string `protobuf:"bytes,14,opt,name=inv_number,json=invNumber,proto3" json:"inv_number,omitempty"`
 	Barcode       string `protobuf:"bytes,15,opt,name=barcode,proto3" json:"barcode,omitempty"`
@@ -104,11 +104,11 @@ func (x *Order) GetType() string {
 	return ""
 }
 
-func (x *Order) GetReader() *Reader {
+func (x *Order) GetReaderTicketNumber() int64 {
 	if x != nil {
-		return x.Reader
+		return x.ReaderTicketNumber
 	}
-	return nil
+	return 0
 }
 
 func (x *Order) GetEbookId() int64 {
@@ -694,15 +694,15 @@ var File_protobuf_model_order_proto protoreflect.FileDescriptor
 
 const file_protobuf_model_order_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotobuf/model_order.proto\x12\x05order\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bprotobuf/model_reader.proto\x1a\x1fprotobuf/model_periodical.proto\x1a\x1fprotobuf/model_dictionary.proto\"\xf9\x04\n" +
+	"\x1aprotobuf/model_order.proto\x12\x05order\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1fprotobuf/model_periodical.proto\x1a\x1fprotobuf/model_dictionary.proto\"\x84\x05\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\x03R\x02Id\x129\n" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12%\n" +
-	"\x06reader\x18\x05 \x01(\v2\r.order.ReaderR\x06reader\x12\x19\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x120\n" +
+	"\x14reader_ticket_number\x18\x05 \x01(\x03R\x12readerTicketNumber\x12\x19\n" +
 	"\bebook_id\x18\x06 \x01(\x03R\aebookId\x12 \n" +
 	"\febook_inv_id\x18\a \x01(\x03R\n" +
 	"ebookInvId\x121\n" +
@@ -792,31 +792,29 @@ var file_protobuf_model_order_proto_goTypes = []any{
 	(*User)(nil),                  // 6: order.User
 	(*OrderAudit)(nil),            // 7: order.OrderAudit
 	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
-	(*Reader)(nil),                // 9: order.Reader
-	(*Periodical)(nil),            // 10: order.Periodical
-	(*State)(nil),                 // 11: order.State
-	(*Department)(nil),            // 12: order.Department
-	(*ReasonRejection)(nil),       // 13: order.ReasonRejection
+	(*Periodical)(nil),            // 9: order.Periodical
+	(*State)(nil),                 // 10: order.State
+	(*Department)(nil),            // 11: order.Department
+	(*ReasonRejection)(nil),       // 12: order.ReasonRejection
 }
 var file_protobuf_model_order_proto_depIdxs = []int32{
 	8,  // 0: order.Order.created_at:type_name -> google.protobuf.Timestamp
 	8,  // 1: order.Order.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 2: order.Order.reader:type_name -> order.Reader
-	10, // 3: order.Order.periodical:type_name -> order.Periodical
-	11, // 4: order.Order.state:type_name -> order.State
-	12, // 5: order.Order.department:type_name -> order.Department
-	12, // 6: order.Order.storage_department:type_name -> order.Department
-	13, // 7: order.Order.reason_rejection:type_name -> order.ReasonRejection
-	11, // 8: order.StateCount.state:type_name -> order.State
-	12, // 9: order.User.department:type_name -> order.Department
-	8,  // 10: order.OrderAudit.audit_date:type_name -> google.protobuf.Timestamp
-	11, // 11: order.OrderAudit.state:type_name -> order.State
-	12, // 12: order.OrderAudit.department:type_name -> order.Department
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	9,  // 2: order.Order.periodical:type_name -> order.Periodical
+	10, // 3: order.Order.state:type_name -> order.State
+	11, // 4: order.Order.department:type_name -> order.Department
+	11, // 5: order.Order.storage_department:type_name -> order.Department
+	12, // 6: order.Order.reason_rejection:type_name -> order.ReasonRejection
+	10, // 7: order.StateCount.state:type_name -> order.State
+	11, // 8: order.User.department:type_name -> order.Department
+	8,  // 9: order.OrderAudit.audit_date:type_name -> google.protobuf.Timestamp
+	10, // 10: order.OrderAudit.state:type_name -> order.State
+	11, // 11: order.OrderAudit.department:type_name -> order.Department
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_model_order_proto_init() }
@@ -824,7 +822,6 @@ func file_protobuf_model_order_proto_init() {
 	if File_protobuf_model_order_proto != nil {
 		return
 	}
-	file_protobuf_model_reader_proto_init()
 	file_protobuf_model_periodical_proto_init()
 	file_protobuf_model_dictionary_proto_init()
 	type x struct{}

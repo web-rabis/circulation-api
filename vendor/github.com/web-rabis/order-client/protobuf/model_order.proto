@@ -2,7 +2,6 @@ syntax = "proto3";
 package order;
 option go_package = "./protobuf;protobuf";
 import "google/protobuf/timestamp.proto";
-import "protobuf/model_reader.proto";
 import "protobuf/model_periodical.proto";
 import "protobuf/model_dictionary.proto";
 message Order {
@@ -10,9 +9,9 @@ message Order {
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string type = 4;
-  Reader reader = 5;
-  // Только ссылки на сервис ebook: карточку книги и экземпляра
-  // подмешивает шлюз circulation-api.
+  // Только номер читательского билета: карточку читателя, как и карточку
+  // книги/экземпляра ниже, подмешивает шлюз circulation-api.
+  int64 reader_ticket_number = 5;
   int64 ebook_id = 6;
   int64 ebook_inv_id = 7;
   Periodical periodical = 8;

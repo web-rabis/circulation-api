@@ -5,6 +5,7 @@ import (
 
 	"github.com/web-rabis/circulation-api/internal/domain/model"
 	orderModel "github.com/web-rabis/order-client/model"
+	readerModel "github.com/web-rabis/reader-client/model"
 )
 
 // ReaderDTO — читатель в мониторинге.
@@ -45,7 +46,7 @@ func MonitorStates() []string {
 // NewReaderMonitor группирует заказы по читателям и строит список мониторинга.
 func NewReaderMonitor(orders []*model.Order) []ReaderMonitorItem {
 	type readerAgg struct {
-		reader    *orderModel.Reader
+		reader    *readerModel.Reader
 		total     int
 		completed int
 	}

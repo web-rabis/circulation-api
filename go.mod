@@ -10,12 +10,16 @@ require (
 	github.com/hashicorp/logutils v1.0.0
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/lestrrat-go/jwx v1.2.31
+	github.com/pkg/errors v0.9.1
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
+	github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
 	github.com/web-rabis/order-client v0.0.0-20260921181821-4305380e0002
 	github.com/web-rabis/reader-client v0.0.0-20260414025540-b24b276e5454
+	github.com/web-rabis/searcher-proxy v0.0.0-20260531173822-4d20674ca383
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7
+	github.com/web-rabis/sso-client v0.0.0-20260902072025-6f0894046888
 	golang.org/x/sync v0.20.0
 )
 
@@ -41,13 +45,9 @@ require (
 	github.com/lestrrat-go/iter v1.0.2 // indirect
 	github.com/lestrrat-go/option v1.0.1 // indirect
 	github.com/mailru/easyjson v0.7.6 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/swaggo/swag v1.8.1 // indirect
-	github.com/web-rabis/ebook-client v0.0.0-20260928182249-b1ffb5e36015 // indirect
-	github.com/web-rabis/searcher-proxy v0.0.0-20260531173822-4d20674ca383 // indirect
-	github.com/web-rabis/sso-client v0.0.0-20260902072025-6f0894046888 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
 	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
@@ -59,3 +59,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/gorm v1.25.4 // indirect
 )
+
+replace github.com/web-rabis/order-client => ../order-client

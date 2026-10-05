@@ -12,6 +12,7 @@ import (
 	orderClient "github.com/web-rabis/order-client/client"
 	orderModel "github.com/web-rabis/order-client/model"
 	readerClient "github.com/web-rabis/reader-client/client"
+	readerModel "github.com/web-rabis/reader-client/model"
 	ssoClient "github.com/web-rabis/sso-client/client"
 )
 
@@ -62,15 +63,11 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 	)
 	var orders_ = make([]*model.Order, len(orders))
 	for i, order := range orders {
-		if order.Reader != nil {
-			reader, err := m.readerCl.ReaderById(ctx, order.Reader.TicketNumber)
-			if err == nil {
-				order.Reader.Firstname = reader.Firstname
-				order.Reader.Lastname = reader.Lastname
-				order.Reader.Middlename = reader.Middlename
-				order.Reader.Barcode = reader.Barcode
-				order.Reader.IsEmployee = reader.IsEmployee
-				order.Reader.Department = reader.Department
+		var reader *readerModel.Reader
+		if order.ReaderTicketNumber != 0 {
+			reader, err = m.readerCl.ReaderById(ctx, order.ReaderTicketNumber)
+			if err != nil {
+				reader = &readerModel.Reader{TicketNumber: order.ReaderTicketNumber}
 			}
 		}
 		var e *ebookModel.Ebook
@@ -95,7 +92,7 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 				inv = byId[order.EbookInvId]
 			}
 		}
-		orders_[i] = model.NewOrder(order, e, inv)
+		orders_[i] = model.NewOrder(order, reader, e, inv)
 	}
 	return count, orders_, nil
 }
