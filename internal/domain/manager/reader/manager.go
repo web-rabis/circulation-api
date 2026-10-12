@@ -22,5 +22,5 @@ func NewReaderManager(readerCli readerClient.ReaderService) *Manager {
 }
 
 func (m *Manager) ReaderByTicketNumber(ctx context.Context, ticketNumber int64) (*model.Reader, error) {
-	return m.readerCli.ReaderById(ctx, ticketNumber)
+	return m.readerCli.ReaderByTicketNumber(ctx, ticketNumber)
 }
