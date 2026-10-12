@@ -65,7 +65,7 @@ func (m *Manager) List(ctx context.Context, filters *orderModel.OrderFilters, pa
 	for i, order := range orders {
 		var reader *readerModel.Reader
 		if order.ReaderTicketNumber != 0 {
-			reader, err = m.readerCl.ReaderById(ctx, order.ReaderTicketNumber)
+			reader, err = m.readerCl.ReaderByTicketNumber(ctx, order.ReaderTicketNumber)
 			if err != nil {
 				reader = &readerModel.Reader{TicketNumber: order.ReaderTicketNumber}
 			}
