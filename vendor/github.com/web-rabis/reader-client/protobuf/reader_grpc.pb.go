@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,14 +20,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReaderSvc_ReaderById_FullMethodName = "/reader.ReaderSvc/ReaderById"
+	ReaderSvc_ReaderByTicketNumber_FullMethodName      = "/reader.ReaderSvc/ReaderByTicketNumber"
+	ReaderSvc_ReaderList_FullMethodName                = "/reader.ReaderSvc/ReaderList"
+	ReaderSvc_ReaderRegistration_FullMethodName        = "/reader.ReaderSvc/ReaderRegistration"
+	ReaderSvc_ReaderCreate_FullMethodName              = "/reader.ReaderSvc/ReaderCreate"
+	ReaderSvc_ReaderUpdate_FullMethodName              = "/reader.ReaderSvc/ReaderUpdate"
+	ReaderSvc_ReaderDelete_FullMethodName              = "/reader.ReaderSvc/ReaderDelete"
+	ReaderSvc_ReaderApprove_FullMethodName             = "/reader.ReaderSvc/ReaderApprove"
+	ReaderSvc_ReaderReject_FullMethodName              = "/reader.ReaderSvc/ReaderReject"
+	ReaderSvc_ReaderPhotoByTicketNumber_FullMethodName = "/reader.ReaderSvc/ReaderPhotoByTicketNumber"
+	ReaderSvc_ReaderUploadPhoto_FullMethodName         = "/reader.ReaderSvc/ReaderUploadPhoto"
 )
 
 // ReaderSvcClient is the client API for ReaderSvc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReaderSvcClient interface {
-	ReaderById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*Reader, error)
+	ReaderByTicketNumber(ctx context.Context, in *ByTicketNumberRequest, opts ...grpc.CallOption) (*Reader, error)
+	ReaderList(ctx context.Context, in *ReaderListRequest, opts ...grpc.CallOption) (*ReaderListResponse, error)
+	ReaderRegistration(ctx context.Context, in *ReaderRegistrationRequest, opts ...grpc.CallOption) (*ReaderRegistrationResponse, error)
+	ReaderCreate(ctx context.Context, in *ReaderCreateRequest, opts ...grpc.CallOption) (*ReaderCreateResponse, error)
+	ReaderUpdate(ctx context.Context, in *ReaderUpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ReaderDelete(ctx context.Context, in *ReaderDeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ReaderApprove(ctx context.Context, in *ReaderApproveRequest, opts ...grpc.CallOption) (*ReaderApproveResponse, error)
+	ReaderReject(ctx context.Context, in *ReaderRejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ReaderPhotoByTicketNumber(ctx context.Context, in *ByTicketNumberRequest, opts ...grpc.CallOption) (*ReaderPhotoByTicketNumberResponse, error)
+	ReaderUploadPhoto(ctx context.Context, in *ReaderUploadPhotoRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type readerSvcClient struct {
@@ -37,10 +56,100 @@ func NewReaderSvcClient(cc grpc.ClientConnInterface) ReaderSvcClient {
 	return &readerSvcClient{cc}
 }
 
-func (c *readerSvcClient) ReaderById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*Reader, error) {
+func (c *readerSvcClient) ReaderByTicketNumber(ctx context.Context, in *ByTicketNumberRequest, opts ...grpc.CallOption) (*Reader, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Reader)
-	err := c.cc.Invoke(ctx, ReaderSvc_ReaderById_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderByTicketNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderList(ctx context.Context, in *ReaderListRequest, opts ...grpc.CallOption) (*ReaderListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReaderListResponse)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderRegistration(ctx context.Context, in *ReaderRegistrationRequest, opts ...grpc.CallOption) (*ReaderRegistrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReaderRegistrationResponse)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderRegistration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderCreate(ctx context.Context, in *ReaderCreateRequest, opts ...grpc.CallOption) (*ReaderCreateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReaderCreateResponse)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderCreate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderUpdate(ctx context.Context, in *ReaderUpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderDelete(ctx context.Context, in *ReaderDeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderApprove(ctx context.Context, in *ReaderApproveRequest, opts ...grpc.CallOption) (*ReaderApproveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReaderApproveResponse)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderApprove_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderReject(ctx context.Context, in *ReaderRejectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderReject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderPhotoByTicketNumber(ctx context.Context, in *ByTicketNumberRequest, opts ...grpc.CallOption) (*ReaderPhotoByTicketNumberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReaderPhotoByTicketNumberResponse)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderPhotoByTicketNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *readerSvcClient) ReaderUploadPhoto(ctx context.Context, in *ReaderUploadPhotoRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ReaderSvc_ReaderUploadPhoto_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +160,16 @@ func (c *readerSvcClient) ReaderById(ctx context.Context, in *EntityByIdRequest,
 // All implementations must embed UnimplementedReaderSvcServer
 // for forward compatibility.
 type ReaderSvcServer interface {
-	ReaderById(context.Context, *EntityByIdRequest) (*Reader, error)
+	ReaderByTicketNumber(context.Context, *ByTicketNumberRequest) (*Reader, error)
+	ReaderList(context.Context, *ReaderListRequest) (*ReaderListResponse, error)
+	ReaderRegistration(context.Context, *ReaderRegistrationRequest) (*ReaderRegistrationResponse, error)
+	ReaderCreate(context.Context, *ReaderCreateRequest) (*ReaderCreateResponse, error)
+	ReaderUpdate(context.Context, *ReaderUpdateRequest) (*emptypb.Empty, error)
+	ReaderDelete(context.Context, *ReaderDeleteRequest) (*emptypb.Empty, error)
+	ReaderApprove(context.Context, *ReaderApproveRequest) (*ReaderApproveResponse, error)
+	ReaderReject(context.Context, *ReaderRejectRequest) (*emptypb.Empty, error)
+	ReaderPhotoByTicketNumber(context.Context, *ByTicketNumberRequest) (*ReaderPhotoByTicketNumberResponse, error)
+	ReaderUploadPhoto(context.Context, *ReaderUploadPhotoRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedReaderSvcServer()
 }
 
@@ -62,8 +180,35 @@ type ReaderSvcServer interface {
 // pointer dereference when methods are called.
 type UnimplementedReaderSvcServer struct{}
 
-func (UnimplementedReaderSvcServer) ReaderById(context.Context, *EntityByIdRequest) (*Reader, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReaderById not implemented")
+func (UnimplementedReaderSvcServer) ReaderByTicketNumber(context.Context, *ByTicketNumberRequest) (*Reader, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderByTicketNumber not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderList(context.Context, *ReaderListRequest) (*ReaderListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderList not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderRegistration(context.Context, *ReaderRegistrationRequest) (*ReaderRegistrationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderRegistration not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderCreate(context.Context, *ReaderCreateRequest) (*ReaderCreateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderCreate not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderUpdate(context.Context, *ReaderUpdateRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderUpdate not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderDelete(context.Context, *ReaderDeleteRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderDelete not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderApprove(context.Context, *ReaderApproveRequest) (*ReaderApproveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderApprove not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderReject(context.Context, *ReaderRejectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderReject not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderPhotoByTicketNumber(context.Context, *ByTicketNumberRequest) (*ReaderPhotoByTicketNumberResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderPhotoByTicketNumber not implemented")
+}
+func (UnimplementedReaderSvcServer) ReaderUploadPhoto(context.Context, *ReaderUploadPhotoRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReaderUploadPhoto not implemented")
 }
 func (UnimplementedReaderSvcServer) mustEmbedUnimplementedReaderSvcServer() {}
 func (UnimplementedReaderSvcServer) testEmbeddedByValue()                   {}
@@ -86,20 +231,182 @@ func RegisterReaderSvcServer(s grpc.ServiceRegistrar, srv ReaderSvcServer) {
 	s.RegisterService(&ReaderSvc_ServiceDesc, srv)
 }
 
-func _ReaderSvc_ReaderById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityByIdRequest)
+func _ReaderSvc_ReaderByTicketNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ByTicketNumberRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReaderSvcServer).ReaderById(ctx, in)
+		return srv.(ReaderSvcServer).ReaderByTicketNumber(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ReaderSvc_ReaderById_FullMethodName,
+		FullMethod: ReaderSvc_ReaderByTicketNumber_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReaderSvcServer).ReaderById(ctx, req.(*EntityByIdRequest))
+		return srv.(ReaderSvcServer).ReaderByTicketNumber(ctx, req.(*ByTicketNumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderList(ctx, req.(*ReaderListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderRegistration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderRegistration(ctx, req.(*ReaderRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderCreate(ctx, req.(*ReaderCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderUpdate(ctx, req.(*ReaderUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderDelete(ctx, req.(*ReaderDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderApprove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderApproveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderApprove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderApprove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderApprove(ctx, req.(*ReaderApproveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderReject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderRejectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderReject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderReject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderReject(ctx, req.(*ReaderRejectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderPhotoByTicketNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ByTicketNumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderPhotoByTicketNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderPhotoByTicketNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderPhotoByTicketNumber(ctx, req.(*ByTicketNumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReaderSvc_ReaderUploadPhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReaderUploadPhotoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReaderSvcServer).ReaderUploadPhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReaderSvc_ReaderUploadPhoto_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReaderSvcServer).ReaderUploadPhoto(ctx, req.(*ReaderUploadPhotoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +419,666 @@ var ReaderSvc_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ReaderSvcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ReaderById",
-			Handler:    _ReaderSvc_ReaderById_Handler,
+			MethodName: "ReaderByTicketNumber",
+			Handler:    _ReaderSvc_ReaderByTicketNumber_Handler,
+		},
+		{
+			MethodName: "ReaderList",
+			Handler:    _ReaderSvc_ReaderList_Handler,
+		},
+		{
+			MethodName: "ReaderRegistration",
+			Handler:    _ReaderSvc_ReaderRegistration_Handler,
+		},
+		{
+			MethodName: "ReaderCreate",
+			Handler:    _ReaderSvc_ReaderCreate_Handler,
+		},
+		{
+			MethodName: "ReaderUpdate",
+			Handler:    _ReaderSvc_ReaderUpdate_Handler,
+		},
+		{
+			MethodName: "ReaderDelete",
+			Handler:    _ReaderSvc_ReaderDelete_Handler,
+		},
+		{
+			MethodName: "ReaderApprove",
+			Handler:    _ReaderSvc_ReaderApprove_Handler,
+		},
+		{
+			MethodName: "ReaderReject",
+			Handler:    _ReaderSvc_ReaderReject_Handler,
+		},
+		{
+			MethodName: "ReaderPhotoByTicketNumber",
+			Handler:    _ReaderSvc_ReaderPhotoByTicketNumber_Handler,
+		},
+		{
+			MethodName: "ReaderUploadPhoto",
+			Handler:    _ReaderSvc_ReaderUploadPhoto_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/reader.proto",
+}
+
+const (
+	ControlSvc_ControlCheckIn_FullMethodName  = "/reader.ControlSvc/ControlCheckIn"
+	ControlSvc_ControlCheckOut_FullMethodName = "/reader.ControlSvc/ControlCheckOut"
+	ControlSvc_ControlList_FullMethodName     = "/reader.ControlSvc/ControlList"
+)
+
+// ControlSvcClient is the client API for ControlSvc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ControlSvcClient interface {
+	ControlCheckIn(ctx context.Context, in *ControlCheckInRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ControlCheckOut(ctx context.Context, in *ControlCheckOutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ControlList(ctx context.Context, in *ControlListRequest, opts ...grpc.CallOption) (*ControlListResponse, error)
+}
+
+type controlSvcClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewControlSvcClient(cc grpc.ClientConnInterface) ControlSvcClient {
+	return &controlSvcClient{cc}
+}
+
+func (c *controlSvcClient) ControlCheckIn(ctx context.Context, in *ControlCheckInRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ControlSvc_ControlCheckIn_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controlSvcClient) ControlCheckOut(ctx context.Context, in *ControlCheckOutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ControlSvc_ControlCheckOut_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *controlSvcClient) ControlList(ctx context.Context, in *ControlListRequest, opts ...grpc.CallOption) (*ControlListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ControlListResponse)
+	err := c.cc.Invoke(ctx, ControlSvc_ControlList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ControlSvcServer is the server API for ControlSvc service.
+// All implementations must embed UnimplementedControlSvcServer
+// for forward compatibility.
+type ControlSvcServer interface {
+	ControlCheckIn(context.Context, *ControlCheckInRequest) (*emptypb.Empty, error)
+	ControlCheckOut(context.Context, *ControlCheckOutRequest) (*emptypb.Empty, error)
+	ControlList(context.Context, *ControlListRequest) (*ControlListResponse, error)
+	mustEmbedUnimplementedControlSvcServer()
+}
+
+// UnimplementedControlSvcServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedControlSvcServer struct{}
+
+func (UnimplementedControlSvcServer) ControlCheckIn(context.Context, *ControlCheckInRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ControlCheckIn not implemented")
+}
+func (UnimplementedControlSvcServer) ControlCheckOut(context.Context, *ControlCheckOutRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ControlCheckOut not implemented")
+}
+func (UnimplementedControlSvcServer) ControlList(context.Context, *ControlListRequest) (*ControlListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ControlList not implemented")
+}
+func (UnimplementedControlSvcServer) mustEmbedUnimplementedControlSvcServer() {}
+func (UnimplementedControlSvcServer) testEmbeddedByValue()                    {}
+
+// UnsafeControlSvcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ControlSvcServer will
+// result in compilation errors.
+type UnsafeControlSvcServer interface {
+	mustEmbedUnimplementedControlSvcServer()
+}
+
+func RegisterControlSvcServer(s grpc.ServiceRegistrar, srv ControlSvcServer) {
+	// If the following call panics, it indicates UnimplementedControlSvcServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ControlSvc_ServiceDesc, srv)
+}
+
+func _ControlSvc_ControlCheckIn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlCheckInRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlSvcServer).ControlCheckIn(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ControlSvc_ControlCheckIn_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlSvcServer).ControlCheckIn(ctx, req.(*ControlCheckInRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ControlSvc_ControlCheckOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlCheckOutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlSvcServer).ControlCheckOut(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ControlSvc_ControlCheckOut_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlSvcServer).ControlCheckOut(ctx, req.(*ControlCheckOutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ControlSvc_ControlList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlSvcServer).ControlList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ControlSvc_ControlList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlSvcServer).ControlList(ctx, req.(*ControlListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ControlSvc_ServiceDesc is the grpc.ServiceDesc for ControlSvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ControlSvc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "reader.ControlSvc",
+	HandlerType: (*ControlSvcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ControlCheckIn",
+			Handler:    _ControlSvc_ControlCheckIn_Handler,
+		},
+		{
+			MethodName: "ControlCheckOut",
+			Handler:    _ControlSvc_ControlCheckOut_Handler,
+		},
+		{
+			MethodName: "ControlList",
+			Handler:    _ControlSvc_ControlList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "protobuf/reader.proto",
+}
+
+const (
+	DictionarySvc_AcademicDegreeList_FullMethodName = "/reader.DictionarySvc/AcademicDegreeList"
+	DictionarySvc_EducationList_FullMethodName      = "/reader.DictionarySvc/EducationList"
+	DictionarySvc_FacultyList_FullMethodName        = "/reader.DictionarySvc/FacultyList"
+	DictionarySvc_InstitutionList_FullMethodName    = "/reader.DictionarySvc/InstitutionList"
+	DictionarySvc_NationalityList_FullMethodName    = "/reader.DictionarySvc/NationalityList"
+	DictionarySvc_SexList_FullMethodName            = "/reader.DictionarySvc/SexList"
+	DictionarySvc_SocialStatusList_FullMethodName   = "/reader.DictionarySvc/SocialStatusList"
+	DictionarySvc_SpecialityList_FullMethodName     = "/reader.DictionarySvc/SpecialityList"
+	DictionarySvc_TypeCardList_FullMethodName       = "/reader.DictionarySvc/TypeCardList"
+	DictionarySvc_TypeCardById_FullMethodName       = "/reader.DictionarySvc/TypeCardById"
+)
+
+// DictionarySvcClient is the client API for DictionarySvc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type DictionarySvcClient interface {
+	AcademicDegreeList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	EducationList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	FacultyList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	InstitutionList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	NationalityList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	SexList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	SocialStatusList(ctx context.Context, in *SocialStatusListRequest, opts ...grpc.CallOption) (*SocialStatusListResponse, error)
+	SpecialityList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error)
+	TypeCardList(ctx context.Context, in *TypeCardListRequest, opts ...grpc.CallOption) (*TypeCardListResponse, error)
+	TypeCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*TypeCard, error)
+}
+
+type dictionarySvcClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDictionarySvcClient(cc grpc.ClientConnInterface) DictionarySvcClient {
+	return &dictionarySvcClient{cc}
+}
+
+func (c *dictionarySvcClient) AcademicDegreeList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_AcademicDegreeList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) EducationList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_EducationList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) FacultyList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_FacultyList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) InstitutionList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_InstitutionList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) NationalityList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_NationalityList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) SexList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_SexList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) SocialStatusList(ctx context.Context, in *SocialStatusListRequest, opts ...grpc.CallOption) (*SocialStatusListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SocialStatusListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_SocialStatusList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) SpecialityList(ctx context.Context, in *DictionaryListRequest, opts ...grpc.CallOption) (*DictionaryListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DictionaryListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_SpecialityList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) TypeCardList(ctx context.Context, in *TypeCardListRequest, opts ...grpc.CallOption) (*TypeCardListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TypeCardListResponse)
+	err := c.cc.Invoke(ctx, DictionarySvc_TypeCardList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dictionarySvcClient) TypeCardById(ctx context.Context, in *EntityByIdRequest, opts ...grpc.CallOption) (*TypeCard, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TypeCard)
+	err := c.cc.Invoke(ctx, DictionarySvc_TypeCardById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DictionarySvcServer is the server API for DictionarySvc service.
+// All implementations must embed UnimplementedDictionarySvcServer
+// for forward compatibility.
+type DictionarySvcServer interface {
+	AcademicDegreeList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	EducationList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	FacultyList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	InstitutionList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	NationalityList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	SexList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	SocialStatusList(context.Context, *SocialStatusListRequest) (*SocialStatusListResponse, error)
+	SpecialityList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error)
+	TypeCardList(context.Context, *TypeCardListRequest) (*TypeCardListResponse, error)
+	TypeCardById(context.Context, *EntityByIdRequest) (*TypeCard, error)
+	mustEmbedUnimplementedDictionarySvcServer()
+}
+
+// UnimplementedDictionarySvcServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDictionarySvcServer struct{}
+
+func (UnimplementedDictionarySvcServer) AcademicDegreeList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcademicDegreeList not implemented")
+}
+func (UnimplementedDictionarySvcServer) EducationList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EducationList not implemented")
+}
+func (UnimplementedDictionarySvcServer) FacultyList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FacultyList not implemented")
+}
+func (UnimplementedDictionarySvcServer) InstitutionList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InstitutionList not implemented")
+}
+func (UnimplementedDictionarySvcServer) NationalityList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NationalityList not implemented")
+}
+func (UnimplementedDictionarySvcServer) SexList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SexList not implemented")
+}
+func (UnimplementedDictionarySvcServer) SocialStatusList(context.Context, *SocialStatusListRequest) (*SocialStatusListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SocialStatusList not implemented")
+}
+func (UnimplementedDictionarySvcServer) SpecialityList(context.Context, *DictionaryListRequest) (*DictionaryListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SpecialityList not implemented")
+}
+func (UnimplementedDictionarySvcServer) TypeCardList(context.Context, *TypeCardListRequest) (*TypeCardListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TypeCardList not implemented")
+}
+func (UnimplementedDictionarySvcServer) TypeCardById(context.Context, *EntityByIdRequest) (*TypeCard, error) {
+	return nil, status.Error(codes.Unimplemented, "method TypeCardById not implemented")
+}
+func (UnimplementedDictionarySvcServer) mustEmbedUnimplementedDictionarySvcServer() {}
+func (UnimplementedDictionarySvcServer) testEmbeddedByValue()                       {}
+
+// UnsafeDictionarySvcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DictionarySvcServer will
+// result in compilation errors.
+type UnsafeDictionarySvcServer interface {
+	mustEmbedUnimplementedDictionarySvcServer()
+}
+
+func RegisterDictionarySvcServer(s grpc.ServiceRegistrar, srv DictionarySvcServer) {
+	// If the following call panics, it indicates UnimplementedDictionarySvcServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DictionarySvc_ServiceDesc, srv)
+}
+
+func _DictionarySvc_AcademicDegreeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).AcademicDegreeList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_AcademicDegreeList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).AcademicDegreeList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_EducationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).EducationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_EducationList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).EducationList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_FacultyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).FacultyList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_FacultyList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).FacultyList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_InstitutionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).InstitutionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_InstitutionList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).InstitutionList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_NationalityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).NationalityList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_NationalityList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).NationalityList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_SexList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).SexList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_SexList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).SexList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_SocialStatusList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SocialStatusListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).SocialStatusList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_SocialStatusList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).SocialStatusList(ctx, req.(*SocialStatusListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_SpecialityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DictionaryListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).SpecialityList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_SpecialityList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).SpecialityList(ctx, req.(*DictionaryListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_TypeCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TypeCardListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).TypeCardList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_TypeCardList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).TypeCardList(ctx, req.(*TypeCardListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DictionarySvc_TypeCardById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DictionarySvcServer).TypeCardById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DictionarySvc_TypeCardById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DictionarySvcServer).TypeCardById(ctx, req.(*EntityByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DictionarySvc_ServiceDesc is the grpc.ServiceDesc for DictionarySvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DictionarySvc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "reader.DictionarySvc",
+	HandlerType: (*DictionarySvcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AcademicDegreeList",
+			Handler:    _DictionarySvc_AcademicDegreeList_Handler,
+		},
+		{
+			MethodName: "EducationList",
+			Handler:    _DictionarySvc_EducationList_Handler,
+		},
+		{
+			MethodName: "FacultyList",
+			Handler:    _DictionarySvc_FacultyList_Handler,
+		},
+		{
+			MethodName: "InstitutionList",
+			Handler:    _DictionarySvc_InstitutionList_Handler,
+		},
+		{
+			MethodName: "NationalityList",
+			Handler:    _DictionarySvc_NationalityList_Handler,
+		},
+		{
+			MethodName: "SexList",
+			Handler:    _DictionarySvc_SexList_Handler,
+		},
+		{
+			MethodName: "SocialStatusList",
+			Handler:    _DictionarySvc_SocialStatusList_Handler,
+		},
+		{
+			MethodName: "SpecialityList",
+			Handler:    _DictionarySvc_SpecialityList_Handler,
+		},
+		{
+			MethodName: "TypeCardList",
+			Handler:    _DictionarySvc_TypeCardList_Handler,
+		},
+		{
+			MethodName: "TypeCardById",
+			Handler:    _DictionarySvc_TypeCardById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

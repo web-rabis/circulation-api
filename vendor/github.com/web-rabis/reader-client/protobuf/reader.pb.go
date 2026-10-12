@@ -9,6 +9,8 @@ package protobuf
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -65,16 +67,1520 @@ func (x *EntityByIdRequest) GetId() int64 {
 	return 0
 }
 
+type ByTicketNumberRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ByTicketNumberRequest) Reset() {
+	*x = ByTicketNumberRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ByTicketNumberRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ByTicketNumberRequest) ProtoMessage() {}
+
+func (x *ByTicketNumberRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ByTicketNumberRequest.ProtoReflect.Descriptor instead.
+func (*ByTicketNumberRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ByTicketNumberRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+type ReaderListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *ReaderFilter          `protobuf:"bytes,1,opt,name=filters,proto3,oneof" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3,oneof" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderListRequest) Reset() {
+	*x = ReaderListRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderListRequest) ProtoMessage() {}
+
+func (x *ReaderListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderListRequest.ProtoReflect.Descriptor instead.
+func (*ReaderListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ReaderListRequest) GetFilters() *ReaderFilter {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *ReaderListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type ReaderListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Reader              `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderListResponse) Reset() {
+	*x = ReaderListResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderListResponse) ProtoMessage() {}
+
+func (x *ReaderListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderListResponse.ProtoReflect.Descriptor instead.
+func (*ReaderListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ReaderListResponse) GetResult() []*Reader {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *ReaderListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type ReaderRegistrationRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Iin            string                 `protobuf:"bytes,1,opt,name=iin,proto3" json:"iin,omitempty"`
+	Lastname       string                 `protobuf:"bytes,2,opt,name=lastname,proto3" json:"lastname,omitempty"`
+	Middlename     string                 `protobuf:"bytes,3,opt,name=middlename,proto3" json:"middlename,omitempty"`
+	Firstname      string                 `protobuf:"bytes,4,opt,name=firstname,proto3" json:"firstname,omitempty"`
+	BirthDate      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=birth_date,json=birthDate,proto3,oneof" json:"birth_date,omitempty"`
+	Address        string                 `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
+	Phone          string                 `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`
+	Email          string                 `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
+	Sex            *int64                 `protobuf:"varint,9,opt,name=sex,proto3,oneof" json:"sex,omitempty"`
+	Nationality    *int64                 `protobuf:"varint,10,opt,name=nationality,proto3,oneof" json:"nationality,omitempty"`
+	Education      *int64                 `protobuf:"varint,11,opt,name=education,proto3,oneof" json:"education,omitempty"`
+	SocialStatus   *int64                 `protobuf:"varint,12,opt,name=social_status,json=socialStatus,proto3,oneof" json:"social_status,omitempty"`
+	Speciality     *int64                 `protobuf:"varint,13,opt,name=speciality,proto3,oneof" json:"speciality,omitempty"`
+	Institution    *int64                 `protobuf:"varint,14,opt,name=institution,proto3,oneof" json:"institution,omitempty"`
+	Faculty        *int64                 `protobuf:"varint,15,opt,name=faculty,proto3,oneof" json:"faculty,omitempty"`
+	TypeCard       *int64                 `protobuf:"varint,16,opt,name=type_card,json=typeCard,proto3,oneof" json:"type_card,omitempty"`
+	Course         string                 `protobuf:"bytes,17,opt,name=course,proto3" json:"course,omitempty"`
+	WorkPlace      string                 `protobuf:"bytes,18,opt,name=work_place,json=workPlace,proto3" json:"work_place,omitempty"`
+	Position       string                 `protobuf:"bytes,19,opt,name=position,proto3" json:"position,omitempty"`
+	WorkPhone      string                 `protobuf:"bytes,20,opt,name=work_phone,json=workPhone,proto3" json:"work_phone,omitempty"`
+	AcademicDegree *int64                 `protobuf:"varint,21,opt,name=academic_degree,json=academicDegree,proto3,oneof" json:"academic_degree,omitempty"`
+	Photo          []byte                 `protobuf:"bytes,22,opt,name=photo,proto3" json:"photo,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ReaderRegistrationRequest) Reset() {
+	*x = ReaderRegistrationRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderRegistrationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderRegistrationRequest) ProtoMessage() {}
+
+func (x *ReaderRegistrationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderRegistrationRequest.ProtoReflect.Descriptor instead.
+func (*ReaderRegistrationRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ReaderRegistrationRequest) GetIin() string {
+	if x != nil {
+		return x.Iin
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetLastname() string {
+	if x != nil {
+		return x.Lastname
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetMiddlename() string {
+	if x != nil {
+		return x.Middlename
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetFirstname() string {
+	if x != nil {
+		return x.Firstname
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetBirthDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.BirthDate
+	}
+	return nil
+}
+
+func (x *ReaderRegistrationRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetSex() int64 {
+	if x != nil && x.Sex != nil {
+		return *x.Sex
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetNationality() int64 {
+	if x != nil && x.Nationality != nil {
+		return *x.Nationality
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetEducation() int64 {
+	if x != nil && x.Education != nil {
+		return *x.Education
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetSocialStatus() int64 {
+	if x != nil && x.SocialStatus != nil {
+		return *x.SocialStatus
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetSpeciality() int64 {
+	if x != nil && x.Speciality != nil {
+		return *x.Speciality
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetInstitution() int64 {
+	if x != nil && x.Institution != nil {
+		return *x.Institution
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetFaculty() int64 {
+	if x != nil && x.Faculty != nil {
+		return *x.Faculty
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetTypeCard() int64 {
+	if x != nil && x.TypeCard != nil {
+		return *x.TypeCard
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetCourse() string {
+	if x != nil {
+		return x.Course
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetWorkPlace() string {
+	if x != nil {
+		return x.WorkPlace
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetPosition() string {
+	if x != nil {
+		return x.Position
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetWorkPhone() string {
+	if x != nil {
+		return x.WorkPhone
+	}
+	return ""
+}
+
+func (x *ReaderRegistrationRequest) GetAcademicDegree() int64 {
+	if x != nil && x.AcademicDegree != nil {
+		return *x.AcademicDegree
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationRequest) GetPhoto() []byte {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+type ReaderRegistrationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderRegistrationResponse) Reset() {
+	*x = ReaderRegistrationResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderRegistrationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderRegistrationResponse) ProtoMessage() {}
+
+func (x *ReaderRegistrationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderRegistrationResponse.ProtoReflect.Descriptor instead.
+func (*ReaderRegistrationResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ReaderRegistrationResponse) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *ReaderRegistrationResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type ReaderCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reader        *Reader                `protobuf:"bytes,1,opt,name=reader,proto3" json:"reader,omitempty"`
+	Photo         []byte                 `protobuf:"bytes,2,opt,name=photo,proto3" json:"photo,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderCreateRequest) Reset() {
+	*x = ReaderCreateRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderCreateRequest) ProtoMessage() {}
+
+func (x *ReaderCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderCreateRequest.ProtoReflect.Descriptor instead.
+func (*ReaderCreateRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ReaderCreateRequest) GetReader() *Reader {
+	if x != nil {
+		return x.Reader
+	}
+	return nil
+}
+
+func (x *ReaderCreateRequest) GetPhoto() []byte {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+type ReaderCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderCreateResponse) Reset() {
+	*x = ReaderCreateResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderCreateResponse) ProtoMessage() {}
+
+func (x *ReaderCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderCreateResponse.ProtoReflect.Descriptor instead.
+func (*ReaderCreateResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ReaderCreateResponse) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+type ReaderUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reader        *Reader                `protobuf:"bytes,1,opt,name=reader,proto3" json:"reader,omitempty"`
+	Photo         []byte                 `protobuf:"bytes,2,opt,name=photo,proto3" json:"photo,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderUpdateRequest) Reset() {
+	*x = ReaderUpdateRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderUpdateRequest) ProtoMessage() {}
+
+func (x *ReaderUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderUpdateRequest.ProtoReflect.Descriptor instead.
+func (*ReaderUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ReaderUpdateRequest) GetReader() *Reader {
+	if x != nil {
+		return x.Reader
+	}
+	return nil
+}
+
+func (x *ReaderUpdateRequest) GetPhoto() []byte {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+type ReaderDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderDeleteRequest) Reset() {
+	*x = ReaderDeleteRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderDeleteRequest) ProtoMessage() {}
+
+func (x *ReaderDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderDeleteRequest.ProtoReflect.Descriptor instead.
+func (*ReaderDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ReaderDeleteRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+type ReaderApproveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderApproveRequest) Reset() {
+	*x = ReaderApproveRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderApproveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderApproveRequest) ProtoMessage() {}
+
+func (x *ReaderApproveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderApproveRequest.ProtoReflect.Descriptor instead.
+func (*ReaderApproveRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ReaderApproveRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+type ReaderApproveResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	OldTicketNumber int64                  `protobuf:"varint,1,opt,name=old_ticket_number,json=oldTicketNumber,proto3" json:"old_ticket_number,omitempty"`
+	TicketNumber    int64                  `protobuf:"varint,2,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	Barcode         string                 `protobuf:"bytes,3,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	Status          string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	ExpirationDDate *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=expirationD_date,json=expirationDDate,proto3" json:"expirationD_date,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ReaderApproveResponse) Reset() {
+	*x = ReaderApproveResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderApproveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderApproveResponse) ProtoMessage() {}
+
+func (x *ReaderApproveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderApproveResponse.ProtoReflect.Descriptor instead.
+func (*ReaderApproveResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ReaderApproveResponse) GetOldTicketNumber() int64 {
+	if x != nil {
+		return x.OldTicketNumber
+	}
+	return 0
+}
+
+func (x *ReaderApproveResponse) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *ReaderApproveResponse) GetBarcode() string {
+	if x != nil {
+		return x.Barcode
+	}
+	return ""
+}
+
+func (x *ReaderApproveResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ReaderApproveResponse) GetExpirationDDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpirationDDate
+	}
+	return nil
+}
+
+type ReaderRejectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderRejectRequest) Reset() {
+	*x = ReaderRejectRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderRejectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderRejectRequest) ProtoMessage() {}
+
+func (x *ReaderRejectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderRejectRequest.ProtoReflect.Descriptor instead.
+func (*ReaderRejectRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ReaderRejectRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+type ReaderPhotoByTicketNumberResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Photo         []byte                 `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderPhotoByTicketNumberResponse) Reset() {
+	*x = ReaderPhotoByTicketNumberResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderPhotoByTicketNumberResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderPhotoByTicketNumberResponse) ProtoMessage() {}
+
+func (x *ReaderPhotoByTicketNumberResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderPhotoByTicketNumberResponse.ProtoReflect.Descriptor instead.
+func (*ReaderPhotoByTicketNumberResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ReaderPhotoByTicketNumberResponse) GetPhoto() []byte {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+type ReaderUploadPhotoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	Photo         []byte                 `protobuf:"bytes,2,opt,name=photo,proto3" json:"photo,omitempty"`
+	User          *User                  `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReaderUploadPhotoRequest) Reset() {
+	*x = ReaderUploadPhotoRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReaderUploadPhotoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReaderUploadPhotoRequest) ProtoMessage() {}
+
+func (x *ReaderUploadPhotoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReaderUploadPhotoRequest.ProtoReflect.Descriptor instead.
+func (*ReaderUploadPhotoRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ReaderUploadPhotoRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *ReaderUploadPhotoRequest) GetPhoto() []byte {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+func (x *ReaderUploadPhotoRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ControlCheckInRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlCheckInRequest) Reset() {
+	*x = ControlCheckInRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlCheckInRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlCheckInRequest) ProtoMessage() {}
+
+func (x *ControlCheckInRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlCheckInRequest.ProtoReflect.Descriptor instead.
+func (*ControlCheckInRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ControlCheckInRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *ControlCheckInRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ControlCheckOutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TicketNumber  int64                  `protobuf:"varint,1,opt,name=ticket_number,json=ticketNumber,proto3" json:"ticket_number,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlCheckOutRequest) Reset() {
+	*x = ControlCheckOutRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlCheckOutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlCheckOutRequest) ProtoMessage() {}
+
+func (x *ControlCheckOutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlCheckOutRequest.ProtoReflect.Descriptor instead.
+func (*ControlCheckOutRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ControlCheckOutRequest) GetTicketNumber() int64 {
+	if x != nil {
+		return x.TicketNumber
+	}
+	return 0
+}
+
+func (x *ControlCheckOutRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type ControlListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       *ControlFilter         `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,2,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlListRequest) Reset() {
+	*x = ControlListRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlListRequest) ProtoMessage() {}
+
+func (x *ControlListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlListRequest.ProtoReflect.Descriptor instead.
+func (*ControlListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ControlListRequest) GetFilters() *ControlFilter {
+	if x != nil {
+		return x.Filters
+	}
+	return nil
+}
+
+func (x *ControlListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type ControlListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Control             `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlListResponse) Reset() {
+	*x = ControlListResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlListResponse) ProtoMessage() {}
+
+func (x *ControlListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlListResponse.ProtoReflect.Descriptor instead.
+func (*ControlListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ControlListResponse) GetResult() []*Control {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *ControlListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type DictionaryListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryListRequest) Reset() {
+	*x = DictionaryListRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryListRequest) ProtoMessage() {}
+
+func (x *DictionaryListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryListRequest.ProtoReflect.Descriptor instead.
+func (*DictionaryListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *DictionaryListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type DictionaryListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*Dictionary          `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DictionaryListResponse) Reset() {
+	*x = DictionaryListResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DictionaryListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DictionaryListResponse) ProtoMessage() {}
+
+func (x *DictionaryListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DictionaryListResponse.ProtoReflect.Descriptor instead.
+func (*DictionaryListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *DictionaryListResponse) GetResult() []*Dictionary {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *DictionaryListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type SocialStatusListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SocialStatusListRequest) Reset() {
+	*x = SocialStatusListRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SocialStatusListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SocialStatusListRequest) ProtoMessage() {}
+
+func (x *SocialStatusListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SocialStatusListRequest.ProtoReflect.Descriptor instead.
+func (*SocialStatusListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *SocialStatusListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type SocialStatusListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*SocialStatus        `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SocialStatusListResponse) Reset() {
+	*x = SocialStatusListResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SocialStatusListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SocialStatusListResponse) ProtoMessage() {}
+
+func (x *SocialStatusListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SocialStatusListResponse.ProtoReflect.Descriptor instead.
+func (*SocialStatusListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *SocialStatusListResponse) GetResult() []*SocialStatus {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *SocialStatusListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type TypeCardListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeCardListRequest) Reset() {
+	*x = TypeCardListRequest{}
+	mi := &file_protobuf_reader_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeCardListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeCardListRequest) ProtoMessage() {}
+
+func (x *TypeCardListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeCardListRequest.ProtoReflect.Descriptor instead.
+func (*TypeCardListRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *TypeCardListRequest) GetPaging() *Paging {
+	if x != nil {
+		return x.Paging
+	}
+	return nil
+}
+
+type TypeCardListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        []*TypeCard            `protobuf:"bytes,1,rep,name=result,proto3" json:"result,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeCardListResponse) Reset() {
+	*x = TypeCardListResponse{}
+	mi := &file_protobuf_reader_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeCardListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeCardListResponse) ProtoMessage() {}
+
+func (x *TypeCardListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_reader_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeCardListResponse.ProtoReflect.Descriptor instead.
+func (*TypeCardListResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_reader_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *TypeCardListResponse) GetResult() []*TypeCard {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *TypeCardListResponse) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_protobuf_reader_proto protoreflect.FileDescriptor
 
 const file_protobuf_reader_proto_rawDesc = "" +
 	"\n" +
-	"\x15protobuf/reader.proto\x12\x06reader\x1a\x1bprotobuf/reader_model.proto\"#\n" +
+	"\x15protobuf/reader.proto\x12\x06reader\x1a\x1bprotobuf/reader_model.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"#\n" +
 	"\x11EntityByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id2F\n" +
-	"\tReaderSvc\x129\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"<\n" +
+	"\x15ByTicketNumberRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\"\x8c\x01\n" +
+	"\x11ReaderListRequest\x123\n" +
+	"\afilters\x18\x01 \x01(\v2\x14.reader.ReaderFilterH\x00R\afilters\x88\x01\x01\x12+\n" +
+	"\x06paging\x18\x02 \x01(\v2\x0e.reader.PagingH\x01R\x06paging\x88\x01\x01B\n" +
 	"\n" +
-	"ReaderById\x12\x19.reader.EntityByIdRequest\x1a\x0e.reader.Reader\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
+	"\b_filtersB\t\n" +
+	"\a_paging\"R\n" +
+	"\x12ReaderListResponse\x12&\n" +
+	"\x06result\x18\x01 \x03(\v2\x0e.reader.ReaderR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"\xef\x06\n" +
+	"\x19ReaderRegistrationRequest\x12\x10\n" +
+	"\x03iin\x18\x01 \x01(\tR\x03iin\x12\x1a\n" +
+	"\blastname\x18\x02 \x01(\tR\blastname\x12\x1e\n" +
+	"\n" +
+	"middlename\x18\x03 \x01(\tR\n" +
+	"middlename\x12\x1c\n" +
+	"\tfirstname\x18\x04 \x01(\tR\tfirstname\x12>\n" +
+	"\n" +
+	"birth_date\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tbirthDate\x88\x01\x01\x12\x18\n" +
+	"\aaddress\x18\x06 \x01(\tR\aaddress\x12\x14\n" +
+	"\x05phone\x18\a \x01(\tR\x05phone\x12\x14\n" +
+	"\x05email\x18\b \x01(\tR\x05email\x12\x15\n" +
+	"\x03sex\x18\t \x01(\x03H\x01R\x03sex\x88\x01\x01\x12%\n" +
+	"\vnationality\x18\n" +
+	" \x01(\x03H\x02R\vnationality\x88\x01\x01\x12!\n" +
+	"\teducation\x18\v \x01(\x03H\x03R\teducation\x88\x01\x01\x12(\n" +
+	"\rsocial_status\x18\f \x01(\x03H\x04R\fsocialStatus\x88\x01\x01\x12#\n" +
+	"\n" +
+	"speciality\x18\r \x01(\x03H\x05R\n" +
+	"speciality\x88\x01\x01\x12%\n" +
+	"\vinstitution\x18\x0e \x01(\x03H\x06R\vinstitution\x88\x01\x01\x12\x1d\n" +
+	"\afaculty\x18\x0f \x01(\x03H\aR\afaculty\x88\x01\x01\x12 \n" +
+	"\ttype_card\x18\x10 \x01(\x03H\bR\btypeCard\x88\x01\x01\x12\x16\n" +
+	"\x06course\x18\x11 \x01(\tR\x06course\x12\x1d\n" +
+	"\n" +
+	"work_place\x18\x12 \x01(\tR\tworkPlace\x12\x1a\n" +
+	"\bposition\x18\x13 \x01(\tR\bposition\x12\x1d\n" +
+	"\n" +
+	"work_phone\x18\x14 \x01(\tR\tworkPhone\x12,\n" +
+	"\x0facademic_degree\x18\x15 \x01(\x03H\tR\x0eacademicDegree\x88\x01\x01\x12\x14\n" +
+	"\x05photo\x18\x16 \x01(\fR\x05photoB\r\n" +
+	"\v_birth_dateB\x06\n" +
+	"\x04_sexB\x0e\n" +
+	"\f_nationalityB\f\n" +
+	"\n" +
+	"_educationB\x10\n" +
+	"\x0e_social_statusB\r\n" +
+	"\v_specialityB\x0e\n" +
+	"\f_institutionB\n" +
+	"\n" +
+	"\b_facultyB\f\n" +
+	"\n" +
+	"_type_cardB\x12\n" +
+	"\x10_academic_degree\"Y\n" +
+	"\x1aReaderRegistrationResponse\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"S\n" +
+	"\x13ReaderCreateRequest\x12&\n" +
+	"\x06reader\x18\x01 \x01(\v2\x0e.reader.ReaderR\x06reader\x12\x14\n" +
+	"\x05photo\x18\x02 \x01(\fR\x05photo\";\n" +
+	"\x14ReaderCreateResponse\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\"S\n" +
+	"\x13ReaderUpdateRequest\x12&\n" +
+	"\x06reader\x18\x01 \x01(\v2\x0e.reader.ReaderR\x06reader\x12\x14\n" +
+	"\x05photo\x18\x02 \x01(\fR\x05photo\":\n" +
+	"\x13ReaderDeleteRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\";\n" +
+	"\x14ReaderApproveRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\"\xe1\x01\n" +
+	"\x15ReaderApproveResponse\x12*\n" +
+	"\x11old_ticket_number\x18\x01 \x01(\x03R\x0foldTicketNumber\x12#\n" +
+	"\rticket_number\x18\x02 \x01(\x03R\fticketNumber\x12\x18\n" +
+	"\abarcode\x18\x03 \x01(\tR\abarcode\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12E\n" +
+	"\x10expirationD_date\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x0fexpirationDDate\":\n" +
+	"\x13ReaderRejectRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\"9\n" +
+	"!ReaderPhotoByTicketNumberResponse\x12\x14\n" +
+	"\x05photo\x18\x01 \x01(\fR\x05photo\"w\n" +
+	"\x18ReaderUploadPhotoRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12\x14\n" +
+	"\x05photo\x18\x02 \x01(\fR\x05photo\x12 \n" +
+	"\x04user\x18\x03 \x01(\v2\f.reader.UserR\x04user\"^\n" +
+	"\x15ControlCheckInRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12 \n" +
+	"\x04user\x18\x02 \x01(\v2\f.reader.UserR\x04user\"_\n" +
+	"\x16ControlCheckOutRequest\x12#\n" +
+	"\rticket_number\x18\x01 \x01(\x03R\fticketNumber\x12 \n" +
+	"\x04user\x18\x02 \x01(\v2\f.reader.UserR\x04user\"m\n" +
+	"\x12ControlListRequest\x12/\n" +
+	"\afilters\x18\x01 \x01(\v2\x15.reader.ControlFilterR\afilters\x12&\n" +
+	"\x06paging\x18\x02 \x01(\v2\x0e.reader.PagingR\x06paging\"T\n" +
+	"\x13ControlListResponse\x12'\n" +
+	"\x06result\x18\x01 \x03(\v2\x0f.reader.ControlR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"?\n" +
+	"\x15DictionaryListRequest\x12&\n" +
+	"\x06paging\x18\x01 \x01(\v2\x0e.reader.PagingR\x06paging\"Z\n" +
+	"\x16DictionaryListResponse\x12*\n" +
+	"\x06result\x18\x01 \x03(\v2\x12.reader.DictionaryR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"A\n" +
+	"\x17SocialStatusListRequest\x12&\n" +
+	"\x06paging\x18\x01 \x01(\v2\x0e.reader.PagingR\x06paging\"^\n" +
+	"\x18SocialStatusListResponse\x12,\n" +
+	"\x06result\x18\x01 \x03(\v2\x14.reader.SocialStatusR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\"=\n" +
+	"\x13TypeCardListRequest\x12&\n" +
+	"\x06paging\x18\x01 \x01(\v2\x0e.reader.PagingR\x06paging\"V\n" +
+	"\x14TypeCardListResponse\x12(\n" +
+	"\x06result\x18\x01 \x03(\v2\x10.reader.TypeCardR\x06result\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count2\xa6\x06\n" +
+	"\tReaderSvc\x12G\n" +
+	"\x14ReaderByTicketNumber\x12\x1d.reader.ByTicketNumberRequest\x1a\x0e.reader.Reader\"\x00\x12E\n" +
+	"\n" +
+	"ReaderList\x12\x19.reader.ReaderListRequest\x1a\x1a.reader.ReaderListResponse\"\x00\x12]\n" +
+	"\x12ReaderRegistration\x12!.reader.ReaderRegistrationRequest\x1a\".reader.ReaderRegistrationResponse\"\x00\x12K\n" +
+	"\fReaderCreate\x12\x1b.reader.ReaderCreateRequest\x1a\x1c.reader.ReaderCreateResponse\"\x00\x12E\n" +
+	"\fReaderUpdate\x12\x1b.reader.ReaderUpdateRequest\x1a\x16.google.protobuf.Empty\"\x00\x12E\n" +
+	"\fReaderDelete\x12\x1b.reader.ReaderDeleteRequest\x1a\x16.google.protobuf.Empty\"\x00\x12N\n" +
+	"\rReaderApprove\x12\x1c.reader.ReaderApproveRequest\x1a\x1d.reader.ReaderApproveResponse\"\x00\x12E\n" +
+	"\fReaderReject\x12\x1b.reader.ReaderRejectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n" +
+	"\x19ReaderPhotoByTicketNumber\x12\x1d.reader.ByTicketNumberRequest\x1a).reader.ReaderPhotoByTicketNumberResponse\"\x00\x12O\n" +
+	"\x11ReaderUploadPhoto\x12 .reader.ReaderUploadPhotoRequest\x1a\x16.google.protobuf.Empty\"\x002\xee\x01\n" +
+	"\n" +
+	"ControlSvc\x12I\n" +
+	"\x0eControlCheckIn\x12\x1d.reader.ControlCheckInRequest\x1a\x16.google.protobuf.Empty\"\x00\x12K\n" +
+	"\x0fControlCheckOut\x12\x1e.reader.ControlCheckOutRequest\x1a\x16.google.protobuf.Empty\"\x00\x12H\n" +
+	"\vControlList\x12\x1a.reader.ControlListRequest\x1a\x1b.reader.ControlListResponse\"\x002\xb4\x06\n" +
+	"\rDictionarySvc\x12U\n" +
+	"\x12AcademicDegreeList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12P\n" +
+	"\rEducationList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12N\n" +
+	"\vFacultyList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12R\n" +
+	"\x0fInstitutionList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12R\n" +
+	"\x0fNationalityList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12J\n" +
+	"\aSexList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12W\n" +
+	"\x10SocialStatusList\x12\x1f.reader.SocialStatusListRequest\x1a .reader.SocialStatusListResponse\"\x00\x12Q\n" +
+	"\x0eSpecialityList\x12\x1d.reader.DictionaryListRequest\x1a\x1e.reader.DictionaryListResponse\"\x00\x12K\n" +
+	"\fTypeCardList\x12\x1b.reader.TypeCardListRequest\x1a\x1c.reader.TypeCardListResponse\"\x00\x12=\n" +
+	"\fTypeCardById\x12\x19.reader.EntityByIdRequest\x1a\x10.reader.TypeCard\"\x00B\x15Z\x13./protobuf;protobufb\x06proto3"
 
 var (
 	file_protobuf_reader_proto_rawDescOnce sync.Once
@@ -88,19 +1594,116 @@ func file_protobuf_reader_proto_rawDescGZIP() []byte {
 	return file_protobuf_reader_proto_rawDescData
 }
 
-var file_protobuf_reader_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_protobuf_reader_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_protobuf_reader_proto_goTypes = []any{
-	(*EntityByIdRequest)(nil), // 0: reader.EntityByIdRequest
-	(*Reader)(nil),            // 1: reader.Reader
+	(*EntityByIdRequest)(nil),                 // 0: reader.EntityByIdRequest
+	(*ByTicketNumberRequest)(nil),             // 1: reader.ByTicketNumberRequest
+	(*ReaderListRequest)(nil),                 // 2: reader.ReaderListRequest
+	(*ReaderListResponse)(nil),                // 3: reader.ReaderListResponse
+	(*ReaderRegistrationRequest)(nil),         // 4: reader.ReaderRegistrationRequest
+	(*ReaderRegistrationResponse)(nil),        // 5: reader.ReaderRegistrationResponse
+	(*ReaderCreateRequest)(nil),               // 6: reader.ReaderCreateRequest
+	(*ReaderCreateResponse)(nil),              // 7: reader.ReaderCreateResponse
+	(*ReaderUpdateRequest)(nil),               // 8: reader.ReaderUpdateRequest
+	(*ReaderDeleteRequest)(nil),               // 9: reader.ReaderDeleteRequest
+	(*ReaderApproveRequest)(nil),              // 10: reader.ReaderApproveRequest
+	(*ReaderApproveResponse)(nil),             // 11: reader.ReaderApproveResponse
+	(*ReaderRejectRequest)(nil),               // 12: reader.ReaderRejectRequest
+	(*ReaderPhotoByTicketNumberResponse)(nil), // 13: reader.ReaderPhotoByTicketNumberResponse
+	(*ReaderUploadPhotoRequest)(nil),          // 14: reader.ReaderUploadPhotoRequest
+	(*ControlCheckInRequest)(nil),             // 15: reader.ControlCheckInRequest
+	(*ControlCheckOutRequest)(nil),            // 16: reader.ControlCheckOutRequest
+	(*ControlListRequest)(nil),                // 17: reader.ControlListRequest
+	(*ControlListResponse)(nil),               // 18: reader.ControlListResponse
+	(*DictionaryListRequest)(nil),             // 19: reader.DictionaryListRequest
+	(*DictionaryListResponse)(nil),            // 20: reader.DictionaryListResponse
+	(*SocialStatusListRequest)(nil),           // 21: reader.SocialStatusListRequest
+	(*SocialStatusListResponse)(nil),          // 22: reader.SocialStatusListResponse
+	(*TypeCardListRequest)(nil),               // 23: reader.TypeCardListRequest
+	(*TypeCardListResponse)(nil),              // 24: reader.TypeCardListResponse
+	(*ReaderFilter)(nil),                      // 25: reader.ReaderFilter
+	(*Paging)(nil),                            // 26: reader.Paging
+	(*Reader)(nil),                            // 27: reader.Reader
+	(*timestamppb.Timestamp)(nil),             // 28: google.protobuf.Timestamp
+	(*User)(nil),                              // 29: reader.User
+	(*ControlFilter)(nil),                     // 30: reader.ControlFilter
+	(*Control)(nil),                           // 31: reader.Control
+	(*Dictionary)(nil),                        // 32: reader.Dictionary
+	(*SocialStatus)(nil),                      // 33: reader.SocialStatus
+	(*TypeCard)(nil),                          // 34: reader.TypeCard
+	(*emptypb.Empty)(nil),                     // 35: google.protobuf.Empty
 }
 var file_protobuf_reader_proto_depIdxs = []int32{
-	0, // 0: reader.ReaderSvc.ReaderById:input_type -> reader.EntityByIdRequest
-	1, // 1: reader.ReaderSvc.ReaderById:output_type -> reader.Reader
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	25, // 0: reader.ReaderListRequest.filters:type_name -> reader.ReaderFilter
+	26, // 1: reader.ReaderListRequest.paging:type_name -> reader.Paging
+	27, // 2: reader.ReaderListResponse.result:type_name -> reader.Reader
+	28, // 3: reader.ReaderRegistrationRequest.birth_date:type_name -> google.protobuf.Timestamp
+	27, // 4: reader.ReaderCreateRequest.reader:type_name -> reader.Reader
+	27, // 5: reader.ReaderUpdateRequest.reader:type_name -> reader.Reader
+	28, // 6: reader.ReaderApproveResponse.expirationD_date:type_name -> google.protobuf.Timestamp
+	29, // 7: reader.ReaderUploadPhotoRequest.user:type_name -> reader.User
+	29, // 8: reader.ControlCheckInRequest.user:type_name -> reader.User
+	29, // 9: reader.ControlCheckOutRequest.user:type_name -> reader.User
+	30, // 10: reader.ControlListRequest.filters:type_name -> reader.ControlFilter
+	26, // 11: reader.ControlListRequest.paging:type_name -> reader.Paging
+	31, // 12: reader.ControlListResponse.result:type_name -> reader.Control
+	26, // 13: reader.DictionaryListRequest.paging:type_name -> reader.Paging
+	32, // 14: reader.DictionaryListResponse.result:type_name -> reader.Dictionary
+	26, // 15: reader.SocialStatusListRequest.paging:type_name -> reader.Paging
+	33, // 16: reader.SocialStatusListResponse.result:type_name -> reader.SocialStatus
+	26, // 17: reader.TypeCardListRequest.paging:type_name -> reader.Paging
+	34, // 18: reader.TypeCardListResponse.result:type_name -> reader.TypeCard
+	1,  // 19: reader.ReaderSvc.ReaderByTicketNumber:input_type -> reader.ByTicketNumberRequest
+	2,  // 20: reader.ReaderSvc.ReaderList:input_type -> reader.ReaderListRequest
+	4,  // 21: reader.ReaderSvc.ReaderRegistration:input_type -> reader.ReaderRegistrationRequest
+	6,  // 22: reader.ReaderSvc.ReaderCreate:input_type -> reader.ReaderCreateRequest
+	8,  // 23: reader.ReaderSvc.ReaderUpdate:input_type -> reader.ReaderUpdateRequest
+	9,  // 24: reader.ReaderSvc.ReaderDelete:input_type -> reader.ReaderDeleteRequest
+	10, // 25: reader.ReaderSvc.ReaderApprove:input_type -> reader.ReaderApproveRequest
+	12, // 26: reader.ReaderSvc.ReaderReject:input_type -> reader.ReaderRejectRequest
+	1,  // 27: reader.ReaderSvc.ReaderPhotoByTicketNumber:input_type -> reader.ByTicketNumberRequest
+	14, // 28: reader.ReaderSvc.ReaderUploadPhoto:input_type -> reader.ReaderUploadPhotoRequest
+	15, // 29: reader.ControlSvc.ControlCheckIn:input_type -> reader.ControlCheckInRequest
+	16, // 30: reader.ControlSvc.ControlCheckOut:input_type -> reader.ControlCheckOutRequest
+	17, // 31: reader.ControlSvc.ControlList:input_type -> reader.ControlListRequest
+	19, // 32: reader.DictionarySvc.AcademicDegreeList:input_type -> reader.DictionaryListRequest
+	19, // 33: reader.DictionarySvc.EducationList:input_type -> reader.DictionaryListRequest
+	19, // 34: reader.DictionarySvc.FacultyList:input_type -> reader.DictionaryListRequest
+	19, // 35: reader.DictionarySvc.InstitutionList:input_type -> reader.DictionaryListRequest
+	19, // 36: reader.DictionarySvc.NationalityList:input_type -> reader.DictionaryListRequest
+	19, // 37: reader.DictionarySvc.SexList:input_type -> reader.DictionaryListRequest
+	21, // 38: reader.DictionarySvc.SocialStatusList:input_type -> reader.SocialStatusListRequest
+	19, // 39: reader.DictionarySvc.SpecialityList:input_type -> reader.DictionaryListRequest
+	23, // 40: reader.DictionarySvc.TypeCardList:input_type -> reader.TypeCardListRequest
+	0,  // 41: reader.DictionarySvc.TypeCardById:input_type -> reader.EntityByIdRequest
+	27, // 42: reader.ReaderSvc.ReaderByTicketNumber:output_type -> reader.Reader
+	3,  // 43: reader.ReaderSvc.ReaderList:output_type -> reader.ReaderListResponse
+	5,  // 44: reader.ReaderSvc.ReaderRegistration:output_type -> reader.ReaderRegistrationResponse
+	7,  // 45: reader.ReaderSvc.ReaderCreate:output_type -> reader.ReaderCreateResponse
+	35, // 46: reader.ReaderSvc.ReaderUpdate:output_type -> google.protobuf.Empty
+	35, // 47: reader.ReaderSvc.ReaderDelete:output_type -> google.protobuf.Empty
+	11, // 48: reader.ReaderSvc.ReaderApprove:output_type -> reader.ReaderApproveResponse
+	35, // 49: reader.ReaderSvc.ReaderReject:output_type -> google.protobuf.Empty
+	13, // 50: reader.ReaderSvc.ReaderPhotoByTicketNumber:output_type -> reader.ReaderPhotoByTicketNumberResponse
+	35, // 51: reader.ReaderSvc.ReaderUploadPhoto:output_type -> google.protobuf.Empty
+	35, // 52: reader.ControlSvc.ControlCheckIn:output_type -> google.protobuf.Empty
+	35, // 53: reader.ControlSvc.ControlCheckOut:output_type -> google.protobuf.Empty
+	18, // 54: reader.ControlSvc.ControlList:output_type -> reader.ControlListResponse
+	20, // 55: reader.DictionarySvc.AcademicDegreeList:output_type -> reader.DictionaryListResponse
+	20, // 56: reader.DictionarySvc.EducationList:output_type -> reader.DictionaryListResponse
+	20, // 57: reader.DictionarySvc.FacultyList:output_type -> reader.DictionaryListResponse
+	20, // 58: reader.DictionarySvc.InstitutionList:output_type -> reader.DictionaryListResponse
+	20, // 59: reader.DictionarySvc.NationalityList:output_type -> reader.DictionaryListResponse
+	20, // 60: reader.DictionarySvc.SexList:output_type -> reader.DictionaryListResponse
+	22, // 61: reader.DictionarySvc.SocialStatusList:output_type -> reader.SocialStatusListResponse
+	20, // 62: reader.DictionarySvc.SpecialityList:output_type -> reader.DictionaryListResponse
+	24, // 63: reader.DictionarySvc.TypeCardList:output_type -> reader.TypeCardListResponse
+	34, // 64: reader.DictionarySvc.TypeCardById:output_type -> reader.TypeCard
+	42, // [42:65] is the sub-list for method output_type
+	19, // [19:42] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_reader_proto_init() }
@@ -109,15 +1712,17 @@ func file_protobuf_reader_proto_init() {
 		return
 	}
 	file_protobuf_reader_model_proto_init()
+	file_protobuf_reader_proto_msgTypes[2].OneofWrappers = []any{}
+	file_protobuf_reader_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_reader_proto_rawDesc), len(file_protobuf_reader_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   25,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   3,
 		},
 		GoTypes:           file_protobuf_reader_proto_goTypes,
 		DependencyIndexes: file_protobuf_reader_proto_depIdxs,

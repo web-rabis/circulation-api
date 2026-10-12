@@ -14,7 +14,8 @@ type BaseClient struct {
 	conn     *grpc.ClientConn
 	dialOpts []grpc.DialOption
 
-	readerSvc client.ReaderService
+	readerSvc     client.ReaderService
+	dictionarySvc client.DictionaryService
 }
 
 var _ client.Base = &BaseClient{}
@@ -50,4 +51,12 @@ func (c *BaseClient) ReaderSvc() client.ReaderService {
 	}
 
 	return c.readerSvc
+}
+
+func (c *BaseClient) DictionarySvc() client.DictionaryService {
+	if c.dictionarySvc == nil {
+		c.dictionarySvc = NewDictionaryServiceClient(protobuf.NewDictionarySvcClient(c.conn))
+	}
+
+	return c.dictionarySvc
 }

@@ -2,11 +2,155 @@ syntax = "proto3";
 package reader;
 option go_package = "./protobuf;protobuf";
 import "protobuf/reader_model.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 service ReaderSvc {
-  rpc ReaderById(EntityByIdRequest) returns (Reader) {}
+  rpc ReaderByTicketNumber(ByTicketNumberRequest) returns (Reader) {}
+  rpc ReaderList(ReaderListRequest) returns (ReaderListResponse) {}
+
+  rpc ReaderRegistration(ReaderRegistrationRequest) returns (ReaderRegistrationResponse) {}
+
+  rpc ReaderCreate(ReaderCreateRequest) returns (ReaderCreateResponse) {}
+  rpc ReaderUpdate(ReaderUpdateRequest) returns (google.protobuf.Empty) {}
+  rpc ReaderDelete(ReaderDeleteRequest) returns (google.protobuf.Empty) {}
+
+  rpc ReaderApprove(ReaderApproveRequest) returns (ReaderApproveResponse) {}
+  rpc ReaderReject(ReaderRejectRequest) returns (google.protobuf.Empty) {}
+
+  rpc ReaderPhotoByTicketNumber(ByTicketNumberRequest) returns (ReaderPhotoByTicketNumberResponse) {}
+  rpc ReaderUploadPhoto(ReaderUploadPhotoRequest) returns (google.protobuf.Empty) {}
+}
+service ControlSvc {
+  rpc ControlCheckIn(ControlCheckInRequest) returns (google.protobuf.Empty) {}
+  rpc ControlCheckOut(ControlCheckOutRequest) returns (google.protobuf.Empty) {}
+  rpc ControlList(ControlListRequest) returns (ControlListResponse) {}
+
+}
+service DictionarySvc {
+  rpc AcademicDegreeList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc EducationList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc FacultyList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc InstitutionList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc NationalityList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc SexList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc SocialStatusList(SocialStatusListRequest) returns (SocialStatusListResponse) {}
+  rpc SpecialityList(DictionaryListRequest) returns (DictionaryListResponse) {}
+  rpc TypeCardList(TypeCardListRequest) returns (TypeCardListResponse) {}
+  rpc TypeCardById(EntityByIdRequest) returns (TypeCard) {}
 }
 
 message EntityByIdRequest {
   int64 id = 1;
+}
+message ByTicketNumberRequest{
+  int64 ticket_number = 1;
+}
+message ReaderListRequest {
+  optional ReaderFilter filters = 1;
+  optional Paging paging = 2;
+}
+message ReaderListResponse {
+  repeated Reader result = 1;
+  int64 count = 2;
+}
+message ReaderRegistrationRequest  {
+  string iin = 1;
+  string lastname = 2;
+  string middlename = 3;
+  string firstname = 4;
+  optional google.protobuf.Timestamp birth_date = 5;
+  string address = 6;
+  string phone = 7;
+  string email = 8;
+  optional int64 sex = 9;
+  optional int64 nationality = 10;
+  optional int64 education = 11;
+  optional int64 social_status = 12;
+  optional int64 speciality = 13;
+  optional int64 institution = 14;
+  optional int64 faculty = 15;
+  optional int64 type_card = 16;
+  string course = 17;
+  string work_place = 18;
+  string position = 19;
+  string work_phone = 20;
+  optional int64 academic_degree = 21;
+  bytes photo = 22;
+}
+message ReaderRegistrationResponse  {
+  int64 ticket_number = 1;
+  string status = 2;
+}
+message ReaderCreateRequest {
+  Reader reader = 1;
+  bytes photo = 2;
+}
+message ReaderCreateResponse {
+  int64 ticket_number = 1;
+}
+message ReaderUpdateRequest {
+  Reader reader = 1;
+  bytes photo = 2;
+}
+message ReaderDeleteRequest {
+  int64 ticket_number = 1;
+}
+message ReaderApproveRequest {
+  int64 ticket_number = 1;
+}
+message ReaderApproveResponse {
+  int64 old_ticket_number = 1;
+  int64 ticket_number = 2;
+  string barcode = 3;
+  string status = 4;
+  google.protobuf.Timestamp expirationD_date = 5;
+}
+message ReaderRejectRequest {
+  int64 ticket_number = 1;
+}
+message ReaderPhotoByTicketNumberResponse {
+  bytes photo = 1;
+}
+message ReaderUploadPhotoRequest {
+  int64 ticket_number = 1;
+  bytes photo = 2;
+  User user = 3;
+}
+message ControlCheckInRequest {
+  int64 ticket_number = 1;
+  User user = 2;
+}
+message ControlCheckOutRequest {
+  int64 ticket_number = 1;
+  User user = 2;
+}
+message ControlListRequest {
+  ControlFilter filters = 1;
+  Paging paging = 2;
+}
+message ControlListResponse {
+  repeated Control result = 1;
+  int64 count = 2;
+}
+message DictionaryListRequest {
+  Paging paging = 1;
+}
+message DictionaryListResponse {
+  repeated Dictionary result = 1;
+  int64 count = 2;
+}
+message SocialStatusListRequest {
+  Paging paging = 1;
+}
+message SocialStatusListResponse {
+  repeated SocialStatus result = 1;
+  int64 count = 2;
+}
+message TypeCardListRequest {
+  Paging paging = 1;
+}
+message TypeCardListResponse {
+  repeated TypeCard result = 1;
+  int64 count = 2;
 }
