@@ -15,7 +15,7 @@ require (
 	github.com/web-rabis/db v0.0.0-20251121023248-f49a06e80067
 	github.com/web-rabis/ebook-client v0.0.0-20261005162428-0c723e959a15
 	github.com/web-rabis/httperrors v0.0.0-20230828182436-93be23854738
-	github.com/web-rabis/order-client v0.0.0-20261101173432-7a68aa910aa8
+	github.com/web-rabis/order-client v0.0.0-20261110030522-d1afc108886c
 	github.com/web-rabis/reader-client v0.0.0-20261012060719-4a4571017c13
 	github.com/web-rabis/searcher-proxy v0.0.0-20260531173822-4d20674ca383
 	github.com/web-rabis/servers v0.0.0-20230808095603-66994ba613c7

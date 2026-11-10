@@ -45,6 +45,9 @@ func PagingParseFromHttp(r *http.Request) (*Paging, error) {
 		if sortKeyFromQuery == "ticketNumber" {
 			paging.SortKey = "eo.reader_ticket_num"
 		}
+		if sortKeyFromQuery == "ordered_date" {
+			paging.SortKey = "eo.ordered_date"
+		}
 	}
 
 	return &paging, nil
